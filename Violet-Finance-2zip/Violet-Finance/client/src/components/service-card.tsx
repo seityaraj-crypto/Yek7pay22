@@ -16,11 +16,20 @@ interface ServiceCardProps {
   delay?: number;
   variant?: "default" | "featured";
   features?: string[];
+  externalUrl?: string;
 }
 
-export function ServiceCard({ icon: Icon, title, description, delay = 0, variant = "default", features }: ServiceCardProps) {
+export function ServiceCard({ icon: Icon, title, description, delay = 0, variant = "default", features, externalUrl }: ServiceCardProps) {
   const isFeatured = variant === "featured";
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleClick = () => {
+    if (externalUrl) {
+      window.location.href = externalUrl;
+    } else {
+      setIsOpen(true);
+    }
+  };
 
   const defaultFeatures = [
     "Instant real-time processing",
@@ -50,7 +59,7 @@ export function ServiceCard({ icon: Icon, title, description, delay = 0, variant
           boxShadow: "0 25px 50px -12px rgba(59, 130, 246, 0.5)"
         }}
         whileTap={{ scale: 0.95 }}
-        onClick={() => setIsOpen(true)}
+        onClick={handleClick}
         className={`group relative p-8 rounded-3xl border transition-all duration-300 overflow-hidden cursor-pointer
           ${isFeatured 
             ? "bg-blue-950/40 border-white/10 shadow-2xl shadow-blue-950/20 backdrop-blur-sm" 

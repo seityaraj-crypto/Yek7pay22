@@ -27,13 +27,13 @@ export default function Home() {
          <div className="container mx-auto px-4">
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
                {[
-                 { label: 'Sent Money', icon: Send, color: 'text-blue-500' },
-                 { label: 'AEPS', icon: Fingerprint, color: 'text-blue-400' },
-                 { label: 'Credit Card', icon: CreditCard, color: 'text-blue-500' },
-                 { label: 'Nepal Remit', icon: Globe, color: 'text-blue-600' },
-                 { label: 'Flights', icon: Plane, color: 'text-blue-400' }
+                 { label: 'Sent Money', icon: Send, color: 'text-blue-500', action: () => setIsAuthOpen(true) },
+                 { label: 'AEPS', icon: Fingerprint, color: 'text-blue-400', action: () => setIsAuthOpen(true) },
+                 { label: 'Credit Card', icon: CreditCard, color: 'text-blue-500', action: () => setIsAuthOpen(true) },
+                 { label: 'Nepal Remit', icon: Globe, color: 'text-blue-600', action: () => setIsAuthOpen(true) },
+                 { label: 'Flights', icon: Plane, color: 'text-blue-400', action: () => window.location.href = "https://yek7pay.in" }
                ].map((action, i) => (
-                  <Button key={i} variant="ghost" className="h-20 bg-white/5 backdrop-blur-md shadow-xl border border-white/5 hover:border-violet-500/30 hover:bg-violet-500/5 rounded-2xl flex flex-col gap-2 transition-all group" onClick={() => setIsAuthOpen(true)}>
+                  <Button key={i} variant="ghost" className="h-20 bg-white/5 backdrop-blur-md shadow-xl border border-white/5 hover:border-violet-500/30 hover:bg-violet-500/5 rounded-2xl flex flex-col gap-2 transition-all group" onClick={action.action}>
                      <div className={`p-2 rounded-xl bg-white/5 group-hover:scale-110 transition-transform ${action.color}`}>
                         <action.icon className="h-5 w-5" />
                      </div>
@@ -217,6 +217,7 @@ export default function Home() {
               title="Flight Booking"
               description="The smartest way to book domestic and international flights."
               delay={0.3}
+              externalUrl="https://yek7pay.in"
               features={[
                 "Domestic & international flights on one platform",
                 "Best fares with smart price comparison",
