@@ -269,12 +269,12 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.3, delay: i * 0.1 }}
               >
-                <div className={`group h-full p-8 rounded-[2rem] border border-white/10 transition-all backdrop-blur-xl shadow-xl ${s.isSpecial ? 'bg-gradient-to-br from-[#1a0b3b] to-[#4a0e8f] hover:border-purple-500/50' : 'bg-white/5 hover:border-emerald-500/30 hover:bg-white/10'}`}>
-                  <div className={`w-12 h-12 rounded-2xl ${s.bgColor} flex items-center justify-center ${s.color} mb-6 group-hover:scale-110 transition-transform shadow-lg border border-white/10`}>
-                    <s.icon className="h-6 w-6" />
+                <div className={`group h-full p-6 rounded-2xl border border-white/10 transition-all backdrop-blur-xl shadow-xl ${s.isSpecial ? 'bg-gradient-to-br from-[#1a0b3b] to-[#4a0e8f] hover:border-purple-500/50' : 'bg-white/5 hover:border-emerald-500/30 hover:bg-white/10'}`}>
+                  <div className={`w-10 h-10 rounded-xl ${s.bgColor} flex items-center justify-center ${s.color} mb-4 group-hover:scale-110 transition-transform shadow-lg border border-white/10`}>
+                    <s.icon className="h-5 w-5" />
                   </div>
-                  <h4 className="text-xl font-bold mb-2 text-white">{s.title}</h4>
-                  <p className={`${s.isSpecial ? 'text-white/70' : 'text-white/40'} text-sm mb-6`}>{s.desc}</p>
+                  <h4 className="text-lg font-bold mb-1 text-white">{s.title}</h4>
+                  <p className={`${s.isSpecial ? 'text-white/70' : 'text-white/40'} text-xs mb-4`}>{s.desc}</p>
                   <Link href="/compliance">
                     <Button variant="link" className={`${s.isSpecial ? 'text-purple-300' : s.color} p-0 h-auto font-bold flex items-center gap-2 group/btn`}>
                       Learn More <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
