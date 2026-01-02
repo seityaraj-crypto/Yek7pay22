@@ -9,6 +9,7 @@ import Home from "@/pages/home";
 import About from "@/pages/about";
 import Terms from "@/pages/terms";
 import Privacy from "@/pages/privacy";
+import Compliance from "@/pages/compliance";
 import { Chatbot } from "@/components/chatbot";
 
 function ScrollToTop() {
@@ -26,6 +27,7 @@ function Router() {
       <Route path="/about" component={About} />
       <Route path="/terms" component={Terms} />
       <Route path="/privacy" component={Privacy} />
+      <Route path="/compliance" component={Compliance} />
       <Route component={NotFound} />
     </Switch>
   );

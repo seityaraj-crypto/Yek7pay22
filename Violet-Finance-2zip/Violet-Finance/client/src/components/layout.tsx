@@ -44,7 +44,7 @@ export function Navbar() {
         { name: "Business Loans", icon: Building2, href: "/#booking" },
         { name: "Flight Bookings", icon: Plane, href: "/#booking" },
         { name: "Train Bookings", icon: Train, href: "/#booking" },
-        { name: "GST & Compliance", icon: ClipboardCheck, href: "/about" },
+        { name: "GST & Compliance", icon: ClipboardCheck, href: "/compliance" },
       ]
     }
   ];
