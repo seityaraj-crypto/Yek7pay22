@@ -126,21 +126,29 @@ export default function Compliance() {
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {complianceServices.map((service) => (
-                  <Card 
+                  <motion.div
                     key={service.id}
-                    className={`cursor-pointer transition-all duration-300 border-white/10 hover:border-emerald-500/50 bg-white/5 backdrop-blur-xl group ${
-                      selectedService === service.id ? 'ring-2 ring-emerald-500 bg-white/10 border-emerald-500/50' : ''
-                    }`}
-                    onClick={() => setSelectedService(service.id)}
+                    whileHover={{ scale: 1.05, translateY: -10 }}
+                    whileTap={{ scale: 0.95 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3 }}
                   >
-                    <CardHeader>
-                      <div className={`w-12 h-12 rounded-2xl ${service.bgColor} flex items-center justify-center ${service.color} mb-4 group-hover:scale-110 transition-transform`}>
-                        <service.icon className="h-6 w-6" />
-                      </div>
-                      <CardTitle className="text-white text-xl">{service.title}</CardTitle>
-                      <CardDescription className="text-white/50">{service.description}</CardDescription>
-                    </CardHeader>
-                  </Card>
+                    <Card 
+                      className={`cursor-pointer h-full transition-all duration-300 border-white/10 hover:border-emerald-500/50 bg-white/5 backdrop-blur-xl group ${
+                        selectedService === service.id ? 'ring-2 ring-emerald-500 bg-white/10 border-emerald-500/50' : ''
+                      }`}
+                      onClick={() => setSelectedService(service.id)}
+                    >
+                      <CardHeader>
+                        <div className={`w-12 h-12 rounded-2xl ${service.bgColor} flex items-center justify-center ${service.color} mb-4 group-hover:scale-110 transition-transform shadow-lg`}>
+                          <service.icon className="h-6 w-6" />
+                        </div>
+                        <CardTitle className="text-white text-xl">{service.title}</CardTitle>
+                        <CardDescription className="text-white/50">{service.description}</CardDescription>
+                      </CardHeader>
+                    </Card>
+                  </motion.div>
                 ))}
               </div>
             </div>

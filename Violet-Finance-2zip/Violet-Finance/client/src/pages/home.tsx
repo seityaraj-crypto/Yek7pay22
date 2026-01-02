@@ -5,6 +5,7 @@ import { SectionHeader } from "@/components/section-header";
 import { AuthDialog } from "@/components/auth-dialog";
 import { useState } from "react";
 import { Link } from "wouter";
+import { motion } from "framer-motion";
 import { 
   Send, Globe, Fingerprint, 
   Plane, Train, Briefcase, Building2, 
@@ -255,23 +256,33 @@ export default function Home() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
             {[
-              { title: "GST Filing", icon: FileText, desc: "Monthly & Quarterly GST returns", color: "text-blue-400" },
-              { title: "ITR Filing", icon: ClipboardCheck, desc: "Income tax returns for all entities", color: "text-purple-400" },
-              { title: "Tax Audit", icon: Scale, desc: "Audit services by certified professionals", color: "text-amber-400" },
-              { title: "Company Setup", icon: Building, desc: "PVT LTD, LLP, OPC registration", color: "text-emerald-400" }
+              { title: "GST Filing", icon: FileText, desc: "Monthly & Quarterly GST returns", color: "text-blue-400", bgColor: "bg-blue-400/10" },
+              { title: "ITR Filing", icon: ClipboardCheck, desc: "Income tax returns for all entities", color: "text-purple-400", bgColor: "bg-purple-400/10" },
+              { title: "Tax Audit", icon: Scale, desc: "Audit services by certified professionals", color: "text-amber-400", bgColor: "bg-amber-400/10" },
+              { title: "Company Setup", icon: Building, desc: "PVT LTD, LLP, OPC registration", color: "text-emerald-400", bgColor: "bg-emerald-400/10" }
             ].map((s, i) => (
-              <div key={i} className="group p-8 rounded-[2rem] bg-white/5 border border-white/10 hover:border-emerald-500/30 transition-all hover:bg-white/10">
-                <div className={`w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center ${s.color} mb-6 group-hover:scale-110 transition-transform`}>
-                  <s.icon className="h-6 w-6" />
+              <motion.div
+                key={i}
+                whileHover={{ scale: 1.05, translateY: -10 }}
+                whileTap={{ scale: 0.95 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: i * 0.1 }}
+              >
+                <div className="group h-full p-8 rounded-[2rem] bg-white/5 border border-white/10 hover:border-emerald-500/30 transition-all hover:bg-white/10 backdrop-blur-xl shadow-xl">
+                  <div className={`w-12 h-12 rounded-2xl ${s.bgColor} flex items-center justify-center ${s.color} mb-6 group-hover:scale-110 transition-transform shadow-lg`}>
+                    <s.icon className="h-6 w-6" />
+                  </div>
+                  <h4 className="text-xl font-bold mb-2">{s.title}</h4>
+                  <p className="text-white/40 text-sm mb-6">{s.desc}</p>
+                  <Link href="/compliance">
+                    <Button variant="link" className={`${s.color} p-0 h-auto font-bold flex items-center gap-2 group/btn`}>
+                      Learn More <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
+                    </Button>
+                  </Link>
                 </div>
-                <h4 className="text-xl font-bold mb-2">{s.title}</h4>
-                <p className="text-white/40 text-sm mb-6">{s.desc}</p>
-                <Link href="/compliance">
-                  <Button variant="link" className={`${s.color} p-0 h-auto font-bold flex items-center gap-2 group/btn`}>
-                    Learn More <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
-                  </Button>
-                </Link>
-              </div>
+              </motion.div>
             ))}
           </div>
 
