@@ -50,8 +50,23 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-r from-rose-500/10 to-purple-500/10 blur-[100px] pointer-events-none" />
         <div className="container mx-auto px-4 relative z-10">
           <div className="rounded-[3rem] bg-black/40 border border-white/5 backdrop-blur-xl p-12 md:p-20 shadow-2xl overflow-hidden group">
-            <div className="absolute top-0 right-0 p-12 opacity-10 group-hover:opacity-20 transition-opacity">
-              <Plane className="h-64 w-64 -rotate-12" />
+            <div className="absolute top-0 right-0 p-12 opacity-20 group-hover:opacity-40 transition-all duration-700">
+              <motion.div
+                animate={{ 
+                  y: [0, -20, 0],
+                  rotateX: [0, 15, 0],
+                  rotateY: [-10, 10, -10],
+                  z: [0, 50, 0]
+                }}
+                transition={{ 
+                  duration: 6, 
+                  repeat: Infinity, 
+                  ease: "easeInOut" 
+                }}
+                style={{ perspective: "1000px" }}
+              >
+                <Plane className="h-64 w-64 text-rose-400 filter drop-shadow-[0_20px_50px_rgba(225,29,72,0.4)]" />
+              </motion.div>
             </div>
             
             <div className="max-w-3xl relative z-10">
