@@ -240,6 +240,20 @@ export default function Home() {
                 "Smooth, secure, and reliable transactions"
               ]}
             />
+            <ServiceCard 
+              icon={ShieldCheck}
+              title="Vehicle Insurance"
+              description="Protect your car and bike with comprehensive insurance plans from top providers."
+              delay={0.5}
+              variant="featured"
+              onClick={() => window.location.href = "/insurance"}
+              features={[
+                "Comprehensive Car & Bike Insurance",
+                "Cashless claims at 5000+ garages",
+                "Instant policy issuance & renewal",
+                "24/7 Roadside assistance support"
+              ]}
+            />
           </div>
         </div>
       </section>
