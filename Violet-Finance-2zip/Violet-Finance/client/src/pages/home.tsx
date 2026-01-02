@@ -11,7 +11,7 @@ import {
   Plane, Train, Briefcase, Building2, 
   Zap, Receipt, Landmark, Banknote, CreditCard,
   CheckCircle2, QrCode, Smartphone, Mail, Phone, MapPin,
-  ShieldCheck, UserCheck, Coins, ArrowRight, ClipboardCheck, FileText, Scale, Building
+  ShieldCheck, UserCheck, Coins, ArrowRight, ClipboardCheck, FileText, Scale, Building, Shield
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
