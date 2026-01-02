@@ -32,7 +32,7 @@ export function Navbar() {
     {
       label: "Payments",
       items: [
-        { name: "Bharat Connect (BBPS)", icon: Receipt, href: "/#bharat-connect" },
+        { name: "Bharat Connect (BBPS)", icon: Receipt, href: "/bbps" },
         { name: "UPI QR Collection", icon: Zap, iconColor: "text-yellow-500", href: "/#services" },
         { name: "mPOS Card Solutions", icon: CreditCard, href: "/#services" },
         { name: "PPI Wallet", icon: Briefcase, href: "/#banking" },
@@ -95,7 +95,7 @@ export function Navbar() {
             </DropdownMenuContent>
           </DropdownMenu>
 
-          <a href="/#bharat-connect" className="text-sm font-bold text-slate-700 hover:text-blue-600 transition-all uppercase tracking-widest px-4 h-9 flex items-center rounded-lg hover:bg-slate-200/50">Bharat Connect</a>
+          <a href="/bbps" className="text-sm font-bold text-slate-700 hover:text-blue-600 transition-all uppercase tracking-widest px-4 h-9 flex items-center rounded-lg hover:bg-slate-200/50">Bharat Connect</a>
           <Link href="/about" className="text-sm font-bold text-slate-700 hover:text-blue-600 transition-all uppercase tracking-widest px-4 h-9 flex items-center rounded-lg hover:bg-slate-200/50">About Us</Link>
         </div>
 
@@ -147,7 +147,8 @@ export function Navbar() {
                      {[
                        { name: "Banking", href: "/#banking" },
                        { name: "Services", href: "/#services" },
-                       { name: "Bharat Connect", href: "/#bharat-connect" },
+                       { name: "Bharat Connect", href: "/bbps" },
+                       { name: "Insurance", href: "/insurance" },
                        { name: "Booking", href: "/#booking" },
                      ].map((link) => (
                        <a 

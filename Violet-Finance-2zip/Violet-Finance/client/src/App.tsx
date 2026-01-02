@@ -10,6 +10,8 @@ import About from "@/pages/about";
 import Terms from "@/pages/terms";
 import Privacy from "@/pages/privacy";
 import Compliance from "@/pages/compliance";
+import Insurance from "@/pages/insurance";
+import BharatConnect from "@/pages/bbps";
 import { Chatbot } from "@/components/chatbot";
 
 function ScrollToTop() {
@@ -28,6 +30,8 @@ function Router() {
       <Route path="/terms" component={Terms} />
       <Route path="/privacy" component={Privacy} />
       <Route path="/compliance" component={Compliance} />
+      <Route path="/insurance" component={Insurance} />
+      <Route path="/bbps" component={BharatConnect} />
       <Route component={NotFound} />
     </Switch>
   );

@@ -33,6 +33,7 @@ export default function Home() {
                  { label: 'AEPS', icon: Fingerprint, color: 'text-blue-400', action: () => setIsAuthOpen(true) },
                  { label: 'Credit Card', icon: CreditCard, color: 'text-blue-500', action: () => setIsAuthOpen(true) },
                  { label: 'Nepal Remit', icon: Globe, color: 'text-blue-600', action: () => setIsAuthOpen(true) },
+                 { label: 'Insurance', icon: ShieldCheck, color: 'text-purple-400', action: () => window.location.href = "/insurance" },
                  { label: 'Flights', icon: Plane, color: 'text-blue-400', action: () => window.location.href = "https://yek7pay.in" }
                ].map((action, i) => (
                   <Button key={i} variant="ghost" className="h-20 bg-white/5 backdrop-blur-md shadow-xl border border-white/5 hover:border-violet-500/30 hover:bg-violet-500/5 rounded-2xl flex flex-col gap-2 transition-all group" onClick={action.action}>
@@ -158,7 +159,7 @@ export default function Home() {
                     </div>
                   ))}
                 </div>
-                  <Button className="bg-primary hover:bg-primary/90 text-white rounded-full px-10 h-14 font-bold shadow-lg shadow-blue-900/40" onClick={() => setIsAuthOpen(true)}>
+                  <Button className="bg-primary hover:bg-primary/90 text-white rounded-full px-10 h-14 font-bold shadow-lg shadow-blue-900/40" onClick={() => window.location.href = "/bbps"}>
                   Pay Bills Now
                 </Button>
               </div>
