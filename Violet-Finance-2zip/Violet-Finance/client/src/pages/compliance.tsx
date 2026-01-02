@@ -1,10 +1,11 @@
 import { Navbar, Footer } from "@/components/layout";
 import { motion } from "framer-motion";
-import { ClipboardCheck, FileText, Scale, Building, Upload, CheckCircle2, AlertCircle, Zap } from "lucide-react";
+import { ClipboardCheck, FileText, Scale, Building, Upload, CheckCircle2, AlertCircle, Zap, ArrowLeft } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { Link } from "wouter";
 
 const complianceServices = [
   {
@@ -96,6 +97,12 @@ export default function Compliance() {
       <Navbar />
       
       <main className="container mx-auto px-4 pt-32 pb-24">
+        <Link href="/">
+          <Button variant="ghost" className="mb-8 text-white/60 hover:text-white hover:bg-white/5 gap-2 group">
+            <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
+            Back to Home
+          </Button>
+        </Link>
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
