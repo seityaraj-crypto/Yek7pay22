@@ -90,7 +90,7 @@ export function registerChatRoutes(app: Express): void {
 
       // Stream response from OpenAI
       const stream = await openai!.chat.completions.create({
-        model: "gpt-4o", // Changed from non-existent gpt-5.1
+        model: "gpt-4o-mini", // Use gpt-4o-mini for better reliability/speed
         messages: chatMessages,
         stream: true,
         max_tokens: 2048,

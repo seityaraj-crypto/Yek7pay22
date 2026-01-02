@@ -165,7 +165,7 @@ export function Chatbot() {
             </ScrollArea>
             <div className="p-4 border-t border-white/10 bg-white/5 flex gap-2">
               <input
-                className="flex-1 bg-white/5 border border-white/10 rounded-full px-4 text-sm focus:outline-none focus:ring-1 focus:ring-primary"
+                className="flex-1 bg-white/5 border border-white/10 rounded-full px-4 text-sm focus:outline-none focus:ring-1 focus:ring-primary h-10"
                 placeholder="Type a message..."
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
@@ -176,7 +176,12 @@ export function Chatbot() {
                   }
                 }}
               />
-              <Button size="icon" className="rounded-full h-8 w-8 bg-primary hover:bg-primary/90" onClick={handleSend}>
+              <Button 
+                size="icon" 
+                className="rounded-full h-10 w-10 bg-primary hover:bg-primary/90 flex-shrink-0" 
+                onClick={handleSend}
+                disabled={!input.trim()}
+              >
                 <Send className="h-4 w-4" />
               </Button>
             </div>
