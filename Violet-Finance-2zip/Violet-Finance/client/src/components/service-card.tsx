@@ -17,15 +17,18 @@ interface ServiceCardProps {
   variant?: "default" | "featured";
   features?: string[];
   externalUrl?: string;
+  onClick?: () => void;
 }
 
-export function ServiceCard({ icon: Icon, title, description, delay = 0, variant = "default", features, externalUrl }: ServiceCardProps) {
+export function ServiceCard({ icon: Icon, title, description, delay = 0, variant = "default", features, externalUrl, onClick }: ServiceCardProps) {
   const isFeatured = variant === "featured";
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => {
     if (externalUrl) {
       window.location.href = externalUrl;
+    } else if (onClick) {
+      onClick();
     } else {
       setIsOpen(true);
     }

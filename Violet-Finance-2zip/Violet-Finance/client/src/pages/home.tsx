@@ -240,7 +240,7 @@ export default function Home() {
                 "Smooth, secure, and reliable transactions"
               ]}
             />
-            <div className="lg:col-span-4">
+            <div className="lg:col-span-4 h-full">
               <ServiceCard 
                 icon={ShieldCheck}
                 title="Vehicle Insurance"
