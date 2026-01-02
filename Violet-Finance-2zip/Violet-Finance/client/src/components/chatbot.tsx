@@ -124,7 +124,7 @@ export function Chatbot() {
       </Button>
 
       {isOpen && (
-        <Card className="fixed bottom-24 right-6 w-[350px] h-[500px] shadow-2xl z-50 flex flex-col border-white/10 bg-[#000a26] text-white overflow-hidden">
+        <Card className="fixed bottom-0 right-0 w-full h-full md:bottom-24 md:right-6 md:w-[350px] md:h-[500px] shadow-2xl z-50 flex flex-col border-white/10 bg-[#000a26] text-white overflow-hidden rounded-none md:rounded-3xl">
           <CardHeader className="bg-gradient-to-r from-cyan-500 to-blue-500 p-4 flex flex-row items-center justify-between">
             <CardTitle className="text-sm font-bold flex items-center gap-2">
               <div className="h-2 w-2 bg-green-400 rounded-full animate-pulse" />
@@ -135,7 +135,7 @@ export function Chatbot() {
             </Button>
           </CardHeader>
           <CardContent className="flex-1 flex flex-col p-0">
-            <ScrollArea className="flex-1 p-4">
+            <ScrollArea className="flex-1 p-2 md:p-4">
               <div className="space-y-4">
                 {messages.length === 0 && !streamingMessage && (
                   <div className="text-center py-10 opacity-50 italic text-sm">
