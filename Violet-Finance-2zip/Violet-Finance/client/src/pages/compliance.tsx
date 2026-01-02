@@ -38,6 +38,14 @@ const complianceServices = [
     icon: Building,
     color: "text-emerald-400",
     bgColor: "bg-emerald-400/10"
+  },
+  {
+    id: "other",
+    title: "Other Services",
+    description: "Need something else? Upload your documents and tell us your requirements.",
+    icon: Zap,
+    color: "text-rose-400",
+    bgColor: "bg-rose-400/10"
   }
 ];
 

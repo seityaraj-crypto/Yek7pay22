@@ -4,12 +4,13 @@ import { ServiceCard } from "@/components/service-card";
 import { SectionHeader } from "@/components/section-header";
 import { AuthDialog } from "@/components/auth-dialog";
 import { useState } from "react";
+import { Link } from "wouter";
 import { 
   Send, Globe, Fingerprint, 
   Plane, Train, Briefcase, Building2, 
   Zap, Receipt, Landmark, Banknote, CreditCard,
   CheckCircle2, QrCode, Smartphone, Mail, Phone, MapPin,
-  ShieldCheck, UserCheck, Coins, ArrowRight
+  ShieldCheck, UserCheck, Coins, ArrowRight, ClipboardCheck, FileText, Scale, Building
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -237,6 +238,49 @@ export default function Home() {
                 "Smooth, secure, and reliable transactions"
               ]}
             />
+          </div>
+        </div>
+      </section>
+
+      {/* GST & Compliance Section */}
+      <section id="compliance" className="py-24 relative overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-emerald-500/5 blur-[120px] pointer-events-none" />
+        <div className="container mx-auto px-4 relative z-10">
+          <SectionHeader 
+            badge="Tax & Regulatory"
+            title="GST & Compliance Services"
+            description="Professional solutions for GST filing, ITR, audits, and company formation to keep your business compliant."
+            className="text-white"
+          />
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
+            {[
+              { title: "GST Filing", icon: FileText, desc: "Monthly & Quarterly GST returns", color: "text-blue-400" },
+              { title: "ITR Filing", icon: ClipboardCheck, desc: "Income tax returns for all entities", color: "text-purple-400" },
+              { title: "Tax Audit", icon: Scale, desc: "Audit services by certified professionals", color: "text-amber-400" },
+              { title: "Company Setup", icon: Building, desc: "PVT LTD, LLP, OPC registration", color: "text-emerald-400" }
+            ].map((s, i) => (
+              <div key={i} className="group p-8 rounded-[2rem] bg-white/5 border border-white/10 hover:border-emerald-500/30 transition-all hover:bg-white/10">
+                <div className={`w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center ${s.color} mb-6 group-hover:scale-110 transition-transform`}>
+                  <s.icon className="h-6 w-6" />
+                </div>
+                <h4 className="text-xl font-bold mb-2">{s.title}</h4>
+                <p className="text-white/40 text-sm mb-6">{s.desc}</p>
+                <Link href="/compliance">
+                  <Button variant="link" className={`${s.color} p-0 h-auto font-bold flex items-center gap-2 group/btn`}>
+                    Learn More <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
+                  </Button>
+                </Link>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-16 text-center">
+            <Link href="/compliance">
+              <Button className="bg-emerald-600 hover:bg-emerald-500 text-white rounded-full px-12 h-14 font-bold shadow-lg shadow-emerald-900/40 transition-all hover:scale-105 active:scale-95">
+                Explore All Compliance Services
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
