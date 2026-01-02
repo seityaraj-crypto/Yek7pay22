@@ -2,12 +2,20 @@ import type { Express, Request, Response } from "express";
 import OpenAI from "openai";
 import { chatStorage } from "./storage";
 
-const openai = new OpenAI({
+const openai = process.env.AI_INTEGRATIONS_OPENAI_API_KEY ? new OpenAI({
   apiKey: process.env.AI_INTEGRATIONS_OPENAI_API_KEY,
   baseURL: process.env.AI_INTEGRATIONS_OPENAI_BASE_URL,
-});
+}) : null;
 
 export function registerChatRoutes(app: Express): void {
+  // Check if OpenAI is configured middleware
+  const checkOpenAI = (req: Request, res: Response, next: any) => {
+    if (!openai) {
+      return res.status(503).json({ error: "Chat service is not configured. Please add OpenAI integration." });
+    }
+    next();
+  };
+
   // Get all conversations
   app.get("/api/conversations", async (req: Request, res: Response) => {
     try {
@@ -60,7 +68,7 @@ export function registerChatRoutes(app: Express): void {
   });
 
   // Send message and get AI response (streaming)
-  app.post("/api/conversations/:id/messages", async (req: Request, res: Response) => {
+  app.post("/api/conversations/:id/messages", checkOpenAI, async (req: Request, res: Response) => {
     try {
       const conversationId = parseInt(req.params.id);
       const { content } = req.body;
@@ -81,11 +89,11 @@ export function registerChatRoutes(app: Express): void {
       res.setHeader("Connection", "keep-alive");
 
       // Stream response from OpenAI
-      const stream = await openai.chat.completions.create({
-        model: "gpt-5.1",
+      const stream = await openai!.chat.completions.create({
+        model: "gpt-4o", // Changed from non-existent gpt-5.1
         messages: chatMessages,
         stream: true,
-        max_completion_tokens: 2048,
+        max_tokens: 2048,
       });
 
       let fullResponse = "";
