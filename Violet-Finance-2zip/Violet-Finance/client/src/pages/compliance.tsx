@@ -13,24 +13,24 @@ const complianceServices = [
     title: "GST Filing & Return",
     description: "Monthly and quarterly GST return filing for regular and composition taxpayers.",
     icon: FileText,
-    color: "text-blue-400",
-    bgColor: "bg-blue-400/10"
+    color: "text-white",
+    bgColor: "bg-gradient-to-br from-[#0a0a2e] to-[#1a0a3a]"
   },
   {
     id: "itr-filing",
     title: "ITR Filing",
     description: "Income Tax Return filing for individuals, professionals, and business entities.",
     icon: ClipboardCheck,
-    color: "text-purple-400",
-    bgColor: "bg-purple-400/10"
+    color: "text-white",
+    bgColor: "bg-gradient-to-br from-[#1a0a3a] to-[#2a0a4a]"
   },
   {
     id: "tax-audit",
     title: "Tax Audit",
     description: "Statutory tax audit services by certified professionals to ensure compliance.",
     icon: Scale,
-    color: "text-amber-400",
-    bgColor: "bg-amber-400/10"
+    color: "text-white",
+    bgColor: "bg-gradient-to-br from-[#0a0a2e] to-[#2a0a4a]"
   },
   {
     id: "company-formation",
