@@ -254,9 +254,8 @@ export default function Home() {
             className="text-white"
           />
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
             {[
-              { title: "GST Filing", icon: FileText, desc: "Monthly & Quarterly GST returns", color: "text-blue-400", bgColor: "bg-blue-400/10" },
+              { title: "GST Filing", icon: FileText, desc: "Monthly & Quarterly GST returns", color: "text-white", bgColor: "bg-gradient-to-br from-[#0a0a2e] to-[#2a0a4a]", isSpecial: true },
               { title: "ITR Filing", icon: ClipboardCheck, desc: "Income tax returns for all entities", color: "text-purple-400", bgColor: "bg-purple-400/10" },
               { title: "Tax Audit", icon: Scale, desc: "Audit services by certified professionals", color: "text-amber-400", bgColor: "bg-amber-400/10" },
               { title: "Company Setup", icon: Building, desc: "PVT LTD, LLP, OPC registration", color: "text-emerald-400", bgColor: "bg-emerald-400/10" }
@@ -270,21 +269,20 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.3, delay: i * 0.1 }}
               >
-                <div className="group h-full p-8 rounded-[2rem] bg-white/5 border border-white/10 hover:border-emerald-500/30 transition-all hover:bg-white/10 backdrop-blur-xl shadow-xl">
-                  <div className={`w-12 h-12 rounded-2xl ${s.bgColor} flex items-center justify-center ${s.color} mb-6 group-hover:scale-110 transition-transform shadow-lg`}>
+                <div className={`group h-full p-8 rounded-[2rem] border border-white/10 transition-all backdrop-blur-xl shadow-xl ${s.isSpecial ? 'bg-gradient-to-br from-[#1a0b3b] to-[#4a0e8f] hover:border-purple-500/50' : 'bg-white/5 hover:border-emerald-500/30 hover:bg-white/10'}`}>
+                  <div className={`w-12 h-12 rounded-2xl ${s.bgColor} flex items-center justify-center ${s.color} mb-6 group-hover:scale-110 transition-transform shadow-lg border border-white/10`}>
                     <s.icon className="h-6 w-6" />
                   </div>
-                  <h4 className="text-xl font-bold mb-2">{s.title}</h4>
-                  <p className="text-white/40 text-sm mb-6">{s.desc}</p>
+                  <h4 className="text-xl font-bold mb-2 text-white">{s.title}</h4>
+                  <p className={`${s.isSpecial ? 'text-white/70' : 'text-white/40'} text-sm mb-6`}>{s.desc}</p>
                   <Link href="/compliance">
-                    <Button variant="link" className={`${s.color} p-0 h-auto font-bold flex items-center gap-2 group/btn`}>
+                    <Button variant="link" className={`${s.isSpecial ? 'text-purple-300' : s.color} p-0 h-auto font-bold flex items-center gap-2 group/btn`}>
                       Learn More <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
                     </Button>
                   </Link>
                 </div>
               </motion.div>
             ))}
-          </div>
 
           <div className="mt-16 text-center">
             <Link href="/compliance">
