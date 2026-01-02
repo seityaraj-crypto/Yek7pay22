@@ -50,34 +50,33 @@
 }
 
 :root {
-  /* Dynamic Background Inspired by Image Theme */
-  --background: 240 45% 4%; /* Near black/dark blue from image */
+  --background: 240 45% 4%;
   --foreground: 0 0% 100%;
 
-  --card: 240 45% 8%; /* Deep navy cards */
+  --card: 240 45% 8%;
   --card-foreground: 210 50% 98%;
 
   --popover: 240 45% 8%;
   --popover-foreground: 210 50% 98%;
 
-  --primary: 271 81% 56%; /* Deep Violet from image */
+  --primary: 343 81% 56%; /* Rose from Travel card */
   --primary-foreground: 0 0% 100%;
 
-  --secondary: 217 91% 60%; /* Bright Blue from image */
+  --secondary: 271 81% 56%; /* Purple from Travel card */
   --secondary-foreground: 0 0% 100%;
 
-  --muted: 210 40% 96%;
+  --muted: 240 45% 12%;
   --muted-foreground: 215 16% 47%;
 
-  --accent: 198 100% 95%;
-  --accent-foreground: 198 100% 30%;
+  --accent: 343 100% 95%;
+  --accent-foreground: 343 100% 30%;
 
   --destructive: 0 84% 60%;
   --destructive-foreground: 210 40% 98%;
 
-  --border: 214 32% 91%;
-  --input: 214 32% 91%;
-  --ring: 198 100% 45%;
+  --border: 240 45% 15%;
+  --input: 240 45% 15%;
+  --ring: 343 100% 45%;
 }
 
 @layer base {
@@ -86,8 +85,9 @@
   }
   body {
     @apply font-sans antialiased text-foreground selection:bg-primary/30;
-    background: #0d0d2b;
-    background-image: linear-gradient(135deg, #0d0d2b 0%, #1a0b3b 50%, #0d0d2b 100%);
+    background: #050505;
+    background-image: radial-gradient(at 0% 0%, hsla(343, 81%, 56%, 0.05) 0px, transparent 50%),
+                      radial-gradient(at 100% 100%, hsla(271, 81%, 56%, 0.05) 0px, transparent 50%);
     min-height: 100vh;
   }
   h1, h2, h3, h4, h5, h6 {
@@ -97,20 +97,12 @@
 
 @layer utilities {
   .glass-card {
-    @apply bg-white/80 backdrop-blur-md shadow-xl border border-white/20;
+    @apply bg-white/5 backdrop-blur-md shadow-xl border border-white/10;
   }
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-700 to-blue-400;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-rose-400 to-purple-400;
   }
   .neo-glow {
-    @apply shadow-[0_0_20px_rgba(0,191,255,0.15)];
-  }
-  .bg-mesh {
-    --mesh-dark: hsla(221, 45%, 25%, 0.03);
-    --mesh-light: hsla(198, 100%, 45%, 0.03);
-
-    background-image: 
-      radial-gradient(at 0% 0%, var(--mesh-dark) 0px, transparent 50%),
-      radial-gradient(at 100% 100%, var(--mesh-light) 0px, transparent 50%);
+    @apply shadow-[0_0_20px_rgba(225,29,72,0.15)];
   }
 }
