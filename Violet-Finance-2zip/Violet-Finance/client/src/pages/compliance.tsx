@@ -1,6 +1,6 @@
 import { Navbar, Footer } from "@/components/layout";
 import { motion } from "framer-motion";
-import { ClipboardCheck, FileText, Scale, Building, Upload, CheckCircle2, AlertCircle } from "lucide-react";
+import { ClipboardCheck, FileText, Scale, Building, Upload, CheckCircle2, AlertCircle, Zap } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
