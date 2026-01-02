@@ -169,7 +169,12 @@ export function Chatbot() {
                 placeholder="Type a message..."
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                onKeyPress={(e) => e.key === 'Enter' && handleSend()}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    handleSend();
+                  }
+                }}
               />
               <Button size="icon" className="rounded-full h-8 w-8 bg-primary hover:bg-primary/90" onClick={handleSend}>
                 <Send className="h-4 w-4" />

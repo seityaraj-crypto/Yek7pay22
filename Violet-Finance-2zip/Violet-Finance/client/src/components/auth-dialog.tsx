@@ -15,9 +15,23 @@ interface AuthDialogProps {
 }
 
 export function AuthDialog({ isOpen, onOpenChange }: AuthDialogProps) {
+  const handleAction = (action: string) => {
+    console.log(`${action} clicked`);
+    // Future integration point
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="bg-gradient-to-br from-[#0a0a2e] via-[#1a0a3a] to-[#2a0a4a] border-white/10 text-white sm:max-w-[450px] rounded-3xl backdrop-blur-3xl shadow-[0_0_50px_rgba(59,130,246,0.3)]">
+      <DialogContent 
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            // Default to login or first action
+            handleAction("Login");
+          }
+        }}
+        className="bg-gradient-to-br from-[#0a0a2e] via-[#1a0a3a] to-[#2a0a4a] border-white/10 text-white sm:max-w-[450px] rounded-3xl backdrop-blur-3xl shadow-[0_0_50px_rgba(59,130,246,0.3)]"
+      >
         <DialogHeader>
           <div className="mb-6 h-16 w-16 rounded-2xl bg-gradient-to-br from-blue-500 via-blue-400 to-purple-600 flex items-center justify-center text-white shadow-[0_0_30px_rgba(59,130,246,0.5)] mx-auto animate-pulse">
             <ShieldCheck className="h-8 w-8" />
