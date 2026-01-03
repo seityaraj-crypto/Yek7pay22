@@ -12,7 +12,7 @@ import {
   Zap, Receipt, Landmark, Banknote, CreditCard,
   CheckCircle2, QrCode, Smartphone, Mail, Phone, MapPin,
   ShieldCheck, UserCheck, Coins, ArrowRight, ClipboardCheck, FileText, Scale, Building,
-  Hotel
+  Hotel, Bus
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -84,7 +84,7 @@ export default function Home() {
                 {[
                   { label: 'Flights', icon: Plane, desc: 'Domestic & International', color: 'text-pink-400' },
                   { label: 'Hotels', icon: Hotel, desc: '500,000+ Worldwide', color: 'text-pink-400' },
-                  { label: 'Bus', icon: Smartphone, desc: 'All Major Operators', color: 'text-pink-400' }
+                  { label: 'Bus', icon: Bus, desc: 'All Major Operators', color: 'text-pink-400' }
                 ].map((item, i) => (
                   <div key={i} className="flex flex-col gap-3">
                     <div className={`w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center ${item.color}`}>
