@@ -49,7 +49,7 @@ export default function Home() {
       <Hero />
 
       {/* Quick Actions Bar */}
-      <section className="relative mt-4 md:-mt-16 z-20">
+      <section className="relative mt-4 md:mt-8 z-20">
          <div className="container mx-auto px-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
                {[

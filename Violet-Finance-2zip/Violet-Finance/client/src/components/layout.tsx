@@ -74,7 +74,7 @@ export function Navbar() {
              <img 
                src={logoImg} 
                alt="Yek7pay" 
-               className="h-14 w-auto transition-all duration-500 group-hover:scale-110 brightness-110 drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]" 
+               className="h-10 w-auto transition-all duration-500 group-hover:scale-110 brightness-110 drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]" 
              />
           </div>
         </Link>
@@ -315,6 +315,20 @@ export function Footer() {
         </div>
         
         <div className="border-t border-white/10 pt-12">
+          <div className="flex flex-col items-center mb-8">
+            <h4 className="text-sm font-bold text-white mb-4 uppercase tracking-widest">Download Our App</h4>
+            <a 
+              href="https://play.google.com/store/apps/details?id=com.yek7pay" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-400 text-white px-6 py-3 rounded-xl font-bold transition-all hover:scale-105 shadow-lg shadow-green-500/20"
+            >
+              <svg className="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 010 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/>
+              </svg>
+              Get it on Google Play
+            </a>
+          </div>
           <div className="flex flex-wrap justify-center gap-6 mb-6 text-sm text-white/70">
             <Link href="/about" className="hover:text-blue-400 transition-all">About Us</Link>
             <Link href="/terms" className="hover:text-blue-400 transition-all">Terms of Service</Link>
