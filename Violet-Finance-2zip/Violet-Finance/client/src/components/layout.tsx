@@ -31,22 +31,25 @@ export function Navbar() {
 
   const services = [
     {
-      label: "Banking",
+      label: "Banking & Remittance",
       items: [
         { name: "Advance DMT", icon: Send, href: "/#banking" },
         { name: "Neo Bank Unlimited", icon: Landmark, href: "/#banking" },
         { name: "Indo-Nepal Remit", icon: Globe, href: "/#banking" },
         { name: "AEPS Withdrawal", icon: Fingerprint, href: "/#banking" },
         { name: "Micro ATM", icon: Smartphone, href: "/#banking" },
+        { name: "PPI Wallet", icon: Briefcase, href: "/#banking" },
       ]
     },
     {
-      label: "Payments",
+      label: "Payments & Collection",
       items: [
         { name: "Bharat Connect (BBPS)", icon: Receipt, href: "/bbps" },
         { name: "UPI QR Collection", icon: Zap, iconColor: "text-yellow-500", href: "/#services" },
         { name: "mPOS Card Solutions", icon: CreditCard, href: "/#services" },
-        { name: "PPI Wallet", icon: Briefcase, href: "/#banking" },
+        { name: "Credit Card Bill Pay", icon: CreditCard, iconColor: "text-purple-400", href: "/bbps" },
+        { name: "Utility Payments", icon: Zap, iconColor: "text-green-400", href: "/bbps" },
+        { name: "Recharge & DTH", icon: Smartphone, iconColor: "text-blue-400", href: "/bbps" },
       ]
     },
     {
@@ -55,6 +58,8 @@ export function Navbar() {
         { name: "Business Loans", icon: Building2, href: "/#booking" },
         { name: "Flight Bookings", icon: Plane, href: "/#booking" },
         { name: "Train Bookings", icon: Train, href: "/#booking" },
+        { name: "Bus Bookings", icon: Train, iconColor: "text-orange-400", href: "/#booking" },
+        { name: "Hotel Bookings", icon: Building2, iconColor: "text-pink-400", href: "/#booking" },
         { name: "GST & Compliance", icon: ClipboardCheck, href: "/compliance" },
       ]
     }
@@ -232,41 +237,55 @@ export function Footer() {
           </div>
           
           <div className="text-center md:text-left">
-            <h4 className="font-display font-bold text-white mb-10 text-sm tracking-wider uppercase opacity-70">Services</h4>
-            <ul className="space-y-4 text-sm text-white">
-              <li><a href="#" className="hover:text-blue-400 transition-all">Money Transfer</a></li>
-              <li><a href="#" className="hover:text-blue-400 transition-all">AEPS Services</a></li>
-              <li><a href="#" className="hover:text-blue-400 transition-all">Loans</a></li>
-              <li><a href="#" className="hover:text-blue-400 transition-all">Travel Bookings</a></li>
+            <h4 className="font-display font-bold text-white mb-10 text-sm tracking-wider uppercase opacity-70">Banking & Remittance</h4>
+            <ul className="space-y-3 text-sm text-white">
+              <li><a href="/#banking" className="hover:text-blue-400 transition-all">Advance DMT</a></li>
+              <li><a href="/#banking" className="hover:text-blue-400 transition-all">Neo Bank Unlimited</a></li>
+              <li><a href="/#banking" className="hover:text-blue-400 transition-all">Indo-Nepal Remit</a></li>
+              <li><a href="/#banking" className="hover:text-blue-400 transition-all">AEPS Withdrawal</a></li>
+              <li><a href="/#banking" className="hover:text-blue-400 transition-all">Micro ATM</a></li>
+              <li><a href="/#banking" className="hover:text-blue-400 transition-all">PPI Wallet</a></li>
             </ul>
           </div>
 
           <div className="text-center md:text-left">
-            <h4 className="font-display font-bold text-white mb-10 text-sm tracking-wider uppercase opacity-70">Company</h4>
-            <ul className="space-y-4 text-sm text-white">
-              <li><Link href="/about" className="hover:text-blue-400 transition-all">About Us</Link></li>
-              <li><a href="#" className="hover:text-blue-400 transition-all">Careers</a></li>
-              <li><a href="#" className="hover:text-blue-400 transition-all">Blog</a></li>
-              <li><a href="#" className="hover:text-blue-400 transition-all">Contact</a></li>
+            <h4 className="font-display font-bold text-white mb-10 text-sm tracking-wider uppercase opacity-70">Payments & Collection</h4>
+            <ul className="space-y-3 text-sm text-white">
+              <li><a href="/bbps" className="hover:text-blue-400 transition-all">Bharat Connect (BBPS)</a></li>
+              <li><a href="/#services" className="hover:text-blue-400 transition-all">UPI QR Collection</a></li>
+              <li><a href="/#services" className="hover:text-blue-400 transition-all">mPOS Card Solutions</a></li>
+              <li><a href="/bbps" className="hover:text-blue-400 transition-all">Credit Card Bill Pay</a></li>
+              <li><a href="/bbps" className="hover:text-blue-400 transition-all">Utility Payments</a></li>
+              <li><a href="/bbps" className="hover:text-blue-400 transition-all">Recharge & DTH</a></li>
             </ul>
           </div>
 
           <div className="text-center md:text-left">
-            <h4 className="font-display font-bold text-white mb-10 text-sm tracking-wider uppercase opacity-70">Support</h4>
-            <ul className="space-y-4 text-sm text-white">
-              <li><a href="#" className="hover:text-blue-400 transition-all">Help Center</a></li>
-              <li><Link href="/terms" className="hover:text-blue-400 transition-all">Terms of Service</Link></li>
-              <li><Link href="/privacy" className="hover:text-blue-400 transition-all">Privacy Policy</Link></li>
-              <li><a href="#" className="hover:text-blue-400 transition-all">FAQs</a></li>
+            <h4 className="font-display font-bold text-white mb-10 text-sm tracking-wider uppercase opacity-70">Growth & Travel</h4>
+            <ul className="space-y-3 text-sm text-white">
+              <li><a href="/#booking" className="hover:text-blue-400 transition-all">Business Loans</a></li>
+              <li><a href="/#booking" className="hover:text-blue-400 transition-all">Flight Bookings</a></li>
+              <li><a href="/#booking" className="hover:text-blue-400 transition-all">Train Bookings</a></li>
+              <li><a href="/#booking" className="hover:text-blue-400 transition-all">Bus Bookings</a></li>
+              <li><a href="/#booking" className="hover:text-blue-400 transition-all">Hotel Bookings</a></li>
+              <li><a href="/compliance" className="hover:text-blue-400 transition-all">GST & Compliance</a></li>
             </ul>
           </div>
         </div>
         
-        <div className="border-t border-white/10 pt-12 text-center">
-          <p className="text-[11px] text-white tracking-[0.2em] font-medium uppercase">
+        <div className="border-t border-white/10 pt-12">
+          <div className="flex flex-wrap justify-center gap-6 mb-6 text-sm text-white/70">
+            <Link href="/about" className="hover:text-blue-400 transition-all">About Us</Link>
+            <Link href="/terms" className="hover:text-blue-400 transition-all">Terms of Service</Link>
+            <Link href="/privacy" className="hover:text-blue-400 transition-all">Privacy Policy</Link>
+            <a href="/insurance" className="hover:text-blue-400 transition-all">Insurance</a>
+            <a href="/compliance" className="hover:text-blue-400 transition-all">Compliance</a>
+            <a href="/upgrade" className="hover:text-blue-400 transition-all">Premium Upgrade</a>
+          </div>
+          <p className="text-[11px] text-white tracking-[0.2em] font-medium uppercase text-center">
              © 2025 Yek7pay. All rights reserved. | Powering <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-pink-500 font-black">India's</span> Financial Future
           </p>
-          <p className="text-sm text-white/60 mt-4 font-medium">
+          <p className="text-sm text-white/60 mt-4 font-medium text-center">
             Yek7pay powered by <span className="text-white font-bold">Axis Bank</span>
           </p>
         </div>

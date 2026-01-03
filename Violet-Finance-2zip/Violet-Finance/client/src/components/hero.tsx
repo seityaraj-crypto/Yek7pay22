@@ -135,20 +135,20 @@ export function Hero() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="hidden lg:block relative"
+            className="block relative mx-auto lg:mx-0 mt-8 lg:mt-0"
           >
-            <div className="relative w-[500px] h-[600px] glass-card rounded-[4rem] flex flex-col items-center justify-start p-6 rotate-2 hover:rotate-0 transition-transform duration-700 overflow-hidden">
+            <div className="relative w-[280px] h-[360px] md:w-[400px] md:h-[500px] lg:w-[500px] lg:h-[600px] glass-card rounded-[2rem] md:rounded-[3rem] lg:rounded-[4rem] flex flex-col items-center justify-start p-3 md:p-4 lg:p-6 rotate-0 lg:rotate-2 hover:rotate-0 transition-transform duration-700 overflow-hidden">
                <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 via-transparent to-secondary/10 rounded-[4rem]" />
                
                {/* Indo-Nepal Money Transfer Feature Card */}
-               <div className="relative w-full h-full bg-gradient-to-br from-[#000a26] via-[#00124d] to-[#000a26] rounded-[3rem] p-6 border border-white/10 flex flex-col gap-6 shadow-2xl overflow-hidden group">
+               <div className="relative w-full h-full bg-gradient-to-br from-[#000a26] via-[#00124d] to-[#000a26] rounded-[1.5rem] md:rounded-[2rem] lg:rounded-[3rem] p-3 md:p-4 lg:p-6 border border-white/10 flex flex-col gap-2 md:gap-4 lg:gap-6 shadow-2xl overflow-hidden group">
                   <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 via-transparent to-purple-500/10 pointer-events-none" />
                   
                   <div className="flex items-center justify-between relative z-10">
-                     <div className="h-8 w-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center shadow-lg shadow-blue-500/20">
-                        <ArrowRight className="h-5 w-5 text-white -rotate-45" />
+                     <div className="h-6 w-6 md:h-8 md:w-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center shadow-lg shadow-blue-500/20">
+                        <ArrowRight className="h-3 w-3 md:h-5 md:w-5 text-white -rotate-45" />
                      </div>
-                     <span className="text-[10px] font-bold text-white uppercase tracking-widest bg-white/10 backdrop-blur-md px-3 py-1 rounded-full border border-white/5">Secure Node</span>
+                     <span className="text-[8px] md:text-[10px] font-bold text-white uppercase tracking-widest bg-white/10 backdrop-blur-md px-2 md:px-3 py-1 rounded-full border border-white/5">Secure Node</span>
                   </div>
 
                   <AnimatePresence mode="wait">
@@ -160,12 +160,12 @@ export function Hero() {
                       transition={{ duration: 0.5, ease: "easeInOut" }}
                       className="space-y-2 relative z-10"
                     >
-                      <h3 className="text-xl font-display font-black bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-blue-300 to-purple-400 leading-tight">{slide.title}</h3>
-                      <p className="text-[10px] text-white/50 font-medium">Real-time settlement with advanced encryption.</p>
+                      <h3 className="text-sm md:text-lg lg:text-xl font-display font-black bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-blue-300 to-purple-400 leading-tight">{slide.title}</h3>
+                      <p className="text-[8px] md:text-[10px] text-white/50 font-medium">Real-time settlement with advanced encryption.</p>
                     </motion.div>
                   </AnimatePresence>
 
-                  <div className="relative h-48 w-full bg-gradient-to-br from-blue-900/50 via-purple-900/30 to-blue-900/50 rounded-2xl overflow-hidden border border-white/10 z-10">
+                  <div className="relative h-28 md:h-36 lg:h-48 w-full bg-gradient-to-br from-blue-900/50 via-purple-900/30 to-blue-900/50 rounded-xl md:rounded-2xl overflow-hidden border border-white/10 z-10">
                     <AnimatePresence mode="wait">
                       <motion.div
                         key={slide.id}
@@ -177,15 +177,15 @@ export function Hero() {
                       >
                         <div className="relative w-full h-full flex items-center justify-center">
                           <motion.div
-                            className="absolute left-8 top-1/2 -translate-y-1/2"
+                            className="absolute left-4 md:left-6 lg:left-8 top-1/2 -translate-y-1/2"
                             animate={{ 
-                              x: [0, 20, 0],
+                              x: [0, 10, 0],
                               scale: [1, 1.1, 1]
                             }}
                             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                           >
-                            <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${slide.gradient} flex items-center justify-center shadow-lg`}>
-                              <span className="text-2xl">{slide.icon}</span>
+                            <div className={`w-10 h-10 md:w-12 md:h-12 lg:w-16 lg:h-16 rounded-full bg-gradient-to-br ${slide.gradient} flex items-center justify-center shadow-lg`}>
+                              <span className="text-lg md:text-xl lg:text-2xl">{slide.icon}</span>
                             </div>
                           </motion.div>
                           
@@ -197,28 +197,28 @@ export function Hero() {
                             }}
                             transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
                           >
-                            <Send className="h-8 w-8 text-green-400" />
+                            <Send className="h-5 w-5 md:h-6 md:w-6 lg:h-8 lg:w-8 text-green-400" />
                           </motion.div>
                           
                           <motion.div
-                            className="absolute right-8 top-1/2 -translate-y-1/2"
+                            className="absolute right-4 md:right-6 lg:right-8 top-1/2 -translate-y-1/2"
                             animate={{ 
-                              x: [0, -20, 0],
+                              x: [0, -10, 0],
                               scale: [1, 1.1, 1]
                             }}
                             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
                           >
-                            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-green-500 to-emerald-400 flex items-center justify-center shadow-lg shadow-green-500/30">
-                              <span className="text-2xl">{slide.targetIcon}</span>
+                            <div className="w-10 h-10 md:w-12 md:h-12 lg:w-16 lg:h-16 rounded-full bg-gradient-to-br from-green-500 to-emerald-400 flex items-center justify-center shadow-lg shadow-green-500/30">
+                              <span className="text-lg md:text-xl lg:text-2xl">{slide.targetIcon}</span>
                             </div>
                           </motion.div>
                           
                           <motion.div
-                            className="absolute bottom-6 left-1/2 -translate-x-1/2"
+                            className="absolute bottom-2 md:bottom-4 lg:bottom-6 left-1/2 -translate-x-1/2"
                             animate={{ opacity: [0.5, 1, 0.5] }}
                             transition={{ duration: 1.5, repeat: Infinity }}
                           >
-                            <div className={`px-3 py-1 rounded-full text-[10px] font-bold ${slide.status === 'Completed' || slide.status === 'Successful' ? 'bg-green-500/20 text-green-400' : 'bg-yellow-500/20 text-yellow-400'}`}>
+                            <div className={`px-2 md:px-3 py-0.5 md:py-1 rounded-full text-[8px] md:text-[10px] font-bold ${slide.status === 'Completed' || slide.status === 'Successful' ? 'bg-green-500/20 text-green-400' : 'bg-yellow-500/20 text-yellow-400'}`}>
                               {slide.status}
                             </div>
                           </motion.div>
@@ -226,12 +226,12 @@ export function Hero() {
                       </motion.div>
                     </AnimatePresence>
                     <div className="absolute inset-0 bg-gradient-to-t from-[#000a26]/80 to-transparent pointer-events-none" />
-                    <div className="absolute bottom-4 left-4 right-4">
+                    <div className="absolute bottom-2 md:bottom-4 left-2 md:left-4 right-2 md:right-4">
                       <div className="flex items-center justify-between text-white">
-                        <div className="text-[10px] font-bold uppercase tracking-wider text-blue-300">Transfer ID: {slide.transferId}</div>
-                        <div className="flex gap-1">
+                        <div className="text-[7px] md:text-[10px] font-bold uppercase tracking-wider text-blue-300">ID: {slide.transferId}</div>
+                        <div className="flex gap-0.5 md:gap-1">
                           {slides.map((_, i) => (
-                            <div key={i} className={`h-1.5 w-1.5 rounded-full transition-all ${i === currentSlide ? 'bg-blue-400 w-4' : 'bg-white/30'}`} />
+                            <div key={i} className={`h-1 w-1 md:h-1.5 md:w-1.5 rounded-full transition-all ${i === currentSlide ? 'bg-blue-400 w-2 md:w-4' : 'bg-white/30'}`} />
                           ))}
                         </div>
                       </div>
@@ -247,16 +247,16 @@ export function Hero() {
                       transition={{ duration: 0.4 }}
                       className="space-y-3 relative z-10"
                     >
-                      <div className="flex items-center justify-between text-xs">
-                        <span className="text-white/40 font-medium">Recipient Name</span>
-                        <span className="font-bold text-white">{slide.recipient}</span>
+                      <div className="flex items-center justify-between text-[10px] md:text-xs">
+                        <span className="text-white/40 font-medium">Recipient</span>
+                        <span className="font-bold text-white truncate max-w-[100px] md:max-w-none">{slide.recipient}</span>
                       </div>
-                      <div className="flex items-center justify-between text-xs">
-                        <span className="text-white/40 font-medium">Transfer Amount</span>
+                      <div className="flex items-center justify-between text-[10px] md:text-xs">
+                        <span className="text-white/40 font-medium">Amount</span>
                         <span className="font-bold text-blue-400">{slide.amount}</span>
                       </div>
-                      <div className="h-12 w-full bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center text-white text-xs font-bold gap-2 shadow-lg shadow-blue-900/20 active:scale-95 transition-transform">
-                        Confirm Transfer <Zap className="h-3 w-3" />
+                      <div className="h-8 md:h-10 lg:h-12 w-full bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg md:rounded-xl flex items-center justify-center text-white text-[10px] md:text-xs font-bold gap-1 md:gap-2 shadow-lg shadow-blue-900/20 active:scale-95 transition-transform">
+                        Confirm <Zap className="h-2.5 w-2.5 md:h-3 md:w-3" />
                       </div>
                     </motion.div>
                   </AnimatePresence>
