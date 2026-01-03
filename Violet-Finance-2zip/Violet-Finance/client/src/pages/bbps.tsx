@@ -14,7 +14,7 @@ const bbpsServices = [
   { title: "Mobile Postpaid", icon: Smartphone, desc: "Clear your mobile bills with zero convenience fees.", color: "text-emerald-400", bgColor: "bg-emerald-400/10" },
   { title: "Fastag", icon: CreditCard, desc: "Instant Fastag recharges for smooth highway travel.", color: "text-cyan-400", bgColor: "bg-cyan-400/10" },
   { title: "Insurance", icon: Receipt, desc: "Pay life and health insurance premiums easily.", color: "text-blue-500", bgColor: "bg-blue-500/10" },
-  { title: "MSPDCL", icon: Zap, desc: "Direct electricity bill payment for MSPDCL customers.", color: "text-yellow-500", bgColor: "bg-yellow-500/10", url: "https://billing.mspdcl.info" }
+  { title: "MSPDCL", icon: Zap, desc: "Manipur Electricity - Direct bill payment for MSPDCL customers.", color: "text-yellow-500", bgColor: "bg-yellow-500/10", url: "https://billing.mspdcl.info" }
 ];
 
 export default function BharatConnect() {
