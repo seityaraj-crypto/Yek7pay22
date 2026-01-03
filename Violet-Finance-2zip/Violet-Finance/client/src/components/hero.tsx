@@ -1,19 +1,73 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ShieldCheck, Zap, Globe, Coins, CheckCircle2, Send } from "lucide-react";
+import { ArrowRight, ShieldCheck, Zap, Globe, Coins, CheckCircle2, Send, Wallet, CreditCard, Smartphone } from "lucide-react";
 import { AuthDialog } from "@/components/auth-dialog";
 import { useState, useEffect } from "react";
 
+const slides = [
+  {
+    id: 1,
+    title: "Indo-Nepal Transfer",
+    amount: "₹1,00,000.00",
+    recipient: "Rajesh Sharma",
+    transferId: "YK7-8821",
+    icon: "🇮🇳",
+    targetIcon: "🇳🇵",
+    status: "Completed",
+    gradient: "from-blue-500 to-cyan-400"
+  },
+  {
+    id: 2,
+    title: "AEPS Withdrawal",
+    amount: "₹25,000.00",
+    recipient: "Priya Patel",
+    transferId: "YK7-9942",
+    icon: "💳",
+    targetIcon: "💰",
+    status: "Processing",
+    gradient: "from-green-500 to-emerald-400"
+  },
+  {
+    id: 3,
+    title: "DMT Transfer",
+    amount: "₹50,000.00",
+    recipient: "Amit Kumar",
+    transferId: "YK7-3356",
+    icon: "🏦",
+    targetIcon: "📱",
+    status: "Completed",
+    gradient: "from-purple-500 to-pink-400"
+  },
+  {
+    id: 4,
+    title: "mPOS Payment",
+    amount: "₹8,500.00",
+    recipient: "Quick Mart Store",
+    transferId: "YK7-7721",
+    icon: "📲",
+    targetIcon: "✅",
+    status: "Successful",
+    gradient: "from-orange-500 to-yellow-400"
+  }
+];
+
 export function Hero() {
   const [isAuthOpen, setIsAuthOpen] = useState(false);
-  const [transferStep, setTransferStep] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setTransferStep((prev) => (prev + 1) % 4);
-    }, 2000);
+      setIsAnimating(true);
+      setTimeout(() => {
+        setCurrentSlide((prev) => (prev + 1) % slides.length);
+        setIsAnimating(false);
+      }, 500);
+    }, 4000);
     return () => clearInterval(interval);
   }, []);
+
+  const slide = slides[currentSlide];
 
   return (
     <div className="relative min-h-screen flex items-center overflow-hidden pt-16 bg-gradient-to-br from-[#0a1a3a] via-[#0d0d2b] to-[#1a0b3b]">
@@ -97,85 +151,115 @@ export function Hero() {
                      <span className="text-[10px] font-bold text-white uppercase tracking-widest bg-white/10 backdrop-blur-md px-3 py-1 rounded-full border border-white/5">Secure Node</span>
                   </div>
 
-                  <div className="space-y-2 relative z-10">
-                     <h3 className="text-xl font-display font-black bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-blue-300 to-purple-400 leading-tight">Indo-Nepal Money Transfer</h3>
-                     <p className="text-[10px] text-white/50 font-medium">Real-time settlement with advanced encryption.</p>
-                  </div>
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={slide.id}
+                      initial={{ opacity: 0, x: 100 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -100 }}
+                      transition={{ duration: 0.5, ease: "easeInOut" }}
+                      className="space-y-2 relative z-10"
+                    >
+                      <h3 className="text-xl font-display font-black bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-blue-300 to-purple-400 leading-tight">{slide.title}</h3>
+                      <p className="text-[10px] text-white/50 font-medium">Real-time settlement with advanced encryption.</p>
+                    </motion.div>
+                  </AnimatePresence>
 
                   <div className="relative h-48 w-full bg-gradient-to-br from-blue-900/50 via-purple-900/30 to-blue-900/50 rounded-2xl overflow-hidden border border-white/10 z-10">
-                     <div className="absolute inset-0 flex items-center justify-center">
-                       <div className="relative w-full h-full flex items-center justify-center">
-                         <motion.div
-                           className="absolute left-4 top-1/2 -translate-y-1/2"
-                           animate={{ 
-                             x: transferStep >= 1 ? [0, 80] : 0,
-                             opacity: transferStep === 0 ? 1 : transferStep >= 2 ? 0 : 1
-                           }}
-                           transition={{ duration: 0.8 }}
-                         >
-                           <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center shadow-lg shadow-blue-500/30">
-                             <span className="text-2xl">🇮🇳</span>
-                           </div>
-                         </motion.div>
-                         
-                         <motion.div
-                           className="absolute"
-                           animate={{ 
-                             scale: transferStep === 1 ? [1, 1.2, 1] : 1,
-                             opacity: transferStep >= 1 ? 1 : 0.3
-                           }}
-                           transition={{ duration: 0.5 }}
-                         >
-                           <Send className={`h-8 w-8 ${transferStep >= 1 ? 'text-green-400' : 'text-white/30'}`} />
-                         </motion.div>
-                         
-                         <motion.div
-                           className="absolute right-4 top-1/2 -translate-y-1/2"
-                           animate={{ 
-                             scale: transferStep >= 2 ? [1, 1.1, 1] : 1,
-                             opacity: transferStep >= 2 ? 1 : 0.5
-                           }}
-                           transition={{ duration: 0.5 }}
-                         >
-                           <div className="w-16 h-16 rounded-full bg-gradient-to-br from-red-500 to-orange-400 flex items-center justify-center shadow-lg shadow-red-500/30">
-                             <span className="text-2xl">🇳🇵</span>
-                           </div>
-                         </motion.div>
-                         
-                         {transferStep === 3 && (
-                           <motion.div
-                             className="absolute"
-                             initial={{ scale: 0, opacity: 0 }}
-                             animate={{ scale: 1, opacity: 1 }}
-                             transition={{ duration: 0.3 }}
-                           >
-                             <CheckCircle2 className="h-12 w-12 text-green-400 drop-shadow-[0_0_10px_rgba(74,222,128,0.5)]" />
-                           </motion.div>
-                         )}
-                       </div>
-                     </div>
-                     <div className="absolute inset-0 bg-gradient-to-t from-[#000a26]/80 to-transparent pointer-events-none" />
-                     <div className="absolute bottom-4 left-4 right-4">
-                        <div className="flex items-center justify-between text-white">
-                           <div className="text-[10px] font-bold uppercase tracking-wider text-blue-300">Transfer ID: YK7-8821</div>
-                           <div className={`h-2 w-2 rounded-full animate-pulse shadow-[0_0_10px_rgba(74,222,128,0.5)] ${transferStep === 3 ? 'bg-green-400' : 'bg-yellow-400'}`} />
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={slide.id}
+                        initial={{ opacity: 0, scale: 0.8, rotateY: 90 }}
+                        animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+                        exit={{ opacity: 0, scale: 0.8, rotateY: -90 }}
+                        transition={{ duration: 0.6, ease: "easeInOut" }}
+                        className="absolute inset-0 flex items-center justify-center"
+                      >
+                        <div className="relative w-full h-full flex items-center justify-center">
+                          <motion.div
+                            className="absolute left-8 top-1/2 -translate-y-1/2"
+                            animate={{ 
+                              x: [0, 20, 0],
+                              scale: [1, 1.1, 1]
+                            }}
+                            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                          >
+                            <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${slide.gradient} flex items-center justify-center shadow-lg`}>
+                              <span className="text-2xl">{slide.icon}</span>
+                            </div>
+                          </motion.div>
+                          
+                          <motion.div
+                            className="absolute"
+                            animate={{ 
+                              rotate: [0, 360],
+                              scale: [1, 1.2, 1]
+                            }}
+                            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                          >
+                            <Send className="h-8 w-8 text-green-400" />
+                          </motion.div>
+                          
+                          <motion.div
+                            className="absolute right-8 top-1/2 -translate-y-1/2"
+                            animate={{ 
+                              x: [0, -20, 0],
+                              scale: [1, 1.1, 1]
+                            }}
+                            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                          >
+                            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-green-500 to-emerald-400 flex items-center justify-center shadow-lg shadow-green-500/30">
+                              <span className="text-2xl">{slide.targetIcon}</span>
+                            </div>
+                          </motion.div>
+                          
+                          <motion.div
+                            className="absolute bottom-6 left-1/2 -translate-x-1/2"
+                            animate={{ opacity: [0.5, 1, 0.5] }}
+                            transition={{ duration: 1.5, repeat: Infinity }}
+                          >
+                            <div className={`px-3 py-1 rounded-full text-[10px] font-bold ${slide.status === 'Completed' || slide.status === 'Successful' ? 'bg-green-500/20 text-green-400' : 'bg-yellow-500/20 text-yellow-400'}`}>
+                              {slide.status}
+                            </div>
+                          </motion.div>
                         </div>
-                     </div>
+                      </motion.div>
+                    </AnimatePresence>
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#000a26]/80 to-transparent pointer-events-none" />
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <div className="flex items-center justify-between text-white">
+                        <div className="text-[10px] font-bold uppercase tracking-wider text-blue-300">Transfer ID: {slide.transferId}</div>
+                        <div className="flex gap-1">
+                          {slides.map((_, i) => (
+                            <div key={i} className={`h-1.5 w-1.5 rounded-full transition-all ${i === currentSlide ? 'bg-blue-400 w-4' : 'bg-white/30'}`} />
+                          ))}
+                        </div>
+                      </div>
+                    </div>
                   </div>
 
-                  <div className="space-y-3 relative z-10">
-                     <div className="flex items-center justify-between text-xs">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={slide.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ duration: 0.4 }}
+                      className="space-y-3 relative z-10"
+                    >
+                      <div className="flex items-center justify-between text-xs">
                         <span className="text-white/40 font-medium">Recipient Name</span>
-                        <span className="font-bold text-white">Rajesh Sharma</span>
-                     </div>
-                     <div className="flex items-center justify-between text-xs">
+                        <span className="font-bold text-white">{slide.recipient}</span>
+                      </div>
+                      <div className="flex items-center justify-between text-xs">
                         <span className="text-white/40 font-medium">Transfer Amount</span>
-                        <span className="font-bold text-blue-400">₹ 1,00,000.00</span>
-                     </div>
-                     <div className="h-12 w-full bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center text-white text-xs font-bold gap-2 shadow-lg shadow-blue-900/20 active:scale-95 transition-transform">
+                        <span className="font-bold text-blue-400">{slide.amount}</span>
+                      </div>
+                      <div className="h-12 w-full bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center text-white text-xs font-bold gap-2 shadow-lg shadow-blue-900/20 active:scale-95 transition-transform">
                         Confirm Transfer <Zap className="h-3 w-3" />
-                     </div>
-                  </div>
+                      </div>
+                    </motion.div>
+                  </AnimatePresence>
                </div>
 
                {/* Decorative floating elements */}
@@ -189,5 +273,3 @@ export function Hero() {
     </div>
   );
 }
-
-import { Wallet } from "lucide-react";
