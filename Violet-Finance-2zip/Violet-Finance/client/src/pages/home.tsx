@@ -276,10 +276,13 @@ export default function Home() {
                 <p className="text-lg text-white mb-8">
                   Pay all your utility bills—Electricity, Gas, Water, Broadband, and more—instantly via Yek7pay's universal payout system.
                 </p>
-                <div className="grid grid-cols-2 gap-4 mb-10">
-                  {['Utilities', 'Recharge', 'Insurance', 'Fastag'].map(item => (
-                    <div key={item} className="flex items-center gap-2 text-sm text-white">
-                      <Zap className="h-4 w-4 text-violet-500" />
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-10">
+                  {[
+                    'Electricity', 'Gas', 'Water', 'Broadband', 'DTH', 'Mobile Recharge',
+                    'Credit Card', 'Insurance', 'Fastag', 'LPG', 'Landline', 'Education Fees'
+                  ].map(item => (
+                    <div key={item} className="flex items-center gap-2 text-sm text-white bg-white/5 rounded-lg px-3 py-2 border border-white/5">
+                      <Zap className="h-4 w-4 text-violet-500 shrink-0" />
                       {item}
                     </div>
                   ))}
