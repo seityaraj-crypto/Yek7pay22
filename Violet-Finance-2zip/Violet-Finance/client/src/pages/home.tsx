@@ -280,23 +280,10 @@ export default function Home() {
               ]}
             />
             <ServiceCard 
-              icon={Plane}
-              title="Flight Booking"
-              description="The smartest way to book domestic and international flights."
-              delay={0.3}
-              externalUrl="https://yek7pay.in"
-              features={[
-                "Domestic & international flights on one platform",
-                "Best fares with smart price comparison",
-                "Instant booking & real-time confirmation",
-                "Easy cancellations and rescheduling support"
-              ]}
-            />
-            <ServiceCard 
               icon={Train}
               title="Train Booking"
               description="Quick IRCTC bookings with real-time seat tracking and updates."
-              delay={0.4}
+              delay={0.3}
               features={[
                 "Fast IRCTC booking integration",
                 "Real-time seat availability & PNR updates",
@@ -308,7 +295,7 @@ export default function Home() {
               icon={ShieldCheck}
               title="Vehicle Insurance"
               description="Protect your car and bike with comprehensive insurance plans from top providers."
-              delay={0.5}
+              delay={0.4}
               variant="featured"
               onClick={() => window.location.href = "/insurance"}
               features={[
