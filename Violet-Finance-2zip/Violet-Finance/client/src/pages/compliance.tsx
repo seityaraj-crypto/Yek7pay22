@@ -130,22 +130,22 @@ export default function Compliance() {
                   <CheckCircle2 className="text-emerald-400 h-6 w-6" />
                   Select Service
                 </h2>
-                <div className="flex flex-col sm:flex-row gap-3">
+                <div className="flex flex-col sm:flex-row gap-4">
                   <Button 
                     variant="outline"
-                    className="bg-green-500/10 border-green-500/20 hover:bg-green-500/20 text-green-400 gap-2"
+                    className="h-14 px-8 bg-[#25D366] hover:bg-[#128C7E] text-white border-none shadow-[0_0_20px_rgba(37,211,102,0.3)] hover:shadow-[0_0_30px_rgba(37,211,102,0.5)] gap-3 rounded-2xl transition-all duration-300 active:scale-95 group font-display font-black text-lg tracking-tight"
                     onClick={() => handleWhatsAppAppointment("919230967187")}
                   >
-                    <MessageCircle className="h-4 w-4" />
-                    Appointment 1
+                    <MessageCircle className="h-6 w-6 fill-white group-hover:scale-110 transition-transform" />
+                    Make an Appointment 1
                   </Button>
                   <Button 
                     variant="outline"
-                    className="bg-green-500/10 border-green-500/20 hover:bg-green-500/20 text-green-400 gap-2"
+                    className="h-14 px-8 bg-[#25D366] hover:bg-[#128C7E] text-white border-none shadow-[0_0_20px_rgba(37,211,102,0.3)] hover:shadow-[0_0_30px_rgba(37,211,102,0.5)] gap-3 rounded-2xl transition-all duration-300 active:scale-95 group font-display font-black text-lg tracking-tight"
                     onClick={() => handleWhatsAppAppointment("919230967189")}
                   >
-                    <MessageCircle className="h-4 w-4" />
-                    Appointment 2
+                    <MessageCircle className="h-6 w-6 fill-white group-hover:scale-110 transition-transform" />
+                    Make an Appointment 2
                   </Button>
                 </div>
               </div>
