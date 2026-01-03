@@ -148,11 +148,11 @@ export default function Home() {
             <ServiceCard 
               icon={Send}
               title="Advance DMT"
-              description="Seamlessly transfer funds to any bank account in India instantly with Yek7pay's 24/7 DMT service."
+              description={<>Seamlessly transfer funds to any bank account in India instantly with Yek7pay's <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-blue-500 font-bold">24/7</span> DMT service.</>}
               delay={0.1}
               variant="featured"
               features={[
-                "24/7 Instant DMT to any bank in India",
+                "24/7_GRADIENT Instant DMT to any bank in India",
                 "Real-time settlements with zero delays",
                 "Bank-grade security with seamless experience",
                 "High success rate & instant confirmations"
@@ -325,7 +325,7 @@ export default function Home() {
                 "Comprehensive Car & Bike Insurance",
                 "Cashless claims at 5000+ garages",
                 "Instant policy issuance & renewal",
-                "24/7 Roadside assistance support"
+                "24/7_GRADIENT Roadside assistance support"
               ]}
             />
           </div>
@@ -354,7 +354,7 @@ export default function Home() {
                 "Monthly & Quarterly GST returns",
                 "Instant real-time processing",
                 "Secure bank-grade encryption",
-                "24/7 technical support"
+                "24/7_GRADIENT technical support"
               ]}
             />
             <ServiceCard 
@@ -464,7 +464,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
             {[
               { icon: ShieldCheck, title: 'Secure Transactions', desc: 'Bank-grade security with end-to-end encryption for all transactions.' },
-              { icon: UserCheck, title: '24/7 Support', desc: 'Round-the-clock customer support to assist you anytime, anywhere.' },
+              { icon: UserCheck, title: '24/7 Support', desc: 'Round-the-clock customer support to assist you anytime, anywhere.', gradient: true },
               { icon: Zap, title: 'Instant Settlement', desc: 'Get your money instantly with our fast settlement system.' },
               { icon: Coins, title: 'Low Charges', desc: 'Industry-best pricing with transparent and minimal charges.' }
             ].map((feature, i) => (
@@ -472,7 +472,7 @@ export default function Home() {
                 <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-purple-400 mb-6 group-hover:bg-purple-600 group-hover:text-white transition-all duration-500 shadow-sm">
                   <feature.icon className="h-8 w-8" />
                 </div>
-                <h4 className="text-lg font-bold text-white mb-3">{feature.title}</h4>
+                <h4 className={`text-lg font-bold mb-3 ${(feature as any).gradient ? 'bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-blue-500' : 'text-white'}`}>{feature.title}</h4>
                 <p className="text-sm text-white/40 leading-relaxed font-medium">{feature.desc}</p>
               </div>
             ))}
@@ -549,7 +549,7 @@ export default function Home() {
                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full md:w-auto">
                     {[
                       { label: 'Setup Fee', value: '0%', color: 'text-purple-400' },
-                      { label: 'Support Available', value: '24/7', color: 'text-blue-400' },
+                      { label: 'Support Available', value: '24/7', color: 'bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-blue-500' },
                       { label: 'Settlement', value: 'Instant', color: 'text-purple-400' }
                     ].map((item, i) => (
                       <div key={i} className="bg-white/5 backdrop-blur-md p-6 rounded-2xl border border-white/10 text-center">

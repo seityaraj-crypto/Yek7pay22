@@ -37,7 +37,7 @@ export function ServiceCard({ icon: Icon, title, description, delay = 0, variant
   const defaultFeatures = [
     "Instant real-time processing",
     "Secure bank-grade encryption",
-    "24/7 technical support"
+    "24/7_GRADIENT technical support"
   ];
 
   const displayFeatures = features || defaultFeatures;
@@ -101,7 +101,12 @@ export function ServiceCard({ icon: Icon, title, description, delay = 0, variant
                   {displayFeatures.map((feature, index) => (
                     <li key={index} className="flex items-center gap-3 text-sm text-white/90 font-medium group/item">
                       <div className={`h-2 w-2 rounded-full ${index % 2 === 0 ? "bg-blue-400 shadow-[0_0_10px_rgba(96,165,250,0.5)]" : "bg-purple-400 shadow-[0_0_10px_rgba(192,132,252,0.5)]"} transition-transform group-hover/item:scale-125`} />
-                      {feature}
+                      {feature.includes("24/7_GRADIENT") ? (
+                        <>
+                          <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-blue-500 font-bold">24/7</span>
+                          {feature.replace("24/7_GRADIENT", "")}
+                        </>
+                      ) : feature}
                     </li>
                   ))}
                 </ul>

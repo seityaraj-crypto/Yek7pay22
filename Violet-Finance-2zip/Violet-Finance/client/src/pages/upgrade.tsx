@@ -33,7 +33,7 @@ export default function Upgrade() {
                 { title: "PPI Wallet", desc: "Digital wallet solutions for instant merchant payouts." },
                 { title: "Premium Loans", desc: "Priority processing for business and personal financing." },
                 { title: "Compliance Suite", desc: "Full access to GST filing, ITR, and audit services." },
-                { title: "VIP Support", desc: "24/7 dedicated account manager for your business." },
+                { title: "VIP Support", desc: "24/7 dedicated account manager for your business.", has247: true },
                 { title: "Elite Commission", desc: "Unlock the highest commission slabs in the industry." }
               ].map((feature, i) => (
                 <motion.div 
@@ -49,7 +49,14 @@ export default function Upgrade() {
                     </div>
                     <div>
                       <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
-                      <p className="text-white/40 leading-relaxed">{feature.desc}</p>
+                      <p className="text-white/40 leading-relaxed">
+                        {(feature as any).has247 ? (
+                          <>
+                            <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-blue-500 font-bold">24/7</span>
+                            {feature.desc.replace("24/7", "")}
+                          </>
+                        ) : feature.desc}
+                      </p>
                     </div>
                   </div>
                 </motion.div>

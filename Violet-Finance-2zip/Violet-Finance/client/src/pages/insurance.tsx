@@ -15,7 +15,7 @@ const insuranceTypes = [
     icon: Car,
     color: "text-blue-400",
     bgColor: "bg-blue-400/10",
-    features: ["Zero Depreciation Cover", "24/7 Roadside Assistance", "Cashless Garage Network", "Engine Protection"]
+    features: ["Zero Depreciation Cover", "24/7_GRADIENT Roadside Assistance", "Cashless Garage Network", "Engine Protection"]
   },
   {
     id: "bike-insurance",
@@ -117,7 +117,13 @@ export default function Insurance() {
                         <ul className="space-y-2">
                           {type.features.map((f, i) => (
                             <li key={i} className="flex items-center gap-2 text-xs text-white/40 font-medium">
-                              <CheckCircle2 className="h-3 w-3 text-green-500" /> {f}
+                              <CheckCircle2 className="h-3 w-3 text-green-500" /> 
+                              {f.includes("24/7_GRADIENT") ? (
+                                <>
+                                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-blue-500 font-bold">24/7</span>
+                                  {f.replace("24/7_GRADIENT", "")}
+                                </>
+                              ) : f}
                             </li>
                           ))}
                         </ul>
