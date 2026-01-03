@@ -13,7 +13,8 @@ const bbpsServices = [
   { title: "DTH / TV", icon: Tv, desc: "Quick recharges for all major DTH providers.", color: "text-rose-400", bgColor: "bg-rose-400/10" },
   { title: "Mobile Postpaid", icon: Smartphone, desc: "Clear your mobile bills with zero convenience fees.", color: "text-emerald-400", bgColor: "bg-emerald-400/10" },
   { title: "Fastag", icon: CreditCard, desc: "Instant Fastag recharges for smooth highway travel.", color: "text-cyan-400", bgColor: "bg-cyan-400/10" },
-  { title: "Insurance", icon: Receipt, desc: "Pay life and health insurance premiums easily.", color: "text-blue-500", bgColor: "bg-blue-500/10" }
+  { title: "Insurance", icon: Receipt, desc: "Pay life and health insurance premiums easily.", color: "text-blue-500", bgColor: "bg-blue-500/10" },
+  { title: "MSPDCL", icon: Zap, desc: "Direct electricity bill payment for MSPDCL customers.", color: "text-yellow-500", bgColor: "bg-yellow-500/10", url: "https://billing.mspdcl.info" }
 ];
 
 export default function BharatConnect() {
@@ -55,7 +56,14 @@ export default function BharatConnect() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: i * 0.05 }}
               >
-                <Card className="h-full bg-white/5 border-white/10 hover:border-violet-500/50 transition-all backdrop-blur-xl group cursor-pointer">
+                <Card 
+                  className="h-full bg-white/5 border-white/10 hover:border-violet-500/50 transition-all backdrop-blur-xl group cursor-pointer"
+                  onClick={() => {
+                    if (service.url) {
+                      window.open(service.url, '_blank');
+                    }
+                  }}
+                >
                   <CardHeader>
                     <div className={`w-12 h-12 rounded-2xl ${service.bgColor} flex items-center justify-center ${service.color} mb-4 group-hover:scale-110 transition-transform shadow-lg border border-white/5`}>
                       <service.icon className="h-6 w-6" />
@@ -64,7 +72,15 @@ export default function BharatConnect() {
                     <CardDescription className="text-white/40 text-xs">{service.desc}</CardDescription>
                   </CardHeader>
                   <div className="px-6 pb-6">
-                    <Button className="w-full bg-white/5 hover:bg-violet-500 text-white border-white/10 rounded-xl text-xs font-bold transition-all">
+                    <Button 
+                      className="w-full bg-white/5 hover:bg-violet-500 text-white border-white/10 rounded-xl text-xs font-bold transition-all"
+                      onClick={(e) => {
+                        if (service.url) {
+                          e.stopPropagation();
+                          window.open(service.url, '_blank');
+                        }
+                      }}
+                    >
                       Pay Now
                     </Button>
                   </div>
