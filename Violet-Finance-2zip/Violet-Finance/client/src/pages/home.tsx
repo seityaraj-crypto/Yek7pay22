@@ -353,7 +353,7 @@ export default function Home() {
             />
             <ServiceCard 
               icon={Scale}
-              title="Tax Audit"
+              title="Deep Tax related"
               description="Professional tax audit services by certified experts to ensure compliance."
               delay={0.3}
               features={[

@@ -26,7 +26,7 @@ const complianceServices = [
   },
   {
     id: "tax-audit",
-    title: "Tax Audit",
+    title: "Deep Tax related",
     description: "Comprehensive statutory tax audit services by certified professionals. We provide deep tax analysis, compliance verification, and risk assessment to ensure your business stays ahead of regulatory requirements.",
     icon: Scale,
     color: "text-amber-400",
