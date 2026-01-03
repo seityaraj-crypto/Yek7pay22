@@ -69,11 +69,11 @@ export default function Home() {
             </div>
             
             <div className="max-w-3xl relative z-10">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 text-blue-400 text-xs font-bold mb-8 border border-blue-500/20">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-pink-500/10 text-pink-400 text-xs font-bold mb-8 border border-pink-500/20">
                 ✈️ Travel & Lifestyle
               </div>
               <h2 className="text-4xl md:text-7xl font-display font-black text-white mb-8 leading-tight">
-                Book <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-400">Flights, Hotels</span> & <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-rose-400">Buses</span> Instantly
+                Book <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-pink-300">Flights, Hotels</span> & <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-300 to-pink-500">Buses</span> Instantly
               </h2>
               <p className="text-xl text-white/50 mb-12 font-medium leading-relaxed">
                 Experience the world with Yek7pay. Get exclusive deals on domestic and international bookings with the lowest convenience fees in the industry.
@@ -81,9 +81,9 @@ export default function Home() {
               
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-12">
                 {[
-                  { label: 'Flights', icon: Plane, desc: 'Domestic & International', color: 'text-blue-400' },
-                  { label: 'Hotels', icon: Building2, desc: '500,000+ Worldwide', color: 'text-indigo-400' },
-                  { label: 'Bus', icon: Smartphone, desc: 'All Major Operators', color: 'text-rose-400' }
+                  { label: 'Flights', icon: Plane, desc: 'Domestic & International', color: 'text-pink-400' },
+                  { label: 'Hotels', icon: Building2, desc: '500,000+ Worldwide', color: 'text-pink-400' },
+                  { label: 'Bus', icon: Smartphone, desc: 'All Major Operators', color: 'text-pink-400' }
                 ].map((item, i) => (
                   <div key={i} className="flex flex-col gap-3">
                     <div className={`w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center ${item.color}`}>
@@ -96,7 +96,7 @@ export default function Home() {
               </div>
               
               <Button 
-                className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white rounded-full px-12 h-16 text-lg font-bold shadow-xl shadow-blue-900/40 transition-all hover:scale-105 active:scale-95 flex items-center gap-3 border border-white/10"
+                className="bg-gradient-to-r from-pink-500 via-pink-600 to-pink-700 hover:from-pink-400 hover:to-pink-600 text-white rounded-full px-12 h-16 text-lg font-bold shadow-xl shadow-pink-900/40 transition-all hover:scale-105 active:scale-95 flex items-center gap-3 border border-white/10"
                 onClick={() => window.location.href = "https://yek7pay.in"}
               >
                 Go to Booking Portal <ArrowRight className="h-6 w-6" />
