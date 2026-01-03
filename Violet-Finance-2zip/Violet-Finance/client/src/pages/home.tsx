@@ -509,11 +509,9 @@ export default function Home() {
                     </li>
                   ))}
                </ul>
-               <a href="https://wa.me/919230967187?text=Hi%2C%20I%20want%20to%20open%20an%20account%20with%20Yek7Pay" target="_blank" rel="noopener noreferrer" className="w-full">
-                  <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white h-14 rounded-2xl font-bold">
-                    Get Started <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
-               </a>
+               <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white h-14 rounded-2xl font-bold" onClick={() => setIsAuthOpen(true)}>
+                  Get Started <ArrowRight className="ml-2 h-5 w-5" />
+               </Button>
             </div>
 
             <div className="bg-white/5 backdrop-blur-xl p-12 rounded-[3rem] shadow-2xl border border-white/10 flex flex-col items-center text-center group">
@@ -529,11 +527,9 @@ export default function Home() {
                     </li>
                   ))}
                </ul>
-               <a href="https://wa.me/919230967187?text=Hi%2C%20I%20want%20to%20open%20an%20account%20with%20Yek7Pay" target="_blank" rel="noopener noreferrer" className="w-full">
-                  <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white h-14 rounded-2xl font-bold">
-                    Get Started <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
-               </a>
+               <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white h-14 rounded-2xl font-bold" onClick={() => setIsAuthOpen(true)}>
+                  Get Started <ArrowRight className="ml-2 h-5 w-5" />
+               </Button>
             </div>
           </div>
         </div>

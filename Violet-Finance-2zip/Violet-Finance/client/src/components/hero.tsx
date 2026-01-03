@@ -40,11 +40,9 @@ export function Hero() {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start">
-                <a href="https://wa.me/919230967187?text=Hi%2C%20I%20want%20to%20open%20an%20account%20with%20Yek7Pay" target="_blank" rel="noopener noreferrer">
-                  <Button size="lg" className="bg-primary hover:bg-primary/90 text-white h-14 px-10 rounded-full shadow-2xl neo-glow text-lg font-bold">
-                    Get Started <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
-                </a>
+                <Button size="lg" className="bg-primary hover:bg-primary/90 text-white h-14 px-10 rounded-full shadow-2xl neo-glow text-lg font-bold" onClick={() => setIsAuthOpen(true)}>
+                  Get Started <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
                 <Button size="lg" variant="outline" className="h-14 px-10 rounded-full border-white/10 hover:bg-white/5 hover:text-white text-lg font-bold" onClick={() => setIsAuthOpen(true)}>
                   Explore Features
                 </Button>
