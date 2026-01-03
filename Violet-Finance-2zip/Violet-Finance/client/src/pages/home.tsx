@@ -12,7 +12,7 @@ import {
   Zap, Receipt, Landmark, Banknote, CreditCard,
   CheckCircle2, QrCode, Smartphone, Mail, Phone, MapPin,
   ShieldCheck, UserCheck, Coins, ArrowRight, ClipboardCheck, FileText, Scale, Building,
-  Hotel, Bus, MessageCircle, Clock, X, AlertCircle
+  Hotel, Bus, MessageCircle, Clock, X, AlertCircle, TabletSmartphone
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -519,7 +519,7 @@ export default function Home() {
 
             <div className="bg-white/5 backdrop-blur-xl p-12 rounded-[3rem] shadow-2xl border border-white/10 flex flex-col items-center text-center group">
                <div className="w-20 h-20 rounded-3xl bg-blue-600 flex items-center justify-center text-white mb-8 shadow-xl shadow-blue-500/20">
-                  <Smartphone className="h-10 w-10" />
+                  <TabletSmartphone className="h-10 w-10" />
                </div>
                <h3 className="text-2xl font-bold text-white mb-4">mPOS Solutions</h3>
                <p className="text-white/50 mb-8 max-w-sm">Portable card payment solutions for your store with instant settlement.</p>
