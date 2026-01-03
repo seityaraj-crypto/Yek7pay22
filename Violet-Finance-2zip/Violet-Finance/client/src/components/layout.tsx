@@ -116,21 +116,13 @@ export function Navbar() {
           <Link href="/about" className="text-sm font-bold text-slate-700 hover:text-blue-600 transition-all uppercase tracking-widest px-4 h-9 flex items-center rounded-lg hover:bg-slate-200/50">About Us</Link>
         </div>
 
-        <div className="flex items-center gap-2 md:gap-6">
-          <div className="hidden lg:flex items-center gap-4 text-xs font-bold text-slate-500">
-            <div className="flex flex-col items-end">
-              <span>info@yek7pay.com</span>
-              <span>+91 9230967187</span>
-            </div>
-          </div>
-          <div className="hidden md:flex items-center gap-4">
-             <Button variant="ghost" className="text-sm text-slate-700 font-bold hover:text-blue-600 hover:bg-slate-200/50" onClick={openLogin}>
-               Login
-             </Button>
-             <Button className="bg-gradient-to-r from-blue-950 via-blue-900 to-purple-800 hover:opacity-90 text-white border-0 shadow-[0_0_20px_rgba(59,130,246,0.3)] rounded-full px-4 md:px-8 h-10 md:h-11 text-xs md:text-sm font-bold transition-all hover:scale-105 active:scale-95" onClick={openMenu}>
-               Open Account
-             </Button>
-          </div>
+        <div className="flex items-center gap-3 md:gap-4">
+          <Button variant="ghost" className="text-sm text-slate-700 font-bold hover:text-blue-600 hover:bg-slate-200/50 hidden sm:flex" onClick={openLogin}>
+            Login
+          </Button>
+          <Button className="bg-gradient-to-r from-blue-950 via-blue-900 to-purple-800 hover:opacity-90 text-white border-0 shadow-[0_0_20px_rgba(59,130,246,0.3)] rounded-full px-4 md:px-6 h-9 md:h-10 text-xs md:text-sm font-bold transition-all hover:scale-105 active:scale-95" onClick={openMenu}>
+            Open Account
+          </Button>
 
           <div className="flex items-center gap-2">
              <Button variant="ghost" size="icon" className="text-blue-400 relative hover:text-primary hover:bg-blue-50 hidden sm:flex">

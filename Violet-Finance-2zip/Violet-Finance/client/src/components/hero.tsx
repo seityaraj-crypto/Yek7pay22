@@ -1,8 +1,35 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ShieldCheck, Zap, Globe, Coins, CheckCircle2, Send, Wallet, CreditCard, Smartphone } from "lucide-react";
+import { ArrowRight, ShieldCheck, Zap, Globe, Coins, CheckCircle2, Send, Wallet, CreditCard, Smartphone, Banknote } from "lucide-react";
 import { AuthDialog } from "@/components/auth-dialog";
 import { useState, useEffect } from "react";
+
+const heroTextSlides = [
+  {
+    id: 1,
+    highlight: "Neo Bank Unlimited",
+    text: "Daily money transfers with no limits. Send unlimited amounts every day with Yek7pay Neo Bank.",
+    icon: Banknote
+  },
+  {
+    id: 2,
+    highlight: "Zero Transfer Fees",
+    text: "Enjoy zero fees on all domestic transfers. Your money reaches faster without hidden charges.",
+    icon: Send
+  },
+  {
+    id: 3,
+    highlight: "Instant Settlement",
+    text: "Get T+0 instant settlement on all transactions. Your earnings hit your account immediately.",
+    icon: Zap
+  },
+  {
+    id: 4,
+    highlight: "Secure & Reliable",
+    text: "Bank-grade security with AES-256 encryption. Your transactions are always protected.",
+    icon: ShieldCheck
+  }
+];
 
 const slides = [
   {
@@ -54,6 +81,7 @@ const slides = [
 export function Hero() {
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentTextSlide, setCurrentTextSlide] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
@@ -67,7 +95,15 @@ export function Hero() {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    const textInterval = setInterval(() => {
+      setCurrentTextSlide((prev) => (prev + 1) % heroTextSlides.length);
+    }, 5000);
+    return () => clearInterval(textInterval);
+  }, []);
+
   const slide = slides[currentSlide];
+  const textSlide = heroTextSlides[currentTextSlide];
 
   return (
     <div className="relative min-h-screen flex items-center overflow-hidden pt-16 bg-gradient-to-br from-[#0a1a3a] via-[#0d0d2b] to-[#1a0b3b]">
@@ -96,10 +132,43 @@ export function Hero() {
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-blue-400 to-purple-500">Solution Provider</span>
               </h1>
               
-              <p className="text-xl text-gray-300 mb-10 max-w-xl leading-relaxed mx-auto lg:mx-0">
-                Yek7pay brings you Neo Bank unlimited money transfer. Secure wallets, Indo-Nepal remittances, and instant AEPS. 
-                The best solution for merchants and high-volume transactions.
-              </p>
+              <div className="mb-10 max-w-xl mx-auto lg:mx-0 min-h-[120px]">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={textSlide.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.5 }}
+                    className="space-y-3"
+                  >
+                    <div className="flex items-center gap-3 justify-center lg:justify-start">
+                      <div className="p-2 rounded-xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 border border-white/10">
+                        <textSlide.icon className="h-5 w-5 text-blue-400" />
+                      </div>
+                      <span className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
+                        {textSlide.highlight}
+                      </span>
+                    </div>
+                    <p className="text-xl text-gray-300 leading-relaxed">
+                      {textSlide.text}
+                    </p>
+                  </motion.div>
+                </AnimatePresence>
+                <div className="flex gap-2 mt-4 justify-center lg:justify-start">
+                  {heroTextSlides.map((_, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setCurrentTextSlide(idx)}
+                      className={`w-2 h-2 rounded-full transition-all ${
+                        idx === currentTextSlide 
+                          ? 'bg-blue-400 w-6' 
+                          : 'bg-white/20 hover:bg-white/40'
+                      }`}
+                    />
+                  ))}
+                </div>
+              </div>
 
               <div className="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start">
                 <Button size="lg" className="bg-primary hover:bg-primary/90 text-white h-14 px-10 rounded-full shadow-2xl neo-glow text-lg font-bold" onClick={() => setIsAuthOpen(true)}>
