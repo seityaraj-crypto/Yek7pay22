@@ -50,21 +50,19 @@ export function AuthDialog({ isOpen, onOpenChange }: AuthDialogProps) {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
-            <Button 
-              className="w-full h-16 bg-gradient-to-r from-blue-600 to-blue-400 border-0 text-white rounded-2xl font-bold text-lg flex items-center justify-between px-6 group"
-              onClick={() => {
-                // Future integration point
-                console.log("Register clicked");
-              }}
-            >
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors">
-                  <UserPlus className="h-5 w-5" />
+            <a href="https://wa.me/919230967187?text=Hi%2C%20I%20want%20to%20open%20an%20account%20with%20Yek7Pay" target="_blank" rel="noopener noreferrer" className="w-full" onClick={() => onOpenChange(false)}>
+              <Button 
+                className="w-full h-16 bg-gradient-to-r from-blue-600 to-blue-400 border-0 text-white rounded-2xl font-bold text-lg flex items-center justify-between px-6 group"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors">
+                    <UserPlus className="h-5 w-5" />
+                  </div>
+                  <span>Open Account</span>
                 </div>
-                <span>Open Account</span>
-              </div>
-              <span className="text-white/40 group-hover:text-white transition-colors">→</span>
-            </Button>
+                <span className="text-white/40 group-hover:text-white transition-colors">→</span>
+              </Button>
+            </a>
           </motion.div>
 
           <motion.div

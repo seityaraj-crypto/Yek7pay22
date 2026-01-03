@@ -110,9 +110,11 @@ export function Navbar() {
              <Button variant="ghost" className="text-sm text-slate-700 font-bold hover:text-blue-600 hover:bg-slate-200/50" onClick={() => setIsAuthOpen(true)}>
                Login
              </Button>
-             <Button className="bg-gradient-to-r from-blue-500 via-blue-400 to-purple-500 hover:opacity-90 text-white border-0 shadow-[0_0_20px_rgba(59,130,246,0.3)] rounded-full px-4 md:px-8 h-10 md:h-11 text-xs md:text-sm font-bold transition-all hover:scale-105 active:scale-95" onClick={() => setIsAuthOpen(true)}>
-               Open Account
-             </Button>
+             <a href="https://wa.me/919230967187?text=Hi%2C%20I%20want%20to%20open%20an%20account%20with%20Yek7Pay" target="_blank" rel="noopener noreferrer">
+               <Button className="bg-gradient-to-r from-blue-500 via-blue-400 to-purple-500 hover:opacity-90 text-white border-0 shadow-[0_0_20px_rgba(59,130,246,0.3)] rounded-full px-4 md:px-8 h-10 md:h-11 text-xs md:text-sm font-bold transition-all hover:scale-105 active:scale-95">
+                 Open Account
+               </Button>
+             </a>
           </div>
 
           <div className="flex items-center gap-2">
@@ -138,9 +140,11 @@ export function Navbar() {
                      <Button variant="outline" className="w-full border-blue-200 text-blue-900 font-bold hover:bg-blue-100/50 h-12" onClick={() => { setIsAuthOpen(true); setIsOpen(false); }}>
                        Login
                      </Button>
-                     <Button className="w-full bg-gradient-to-r from-blue-600 to-blue-400 border-0 hover:opacity-90 text-white rounded-full font-bold h-12 shadow-lg shadow-blue-500/10" onClick={() => { setIsAuthOpen(true); setIsOpen(false); }}>
-                       Open Account
-                     </Button>
+                     <a href="https://wa.me/919230967187?text=Hi%2C%20I%20want%20to%20open%20an%20account%20with%20Yek7Pay" target="_blank" rel="noopener noreferrer" className="w-full" onClick={() => setIsOpen(false)}>
+                       <Button className="w-full bg-gradient-to-r from-blue-600 to-blue-400 border-0 hover:opacity-90 text-white rounded-full font-bold h-12 shadow-lg shadow-blue-500/10">
+                         Open Account
+                       </Button>
+                     </a>
                    </div>
 
                    <div className="space-y-4 pt-4 border-t border-blue-100">
