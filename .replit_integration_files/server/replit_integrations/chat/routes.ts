@@ -8,7 +8,6 @@ const openai = new OpenAI({
 });
 
 export function registerChatRoutes(app: Express): void {
-
   // Get all conversations
   app.get("/api/conversations", async (req: Request, res: Response) => {
     try {
@@ -81,18 +80,12 @@ export function registerChatRoutes(app: Express): void {
       res.setHeader("Cache-Control", "no-cache");
       res.setHeader("Connection", "keep-alive");
 
-      // Add system message for Yek7pay assistant
-      const systemMessage = {
-        role: "system" as const,
-        content: "You are Yek7pay AI Assistant, a helpful financial assistant for the Yek7pay fintech platform. You help users with questions about money transfers, AEPS services, bill payments, loans, insurance, travel bookings, and other financial services. Be friendly, professional, and concise in your responses."
-      };
-
       // Stream response from OpenAI
       const stream = await openai.chat.completions.create({
-        model: "gpt-4o-mini",
-        messages: [systemMessage, ...chatMessages],
+        model: "gpt-5.1",
+        messages: chatMessages,
         stream: true,
-        max_tokens: 2048,
+        max_completion_tokens: 2048,
       });
 
       let fullResponse = "";
