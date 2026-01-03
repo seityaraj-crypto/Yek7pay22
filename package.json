@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "build": "cd Violet-Finance-2zip/Violet-Finance && npm install && npm run build",
+    "start": "cd Violet-Finance-2zip/Violet-Finance && npm run start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
