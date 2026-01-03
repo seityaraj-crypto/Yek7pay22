@@ -37,4 +37,4 @@ externalPort = 80
 [deployment]
 deploymentTarget = "autoscale"
 run = ["bash", "-c", "cd Violet-Finance-2zip/Violet-Finance && npm run start"]
-build = ["bash", "-c", "cd Violet-Finance-2zip/Violet-Finance && npm run build"]
+build = ["bash", "-c", "cd Violet-Finance-2zip/Violet-Finance && npm install && npm run build"]
