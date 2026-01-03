@@ -99,7 +99,7 @@ export default function Home() {
               <h2 className="text-4xl md:text-7xl font-display font-black text-white mb-8 leading-tight">
                 Book <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-pink-400 to-blue-400">Flights, Hotels</span> & <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-blue-400">Buses</span> Instantly
               </h2>
-              <p className="text-xl text-white/50 mb-12 font-medium leading-relaxed">
+              <p className="text-xl text-gray-300 mb-12 font-medium leading-relaxed">
                 Experience the world with Yek7pay. Get exclusive deals on domestic and international bookings with the lowest convenience fees in the industry.
               </p>
               
