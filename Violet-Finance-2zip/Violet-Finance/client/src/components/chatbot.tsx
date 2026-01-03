@@ -125,7 +125,7 @@ export function Chatbot() {
 
       {isOpen && (
         <Card className="fixed bottom-0 right-0 w-full h-full md:bottom-24 md:right-6 md:w-[350px] md:h-[500px] shadow-2xl z-50 flex flex-col border-white/10 bg-[#000a26] text-white overflow-hidden rounded-none md:rounded-3xl">
-          <CardHeader className="bg-gradient-to-r from-cyan-500 to-blue-500 p-4 flex flex-row items-center justify-between">
+          <CardHeader className="bg-gradient-to-r from-cyan-500 to-blue-500 p-4 flex flex-row items-center justify-between shrink-0 sticky top-0 z-10">
             <CardTitle className="text-sm font-bold flex items-center gap-2">
               <div className="h-2 w-2 bg-green-400 rounded-full animate-pulse" />
               Yek7pay AI
@@ -167,8 +167,8 @@ export function Chatbot() {
               </Button>
             </div>
           </CardHeader>
-          <CardContent className="flex-1 flex flex-col p-0">
-            <ScrollArea className="flex-1 p-2 md:p-4">
+          <CardContent className="flex-1 flex flex-col p-0 overflow-hidden min-h-0">
+            <ScrollArea className="flex-1 p-2 md:p-4 min-h-0">
               <div className="space-y-4">
                 {messages.length === 0 && !streamingMessage && (
                   <div className="text-center py-10 opacity-50 italic text-sm">
@@ -196,7 +196,7 @@ export function Chatbot() {
                 <div ref={scrollRef} />
               </div>
             </ScrollArea>
-            <div className="p-4 border-t border-white/10 bg-white/5 flex gap-2">
+            <div className="p-4 border-t border-white/10 bg-white/5 flex gap-2 shrink-0">
               <input
                 className="flex-1 bg-white/5 border border-white/10 rounded-full px-4 text-sm focus:outline-none focus:ring-1 focus:ring-primary h-10"
                 placeholder="Type a message..."
