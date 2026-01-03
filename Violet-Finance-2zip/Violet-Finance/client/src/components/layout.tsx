@@ -21,7 +21,13 @@ export function Navbar() {
   const [isDarkMode, setIsDarkMode] = React.useState(true);
 
   const toggleTheme = () => {
-    setIsDarkMode(!isDarkMode);
+    const newMode = !isDarkMode;
+    setIsDarkMode(newMode);
+    if (newMode) {
+      document.body.classList.remove('light-mode');
+    } else {
+      document.body.classList.add('light-mode');
+    }
   };
 
   const openLogin = () => {
