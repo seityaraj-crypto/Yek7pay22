@@ -16,7 +16,7 @@ export function Hero() {
   }, []);
 
   return (
-    <div className="relative min-h-screen flex items-center overflow-hidden pt-16 bg-gradient-to-b from-[#0a1a3a] via-[#0d0d2b] to-[#1a0b3b]">
+    <div className="relative min-h-screen flex items-center overflow-hidden pt-16 bg-gradient-to-br from-[#0a1a3a] via-[#0d0d2b] to-[#1a0b3b]">
       {/* Dynamic Background Elements */}
       <div className="absolute inset-0 z-0">
         <div className="absolute top-0 left-0 w-full h-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 mix-blend-overlay" />
