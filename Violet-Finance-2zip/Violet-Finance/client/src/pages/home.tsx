@@ -584,7 +584,7 @@ export default function Home() {
       </section>
 
       <Footer />
-      <AuthDialog open={isAuthOpen} onOpenChange={setIsAuthOpen} />
+      <AuthDialog isOpen={isAuthOpen} onOpenChange={setIsAuthOpen} />
 
       {/* Time Selection Modal */}
       <AnimatePresence>
