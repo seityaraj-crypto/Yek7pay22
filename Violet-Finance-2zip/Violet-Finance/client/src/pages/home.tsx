@@ -135,7 +135,7 @@ export default function Home() {
       </section>
 
       {/* Core Banking Section */}
-      <section id="banking" className="py-24 relative bg-black/40">
+      <section id="banking" className="py-24 relative bg-gradient-to-b from-indigo-950/40 to-purple-950/40">
         <div className="container mx-auto px-4">
           <SectionHeader 
             badge="Banking Excellence"
@@ -228,7 +228,7 @@ export default function Home() {
       {/* Services & Bharat Connect Section */}
       <section id="bharat-connect" className="py-24">
         <div className="container mx-auto px-4">
-          <div className="rounded-[2.5rem] bg-gradient-to-br from-black to-violet-950/20 border border-white/5 p-10 md:p-16 relative overflow-hidden shadow-2xl">
+          <div className="rounded-[2.5rem] bg-gradient-to-br from-indigo-950/60 to-purple-950/40 border border-white/5 p-10 md:p-16 relative overflow-hidden shadow-2xl">
             <div className="flex flex-col lg:flex-row items-center justify-between gap-12 relative z-10">
               <div className="max-w-xl">
                 <div className="inline-block p-3 rounded-2xl bg-violet-500/10 text-violet-400 mb-6">
@@ -267,7 +267,7 @@ export default function Home() {
       </section>
 
       {/* Loans & Bookings Section */}
-      <section id="booking" className="py-24 bg-black/40">
+      <section id="booking" className="py-24 bg-gradient-to-b from-purple-950/40 to-indigo-950/40">
         <div className="container mx-auto px-4">
           <SectionHeader 
             badge="Travel & Finance"
@@ -481,7 +481,7 @@ export default function Home() {
       </section>
 
       {/* Payment Solutions Section */}
-      <section className="py-24 bg-black/20">
+      <section className="py-24 bg-gradient-to-b from-indigo-950/20 to-purple-950/20">
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center text-center mb-16">
              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-500/10 text-purple-400 text-xs font-bold mb-6 border border-purple-500/20">
@@ -594,7 +594,7 @@ export default function Home() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+              className="absolute inset-0 bg-indigo-950/70 backdrop-blur-sm"
               onClick={() => setShowTimePicker(false)}
             />
             <motion.div 

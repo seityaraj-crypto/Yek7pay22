@@ -1,6 +1,6 @@
 import { LucideIcon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, ReactNode } from "react";
 import {
   Dialog,
   DialogContent,
@@ -12,7 +12,7 @@ import {
 interface ServiceCardProps {
   icon: LucideIcon;
   title: string;
-  description: string;
+  description: string | ReactNode;
   delay?: number;
   variant?: "default" | "featured";
   features?: string[];
