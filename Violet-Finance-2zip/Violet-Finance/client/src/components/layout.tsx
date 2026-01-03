@@ -159,23 +159,62 @@ export function Navbar() {
                      </Button>
                    </div>
 
-                   <div className="space-y-4 pt-4 border-t border-blue-100">
-                     {[
-                       { name: "Banking", href: "/#banking" },
-                       { name: "Services", href: "/#services" },
-                       { name: "Bharat Connect", href: "/bbps" },
-                       { name: "Insurance", href: "/insurance" },
-                       { name: "Booking", href: "/#booking" },
-                     ].map((link) => (
-                       <a 
-                         key={link.name} 
-                         href={link.href}
-                         className="block text-lg font-bold text-blue-900 hover:text-primary transition-all tracking-wide"
-                         onClick={() => setIsOpen(false)}
-                       >
-                         {link.name}
-                       </a>
-                     ))}
+                   <div className="space-y-6 pt-4 border-t border-blue-100 max-h-[60vh] overflow-y-auto">
+                     <div>
+                       <h4 className="text-xs font-bold text-blue-400 uppercase tracking-widest mb-3">Banking & Remittance</h4>
+                       <div className="grid grid-cols-2 gap-2">
+                         {[
+                           { name: "Advance DMT", href: "/#banking" },
+                           { name: "Neo Bank", href: "/#banking" },
+                           { name: "Indo-Nepal Remit", href: "/#banking" },
+                           { name: "AEPS", href: "/#banking" },
+                           { name: "Micro ATM", href: "/#banking" },
+                           { name: "PPI Wallet", href: "/#banking" },
+                         ].map((link) => (
+                           <a key={link.name} href={link.href} className="text-sm text-blue-900 hover:text-primary py-1" onClick={() => setIsOpen(false)}>
+                             {link.name}
+                           </a>
+                         ))}
+                       </div>
+                     </div>
+                     
+                     <div>
+                       <h4 className="text-xs font-bold text-blue-400 uppercase tracking-widest mb-3">Payments & Collection</h4>
+                       <div className="grid grid-cols-2 gap-2">
+                         {[
+                           { name: "Bharat Connect", href: "/bbps" },
+                           { name: "UPI QR", href: "/#services" },
+                           { name: "mPOS Solutions", href: "/#services" },
+                           { name: "Credit Card Pay", href: "/bbps" },
+                           { name: "Utility Bills", href: "/bbps" },
+                           { name: "Recharge & DTH", href: "/bbps" },
+                         ].map((link) => (
+                           <a key={link.name} href={link.href} className="text-sm text-blue-900 hover:text-primary py-1" onClick={() => setIsOpen(false)}>
+                             {link.name}
+                           </a>
+                         ))}
+                       </div>
+                     </div>
+                     
+                     <div>
+                       <h4 className="text-xs font-bold text-blue-400 uppercase tracking-widest mb-3">Growth & Travel</h4>
+                       <div className="grid grid-cols-2 gap-2">
+                         {[
+                           { name: "Business Loans", href: "/#booking" },
+                           { name: "Flight Booking", href: "/#booking" },
+                           { name: "Train Booking", href: "/#booking" },
+                           { name: "Bus Booking", href: "/#booking" },
+                           { name: "Hotel Booking", href: "/#booking" },
+                           { name: "Insurance", href: "/insurance" },
+                           { name: "GST & Compliance", href: "/compliance" },
+                           { name: "Premium Upgrade", href: "/upgrade" },
+                         ].map((link) => (
+                           <a key={link.name} href={link.href} className="text-sm text-blue-900 hover:text-primary py-1" onClick={() => setIsOpen(false)}>
+                             {link.name}
+                           </a>
+                         ))}
+                       </div>
+                     </div>
                    </div>
                  </div>
                </SheetContent>
