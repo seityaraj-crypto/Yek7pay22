@@ -431,9 +431,9 @@ export default function Home() {
             <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />
             <div className="relative z-10">
                <div className="flex flex-col items-center text-center mb-12">
-                  <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-blue-100 text-xs font-bold mb-6">
-                    <span className="w-2 h-2 bg-blue-300 rounded-full animate-pulse" />
-                    Our Impact in Numbers
+                  <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-xs font-bold mb-6">
+                    <span className="w-2 h-2 bg-pink-400 rounded-full animate-pulse" />
+                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-blue-400 font-black">Our Impact in Numbers</span>
                   </div>
                </div>
                <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
