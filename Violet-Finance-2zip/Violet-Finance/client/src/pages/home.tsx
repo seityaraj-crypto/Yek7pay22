@@ -49,9 +49,9 @@ export default function Home() {
       <Hero />
 
       {/* Quick Actions Bar */}
-      <section className="relative -mt-16 z-20">
+      <section className="relative mt-4 md:-mt-16 z-20">
          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
                {[
                  { label: 'Sent Money', icon: Send, color: 'text-blue-500', action: () => setIsAuthOpen(true) },
                  { label: 'AEPS', icon: Fingerprint, color: 'text-blue-400', action: () => setIsAuthOpen(true) },
