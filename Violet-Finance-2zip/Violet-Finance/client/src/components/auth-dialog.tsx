@@ -6,8 +6,9 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { UserPlus, LogIn, ShieldCheck } from "lucide-react";
+import { UserPlus, LogIn, ShieldCheck, Zap } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "wouter";
 
 interface AuthDialogProps {
   isOpen: boolean;
@@ -86,6 +87,29 @@ export function AuthDialog({ isOpen, onOpenChange }: AuthDialogProps) {
               </div>
               <span className="text-white/40 group-hover:text-blue-400 transition-colors">→</span>
             </Button>
+          </motion.div>
+
+          <motion.div
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <Link href="/upgrade">
+              <Button 
+                onClick={() => onOpenChange(false)}
+                className="w-full h-16 bg-gradient-to-r from-pink-600 to-purple-600 border-0 text-white rounded-2xl font-bold text-lg flex items-center justify-between px-6 group shadow-lg shadow-pink-500/20"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors">
+                    <Zap className="h-5 w-5" />
+                  </div>
+                  <div className="text-left">
+                    <div className="text-xs uppercase tracking-widest text-white/60 font-black">Special Offer</div>
+                    <span>Upgrade Premium ₹999</span>
+                  </div>
+                </div>
+                <span className="text-white/40 group-hover:text-white transition-colors">→</span>
+              </Button>
+            </Link>
           </motion.div>
         </div>
 

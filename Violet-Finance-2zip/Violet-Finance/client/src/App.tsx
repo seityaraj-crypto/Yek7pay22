@@ -12,6 +12,7 @@ import Privacy from "@/pages/privacy";
 import Compliance from "@/pages/compliance";
 import Insurance from "@/pages/insurance";
 import BharatConnect from "@/pages/bbps";
+import Upgrade from "@/pages/upgrade";
 import { Chatbot } from "@/components/chatbot";
 
 function ScrollToTop() {
@@ -32,6 +33,7 @@ function Router() {
       <Route path="/compliance" component={Compliance} />
       <Route path="/insurance" component={Insurance} />
       <Route path="/bbps" component={BharatConnect} />
+      <Route path="/upgrade" component={Upgrade} />
       <Route component={NotFound} />
     </Switch>
   );
