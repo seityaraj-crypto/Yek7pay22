@@ -86,12 +86,14 @@ export default function Home() {
                   { label: 'Hotels', icon: Hotel, desc: '500,000+ Worldwide', color: 'text-pink-400' },
                   { label: 'Bus', icon: Bus, desc: 'All Major Operators', color: 'text-pink-400' }
                 ].map((item, i) => (
-                  <div key={i} className="flex flex-col gap-3">
-                    <div className={`w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center ${item.color}`}>
-                      <item.icon className="h-6 w-6" />
+                  <div key={i} className="flex items-center gap-4 group/item">
+                    <div className={`w-14 h-14 shrink-0 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center ${item.color} group-hover/item:bg-pink-500/20 transition-colors`}>
+                      <item.icon className="h-7 w-7" />
                     </div>
-                    <h4 className="font-bold text-white">{item.label}</h4>
-                    <p className="text-xs text-white/30">{item.desc}</p>
+                    <div>
+                      <h4 className="font-bold text-white text-lg">{item.label}</h4>
+                      <p className="text-sm text-white/30">{item.desc}</p>
+                    </div>
                   </div>
                 ))}
               </div>
