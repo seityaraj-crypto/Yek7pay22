@@ -254,13 +254,13 @@ export default function Home() {
                 </Button>
               </div>
               
-              <div className="grid grid-cols-2 gap-6 w-full lg:w-auto">
-                <div className="p-8 bg-white/5 border border-white/5 rounded-3xl text-center shadow-inner">
-                  <div className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-pink-500 mb-2">24/7</div>
+              <div className="grid grid-cols-2 gap-4 w-full lg:w-auto">
+                <div className="p-6 bg-white/5 border border-white/5 rounded-2xl text-center shadow-inner flex flex-col justify-center min-h-[100px]">
+                  <div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-pink-500 mb-1">24/7</div>
                   <div className="text-xs uppercase tracking-widest text-white/30">Support</div>
                 </div>
-                <div className="p-8 bg-white/5 border border-white/5 rounded-3xl text-center mt-6 shadow-inner">
-                  <div className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-blue-400 mb-2">Instant</div>
+                <div className="p-6 bg-white/5 border border-white/5 rounded-2xl text-center shadow-inner flex flex-col justify-center min-h-[100px]">
+                  <div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-blue-400 mb-1">Instant</div>
                   <div className="text-xs uppercase tracking-widest text-white/30">Settlement</div>
                 </div>
               </div>
