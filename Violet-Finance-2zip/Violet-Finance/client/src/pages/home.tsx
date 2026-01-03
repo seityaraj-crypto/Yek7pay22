@@ -228,7 +228,7 @@ export default function Home() {
       {/* Services & Bharat Connect Section */}
       <section id="bharat-connect" className="py-24">
         <div className="container mx-auto px-4">
-          <div className="rounded-[2.5rem] bg-gradient-to-br from-black to-violet-950/20 border border-white/5 p-10 md:p-16 relative overflow-hidden shadow-2xl">
+          <div className="rounded-[2.5rem] bg-gradient-to-b from-black to-violet-950/20 border border-white/5 p-10 md:p-16 relative overflow-hidden shadow-2xl">
             <div className="flex flex-col lg:flex-row items-center justify-between gap-12 relative z-10">
               <div className="max-w-xl">
                 <div className="inline-block p-3 rounded-2xl bg-violet-500/10 text-violet-400 mb-6">
