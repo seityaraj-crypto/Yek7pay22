@@ -1,11 +1,19 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ShieldCheck, Zap, Globe, Coins } from "lucide-react";
+import { ArrowRight, ShieldCheck, Zap, Globe, Coins, CheckCircle2, Send } from "lucide-react";
 import { AuthDialog } from "@/components/auth-dialog";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export function Hero() {
   const [isAuthOpen, setIsAuthOpen] = useState(false);
+  const [transferStep, setTransferStep] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTransferStep((prev) => (prev + 1) % 4);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="relative min-h-screen flex items-center overflow-hidden pt-16 bg-gradient-to-br from-[#1a0b3b] via-[#0d0d2b] to-[#0a1a3a]">
@@ -94,20 +102,63 @@ export function Hero() {
                      <p className="text-[10px] text-white/50 font-medium">Real-time settlement with advanced encryption.</p>
                   </div>
 
-                  <div className="relative h-48 w-full bg-white/5 rounded-2xl overflow-hidden border border-white/10 z-10">
-                     <video 
-                       src="/hero-video.mp4" 
-                       autoPlay
-                       loop
-                       muted
-                       playsInline
-                       className="w-full h-full object-cover opacity-90 group-hover:scale-110 transition-transform duration-700"
-                     />
-                     <div className="absolute inset-0 bg-gradient-to-t from-[#000a26]/60 to-transparent pointer-events-none" />
+                  <div className="relative h-48 w-full bg-gradient-to-br from-blue-900/50 via-purple-900/30 to-blue-900/50 rounded-2xl overflow-hidden border border-white/10 z-10">
+                     <div className="absolute inset-0 flex items-center justify-center">
+                       <div className="relative w-full h-full flex items-center justify-center">
+                         <motion.div
+                           className="absolute left-4 top-1/2 -translate-y-1/2"
+                           animate={{ 
+                             x: transferStep >= 1 ? [0, 80] : 0,
+                             opacity: transferStep === 0 ? 1 : transferStep >= 2 ? 0 : 1
+                           }}
+                           transition={{ duration: 0.8 }}
+                         >
+                           <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center shadow-lg shadow-blue-500/30">
+                             <span className="text-2xl">🇮🇳</span>
+                           </div>
+                         </motion.div>
+                         
+                         <motion.div
+                           className="absolute"
+                           animate={{ 
+                             scale: transferStep === 1 ? [1, 1.2, 1] : 1,
+                             opacity: transferStep >= 1 ? 1 : 0.3
+                           }}
+                           transition={{ duration: 0.5 }}
+                         >
+                           <Send className={`h-8 w-8 ${transferStep >= 1 ? 'text-green-400' : 'text-white/30'}`} />
+                         </motion.div>
+                         
+                         <motion.div
+                           className="absolute right-4 top-1/2 -translate-y-1/2"
+                           animate={{ 
+                             scale: transferStep >= 2 ? [1, 1.1, 1] : 1,
+                             opacity: transferStep >= 2 ? 1 : 0.5
+                           }}
+                           transition={{ duration: 0.5 }}
+                         >
+                           <div className="w-16 h-16 rounded-full bg-gradient-to-br from-red-500 to-orange-400 flex items-center justify-center shadow-lg shadow-red-500/30">
+                             <span className="text-2xl">🇳🇵</span>
+                           </div>
+                         </motion.div>
+                         
+                         {transferStep === 3 && (
+                           <motion.div
+                             className="absolute"
+                             initial={{ scale: 0, opacity: 0 }}
+                             animate={{ scale: 1, opacity: 1 }}
+                             transition={{ duration: 0.3 }}
+                           >
+                             <CheckCircle2 className="h-12 w-12 text-green-400 drop-shadow-[0_0_10px_rgba(74,222,128,0.5)]" />
+                           </motion.div>
+                         )}
+                       </div>
+                     </div>
+                     <div className="absolute inset-0 bg-gradient-to-t from-[#000a26]/80 to-transparent pointer-events-none" />
                      <div className="absolute bottom-4 left-4 right-4">
                         <div className="flex items-center justify-between text-white">
                            <div className="text-[10px] font-bold uppercase tracking-wider text-blue-300">Transfer ID: YK7-8821</div>
-                           <div className="h-2 w-2 bg-green-400 rounded-full animate-pulse shadow-[0_0_10px_rgba(74,222,128,0.5)]" />
+                           <div className={`h-2 w-2 rounded-full animate-pulse shadow-[0_0_10px_rgba(74,222,128,0.5)] ${transferStep === 3 ? 'bg-green-400' : 'bg-yellow-400'}`} />
                         </div>
                      </div>
                   </div>
