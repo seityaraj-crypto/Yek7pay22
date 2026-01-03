@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { MessageCircle, X, Send, Bot, User, Loader2 } from "lucide-react";
+import { MessageCircle, X, Send, Bot, User, Loader2, Minus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -128,11 +128,44 @@ export function Chatbot() {
           <CardHeader className="bg-gradient-to-r from-cyan-500 to-blue-500 p-4 flex flex-row items-center justify-between">
             <CardTitle className="text-sm font-bold flex items-center gap-2">
               <div className="h-2 w-2 bg-green-400 rounded-full animate-pulse" />
-              Yek7pay AI (Powered by GPT-5)
+              Yek7pay AI
             </CardTitle>
-            <Button variant="ghost" size="icon" className="h-8 w-8 text-white hover:bg-white/10" onClick={() => setIsOpen(false)}>
-              <X className="h-4 w-4" />
-            </Button>
+            <div className="flex items-center gap-1">
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="h-8 w-8 text-white hover:bg-white/20" 
+                onClick={async () => {
+                  if (conversationId) {
+                    await fetch(`/api/conversations/${conversationId}`, { method: "DELETE" });
+                    setConversationId(null);
+                    queryClient.invalidateQueries({ queryKey: ["/api/conversations/active"] });
+                    queryClient.invalidateQueries({ queryKey: [`/api/conversations/${conversationId}`] });
+                  }
+                }}
+                title="Clear Chat"
+              >
+                <Trash2 className="h-4 w-4" />
+              </Button>
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="h-8 w-8 text-white hover:bg-white/20" 
+                onClick={() => setIsOpen(false)}
+                title="Minimize"
+              >
+                <Minus className="h-4 w-4" />
+              </Button>
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="h-8 w-8 text-white hover:bg-red-500/50" 
+                onClick={() => setIsOpen(false)}
+                title="Close"
+              >
+                <X className="h-4 w-4" />
+              </Button>
+            </div>
           </CardHeader>
           <CardContent className="flex-1 flex flex-col p-0">
             <ScrollArea className="flex-1 p-2 md:p-4">
