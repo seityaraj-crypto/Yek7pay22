@@ -202,7 +202,7 @@ export function AuthDialog({ isOpen, onOpenChange, defaultView = "menu" }: AuthD
                 whileTap={{ scale: 0.98 }}
               >
                 <Button 
-                  className="w-full h-16 bg-gradient-to-r from-blue-600 to-blue-400 border-0 text-white rounded-2xl font-bold text-lg flex items-center justify-between px-6 group"
+                  className="w-full h-16 bg-gradient-to-r from-blue-950 via-blue-900 to-purple-800 border-0 text-white rounded-2xl font-bold text-lg flex items-center justify-between px-6 group"
                   onClick={() => setView("register")}
                 >
                   <div className="flex items-center gap-4">
