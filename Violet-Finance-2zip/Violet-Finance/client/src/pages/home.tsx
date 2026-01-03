@@ -11,7 +11,7 @@ import {
   Plane, Train, Briefcase, Building2, 
   Zap, Receipt, Landmark, Banknote, CreditCard,
   CheckCircle2, QrCode, Smartphone, Mail, Phone, MapPin,
-  ShieldCheck, UserCheck, Coins, ArrowRight, ClipboardCheck, FileText, Scale, Building, Shield
+  ShieldCheck, UserCheck, Coins, ArrowRight, ClipboardCheck, FileText, Scale, Building
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -19,7 +19,7 @@ export default function Home() {
   const [isAuthOpen, setIsAuthOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#050505] text-white selection:bg-rose-500/30">
+    <div className="min-h-screen bg-gradient-to-b from-[#1a0b3b] via-[#0d0d2b] to-[#0a1a3a] text-white">
       <Navbar />
       
       <Hero />
@@ -29,44 +29,29 @@ export default function Home() {
          <div className="container mx-auto px-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                {[
-                 { label: 'Sent Money', icon: Send, color: 'text-rose-400', action: () => setIsAuthOpen(true) },
-                 { label: 'AEPS', icon: Fingerprint, color: 'text-purple-400', action: () => setIsAuthOpen(true) },
-                 { label: 'Credit Card', icon: CreditCard, color: 'text-rose-400', action: () => setIsAuthOpen(true) },
-                 { label: 'Nepal Remit', icon: Globe, color: 'text-purple-400', action: () => setIsAuthOpen(true) }
+                 { label: 'Sent Money', icon: Send, color: 'text-blue-500', action: () => setIsAuthOpen(true) },
+                 { label: 'AEPS', icon: Fingerprint, color: 'text-blue-400', action: () => setIsAuthOpen(true) },
+                 { label: 'Credit Card', icon: CreditCard, color: 'text-blue-500', action: () => setIsAuthOpen(true) },
+                 { label: 'Nepal Remit', icon: Globe, color: 'text-blue-600', action: () => setIsAuthOpen(true) }
                ].map((action, i) => (
-                  <Button key={i} variant="ghost" className="h-20 bg-white/5 backdrop-blur-md shadow-xl border border-white/10 hover:border-rose-500/30 hover:bg-rose-500/5 rounded-2xl flex flex-col gap-2 transition-all group" onClick={action.action}>
+                  <Button key={i} variant="ghost" className="h-20 bg-white/5 backdrop-blur-md shadow-xl border border-white/5 hover:border-violet-500/30 hover:bg-violet-500/5 rounded-2xl flex flex-col gap-2 transition-all group" onClick={action.action}>
                      <div className={`p-2 rounded-xl bg-white/5 group-hover:scale-110 transition-transform ${action.color}`}>
                         <action.icon className="h-5 w-5" />
                      </div>
-                     <span className="text-[10px] font-bold uppercase tracking-widest text-white/70 group-hover:text-white transition-colors">{action.label}</span>
+                     <span className="text-[10px] font-bold uppercase tracking-widest text-white">{action.label}</span>
                   </Button>
                ))}
             </div>
          </div>
       </section>
 
-      {/* Large Booking Section (Hero of the Theme) */}
+      {/* Large Booking Section */}
       <section id="travel-booking" className="py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-rose-500/20 to-purple-500/20 blur-[120px] pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-r from-rose-500/10 to-purple-500/10 blur-[100px] pointer-events-none" />
         <div className="container mx-auto px-4 relative z-10">
-          <div className="rounded-[3rem] bg-white/5 border border-white/10 backdrop-blur-3xl p-12 md:p-20 shadow-2xl overflow-hidden group">
-            <div className="absolute top-0 right-0 p-12 opacity-30 group-hover:opacity-50 transition-all duration-700">
-              <motion.div
-                animate={{ 
-                  y: [0, -20, 0],
-                  rotateX: [0, 15, 0],
-                  rotateY: [-10, 10, -10],
-                  z: [0, 50, 0]
-                }}
-                transition={{ 
-                  duration: 6, 
-                  repeat: Infinity, 
-                  ease: "easeInOut" 
-                }}
-                style={{ perspective: "1000px" }}
-              >
-                <Plane className="h-64 w-64 text-rose-400 filter drop-shadow-[0_20px_50px_rgba(225,29,72,0.4)]" />
-              </motion.div>
+          <div className="rounded-[3rem] bg-black/40 border border-white/5 backdrop-blur-xl p-12 md:p-20 shadow-2xl overflow-hidden group">
+            <div className="absolute top-0 right-0 p-12 opacity-10 group-hover:opacity-20 transition-opacity">
+              <Plane className="h-64 w-64 -rotate-12" />
             </div>
             
             <div className="max-w-3xl relative z-10">
@@ -86,11 +71,11 @@ export default function Home() {
                   { label: 'Hotels', icon: Building2, desc: '500,000+ Worldwide' },
                   { label: 'Bus', icon: Smartphone, desc: 'All Major Operators' }
                 ].map((item, i) => (
-                  <div key={i} className="flex flex-col gap-3 group/item cursor-default">
-                    <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-rose-400 group-hover/item:bg-rose-500 group-hover/item:text-white transition-all">
+                  <div key={i} className="flex flex-col gap-3">
+                    <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-rose-400">
                       <item.icon className="h-6 w-6" />
                     </div>
-                    <h4 className="font-bold text-white group-hover/item:text-rose-400 transition-colors">{item.label}</h4>
+                    <h4 className="font-bold text-white">{item.label}</h4>
                     <p className="text-xs text-white/30">{item.desc}</p>
                   </div>
                 ))}
@@ -108,7 +93,7 @@ export default function Home() {
       </section>
 
       {/* Core Banking Section */}
-      <section id="banking" className="py-24 relative bg-[#050505]">
+      <section id="banking" className="py-24 relative bg-black/40">
         <div className="container mx-auto px-4">
           <SectionHeader 
             badge="Banking Excellence"
@@ -199,39 +184,38 @@ export default function Home() {
       </section>
 
       {/* Services & Bharat Connect Section */}
-      <section id="bharat-connect" className="py-24 bg-[#050505]">
+      <section id="bharat-connect" className="py-24">
         <div className="container mx-auto px-4">
-          <div className="rounded-[2.5rem] bg-white/5 border border-white/10 p-10 md:p-16 relative overflow-hidden shadow-2xl backdrop-blur-3xl group">
-            <div className="absolute inset-0 bg-gradient-to-br from-rose-500/5 to-purple-500/5 pointer-events-none" />
+          <div className="rounded-[2.5rem] bg-gradient-to-br from-black to-violet-950/20 border border-white/5 p-10 md:p-16 relative overflow-hidden shadow-2xl">
             <div className="flex flex-col lg:flex-row items-center justify-between gap-12 relative z-10">
               <div className="max-w-xl">
-                <div className="inline-block p-3 rounded-2xl bg-rose-500/10 text-rose-400 mb-6 border border-rose-500/20">
+                <div className="inline-block p-3 rounded-2xl bg-violet-500/10 text-violet-400 mb-6">
                   <Receipt className="h-8 w-8" />
                 </div>
-                <h2 className="text-4xl font-display font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-rose-400 via-purple-400 to-rose-300">Bharat Connect</h2>
-                <p className="text-lg text-white/70 mb-8 leading-relaxed">
+                <h2 className="text-4xl font-display font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-blue-400 to-purple-500">Bharat Connect</h2>
+                <p className="text-lg text-white mb-8">
                   Pay all your utility bills—Electricity, Gas, Water, Broadband, and more—instantly via Yek7pay's universal payout system.
                 </p>
                 <div className="grid grid-cols-2 gap-4 mb-10">
                   {['Utilities', 'Recharge', 'Insurance', 'Fastag'].map(item => (
-                    <div key={item} className="flex items-center gap-2 text-sm text-white/40 group-hover:text-white/70 transition-colors">
-                      <Zap className="h-4 w-4 text-rose-500 animate-pulse" />
+                    <div key={item} className="flex items-center gap-2 text-sm text-white">
+                      <Zap className="h-4 w-4 text-violet-500" />
                       {item}
                     </div>
                   ))}
                 </div>
-                  <Button className="bg-rose-600 hover:bg-rose-500 text-white rounded-full px-10 h-14 font-bold shadow-lg shadow-rose-900/40 transition-all hover:scale-105 active:scale-95" onClick={() => window.location.href = "/bbps"}>
+                  <Button className="bg-primary hover:bg-primary/90 text-white rounded-full px-10 h-14 font-bold shadow-lg shadow-blue-900/40" onClick={() => window.location.href = "/bbps"}>
                   Pay Bills Now
                 </Button>
               </div>
               
               <div className="grid grid-cols-2 gap-6 w-full lg:w-auto">
-                <div className="p-8 bg-white/5 border border-white/10 rounded-3xl text-center shadow-inner group-hover:bg-white/10 transition-colors">
-                  <div className="text-3xl font-bold text-rose-500 mb-2">24/7</div>
+                <div className="p-8 bg-white/5 border border-white/5 rounded-3xl text-center shadow-inner">
+                  <div className="text-3xl font-bold text-violet-500 mb-2">24/7</div>
                   <div className="text-xs uppercase tracking-widest text-white/30">Support</div>
                 </div>
-                <div className="p-8 bg-white/5 border border-white/10 rounded-3xl text-center mt-6 shadow-inner group-hover:bg-white/10 transition-colors">
-                  <div className="text-3xl font-bold text-purple-400 mb-2">Instant</div>
+                <div className="p-8 bg-white/5 border border-white/5 rounded-3xl text-center mt-6 shadow-inner">
+                  <div className="text-3xl font-bold text-blue-400 mb-2">Instant</div>
                   <div className="text-xs uppercase tracking-widest text-white/30">Settlement</div>
                 </div>
               </div>
@@ -241,7 +225,7 @@ export default function Home() {
       </section>
 
       {/* Loans & Bookings Section */}
-      <section id="booking" className="py-24 bg-[#050505]">
+      <section id="booking" className="py-24 bg-black/40">
         <div className="container mx-auto px-4">
           <SectionHeader 
             badge="Travel & Finance"
@@ -320,8 +304,8 @@ export default function Home() {
       </section>
 
       {/* GST & Compliance Section */}
-      <section id="compliance" className="py-24 relative overflow-hidden bg-[#050505]">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-rose-500/5 blur-[120px] pointer-events-none" />
+      <section id="compliance" className="py-24 relative overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-emerald-500/5 blur-[120px] pointer-events-none" />
         <div className="container mx-auto px-4 relative z-10">
           <SectionHeader 
             badge="Tax & Regulatory"
@@ -384,7 +368,7 @@ export default function Home() {
 
           <div className="mt-16 text-center">
             <Link href="/compliance">
-              <Button className="bg-rose-600 hover:bg-rose-500 text-white rounded-full px-12 h-14 font-bold shadow-lg shadow-rose-900/40 transition-all hover:scale-105 active:scale-95">
+              <Button className="bg-emerald-600 hover:bg-emerald-500 text-white rounded-full px-12 h-14 font-bold shadow-lg shadow-emerald-900/40 transition-all hover:scale-105 active:scale-95">
                 Explore All Compliance Services
               </Button>
             </Link>
@@ -393,14 +377,14 @@ export default function Home() {
       </section>
 
       {/* Why Choose Us & Statistics Section */}
-      <section className="py-24 bg-[#050505]">
+      <section className="py-24 bg-transparent">
         <div className="container mx-auto px-4">
-          <div className="bg-white/5 backdrop-blur-3xl rounded-[2.5rem] p-12 text-white border border-white/10 shadow-2xl mb-24 relative overflow-hidden group">
+          <div className="bg-gradient-to-r from-purple-600/40 to-blue-600/40 backdrop-blur-xl rounded-[2.5rem] p-12 text-white border border-white/10 shadow-2xl mb-24 relative overflow-hidden group">
             <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />
             <div className="relative z-10">
                <div className="flex flex-col items-center text-center mb-12">
-                  <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-100 text-xs font-bold mb-6">
-                    <span className="w-2 h-2 bg-rose-400 rounded-full animate-pulse" />
+                  <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-blue-100 text-xs font-bold mb-6">
+                    <span className="w-2 h-2 bg-blue-300 rounded-full animate-pulse" />
                     Our Impact in Numbers
                   </div>
                </div>
@@ -411,9 +395,9 @@ export default function Home() {
                     { label: 'Cities Covered', value: '500+' },
                     { label: 'Customer Satisfaction', value: '98%' }
                   ].map((stat, i) => (
-                    <div key={i} className="text-center p-6 bg-white/5 rounded-2xl border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all group/stat">
-                      <div className="text-3xl md:text-4xl font-black mb-2 bg-clip-text text-transparent bg-gradient-to-r from-rose-400 to-purple-400 group-hover/stat:scale-110 transition-transform">{stat.value}</div>
-                      <div className="text-[10px] uppercase tracking-widest text-rose-100 font-bold opacity-70">{stat.label}</div>
+                    <div key={i} className="text-center p-6 bg-white/10 rounded-2xl border border-white/10 backdrop-blur-sm hover:bg-white/20 transition-all">
+                      <div className="text-3xl md:text-4xl font-black mb-2">{stat.value}</div>
+                      <div className="text-[10px] uppercase tracking-widest text-blue-100 font-bold opacity-70">{stat.label}</div>
                     </div>
                   ))}
                </div>
@@ -422,9 +406,9 @@ export default function Home() {
 
           <div className="text-center max-w-3xl mx-auto mb-20">
             <h2 className="text-4xl md:text-5xl font-display font-black text-white mb-6">
-              Why Choose <span className="bg-clip-text text-transparent bg-gradient-to-r from-rose-400 to-purple-400">Yek7pay?</span>
+              Why Choose <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400">Yek7pay?</span>
             </h2>
-            <p className="text-lg text-white/40 font-medium">
+            <p className="text-lg text-white/60 font-medium">
               Experience the best-in-class fintech services with unmatched reliability and speed.
             </p>
           </div>
@@ -437,11 +421,11 @@ export default function Home() {
               { icon: Coins, title: 'Low Charges', desc: 'Industry-best pricing with transparent and minimal charges.' }
             ].map((feature, i) => (
               <div key={i} className="flex flex-col items-center text-center group">
-                <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-rose-400 mb-6 group-hover:bg-rose-600 group-hover:text-white transition-all duration-500 shadow-sm">
+                <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-purple-400 mb-6 group-hover:bg-purple-600 group-hover:text-white transition-all duration-500 shadow-sm">
                   <feature.icon className="h-8 w-8" />
                 </div>
-                <h4 className="text-lg font-bold text-white mb-3 group-hover:text-rose-400 transition-colors">{feature.title}</h4>
-                <p className="text-sm text-white/30 leading-relaxed font-medium">{feature.desc}</p>
+                <h4 className="text-lg font-bold text-white mb-3">{feature.title}</h4>
+                <p className="text-sm text-white/40 leading-relaxed font-medium">{feature.desc}</p>
               </div>
             ))}
           </div>
@@ -449,27 +433,27 @@ export default function Home() {
       </section>
 
       {/* Payment Solutions Section */}
-      <section className="py-24 bg-[#050505]">
+      <section className="py-24 bg-black/20">
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center text-center mb-16">
-             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-rose-500/10 text-rose-400 text-xs font-bold mb-6 border border-rose-500/20">
+             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-500/10 text-purple-400 text-xs font-bold mb-6 border border-purple-500/20">
                🛒 For Merchants & Businesses
              </div>
              <h2 className="text-4xl md:text-5xl font-display font-black text-white mb-6">
-               Powerful <span className="text-rose-400">Payment Solutions</span> for Your Business
+               Powerful <span className="text-purple-400">Payment Solutions</span> for Your Business
              </h2>
-             <p className="text-lg text-white/40 max-w-2xl font-medium">
+             <p className="text-lg text-white/50 max-w-2xl font-medium">
                Accept payments seamlessly with our cutting-edge QR and mPOS solutions tailored for your growth.
              </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <div className="bg-white/5 backdrop-blur-3xl p-12 rounded-[3rem] shadow-2xl border border-white/10 flex flex-col items-center text-center group">
-               <div className="w-20 h-20 rounded-3xl bg-rose-600 flex items-center justify-center text-white mb-8 shadow-xl shadow-rose-500/20">
+            <div className="bg-white/5 backdrop-blur-xl p-12 rounded-[3rem] shadow-2xl border border-white/10 flex flex-col items-center text-center group">
+               <div className="w-20 h-20 rounded-3xl bg-purple-600 flex items-center justify-center text-white mb-8 shadow-xl shadow-purple-500/20">
                   <QrCode className="h-10 w-10" />
                </div>
                <h3 className="text-2xl font-bold text-white mb-4">QR Payment Collection</h3>
-               <p className="text-white/40 mb-8 max-w-sm leading-relaxed">Accept payments via QR codes with instant settlement and soundbox alerts.</p>
+               <p className="text-white/50 mb-8 max-w-sm">Accept payments via QR codes with instant settlement and soundbox alerts.</p>
                <ul className="space-y-3 mb-10 w-full max-w-xs">
                   {['Soundbox included', 'Instant alerts', 'All UPI apps supported'].map(item => (
                     <li key={item} className="flex items-center gap-3 text-sm font-bold text-white/70">
@@ -477,17 +461,17 @@ export default function Home() {
                     </li>
                   ))}
                </ul>
-               <Button className="w-full bg-rose-600 hover:bg-rose-500 text-white h-14 rounded-2xl font-bold transition-all shadow-lg shadow-rose-900/40" onClick={() => setIsAuthOpen(true)}>
+               <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white h-14 rounded-2xl font-bold" onClick={() => setIsAuthOpen(true)}>
                   Get Started <ArrowRight className="ml-2 h-5 w-5" />
                </Button>
             </div>
 
-            <div className="bg-white/5 backdrop-blur-3xl p-12 rounded-[3rem] shadow-2xl border border-white/10 flex flex-col items-center text-center group">
-               <div className="w-20 h-20 rounded-3xl bg-purple-600 flex items-center justify-center text-white mb-8 shadow-xl shadow-purple-500/20">
+            <div className="bg-white/5 backdrop-blur-xl p-12 rounded-[3rem] shadow-2xl border border-white/10 flex flex-col items-center text-center group">
+               <div className="w-20 h-20 rounded-3xl bg-blue-600 flex items-center justify-center text-white mb-8 shadow-xl shadow-blue-500/20">
                   <Smartphone className="h-10 w-10" />
                </div>
                <h3 className="text-2xl font-bold text-white mb-4">mPOS Solutions</h3>
-               <p className="text-white/40 mb-8 max-w-sm leading-relaxed">Portable card payment solutions for your store with instant settlement.</p>
+               <p className="text-white/50 mb-8 max-w-sm">Portable card payment solutions for your store with instant settlement.</p>
                <ul className="space-y-3 mb-10 w-full max-w-xs">
                   {['All card types', 'Portable device', 'Instant settlement'].map(item => (
                     <li key={item} className="flex items-center gap-3 text-sm font-bold text-white/70">
@@ -495,7 +479,7 @@ export default function Home() {
                     </li>
                   ))}
                </ul>
-               <Button className="w-full bg-purple-600 hover:bg-purple-500 text-white h-14 rounded-2xl font-bold transition-all shadow-lg shadow-purple-900/40" onClick={() => setIsAuthOpen(true)}>
+               <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white h-14 rounded-2xl font-bold" onClick={() => setIsAuthOpen(true)}>
                   Get Started <ArrowRight className="ml-2 h-5 w-5" />
                </Button>
             </div>
@@ -504,24 +488,23 @@ export default function Home() {
       </section>
 
       {/* Why Choose Yek7pay Feature Grid */}
-      <section className="py-24 bg-[#050505]">
+      <section className="py-24 bg-transparent">
         <div className="container mx-auto px-4">
-           <div className="bg-white/5 backdrop-blur-3xl rounded-[3rem] p-12 border border-white/10 shadow-xl overflow-hidden relative group">
-              <div className="absolute inset-0 bg-gradient-to-r from-rose-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-              <div className="flex flex-col md:flex-row items-center justify-between gap-12 relative z-10">
+           <div className="bg-white/5 backdrop-blur-xl rounded-[3rem] p-12 border border-white/10 shadow-xl overflow-hidden relative">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-12">
                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-rose-600 flex items-center justify-center text-white shadow-lg">
+                    <div className="w-12 h-12 rounded-xl bg-purple-600 flex items-center justify-center text-white shadow-lg">
                        <Zap className="h-6 w-6" />
                     </div>
                     <h3 className="text-2xl font-black text-white tracking-tight">Why Choose Yek7pay for Your Business?</h3>
                  </div>
                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full md:w-auto">
                     {[
-                      { label: 'Setup Fee', value: '0%', color: 'text-rose-400' },
-                      { label: 'Support Available', value: '24/7', color: 'text-purple-400' },
-                      { label: 'Settlement', value: 'Instant', color: 'text-rose-400' }
+                      { label: 'Setup Fee', value: '0%', color: 'text-purple-400' },
+                      { label: 'Support Available', value: '24/7', color: 'text-blue-400' },
+                      { label: 'Settlement', value: 'Instant', color: 'text-purple-400' }
                     ].map((item, i) => (
-                      <div key={i} className="bg-white/5 backdrop-blur-md p-6 rounded-2xl border border-white/10 text-center hover:bg-white/10 transition-colors">
+                      <div key={i} className="bg-white/5 backdrop-blur-md p-6 rounded-2xl border border-white/10 text-center">
                         <div className={`text-3xl font-black ${item.color} mb-1`}>{item.value}</div>
                         <div className="text-[10px] uppercase tracking-[0.2em] text-white/30 font-bold">{item.label}</div>
                       </div>
@@ -533,26 +516,19 @@ export default function Home() {
       </section>
 
       {/* Ready to Get Started Section */}
-      <section className="py-24 bg-[#050505]">
+      <section className="py-24 bg-transparent">
         <div className="container mx-auto px-4">
-          <div className="bg-gradient-to-r from-rose-600/60 to-purple-600/60 backdrop-blur-3xl rounded-[2.5rem] p-12 text-white border border-white/10 shadow-2xl relative overflow-hidden group">
+          <div className="bg-gradient-to-r from-purple-600/60 to-blue-600/60 backdrop-blur-2xl rounded-[2.5rem] p-12 text-white border border-white/10 shadow-2xl relative overflow-hidden group">
             <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />
             <div className="flex flex-col md:flex-row items-center justify-between gap-12 relative z-10">
               <div className="max-w-2xl text-center md:text-left">
                 <h2 className="text-4xl md:text-5xl font-black mb-6 leading-tight">Ready to Get Started?</h2>
-                <p className="text-xl text-white/80 mb-10 font-medium">Join thousands of merchants and millions of users who trust Yek7pay for their financial needs. Create your account in minutes.</p>
-                <div className="flex flex-col sm:flex-row gap-6">
-                   <Button className="bg-white text-rose-600 hover:bg-rose-50 rounded-full px-12 h-14 text-lg font-bold transition-all hover:scale-105 active:scale-95 shadow-xl" onClick={() => setIsAuthOpen(true)}>
-                      Register Now
-                   </Button>
-                   <Button variant="outline" className="border-white/30 text-white hover:bg-white/10 rounded-full px-12 h-14 text-lg font-bold backdrop-blur-md transition-all">
-                      Contact Sales
-                   </Button>
-                </div>
+                <p className="text-xl text-white/80 font-medium">Join thousands of satisfied merchants and start accepting payments today.</p>
               </div>
-              <div className="hidden lg:block relative">
-                 <div className="w-80 h-80 rounded-full bg-white/10 blur-[80px] absolute inset-0 -z-10 animate-pulse" />
-                 <Shield className="h-64 w-64 text-white/20 animate-float" />
+              <div className="flex-shrink-0 w-full md:w-auto text-center md:text-right">
+                <Button className="w-full md:w-auto bg-white text-purple-600 hover:bg-white/90 h-16 px-12 rounded-2xl font-black text-lg shadow-xl transition-all hover:scale-105 active:scale-95" onClick={() => setIsAuthOpen(true)}>
+                  Create Free Account
+                </Button>
               </div>
             </div>
           </div>
