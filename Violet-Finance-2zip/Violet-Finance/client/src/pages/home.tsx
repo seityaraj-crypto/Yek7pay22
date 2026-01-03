@@ -12,7 +12,7 @@ import {
   Zap, Receipt, Landmark, Banknote, CreditCard,
   CheckCircle2, QrCode, Smartphone, Mail, Phone, MapPin,
   ShieldCheck, UserCheck, Coins, ArrowRight, ClipboardCheck, FileText, Scale, Building,
-  Hotel, Bus, MessageCircle, Clock, X
+  Hotel, Bus, MessageCircle, Clock, X, AlertCircle
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
