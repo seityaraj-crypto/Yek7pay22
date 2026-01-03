@@ -15,6 +15,7 @@ import { useToast } from "@/hooks/use-toast";
 interface AuthDialogProps {
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
+  defaultView?: "menu" | "login";
 }
 
 function generateCaptcha(): string {
@@ -26,8 +27,8 @@ function generateCaptcha(): string {
   return result;
 }
 
-export function AuthDialog({ isOpen, onOpenChange }: AuthDialogProps) {
-  const [view, setView] = useState<"menu" | "login">("menu");
+export function AuthDialog({ isOpen, onOpenChange, defaultView = "menu" }: AuthDialogProps) {
+  const [view, setView] = useState<"menu" | "login">(defaultView);
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -40,7 +41,9 @@ export function AuthDialog({ isOpen, onOpenChange }: AuthDialogProps) {
   const { toast } = useToast();
 
   useEffect(() => {
-    if (!isOpen) {
+    if (isOpen) {
+      setView(defaultView);
+    } else {
       setView("menu");
       setUserId("");
       setPassword("");
@@ -51,7 +54,7 @@ export function AuthDialog({ isOpen, onOpenChange }: AuthDialogProps) {
       setOtpSent(false);
       setOtpLoading(false);
     }
-  }, [isOpen]);
+  }, [isOpen, defaultView]);
 
   const refreshCaptcha = () => {
     setCaptcha(generateCaptcha());

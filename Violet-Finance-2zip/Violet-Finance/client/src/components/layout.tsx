@@ -17,6 +17,17 @@ import logoImg from "@assets/Logo_Yek7pay_PNG_1767107682421.png";
 export function Navbar() {
   const [isOpen, setIsOpen] = React.useState(false);
   const [isAuthOpen, setIsAuthOpen] = React.useState(false);
+  const [authView, setAuthView] = React.useState<"menu" | "login">("menu");
+
+  const openLogin = () => {
+    setAuthView("login");
+    setIsAuthOpen(true);
+  };
+
+  const openMenu = () => {
+    setAuthView("menu");
+    setIsAuthOpen(true);
+  };
 
   const services = [
     {
@@ -107,10 +118,10 @@ export function Navbar() {
             </div>
           </div>
           <div className="hidden md:flex items-center gap-4">
-             <Button variant="ghost" className="text-sm text-slate-700 font-bold hover:text-blue-600 hover:bg-slate-200/50" onClick={() => setIsAuthOpen(true)}>
+             <Button variant="ghost" className="text-sm text-slate-700 font-bold hover:text-blue-600 hover:bg-slate-200/50" onClick={openLogin}>
                Login
              </Button>
-             <Button className="bg-gradient-to-r from-blue-500 via-blue-400 to-purple-500 hover:opacity-90 text-white border-0 shadow-[0_0_20px_rgba(59,130,246,0.3)] rounded-full px-4 md:px-8 h-10 md:h-11 text-xs md:text-sm font-bold transition-all hover:scale-105 active:scale-95" onClick={() => setIsAuthOpen(true)}>
+             <Button className="bg-gradient-to-r from-blue-500 via-blue-400 to-purple-500 hover:opacity-90 text-white border-0 shadow-[0_0_20px_rgba(59,130,246,0.3)] rounded-full px-4 md:px-8 h-10 md:h-11 text-xs md:text-sm font-bold transition-all hover:scale-105 active:scale-95" onClick={openMenu}>
                Open Account
              </Button>
           </div>
@@ -135,10 +146,10 @@ export function Navbar() {
                    </div>
                    
                    <div className="grid grid-cols-1 gap-4">
-                     <Button variant="outline" className="w-full border-blue-200 text-blue-900 font-bold hover:bg-blue-100/50 h-12" onClick={() => { setIsAuthOpen(true); setIsOpen(false); }}>
+                     <Button variant="outline" className="w-full border-blue-200 text-blue-900 font-bold hover:bg-blue-100/50 h-12" onClick={() => { openLogin(); setIsOpen(false); }}>
                        Login
                      </Button>
-                     <Button className="w-full bg-gradient-to-r from-blue-600 to-blue-400 border-0 hover:opacity-90 text-white rounded-full font-bold h-12 shadow-lg shadow-blue-500/10" onClick={() => { setIsAuthOpen(true); setIsOpen(false); }}>
+                     <Button className="w-full bg-gradient-to-r from-blue-600 to-blue-400 border-0 hover:opacity-90 text-white rounded-full font-bold h-12 shadow-lg shadow-blue-500/10" onClick={() => { openMenu(); setIsOpen(false); }}>
                        Open Account
                      </Button>
                    </div>
@@ -167,7 +178,7 @@ export function Navbar() {
           </div>
         </div>
       </div>
-      <AuthDialog isOpen={isAuthOpen} onOpenChange={setIsAuthOpen} />
+      <AuthDialog isOpen={isAuthOpen} onOpenChange={setIsAuthOpen} defaultView={authView} />
     </nav>
   );
 }
