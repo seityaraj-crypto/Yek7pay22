@@ -436,6 +436,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Why Choose Us & Statistics Section */}
+      <section className="py-24 bg-transparent">
         <div className="container mx-auto px-4">
           <div className="bg-gradient-to-r from-purple-600/40 to-blue-600/40 backdrop-blur-xl rounded-[2.5rem] p-12 text-white border border-white/10 shadow-2xl mb-24 relative overflow-hidden group">
             <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />
