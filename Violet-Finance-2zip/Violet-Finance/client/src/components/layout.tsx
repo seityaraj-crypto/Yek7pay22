@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Menu, Shield, Bell, ChevronDown, Landmark, Send, Globe, Fingerprint, CreditCard, Banknote, Briefcase, Zap, Receipt, Plane, Train, Building2, ClipboardCheck, Smartphone } from "lucide-react";
+import { Menu, Shield, Bell, ChevronDown, Landmark, Send, Globe, Fingerprint, CreditCard, Banknote, Briefcase, Zap, Receipt, Plane, Train, Building2, ClipboardCheck, Smartphone, TabletSmartphone } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { AuthDialog } from "@/components/auth-dialog";
 import {
@@ -47,7 +47,7 @@ export function Navbar() {
       items: [
         { name: "Bharat Connect (BBPS)", icon: Receipt, href: "/bbps" },
         { name: "UPI QR Collection", icon: Zap, iconColor: "text-yellow-500", href: "/#services" },
-        { name: "mPOS Card Solutions", icon: CreditCard, href: "/#services" },
+        { name: "mPOS Card Solutions", icon: TabletSmartphone, href: "/#services" },
         { name: "Credit Card Bill Pay", icon: CreditCard, iconColor: "text-purple-400", href: "/bbps" },
         { name: "Utility Payments", icon: Zap, iconColor: "text-green-400", href: "/bbps" },
         { name: "Recharge & DTH", icon: Smartphone, iconColor: "text-blue-400", href: "/bbps" },
