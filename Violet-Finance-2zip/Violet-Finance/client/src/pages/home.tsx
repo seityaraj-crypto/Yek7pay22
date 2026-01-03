@@ -135,7 +135,7 @@ export default function Home() {
       </section>
 
       {/* Core Banking Section */}
-      <section id="banking" className="py-24 relative bg-black/40">
+      <section id="banking" className="py-24 relative bg-gradient-to-b from-blue-950 to-black">
         <div className="container mx-auto px-4">
           <SectionHeader 
             badge="Banking Excellence"
