@@ -133,18 +133,18 @@ export default function Compliance() {
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button 
                     variant="outline"
-                    className="h-14 px-8 bg-[#25D366] hover:bg-[#128C7E] text-white border-none shadow-[0_0_20px_rgba(37,211,102,0.3)] hover:shadow-[0_0_30px_rgba(37,211,102,0.5)] gap-3 rounded-2xl transition-all duration-300 active:scale-95 group font-display font-black text-lg tracking-tight"
+                    className="bg-[#25D366] hover:bg-[#128C7E] text-white rounded-full px-12 h-14 font-bold shadow-lg shadow-[#25D366]/40 transition-all hover:scale-105 active:scale-95 flex items-center gap-3 border border-white/10"
                     onClick={() => handleWhatsAppAppointment("919230967187")}
                   >
-                    <MessageCircle className="h-6 w-6 fill-white group-hover:scale-110 transition-transform" />
+                    <MessageCircle className="h-6 w-6 fill-white" />
                     Make an Appointment 1
                   </Button>
                   <Button 
                     variant="outline"
-                    className="h-14 px-8 bg-[#25D366] hover:bg-[#128C7E] text-white border-none shadow-[0_0_20px_rgba(37,211,102,0.3)] hover:shadow-[0_0_30px_rgba(37,211,102,0.5)] gap-3 rounded-2xl transition-all duration-300 active:scale-95 group font-display font-black text-lg tracking-tight"
+                    className="bg-[#25D366] hover:bg-[#128C7E] text-white rounded-full px-12 h-14 font-bold shadow-lg shadow-[#25D366]/40 transition-all hover:scale-105 active:scale-95 flex items-center gap-3 border border-white/10"
                     onClick={() => handleWhatsAppAppointment("919230967189")}
                   >
-                    <MessageCircle className="h-6 w-6 fill-white group-hover:scale-110 transition-transform" />
+                    <MessageCircle className="h-6 w-6 fill-white" />
                     Make an Appointment 2
                   </Button>
                 </div>
