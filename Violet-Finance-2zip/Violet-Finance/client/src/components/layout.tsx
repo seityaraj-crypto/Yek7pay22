@@ -253,7 +253,7 @@ export function Footer() {
         
         <div className="border-t border-white/10 pt-12 text-center">
           <p className="text-[11px] text-white tracking-[0.2em] font-medium uppercase">
-             © 2025 Yek7pay. All rights reserved. | Powering India's Financial Future
+             © 2025 Yek7pay. All rights reserved. | Powering <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-pink-500 font-black">India's</span> Financial Future
           </p>
         </div>
       </div>
