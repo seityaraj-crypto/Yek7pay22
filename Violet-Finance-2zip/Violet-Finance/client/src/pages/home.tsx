@@ -221,45 +221,7 @@ export default function Home() {
                 "Seamless wallet-to-bank settlement"
               ]}
             />
-            <ServiceCard 
-              icon={Smartphone}
-              title="Micro ATM"
-              description="Enable cash withdrawals anywhere with portable Micro ATM devices."
-              delay={0.7}
-              variant="featured"
-              features={[
-                "Portable Micro ATM devices",
-                "Cash withdrawal at your doorstep",
-                "Balance inquiry & mini statement",
-                "Perfect for rural banking access"
-              ]}
-            />
-            <ServiceCard 
-              icon={CreditCard}
-              title="mPOS Solutions"
-              description="Accept card payments anywhere with mobile POS terminals."
-              delay={0.8}
-              features={[
-                "Accept Visa, Mastercard, RuPay",
-                "Contactless & chip card support",
-                "Instant settlement to bank",
-                "Low transaction fees for merchants"
-              ]}
-            />
-            <ServiceCard 
-              icon={Zap}
-              title="UPI QR Collection"
-              description="Accept UPI payments instantly with branded QR codes."
-              delay={0.9}
-              variant="featured"
-              features={[
-                "Branded UPI QR code solution",
-                "Instant payment notifications",
-                "Real-time settlement tracking",
-                "Zero setup cost for merchants"
-              ]}
-            />
-          </div>
+                      </div>
         </div>
       </section>
 
@@ -369,44 +331,7 @@ export default function Home() {
                 "24/7_GRADIENT Roadside assistance support"
               ]}
             />
-            <ServiceCard 
-              icon={Plane}
-              title="Flight Booking"
-              description="Book domestic and international flights at best prices."
-              delay={0.5}
-              features={[
-                "Domestic & international flights",
-                "Best price guarantee",
-                "Instant e-ticket delivery",
-                "24/7_GRADIENT booking support"
-              ]}
-            />
-            <ServiceCard 
-              icon={Bus}
-              title="Bus Booking"
-              description="Reserve seats on AC and non-AC buses across India."
-              delay={0.6}
-              features={[
-                "All major bus operators",
-                "AC & non-AC options",
-                "Live tracking & updates",
-                "Easy cancellation policy"
-              ]}
-            />
-            <ServiceCard 
-              icon={Building2}
-              title="Hotel Booking"
-              description="Find and book hotels, resorts, and stays at best rates."
-              delay={0.7}
-              variant="featured"
-              features={[
-                "Hotels, resorts & homestays",
-                "Best rate guarantee",
-                "Free cancellation options",
-                "Loyalty rewards program"
-              ]}
-            />
-          </div>
+                      </div>
         </div>
       </section>
 
