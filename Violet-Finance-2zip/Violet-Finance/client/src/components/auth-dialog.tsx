@@ -6,7 +6,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { UserPlus, LogIn, ShieldCheck, Zap, ArrowLeft, Eye, EyeOff, RefreshCw } from "lucide-react";
+import { UserPlus, LogIn, ShieldCheck, Zap, ArrowLeft, RefreshCw, MessageCircle } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { useState, useEffect } from "react";
@@ -28,20 +28,21 @@ function generateCaptcha(): string {
 export function AuthDialog({ isOpen, onOpenChange }: AuthDialogProps) {
   const [view, setView] = useState<"menu" | "login">("menu");
   const [userId, setUserId] = useState("");
-  const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
+  const [otp, setOtp] = useState("");
   const [captchaInput, setCaptchaInput] = useState("");
   const [captcha, setCaptcha] = useState(generateCaptcha());
   const [error, setError] = useState("");
+  const [otpSent, setOtpSent] = useState(false);
 
   useEffect(() => {
     if (!isOpen) {
       setView("menu");
       setUserId("");
-      setPassword("");
+      setOtp("");
       setCaptchaInput("");
       setError("");
       setCaptcha(generateCaptcha());
+      setOtpSent(false);
     }
   }, [isOpen]);
 
@@ -50,13 +51,25 @@ export function AuthDialog({ isOpen, onOpenChange }: AuthDialogProps) {
     setCaptchaInput("");
   };
 
+  const handleSendOtp = () => {
+    if (!userId) {
+      setError("Please enter your Mobile Number or Email first");
+      return;
+    }
+    const message = `Hi, I need OTP for login. My User ID is: ${userId}`;
+    const whatsappUrl = `https://wa.me/919230967187?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, "_blank");
+    setOtpSent(true);
+    setError("");
+  };
+
   const handleLogin = () => {
     if (!userId) {
       setError("Please enter your User ID (Mobile/Email)");
       return;
     }
-    if (!password) {
-      setError("Please enter your password");
+    if (!otp || otp.length !== 4) {
+      setError("Please enter valid 4-digit OTP");
       return;
     }
     if (captchaInput.toLowerCase() !== captcha.toLowerCase()) {
@@ -65,7 +78,7 @@ export function AuthDialog({ isOpen, onOpenChange }: AuthDialogProps) {
       return;
     }
     setError("");
-    console.log("Login attempt:", { userId, password });
+    console.log("Login attempt:", { userId, otp });
     alert("Login functionality will be connected to backend soon!");
   };
 
@@ -189,23 +202,30 @@ export function AuthDialog({ isOpen, onOpenChange }: AuthDialogProps) {
               </div>
 
               <div>
-                <label className="block text-sm font-bold text-white/60 mb-2 text-left">Password</label>
-                <div className="relative">
+                <label className="block text-sm font-bold text-white/60 mb-2 text-left">4-Digit OTP</label>
+                <div className="flex gap-3">
                   <input
-                    type={showPassword ? "text" : "password"}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Enter your password"
-                    className="w-full h-14 px-5 pr-12 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:border-blue-500/50 focus:outline-none transition-colors"
+                    type="text"
+                    value={otp}
+                    onChange={(e) => setOtp(e.target.value.replace(/\D/g, "").slice(0, 4))}
+                    placeholder="Enter 4-digit OTP"
+                    maxLength={4}
+                    className="flex-1 h-14 px-5 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:border-blue-500/50 focus:outline-none transition-colors text-center text-xl tracking-[0.5em] font-bold"
                   />
-                  <button
+                  <Button
                     type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40 hover:text-white/60 transition-colors"
+                    onClick={handleSendOtp}
+                    className={`h-14 px-4 rounded-xl font-bold text-sm flex items-center gap-2 transition-all ${
+                      otpSent 
+                        ? "bg-green-600 hover:bg-green-700 text-white" 
+                        : "bg-[#25D366] hover:bg-[#20bd5a] text-white"
+                    }`}
                   >
-                    {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
-                  </button>
+                    <MessageCircle className="h-5 w-5" />
+                    {otpSent ? "Resend" : "Get OTP"}
+                  </Button>
                 </div>
+                <p className="text-xs text-white/40 mt-2 text-left">OTP will be sent via WhatsApp</p>
               </div>
 
               <div>
@@ -250,8 +270,8 @@ export function AuthDialog({ isOpen, onOpenChange }: AuthDialogProps) {
                 Login
               </Button>
 
-              <div className="flex justify-between text-sm">
-                <a href="#" className="text-blue-400 hover:underline">Forgot Password?</a>
+              <div className="text-center text-sm">
+                <span className="text-white/40">Don't have an account? </span>
                 <a href="https://wa.me/919230967187?text=Hi%2C%20I%20want%20to%20open%20an%20account%20with%20Yek7Pay" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline" onClick={() => onOpenChange(false)}>
                   Create Account
                 </a>
