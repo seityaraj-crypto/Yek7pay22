@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 
 const bbpsServices = [
+  { title: "MSPDCL", icon: Zap, desc: "Manipur Electricity - Direct bill payment for MSPDCL customers.", color: "text-yellow-500", bgColor: "bg-yellow-500/10", url: "https://billing.mspdcl.info" },
   { title: "Electricity", icon: Zap, desc: "Pay all state board electricity bills instantly.", color: "text-yellow-400", bgColor: "bg-yellow-400/10" },
   { title: "Water Bill", icon: Droplets, desc: "Seamless payment for municipal water connections.", color: "text-blue-400", bgColor: "bg-blue-400/10" },
   { title: "LPG Gas", icon: Flame, desc: "Book and pay for gas cylinders from your home.", color: "text-orange-400", bgColor: "bg-orange-400/10" },
@@ -13,8 +14,7 @@ const bbpsServices = [
   { title: "DTH / TV", icon: Tv, desc: "Quick recharges for all major DTH providers.", color: "text-rose-400", bgColor: "bg-rose-400/10" },
   { title: "Mobile Postpaid", icon: Smartphone, desc: "Clear your mobile bills with zero convenience fees.", color: "text-emerald-400", bgColor: "bg-emerald-400/10" },
   { title: "Fastag", icon: CreditCard, desc: "Instant Fastag recharges for smooth highway travel.", color: "text-cyan-400", bgColor: "bg-cyan-400/10" },
-  { title: "Insurance", icon: Receipt, desc: "Pay life and health insurance premiums easily.", color: "text-blue-500", bgColor: "bg-blue-500/10" },
-  { title: "MSPDCL", icon: Zap, desc: "Manipur Electricity - Direct bill payment for MSPDCL customers.", color: "text-yellow-500", bgColor: "bg-yellow-500/10", url: "https://billing.mspdcl.info" }
+  { title: "Insurance", icon: Receipt, desc: "Pay life and health insurance premiums easily.", color: "text-blue-500", bgColor: "bg-blue-500/10" }
 ];
 
 export default function BharatConnect() {
