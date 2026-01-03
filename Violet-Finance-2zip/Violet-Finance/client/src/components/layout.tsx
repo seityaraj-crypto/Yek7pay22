@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Menu, Shield, Bell, ChevronDown, Landmark, Send, Globe, Fingerprint, CreditCard, Banknote, Briefcase, Zap, Receipt, Plane, Train, Building2, ClipboardCheck, Smartphone } from "lucide-react";
+import { Menu, Shield, Bell, ChevronDown, Landmark, Send, Globe, Fingerprint, CreditCard, Banknote, Briefcase, Zap, Receipt, Plane, Train, Building2, ClipboardCheck, Smartphone, Sun, Moon } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { AuthDialog } from "@/components/auth-dialog";
 import {
@@ -18,6 +18,11 @@ export function Navbar() {
   const [isOpen, setIsOpen] = React.useState(false);
   const [isAuthOpen, setIsAuthOpen] = React.useState(false);
   const [authView, setAuthView] = React.useState<"menu" | "login">("menu");
+  const [isDarkMode, setIsDarkMode] = React.useState(true);
+
+  const toggleTheme = () => {
+    setIsDarkMode(!isDarkMode);
+  };
 
   const openLogin = () => {
     setAuthView("login");
@@ -127,6 +132,15 @@ export function Navbar() {
           </div>
 
           <div className="flex items-center gap-2">
+             <Button 
+               variant="ghost" 
+               size="icon" 
+               className="text-slate-600 hover:text-primary hover:bg-slate-200/50 hidden sm:flex"
+               onClick={toggleTheme}
+               title={isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+             >
+               {isDarkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+             </Button>
              <Button variant="ghost" size="icon" className="text-blue-400 relative hover:text-primary hover:bg-blue-50 hidden sm:flex">
                <Bell className="h-5 w-5" />
                <span className="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full border-2 border-white" />
