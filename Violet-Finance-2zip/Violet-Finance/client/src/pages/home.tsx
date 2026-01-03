@@ -382,8 +382,60 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Why Choose Us & Statistics Section */}
-      <section className="py-24 bg-transparent">
+      {/* Upgrade Premium Section */}
+      <section id="upgrade" className="py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-blue-600/10 via-pink-600/10 to-transparent blur-[120px] pointer-events-none" />
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="rounded-[3rem] bg-gradient-to-br from-[#0f172a] via-[#1e1b4b] to-[#2e1065] border border-white/10 backdrop-blur-xl p-12 md:p-20 shadow-2xl overflow-hidden relative group">
+            <div className="absolute top-0 right-0 p-12 opacity-20 group-hover:opacity-40 transition-all duration-700 pointer-events-none">
+              <div className="w-64 h-64 bg-gradient-to-br from-blue-500 to-pink-500 rounded-full blur-[100px] animate-pulse" />
+            </div>
+
+            <div className="max-w-4xl relative z-10">
+              <div className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-gradient-to-r from-blue-600 to-pink-600 text-white text-sm font-black mb-8 shadow-lg shadow-pink-500/20 uppercase tracking-widest">
+                🚀 Business Accelerator
+              </div>
+              <h2 className="text-4xl md:text-7xl font-display font-black text-white mb-8 leading-tight">
+                Upgrade to <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-pink-400 to-blue-400">Premium</span> <br />
+                For Only <span className="text-pink-500">₹ 999</span>
+              </h2>
+              <p className="text-xl text-white/60 mb-12 font-medium leading-relaxed max-w-2xl">
+                Transform your agency into a high-income business. Activate exclusive features designed to maximize your profit and scale your operations instantly.
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-6 mb-16">
+                {[
+                  "Unlimited Neo Bank Money Transfer",
+                  "PPI Wallet for Instant Payouts",
+                  "Premium Business & Personal Loans",
+                  "GST & Compliance Service Suite",
+                  "Priority 24/7 VIP Support",
+                  "Highest Commission Rates"
+                ].map((feature, i) => (
+                  <div key={i} className="flex items-center gap-4 group/feature">
+                    <div className="w-8 h-8 shrink-0 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 group-hover/feature:bg-blue-500 group-hover/feature:text-white transition-all">
+                      <CheckCircle2 className="h-4 w-4" />
+                    </div>
+                    <span className="text-lg font-bold text-white/80 group-hover/feature:text-white transition-colors">{feature}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex flex-wrap gap-6 items-center">
+                <Button 
+                  className="bg-gradient-to-r from-blue-600 via-indigo-600 to-pink-600 hover:from-blue-500 hover:to-pink-500 text-white rounded-full px-16 h-20 text-xl font-black shadow-2xl shadow-blue-900/40 transition-all hover:scale-105 active:scale-95 flex items-center gap-4 border border-white/10"
+                  onClick={() => setIsAuthOpen(true)}
+                >
+                  Activate Now <Zap className="h-6 w-6 fill-current" />
+                </Button>
+                <div className="text-white/40 text-sm font-bold uppercase tracking-widest">
+                  One-time activation fee
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
         <div className="container mx-auto px-4">
           <div className="bg-gradient-to-r from-purple-600/40 to-blue-600/40 backdrop-blur-xl rounded-[2.5rem] p-12 text-white border border-white/10 shadow-2xl mb-24 relative overflow-hidden group">
             <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />
