@@ -267,7 +267,7 @@ export default function Home() {
       </section>
 
       {/* Loans & Bookings Section */}
-      <section id="booking" className="py-24 bg-black/40">
+      <section id="booking" className="py-24 bg-gradient-to-br from-black via-black to-blue-950">
         <div className="container mx-auto px-4">
           <SectionHeader 
             badge="Travel & Finance"
