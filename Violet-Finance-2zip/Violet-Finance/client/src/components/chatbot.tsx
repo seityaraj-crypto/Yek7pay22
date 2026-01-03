@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { MessageCircle, X, Send, Bot, User, Loader2, Minus, Trash2 } from "lucide-react";
+import { MessageCircle, X, Send, Bot, User, Loader2, Minus, Trash2, Maximize2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -13,6 +13,7 @@ interface Message {
 
 export function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isMinimized, setIsMinimized] = useState(false);
   const [input, setInput] = useState("");
   const [conversationId, setConversationId] = useState<number | null>(null);
   const [streamingMessage, setStreamingMessage] = useState("");
@@ -116,12 +117,44 @@ export function Chatbot() {
 
   return (
     <>
-      <Button
-        onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 h-14 w-14 rounded-full shadow-2xl bg-gradient-to-r from-cyan-400 to-blue-400 hover:scale-110 transition-all z-50 p-0 shadow-cyan-500/20 flex items-center justify-center"
-      >
-        <MessageCircle className="h-6 w-6 text-white" />
-      </Button>
+      {!isOpen && !isMinimized && (
+        <Button
+          onClick={() => setIsOpen(true)}
+          className="fixed bottom-6 right-6 h-14 w-14 rounded-full shadow-2xl bg-gradient-to-r from-cyan-400 to-blue-400 hover:scale-110 transition-all z-50 p-0 shadow-cyan-500/20 flex items-center justify-center"
+        >
+          <MessageCircle className="h-6 w-6 text-white" />
+        </Button>
+      )}
+
+      {isMinimized && (
+        <div 
+          className="fixed bottom-6 right-6 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full shadow-2xl z-50 flex items-center gap-3 px-4 py-3 cursor-pointer hover:scale-105 transition-all"
+          onClick={() => { setIsMinimized(false); setIsOpen(true); }}
+        >
+          <div className="h-2 w-2 bg-green-400 rounded-full animate-pulse" />
+          <span className="text-white text-sm font-bold">Yek7pay AI Active</span>
+          <div className="flex items-center gap-1">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="h-7 w-7 text-white hover:bg-white/20 p-0" 
+              onClick={(e) => { e.stopPropagation(); setIsMinimized(false); setIsOpen(true); }}
+              title="Expand"
+            >
+              <Maximize2 className="h-4 w-4" />
+            </Button>
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="h-7 w-7 text-white hover:bg-red-500/50 p-0" 
+              onClick={(e) => { e.stopPropagation(); setIsMinimized(false); }}
+              title="Close"
+            >
+              <X className="h-4 w-4" />
+            </Button>
+          </div>
+        </div>
+      )}
 
       {isOpen && (
         <Card className="fixed bottom-0 right-0 w-full h-full md:bottom-24 md:right-6 md:w-[350px] md:h-[500px] shadow-2xl z-50 flex flex-col border-white/10 bg-[#000a26] text-white overflow-hidden rounded-none md:rounded-3xl">
@@ -151,7 +184,7 @@ export function Chatbot() {
                 variant="ghost" 
                 size="icon" 
                 className="h-8 w-8 text-white hover:bg-white/20" 
-                onClick={() => setIsOpen(false)}
+                onClick={() => { setIsOpen(false); setIsMinimized(true); }}
                 title="Minimize"
               >
                 <Minus className="h-4 w-4" />
