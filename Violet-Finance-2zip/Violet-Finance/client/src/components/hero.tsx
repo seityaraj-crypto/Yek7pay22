@@ -95,12 +95,15 @@ export function Hero() {
                   </div>
 
                   <div className="relative h-48 w-full bg-white/5 rounded-2xl overflow-hidden border border-white/10 z-10">
-                     <img 
-                       src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&q=80&w=800" 
-                       alt="Advanced Money Transfer"
-                       className="w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-700"
+                     <video 
+                       src="/hero-video.mp4" 
+                       autoPlay
+                       loop
+                       muted
+                       playsInline
+                       className="w-full h-full object-cover opacity-90 group-hover:scale-110 transition-transform duration-700"
                      />
-                     <div className="absolute inset-0 bg-gradient-to-t from-[#000a26]/80 to-transparent" />
+                     <div className="absolute inset-0 bg-gradient-to-t from-[#000a26]/60 to-transparent pointer-events-none" />
                      <div className="absolute bottom-4 left-4 right-4">
                         <div className="flex items-center justify-between text-white">
                            <div className="text-[10px] font-bold uppercase tracking-wider text-blue-300">Transfer ID: YK7-8821</div>
