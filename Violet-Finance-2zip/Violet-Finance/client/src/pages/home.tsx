@@ -5,24 +5,42 @@ import { SectionHeader } from "@/components/section-header";
 import { AuthDialog } from "@/components/auth-dialog";
 import { useState } from "react";
 import { Link } from "wouter";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { 
   Send, Globe, Fingerprint, 
   Plane, Train, Briefcase, Building2, 
   Zap, Receipt, Landmark, Banknote, CreditCard,
   CheckCircle2, QrCode, Smartphone, Mail, Phone, MapPin,
   ShieldCheck, UserCheck, Coins, ArrowRight, ClipboardCheck, FileText, Scale, Building,
-  Hotel, Bus, MessageCircle
+  Hotel, Bus, MessageCircle, Clock, X
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function Home() {
   const [isAuthOpen, setIsAuthOpen] = useState(false);
+  const [showTimePicker, setShowTimePicker] = useState(false);
+  const [activeNumber, setActiveNumber] = useState<string | null>(null);
 
   const handleWhatsAppAppointment = (number: string) => {
-    const message = encodeURIComponent("Hello, I would like to make an appointment for Tax Audit/Compliance services.");
-    window.open(`https://wa.me/${number}?text=${message}`, '_blank');
+    setActiveNumber(number);
+    setShowTimePicker(true);
   };
+
+  const confirmAppointment = (time: string) => {
+    if (activeNumber) {
+      const message = encodeURIComponent(`Hello, I would like to make an appointment for Tax Audit/Compliance services at ${time}.`);
+      window.open(`https://wa.me/${activeNumber}?text=${message}`, '_blank');
+      setShowTimePicker(false);
+      setActiveNumber(null);
+    }
+  };
+
+  const timeSlots = [
+    "09:00 AM", "09:30 AM", "10:00 AM", "10:30 AM",
+    "11:00 AM", "11:30 AM", "12:00 PM", "12:30 PM",
+    "02:00 PM", "02:30 PM", "03:00 PM", "03:30 PM",
+    "04:00 PM", "04:30 PM", "05:00 PM", "05:30 PM"
+  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#1a0b3b] via-[#0d0d2b] to-[#0a1a3a] text-white">
@@ -566,7 +584,65 @@ export default function Home() {
       </section>
 
       <Footer />
-      <AuthDialog isOpen={isAuthOpen} onOpenChange={setIsAuthOpen} />
+      <AuthDialog open={isAuthOpen} onOpenChange={setIsAuthOpen} />
+
+      {/* Time Selection Modal */}
+      <AnimatePresence>
+        {showTimePicker && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+              onClick={() => setShowTimePicker(false)}
+            />
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="relative w-full max-w-md bg-[#1a1a3a] border border-white/10 rounded-[2rem] p-8 shadow-2xl"
+            >
+              <button 
+                onClick={() => setShowTimePicker(false)}
+                className="absolute top-6 right-6 p-2 rounded-full hover:bg-white/5 transition-colors"
+              >
+                <X className="h-6 w-6 text-white/40" />
+              </button>
+
+              <div className="flex items-center gap-4 mb-8">
+                <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 flex items-center justify-center text-emerald-400">
+                  <Clock className="h-6 w-6" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-white text-left">Select Appointment Time</h3>
+                  <p className="text-sm text-white/40 text-left">Choose a 30-minute slot</p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3 max-h-[40vh] overflow-y-auto pr-2 custom-scrollbar">
+                {timeSlots.map((time) => (
+                  <Button
+                    key={time}
+                    variant="outline"
+                    className="h-12 bg-white/5 border-white/5 hover:border-emerald-500/50 hover:bg-emerald-500/10 text-white/70 hover:text-white rounded-xl transition-all flex items-center justify-start px-4"
+                    onClick={() => confirmAppointment(time)}
+                  >
+                    {time}
+                  </Button>
+                ))}
+              </div>
+
+              <div className="mt-8 p-4 rounded-xl bg-blue-500/5 border border-blue-500/10 flex gap-3 text-left">
+                <AlertCircle className="h-5 w-5 text-blue-400 shrink-0" />
+                <p className="text-xs text-blue-200/50 leading-relaxed">
+                  All slots are 30 minutes. You will be redirected to WhatsApp with your chosen time.
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
