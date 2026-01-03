@@ -33,6 +33,8 @@ export default function Upgrade() {
                 { title: "PPI Wallet", desc: "Digital wallet solutions for instant merchant payouts." },
                 { title: "Premium Loans", desc: "Priority processing for business and personal financing." },
                 { title: "Compliance Suite", desc: "Full access to GST filing, ITR, and audit services." },
+                { title: "mPOS Solutions", desc: "Portable card payment device for seamless transactions anywhere." },
+                { title: "QR Payment", desc: "Accept UPI payments with QR codes and instant soundbox alerts." },
                 { title: "VIP Support", desc: "24/7 dedicated account manager for your business.", has247: true },
                 { title: "Elite Commission", desc: "Unlock the highest commission slabs in the industry." }
               ].map((feature, i) => (
