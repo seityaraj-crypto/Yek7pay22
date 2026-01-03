@@ -1,6 +1,6 @@
 import { Navbar, Footer } from "@/components/layout";
 import { motion } from "framer-motion";
-import { ClipboardCheck, FileText, Scale, Building, Upload, CheckCircle2, AlertCircle, Zap, ArrowLeft } from "lucide-react";
+import { ClipboardCheck, FileText, Scale, Building, Upload, CheckCircle2, AlertCircle, Zap, ArrowLeft, MessageCircle } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -27,7 +27,7 @@ const complianceServices = [
   {
     id: "tax-audit",
     title: "Tax Audit",
-    description: "Statutory tax audit services by certified professionals to ensure compliance.",
+    description: "Comprehensive statutory tax audit services by certified professionals. We provide deep tax analysis, compliance verification, and risk assessment to ensure your business stays ahead of regulatory requirements.",
     icon: Scale,
     color: "text-amber-400",
     bgColor: "bg-amber-400/10"
@@ -64,6 +64,11 @@ export default function Compliance() {
         description: `${newFiles.length} file(s) selected for upload.`,
       });
     }
+  };
+
+  const handleWhatsAppAppointment = (number: string) => {
+    const message = encodeURIComponent("Hello, I would like to make an appointment for Tax Audit/Compliance services.");
+    window.open(`https://wa.me/${number}?text=${message}`, '_blank');
   };
 
   const handleSubmit = () => {
@@ -120,10 +125,30 @@ export default function Compliance() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             {/* Service Selection */}
             <div className="lg:col-span-2 space-y-8">
-              <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
-                <CheckCircle2 className="text-emerald-400 h-6 w-6" />
-                Select Service
-              </h2>
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-6">
+                <h2 className="text-2xl font-bold flex items-center gap-3">
+                  <CheckCircle2 className="text-emerald-400 h-6 w-6" />
+                  Select Service
+                </h2>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <Button 
+                    variant="outline"
+                    className="bg-green-500/10 border-green-500/20 hover:bg-green-500/20 text-green-400 gap-2"
+                    onClick={() => handleWhatsAppAppointment("919230967187")}
+                  >
+                    <MessageCircle className="h-4 w-4" />
+                    Appointment 1
+                  </Button>
+                  <Button 
+                    variant="outline"
+                    className="bg-green-500/10 border-green-500/20 hover:bg-green-500/20 text-green-400 gap-2"
+                    onClick={() => handleWhatsAppAppointment("919230967189")}
+                  >
+                    <MessageCircle className="h-4 w-4" />
+                    Appointment 2
+                  </Button>
+                </div>
+              </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {complianceServices.map((service) => (
                   <motion.div
