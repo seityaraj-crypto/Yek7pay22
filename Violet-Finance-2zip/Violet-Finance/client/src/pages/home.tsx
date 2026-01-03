@@ -12,12 +12,17 @@ import {
   Zap, Receipt, Landmark, Banknote, CreditCard,
   CheckCircle2, QrCode, Smartphone, Mail, Phone, MapPin,
   ShieldCheck, UserCheck, Coins, ArrowRight, ClipboardCheck, FileText, Scale, Building,
-  Hotel, Bus
+  Hotel, Bus, MessageCircle
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function Home() {
   const [isAuthOpen, setIsAuthOpen] = useState(false);
+
+  const handleWhatsAppAppointment = (number: string) => {
+    const message = encodeURIComponent("Hello, I would like to make an appointment for Tax Audit/Compliance services.");
+    window.open(`https://wa.me/${number}?text=${message}`, '_blank');
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#1a0b3b] via-[#0d0d2b] to-[#0a1a3a] text-white">
@@ -372,12 +377,31 @@ export default function Home() {
             />
           </div>
 
-          <div className="mt-16 text-center">
+          <div className="mt-16 flex flex-col items-center gap-8">
             <Link href="/compliance">
               <Button className="bg-emerald-600 hover:bg-emerald-500 text-white rounded-full px-12 h-14 font-bold shadow-lg shadow-emerald-900/40 transition-all hover:scale-105 active:scale-95">
                 Explore All Compliance Services
               </Button>
             </Link>
+
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button 
+                variant="outline"
+                className="h-14 px-8 bg-[#25D366] hover:bg-[#128C7E] text-white border-none shadow-[0_0_20px_rgba(37,211,102,0.3)] hover:shadow-[0_0_30px_rgba(37,211,102,0.5)] gap-3 rounded-2xl transition-all duration-300 active:scale-95 group font-display font-black text-lg tracking-tight"
+                onClick={() => handleWhatsAppAppointment("919230967187")}
+              >
+                <MessageCircle className="h-6 w-6 fill-white group-hover:scale-110 transition-transform" />
+                Make an Appointment 1
+              </Button>
+              <Button 
+                variant="outline"
+                className="h-14 px-8 bg-[#25D366] hover:bg-[#128C7E] text-white border-none shadow-[0_0_20px_rgba(37,211,102,0.3)] hover:shadow-[0_0_30px_rgba(37,211,102,0.5)] gap-3 rounded-2xl transition-all duration-300 active:scale-95 group font-display font-black text-lg tracking-tight"
+                onClick={() => handleWhatsAppAppointment("919230967189")}
+              >
+                <MessageCircle className="h-6 w-6 fill-white group-hover:scale-110 transition-transform" />
+                Make an Appointment 2
+              </Button>
+            </div>
           </div>
         </div>
       </section>
