@@ -96,7 +96,7 @@ export function Hero() {
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-blue-400 to-purple-500">Solution Provider</span>
               </h1>
               
-              <p className="text-xl text-muted-foreground mb-10 max-w-xl leading-relaxed mx-auto lg:mx-0">
+              <p className="text-xl text-gray-300 mb-10 max-w-xl leading-relaxed mx-auto lg:mx-0">
                 Yek7pay brings you Neo Bank unlimited money transfer. Secure wallets, Indo-Nepal remittances, and instant AEPS. 
                 The best solution for merchants and high-volume transactions.
               </p>
