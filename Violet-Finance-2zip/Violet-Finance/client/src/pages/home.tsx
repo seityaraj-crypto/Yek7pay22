@@ -384,22 +384,22 @@ export default function Home() {
               </Button>
             </Link>
 
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-3">
               <Button 
                 variant="outline"
-                className="bg-[#25D366] hover:bg-[#128C7E] text-white rounded-full px-12 h-14 font-bold shadow-lg shadow-[#25D366]/40 transition-all hover:scale-105 active:scale-95 flex items-center gap-3 border border-white/10"
+                className="bg-purple-400/10 hover:bg-purple-400/20 text-white rounded-full px-8 h-12 font-bold shadow-lg shadow-purple-500/10 transition-all hover:scale-105 active:scale-95 flex items-center gap-2 border border-purple-500/20"
                 onClick={() => handleWhatsAppAppointment("919230967187")}
               >
-                <MessageCircle className="h-6 w-6 fill-white" />
-                Make an Appointment 1
+                <MessageCircle className="h-5 w-5 fill-[#25D366] text-[#25D366]" />
+                <span className="text-sm">Make an Appointment 1</span>
               </Button>
               <Button 
                 variant="outline"
-                className="bg-[#25D366] hover:bg-[#128C7E] text-white rounded-full px-12 h-14 font-bold shadow-lg shadow-[#25D366]/40 transition-all hover:scale-105 active:scale-95 flex items-center gap-3 border border-white/10"
+                className="bg-purple-400/10 hover:bg-purple-400/20 text-white rounded-full px-8 h-12 font-bold shadow-lg shadow-purple-500/10 transition-all hover:scale-105 active:scale-95 flex items-center gap-2 border border-purple-500/20"
                 onClick={() => handleWhatsAppAppointment("919230967189")}
               >
-                <MessageCircle className="h-6 w-6 fill-white" />
-                Make an Appointment 2
+                <MessageCircle className="h-5 w-5 fill-[#25D366] text-[#25D366]" />
+                <span className="text-sm">Make an Appointment 2</span>
               </Button>
             </div>
           </div>
