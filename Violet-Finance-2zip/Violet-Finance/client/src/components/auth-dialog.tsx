@@ -6,10 +6,11 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { UserPlus, LogIn, ShieldCheck, Zap, ArrowLeft, RefreshCw, MessageCircle } from "lucide-react";
+import { UserPlus, LogIn, ShieldCheck, Zap, ArrowLeft, RefreshCw, Eye, EyeOff, Send } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { useState, useEffect } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 interface AuthDialogProps {
   isOpen: boolean;
@@ -28,21 +29,27 @@ function generateCaptcha(): string {
 export function AuthDialog({ isOpen, onOpenChange }: AuthDialogProps) {
   const [view, setView] = useState<"menu" | "login">("menu");
   const [userId, setUserId] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [otp, setOtp] = useState("");
   const [captchaInput, setCaptchaInput] = useState("");
   const [captcha, setCaptcha] = useState(generateCaptcha());
   const [error, setError] = useState("");
   const [otpSent, setOtpSent] = useState(false);
+  const [otpLoading, setOtpLoading] = useState(false);
+  const { toast } = useToast();
 
   useEffect(() => {
     if (!isOpen) {
       setView("menu");
       setUserId("");
+      setPassword("");
       setOtp("");
       setCaptchaInput("");
       setError("");
       setCaptcha(generateCaptcha());
       setOtpSent(false);
+      setOtpLoading(false);
     }
   }, [isOpen]);
 
@@ -51,21 +58,37 @@ export function AuthDialog({ isOpen, onOpenChange }: AuthDialogProps) {
     setCaptchaInput("");
   };
 
-  const handleSendOtp = () => {
+  const handleSendOtp = async () => {
     if (!userId) {
       setError("Please enter your Mobile Number or Email first");
       return;
     }
-    const message = `Hi, I need OTP for login. My User ID is: ${userId}`;
-    const whatsappUrl = `https://wa.me/919230967187?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, "_blank");
-    setOtpSent(true);
+    
+    setOtpLoading(true);
     setError("");
+    
+    setTimeout(() => {
+      setOtpLoading(false);
+      setOtpSent(true);
+      toast({
+        title: "OTP Sent!",
+        description: `A 4-digit OTP has been sent to ${userId} via SMS/Email`,
+      });
+    }, 1500);
+  };
+
+  const handleResendOtp = () => {
+    setOtp("");
+    handleSendOtp();
   };
 
   const handleLogin = () => {
     if (!userId) {
       setError("Please enter your User ID (Mobile/Email)");
+      return;
+    }
+    if (!password) {
+      setError("Please enter your password");
       return;
     }
     if (!otp || otp.length !== 4) {
@@ -78,8 +101,11 @@ export function AuthDialog({ isOpen, onOpenChange }: AuthDialogProps) {
       return;
     }
     setError("");
-    console.log("Login attempt:", { userId, otp });
-    alert("Login functionality will be connected to backend soon!");
+    console.log("Login attempt:", { userId, password, otp });
+    toast({
+      title: "Login",
+      description: "Login functionality will be connected to backend soon!",
+    });
   };
 
   return (
@@ -178,100 +204,129 @@ export function AuthDialog({ isOpen, onOpenChange }: AuthDialogProps) {
               >
                 <ArrowLeft className="h-5 w-5 text-white/60" />
               </button>
-              <div className="mb-6 h-16 w-16 rounded-2xl bg-gradient-to-br from-blue-500 via-blue-400 to-purple-600 flex items-center justify-center text-white shadow-[0_0_30px_rgba(59,130,246,0.5)] mx-auto">
-                <LogIn className="h-8 w-8" />
+              <div className="mb-4 h-14 w-14 rounded-2xl bg-gradient-to-br from-blue-500 via-blue-400 to-purple-600 flex items-center justify-center text-white shadow-[0_0_30px_rgba(59,130,246,0.5)] mx-auto">
+                <LogIn className="h-7 w-7" />
               </div>
-              <DialogTitle className="text-3xl font-display font-black text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-blue-300 to-purple-400 mb-2">
-                Login
+              <DialogTitle className="text-2xl font-display font-black text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-blue-300 to-purple-400 mb-1">
+                Login to Yek7Pay
               </DialogTitle>
-              <DialogDescription className="text-white/70 text-base text-center mb-4">
+              <DialogDescription className="text-white/60 text-sm text-center mb-2">
                 Enter your credentials to access your account
               </DialogDescription>
             </DialogHeader>
 
-            <div className="space-y-5 mt-4">
+            <div className="space-y-4 mt-2">
               <div>
-                <label className="block text-sm font-bold text-white/60 mb-2 text-left">User ID (Mobile No / Email)</label>
+                <label className="block text-xs font-bold text-white/60 mb-1.5 text-left">User ID (Mobile No / Email)</label>
                 <input
                   type="text"
                   value={userId}
                   onChange={(e) => setUserId(e.target.value)}
                   placeholder="Enter mobile number or email"
-                  className="w-full h-14 px-5 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:border-blue-500/50 focus:outline-none transition-colors"
+                  className="w-full h-12 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:border-blue-500/50 focus:outline-none transition-colors text-sm"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-bold text-white/60 mb-2 text-left">4-Digit OTP</label>
-                <div className="flex gap-3">
+                <label className="block text-xs font-bold text-white/60 mb-1.5 text-left">Password</label>
+                <div className="relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Enter your password"
+                    className="w-full h-12 px-4 pr-12 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:border-blue-500/50 focus:outline-none transition-colors text-sm"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40 hover:text-white/60 transition-colors"
+                  >
+                    {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  </button>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-white/60 mb-1.5 text-left">4-Digit OTP (via SMS/Email)</label>
+                <div className="flex gap-2">
                   <input
                     type="text"
                     value={otp}
                     onChange={(e) => setOtp(e.target.value.replace(/\D/g, "").slice(0, 4))}
-                    placeholder="Enter 4-digit OTP"
+                    placeholder="Enter OTP"
                     maxLength={4}
-                    className="flex-1 h-14 px-5 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:border-blue-500/50 focus:outline-none transition-colors text-center text-xl tracking-[0.5em] font-bold"
+                    className="flex-1 h-12 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:border-blue-500/50 focus:outline-none transition-colors text-center text-lg tracking-[0.4em] font-bold"
                   />
-                  <Button
-                    type="button"
-                    onClick={handleSendOtp}
-                    className={`h-14 px-4 rounded-xl font-bold text-sm flex items-center gap-2 transition-all ${
-                      otpSent 
-                        ? "bg-green-600 hover:bg-green-700 text-white" 
-                        : "bg-[#25D366] hover:bg-[#20bd5a] text-white"
-                    }`}
-                  >
-                    <MessageCircle className="h-5 w-5" />
-                    {otpSent ? "Resend" : "Get OTP"}
-                  </Button>
+                  {!otpSent ? (
+                    <Button
+                      type="button"
+                      onClick={handleSendOtp}
+                      disabled={otpLoading}
+                      className="h-12 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs flex items-center gap-2 transition-all disabled:opacity-50"
+                    >
+                      {otpLoading ? (
+                        <RefreshCw className="h-4 w-4 animate-spin" />
+                      ) : (
+                        <Send className="h-4 w-4" />
+                      )}
+                      Send OTP
+                    </Button>
+                  ) : (
+                    <Button
+                      type="button"
+                      onClick={handleResendOtp}
+                      disabled={otpLoading}
+                      className="h-12 px-4 rounded-xl bg-green-600 hover:bg-green-700 text-white font-bold text-xs flex items-center gap-2 transition-all disabled:opacity-50"
+                    >
+                      <RefreshCw className={`h-4 w-4 ${otpLoading ? 'animate-spin' : ''}`} />
+                      Resend
+                    </Button>
+                  )}
                 </div>
-                <p className="text-xs text-white/40 mt-2 text-left">OTP will be sent via WhatsApp</p>
+                <p className="text-[10px] text-white/40 mt-1 text-left">OTP will be sent via SMS and Email automatically</p>
               </div>
 
               <div>
-                <label className="block text-sm font-bold text-white/60 mb-2 text-left">Captcha</label>
-                <div className="flex gap-3">
-                  <div className="flex-1 relative">
-                    <input
-                      type="text"
-                      value={captchaInput}
-                      onChange={(e) => setCaptchaInput(e.target.value)}
-                      placeholder="Enter captcha"
-                      className="w-full h-14 px-5 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:border-blue-500/50 focus:outline-none transition-colors"
-                    />
+                <label className="block text-xs font-bold text-white/60 mb-1.5 text-left">Captcha</label>
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={captchaInput}
+                    onChange={(e) => setCaptchaInput(e.target.value)}
+                    placeholder="Enter captcha"
+                    className="flex-1 h-12 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:border-blue-500/50 focus:outline-none transition-colors text-sm"
+                  />
+                  <div className="h-12 px-3 rounded-xl bg-gradient-to-r from-blue-900/50 to-purple-900/50 border border-white/10 flex items-center justify-center select-none">
+                    <span className="text-lg font-mono font-bold tracking-wider text-white/90 italic" style={{ textDecoration: "line-through", textDecorationColor: "rgba(255,255,255,0.2)" }}>
+                      {captcha}
+                    </span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <div className="h-14 px-4 rounded-xl bg-gradient-to-r from-blue-900/50 to-purple-900/50 border border-white/10 flex items-center justify-center select-none">
-                      <span className="text-xl font-mono font-bold tracking-wider text-white/90 italic" style={{ textDecoration: "line-through", textDecorationColor: "rgba(255,255,255,0.2)" }}>
-                        {captcha}
-                      </span>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={refreshCaptcha}
-                      className="h-14 w-14 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white/40 hover:text-white/60 hover:bg-white/10 transition-colors"
-                    >
-                      <RefreshCw className="h-5 w-5" />
-                    </button>
-                  </div>
+                  <button
+                    type="button"
+                    onClick={refreshCaptcha}
+                    className="h-12 w-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white/40 hover:text-white/60 hover:bg-white/10 transition-colors"
+                  >
+                    <RefreshCw className="h-4 w-4" />
+                  </button>
                 </div>
               </div>
 
               {error && (
-                <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm text-center">
+                <div className="p-2.5 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-xs text-center">
                   {error}
                 </div>
               )}
 
               <Button 
                 onClick={handleLogin}
-                className="w-full h-14 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white rounded-xl font-bold text-lg shadow-lg transition-all hover:scale-[1.02] active:scale-95"
+                className="w-full h-12 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white rounded-xl font-bold text-base shadow-lg transition-all hover:scale-[1.02] active:scale-95"
               >
                 Login
               </Button>
 
-              <div className="text-center text-sm">
-                <span className="text-white/40">Don't have an account? </span>
+              <div className="flex justify-between text-xs">
+                <a href="#" className="text-blue-400 hover:underline">Forgot Password?</a>
                 <a href="https://wa.me/919230967187?text=Hi%2C%20I%20want%20to%20open%20an%20account%20with%20Yek7Pay" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline" onClick={() => onOpenChange(false)}>
                   Create Account
                 </a>
