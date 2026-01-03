@@ -47,9 +47,9 @@ export default function Home() {
 
       {/* Large Booking Section */}
       <section id="travel-booking" className="py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-rose-500/10 to-purple-500/10 blur-[100px] pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 via-purple-600/5 to-rose-600/10 blur-[100px] pointer-events-none" />
         <div className="container mx-auto px-4 relative z-10">
-          <div className="rounded-[3rem] bg-black/40 border border-white/5 backdrop-blur-xl p-12 md:p-20 shadow-2xl overflow-hidden group">
+          <div className="rounded-[3rem] bg-gradient-to-br from-[#0f172a] via-[#1e1b4b] to-[#312e81] border border-white/10 backdrop-blur-xl p-12 md:p-20 shadow-2xl overflow-hidden group">
             <div className="absolute top-0 right-0 p-12 opacity-10 group-hover:opacity-30 transition-all duration-700 ease-out transform group-hover:scale-125 group-hover:-translate-x-12 group-hover:-translate-y-8">
               <motion.div
                 animate={{ 
@@ -69,11 +69,11 @@ export default function Home() {
             </div>
             
             <div className="max-w-3xl relative z-10">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-rose-500/10 text-rose-400 text-xs font-bold mb-8 border border-rose-500/20">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 text-blue-400 text-xs font-bold mb-8 border border-blue-500/20">
                 ✈️ Travel & Lifestyle
               </div>
               <h2 className="text-4xl md:text-7xl font-display font-black text-white mb-8 leading-tight">
-                Book <span className="text-rose-400">Flights, Hotels</span> & <span className="text-purple-400">Buses</span> Instantly
+                Book <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-400">Flights, Hotels</span> & <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-rose-400">Buses</span> Instantly
               </h2>
               <p className="text-xl text-white/50 mb-12 font-medium leading-relaxed">
                 Experience the world with Yek7pay. Get exclusive deals on domestic and international bookings with the lowest convenience fees in the industry.
@@ -81,12 +81,12 @@ export default function Home() {
               
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-12">
                 {[
-                  { label: 'Flights', icon: Plane, desc: 'Domestic & International' },
-                  { label: 'Hotels', icon: Building2, desc: '500,000+ Worldwide' },
-                  { label: 'Bus', icon: Smartphone, desc: 'All Major Operators' }
+                  { label: 'Flights', icon: Plane, desc: 'Domestic & International', color: 'text-blue-400' },
+                  { label: 'Hotels', icon: Building2, desc: '500,000+ Worldwide', color: 'text-indigo-400' },
+                  { label: 'Bus', icon: Smartphone, desc: 'All Major Operators', color: 'text-rose-400' }
                 ].map((item, i) => (
                   <div key={i} className="flex flex-col gap-3">
-                    <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-rose-400">
+                    <div className={`w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center ${item.color}`}>
                       <item.icon className="h-6 w-6" />
                     </div>
                     <h4 className="font-bold text-white">{item.label}</h4>
@@ -96,7 +96,7 @@ export default function Home() {
               </div>
               
               <Button 
-                className="bg-gradient-to-r from-rose-500 to-rose-600 hover:from-rose-600 hover:to-rose-700 text-white rounded-full px-12 h-16 text-lg font-bold shadow-xl shadow-rose-900/40 transition-all hover:scale-105 active:scale-95 flex items-center gap-3"
+                className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white rounded-full px-12 h-16 text-lg font-bold shadow-xl shadow-blue-900/40 transition-all hover:scale-105 active:scale-95 flex items-center gap-3 border border-white/10"
                 onClick={() => window.location.href = "https://yek7pay.in"}
               >
                 Go to Booking Portal <ArrowRight className="h-6 w-6" />
