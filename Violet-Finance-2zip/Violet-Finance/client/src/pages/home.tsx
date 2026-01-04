@@ -12,9 +12,143 @@ import {
   Zap, Receipt, Landmark, Banknote, CreditCard,
   CheckCircle2, QrCode, Smartphone, Mail, Phone, MapPin,
   ShieldCheck, UserCheck, Coins, ArrowRight, ClipboardCheck, FileText, Scale, Building,
-  Hotel, Bus, MessageCircle, Clock, X, AlertCircle, TabletSmartphone
+  Hotel, Bus, MessageCircle, Clock, X, AlertCircle, TabletSmartphone, Loader2
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+
+const countryCodes = [
+  { code: "+91", country: "India", flag: "🇮🇳" },
+  { code: "+977", country: "Nepal", flag: "🇳🇵" },
+  { code: "+1", country: "USA", flag: "🇺🇸" },
+  { code: "+44", country: "UK", flag: "🇬🇧" },
+  { code: "+971", country: "UAE", flag: "🇦🇪" },
+  { code: "+65", country: "Singapore", flag: "🇸🇬" },
+  { code: "+61", country: "Australia", flag: "🇦🇺" },
+  { code: "+880", country: "Bangladesh", flag: "🇧🇩" },
+  { code: "+94", country: "Sri Lanka", flag: "🇱🇰" },
+  { code: "+60", country: "Malaysia", flag: "🇲🇾" },
+];
+
+function ContactForm() {
+  const [formData, setFormData] = useState({
+    name: "",
+    countryCode: "+91",
+    phone: "",
+    email: "",
+    service: ""
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{ success: boolean; message: string } | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData)
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSubmitStatus({ success: true, message: data.message });
+        setFormData({ name: "", countryCode: "+91", phone: "", email: "", service: "" });
+      } else {
+        setSubmitStatus({ success: false, message: data.error || "Something went wrong" });
+      }
+    } catch (error) {
+      setSubmitStatus({ success: false, message: "Failed to submit. Please try again." });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-4">
+      {submitStatus && (
+        <div className={`p-4 rounded-xl text-center ${submitStatus.success ? 'bg-green-500/20 text-green-400 border border-green-500/30' : 'bg-red-500/20 text-red-400 border border-red-500/30'}`}>
+          {submitStatus.message}
+        </div>
+      )}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <input 
+          type="text" 
+          placeholder="Your Name" 
+          value={formData.name}
+          onChange={(e) => setFormData({...formData, name: e.target.value})}
+          required
+          className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-white/40 focus:outline-none focus:border-blue-500 transition-colors"
+        />
+        <div className="flex gap-2">
+          <select 
+            value={formData.countryCode}
+            onChange={(e) => setFormData({...formData, countryCode: e.target.value})}
+            className="px-3 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:border-blue-500 transition-colors min-w-[120px]"
+          >
+            {countryCodes.map((c) => (
+              <option key={c.code} value={c.code}>
+                {c.flag} {c.code}
+              </option>
+            ))}
+          </select>
+          <input 
+            type="tel" 
+            placeholder="Phone Number" 
+            value={formData.phone}
+            onChange={(e) => setFormData({...formData, phone: e.target.value})}
+            required
+            className="flex-1 px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-white/40 focus:outline-none focus:border-blue-500 transition-colors"
+          />
+        </div>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <input 
+          type="email" 
+          placeholder="Email Address" 
+          value={formData.email}
+          onChange={(e) => setFormData({...formData, email: e.target.value})}
+          required
+          className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-white/40 focus:outline-none focus:border-blue-500 transition-colors"
+        />
+        <select 
+          value={formData.service}
+          onChange={(e) => setFormData({...formData, service: e.target.value})}
+          required
+          className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:border-blue-500 transition-colors"
+        >
+          <option value="">Choose Service</option>
+          <option value="Advance DMT">Advance DMT</option>
+          <option value="Neo Bank">Neo Bank</option>
+          <option value="Indo-Nepal Remit">Indo-Nepal Remit</option>
+          <option value="AEPS Withdrawal">AEPS Withdrawal</option>
+          <option value="Bharat Connect (BBPS)">Bharat Connect (BBPS)</option>
+          <option value="mPOS Solutions">mPOS Solutions</option>
+          <option value="Travel Bookings">Travel Bookings</option>
+          <option value="GST & Compliance">GST & Compliance</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <button 
+        type="submit" 
+        disabled={isSubmitting}
+        className="w-full py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-bold rounded-xl transition-all hover:scale-[1.02] shadow-lg shadow-blue-500/20 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+      >
+        {isSubmitting ? (
+          <>
+            <Loader2 className="h-5 w-5 animate-spin" />
+            Sending...
+          </>
+        ) : (
+          "Send Message"
+        )}
+      </button>
+    </form>
+  );
+}
 
 export default function Home() {
   const [isAuthOpen, setIsAuthOpen] = useState(false);
@@ -592,56 +726,7 @@ export default function Home() {
           <div className="p-8 md:p-12 bg-white/5 backdrop-blur-xl rounded-[2.5rem] border border-white/10 max-w-3xl mx-auto">
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-2 text-center">Still got a Question?</h2>
             <p className="text-sm text-white/60 mb-8 text-center">Write to us for more information</p>
-            <form className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <input 
-                  type="text" 
-                  placeholder="Your Name" 
-                  className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-white/40 focus:outline-none focus:border-blue-500 transition-colors"
-                />
-                <div className="flex gap-2">
-                  <select className="px-3 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:border-blue-500 transition-colors">
-                    <option value="+91">+91</option>
-                    <option value="+977">+977</option>
-                    <option value="+1">+1</option>
-                    <option value="+44">+44</option>
-                    <option value="+971">+971</option>
-                    <option value="+65">+65</option>
-                    <option value="+61">+61</option>
-                  </select>
-                  <input 
-                    type="tel" 
-                    placeholder="Phone Number" 
-                    className="flex-1 px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-white/40 focus:outline-none focus:border-blue-500 transition-colors"
-                  />
-                </div>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <input 
-                  type="email" 
-                  placeholder="Email Address" 
-                  className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-white/40 focus:outline-none focus:border-blue-500 transition-colors"
-                />
-                <select className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:border-blue-500 transition-colors">
-                  <option value="">Choose Service</option>
-                  <option value="dmt">Advance DMT</option>
-                  <option value="neobank">Neo Bank</option>
-                  <option value="nepal">Indo-Nepal Remit</option>
-                  <option value="aeps">AEPS Withdrawal</option>
-                  <option value="bbps">Bharat Connect (BBPS)</option>
-                  <option value="mpos">mPOS Solutions</option>
-                  <option value="travel">Travel Bookings</option>
-                  <option value="gst">GST & Compliance</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-              <button 
-                type="submit" 
-                className="w-full py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-bold rounded-xl transition-all hover:scale-[1.02] shadow-lg shadow-blue-500/20"
-              >
-                Send Message
-              </button>
-            </form>
+            <ContactForm />
           </div>
         </div>
       </section>
