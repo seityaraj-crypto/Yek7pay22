@@ -1,12 +1,27 @@
 import { Navbar, Footer } from "@/components/layout";
 import { motion } from "framer-motion";
-import { UserPlus, User, Mail, Phone, Lock, Eye, EyeOff, MapPin, Building2, ArrowRight, CheckCircle2, Shield } from "lucide-react";
+import { UserPlus, User, Mail, Phone, Lock, Eye, EyeOff, MapPin, Calendar, CreditCard, Upload, FileText, ArrowRight, CheckCircle2, Shield, Image } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 export default function NewAccount() {
   const [showPassword, setShowPassword] = useState(false);
-  const [accountType, setAccountType] = useState<'individual' | 'business'>('individual');
+  const [aadhaarFront, setAadhaarFront] = useState<File | null>(null);
+  const [aadhaarBack, setAadhaarBack] = useState<File | null>(null);
+  const [panPhoto, setPanPhoto] = useState<File | null>(null);
+  
+  const aadhaarFrontRef = useRef<HTMLInputElement>(null);
+  const aadhaarBackRef = useRef<HTMLInputElement>(null);
+  const panPhotoRef = useRef<HTMLInputElement>(null);
+
+  const handleFileChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    setter: React.Dispatch<React.SetStateAction<File | null>>
+  ) => {
+    if (e.target.files && e.target.files[0]) {
+      setter(e.target.files[0]);
+    }
+  };
 
   const benefits = [
     "Unlimited Money Transfers Daily",
@@ -23,7 +38,7 @@ export default function NewAccount() {
       
       <main className="pt-32 pb-24">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-5xl mx-auto">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -36,46 +51,26 @@ export default function NewAccount() {
                 Create Your <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">Account</span>
               </h1>
               <p className="text-white/60 text-lg max-w-xl mx-auto">
-                Join 100,000+ partners already earning with Yek7Pay. Start your fintech journey today!
+                Complete your KYC to join 100,000+ partners earning with Yek7Pay
               </p>
             </motion.div>
 
-            <div className="grid md:grid-cols-5 gap-8">
+            <div className="grid lg:grid-cols-3 gap-8">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.1 }}
-                className="md:col-span-3 p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xl"
+                className="lg:col-span-2 p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xl"
               >
-                <div className="flex gap-2 mb-8 p-1 rounded-xl bg-white/5">
-                  <button
-                    onClick={() => setAccountType('individual')}
-                    className={`flex-1 py-3 px-4 rounded-lg font-bold text-sm transition-all flex items-center justify-center gap-2 ${
-                      accountType === 'individual' 
-                        ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white' 
-                        : 'text-white/50 hover:text-white'
-                    }`}
-                  >
-                    <User className="w-4 h-4" />
-                    Individual
-                  </button>
-                  <button
-                    onClick={() => setAccountType('business')}
-                    className={`flex-1 py-3 px-4 rounded-lg font-bold text-sm transition-all flex items-center justify-center gap-2 ${
-                      accountType === 'business' 
-                        ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white' 
-                        : 'text-white/50 hover:text-white'
-                    }`}
-                  >
-                    <Building2 className="w-4 h-4" />
-                    Business
-                  </button>
-                </div>
+                <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
+                  <FileText className="w-5 h-5 text-blue-400" />
+                  KYC Details
+                </h2>
 
-                <form className="space-y-5">
+                <form className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-5">
                     <div>
-                      <label className="block text-sm font-bold text-white/60 mb-2">Full Name</label>
+                      <label className="block text-sm font-bold text-white/60 mb-2">Full Name *</label>
                       <div className="relative">
                         <div className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40">
                           <User className="w-5 h-5" />
@@ -84,94 +79,253 @@ export default function NewAccount() {
                           type="text"
                           placeholder="Enter your full name"
                           className="w-full pl-12 pr-4 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all"
+                          required
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-sm font-bold text-white/60 mb-2">Phone Number</label>
+                      <label className="block text-sm font-bold text-white/60 mb-2">Date of Birth *</label>
+                      <div className="relative">
+                        <div className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40">
+                          <Calendar className="w-5 h-5" />
+                        </div>
+                        <input
+                          type="date"
+                          className="w-full pl-12 pr-4 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all"
+                          required
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-5">
+                    <div>
+                      <label className="block text-sm font-bold text-white/60 mb-2">Mobile Number *</label>
                       <div className="relative">
                         <div className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40">
                           <Phone className="w-5 h-5" />
                         </div>
                         <input
                           type="tel"
-                          placeholder="Enter phone number"
+                          placeholder="Enter 10-digit mobile number"
+                          maxLength={10}
                           className="w-full pl-12 pr-4 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all"
+                          required
                         />
                       </div>
                     </div>
-                  </div>
 
-                  <div>
-                    <label className="block text-sm font-bold text-white/60 mb-2">Email Address</label>
-                    <div className="relative">
-                      <div className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40">
-                        <Mail className="w-5 h-5" />
-                      </div>
-                      <input
-                        type="email"
-                        placeholder="Enter your email"
-                        className="w-full pl-12 pr-4 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all"
-                      />
-                    </div>
-                  </div>
-
-                  {accountType === 'business' && (
                     <div>
-                      <label className="block text-sm font-bold text-white/60 mb-2">Business Name</label>
+                      <label className="block text-sm font-bold text-white/60 mb-2">Email Address *</label>
                       <div className="relative">
                         <div className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40">
-                          <Building2 className="w-5 h-5" />
+                          <Mail className="w-5 h-5" />
                         </div>
                         <input
-                          type="text"
-                          placeholder="Enter business name"
+                          type="email"
+                          placeholder="Enter your email"
                           className="w-full pl-12 pr-4 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all"
+                          required
                         />
                       </div>
                     </div>
-                  )}
+                  </div>
 
                   <div>
-                    <label className="block text-sm font-bold text-white/60 mb-2">City / Location</label>
+                    <label className="block text-sm font-bold text-white/60 mb-2">Full Address *</label>
                     <div className="relative">
-                      <div className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40">
+                      <div className="absolute left-4 top-4 text-white/40">
                         <MapPin className="w-5 h-5" />
                       </div>
+                      <textarea
+                        placeholder="Enter your complete address"
+                        rows={3}
+                        className="w-full pl-12 pr-4 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all resize-none"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-5">
+                    <div>
+                      <label className="block text-sm font-bold text-white/60 mb-2">PIN Code *</label>
                       <input
                         type="text"
-                        placeholder="Enter your city"
-                        className="w-full pl-12 pr-4 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all"
+                        placeholder="Enter 6-digit PIN code"
+                        maxLength={6}
+                        className="w-full px-4 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all"
+                        required
                       />
                     </div>
-                  </div>
 
-                  <div>
-                    <label className="block text-sm font-bold text-white/60 mb-2">Create Password</label>
-                    <div className="relative">
-                      <div className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40">
-                        <Lock className="w-5 h-5" />
+                    <div>
+                      <label className="block text-sm font-bold text-white/60 mb-2">Create Password *</label>
+                      <div className="relative">
+                        <div className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40">
+                          <Lock className="w-5 h-5" />
+                        </div>
+                        <input
+                          type={showPassword ? "text" : "password"}
+                          placeholder="Create a strong password"
+                          className="w-full pl-12 pr-12 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all"
+                          required
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowPassword(!showPassword)}
+                          className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-colors"
+                        >
+                          {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                        </button>
                       </div>
-                      <input
-                        type={showPassword ? "text" : "password"}
-                        placeholder="Create a strong password"
-                        className="w-full pl-12 pr-12 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all"
-                      />
-                      <button
-                        type="button"
-                        onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-colors"
-                      >
-                        {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-                      </button>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-3">
-                    <input type="checkbox" className="w-5 h-5 mt-0.5 rounded border-white/20 bg-white/5 text-blue-500 focus:ring-blue-500/20" />
+                  <div className="border-t border-white/10 pt-6 mt-6">
+                    <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
+                      <CreditCard className="w-5 h-5 text-purple-400" />
+                      Aadhaar Details
+                    </h3>
+                    
+                    <div className="space-y-5">
+                      <div>
+                        <label className="block text-sm font-bold text-white/60 mb-2">Aadhaar Number *</label>
+                        <input
+                          type="text"
+                          placeholder="Enter 12-digit Aadhaar number"
+                          maxLength={12}
+                          className="w-full px-4 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all"
+                          required
+                        />
+                      </div>
+
+                      <div className="grid md:grid-cols-2 gap-5">
+                        <div>
+                          <label className="block text-sm font-bold text-white/60 mb-2">Aadhaar Front Photo *</label>
+                          <input
+                            type="file"
+                            ref={aadhaarFrontRef}
+                            onChange={(e) => handleFileChange(e, setAadhaarFront)}
+                            accept="image/*"
+                            className="hidden"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => aadhaarFrontRef.current?.click()}
+                            className={`w-full p-6 rounded-xl border-2 border-dashed transition-all flex flex-col items-center gap-3 ${
+                              aadhaarFront 
+                                ? 'border-green-500/50 bg-green-500/10' 
+                                : 'border-white/20 bg-white/5 hover:border-blue-500/50 hover:bg-blue-500/10'
+                            }`}
+                          >
+                            {aadhaarFront ? (
+                              <>
+                                <CheckCircle2 className="w-8 h-8 text-green-400" />
+                                <span className="text-sm text-green-400 font-medium">{aadhaarFront.name}</span>
+                              </>
+                            ) : (
+                              <>
+                                <Upload className="w-8 h-8 text-white/40" />
+                                <span className="text-sm text-white/50">Click to upload front side</span>
+                              </>
+                            )}
+                          </button>
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-bold text-white/60 mb-2">Aadhaar Back Photo *</label>
+                          <input
+                            type="file"
+                            ref={aadhaarBackRef}
+                            onChange={(e) => handleFileChange(e, setAadhaarBack)}
+                            accept="image/*"
+                            className="hidden"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => aadhaarBackRef.current?.click()}
+                            className={`w-full p-6 rounded-xl border-2 border-dashed transition-all flex flex-col items-center gap-3 ${
+                              aadhaarBack 
+                                ? 'border-green-500/50 bg-green-500/10' 
+                                : 'border-white/20 bg-white/5 hover:border-blue-500/50 hover:bg-blue-500/10'
+                            }`}
+                          >
+                            {aadhaarBack ? (
+                              <>
+                                <CheckCircle2 className="w-8 h-8 text-green-400" />
+                                <span className="text-sm text-green-400 font-medium">{aadhaarBack.name}</span>
+                              </>
+                            ) : (
+                              <>
+                                <Upload className="w-8 h-8 text-white/40" />
+                                <span className="text-sm text-white/50">Click to upload back side</span>
+                              </>
+                            )}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="border-t border-white/10 pt-6">
+                    <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
+                      <CreditCard className="w-5 h-5 text-orange-400" />
+                      PAN Details
+                    </h3>
+                    
+                    <div className="space-y-5">
+                      <div className="grid md:grid-cols-2 gap-5">
+                        <div>
+                          <label className="block text-sm font-bold text-white/60 mb-2">PAN Number *</label>
+                          <input
+                            type="text"
+                            placeholder="Enter 10-character PAN"
+                            maxLength={10}
+                            className="w-full px-4 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all uppercase"
+                            required
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-bold text-white/60 mb-2">PAN Card Photo *</label>
+                          <input
+                            type="file"
+                            ref={panPhotoRef}
+                            onChange={(e) => handleFileChange(e, setPanPhoto)}
+                            accept="image/*"
+                            className="hidden"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => panPhotoRef.current?.click()}
+                            className={`w-full p-4 rounded-xl border-2 border-dashed transition-all flex items-center justify-center gap-3 ${
+                              panPhoto 
+                                ? 'border-green-500/50 bg-green-500/10' 
+                                : 'border-white/20 bg-white/5 hover:border-blue-500/50 hover:bg-blue-500/10'
+                            }`}
+                          >
+                            {panPhoto ? (
+                              <>
+                                <CheckCircle2 className="w-5 h-5 text-green-400" />
+                                <span className="text-sm text-green-400 font-medium truncate">{panPhoto.name}</span>
+                              </>
+                            ) : (
+                              <>
+                                <Image className="w-5 h-5 text-white/40" />
+                                <span className="text-sm text-white/50">Upload PAN photo</span>
+                              </>
+                            )}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3 pt-4">
+                    <input type="checkbox" className="w-5 h-5 mt-0.5 rounded border-white/20 bg-white/5 text-blue-500 focus:ring-blue-500/20" required />
                     <span className="text-sm text-white/50">
-                      I agree to the{" "}
+                      I confirm that all the information provided is accurate and I agree to the{" "}
                       <a href="/terms" className="text-blue-400 hover:text-blue-300">Terms & Conditions</a>
                       {" "}and{" "}
                       <a href="/privacy" className="text-blue-400 hover:text-blue-300">Privacy Policy</a>
@@ -201,7 +355,7 @@ export default function NewAccount() {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.2 }}
-                className="md:col-span-2 space-y-6"
+                className="space-y-6"
               >
                 <div className="p-6 rounded-2xl bg-gradient-to-br from-blue-600/20 to-purple-600/20 border border-blue-500/20">
                   <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
@@ -215,6 +369,31 @@ export default function NewAccount() {
                         <span className="text-sm">{benefit}</span>
                       </li>
                     ))}
+                  </ul>
+                </div>
+
+                <div className="p-6 rounded-2xl bg-gradient-to-br from-yellow-600/20 to-orange-600/20 border border-yellow-500/20">
+                  <h3 className="text-lg font-bold mb-3 flex items-center gap-2">
+                    <FileText className="w-5 h-5 text-yellow-400" />
+                    Documents Required
+                  </h3>
+                  <ul className="space-y-2 text-sm text-white/60">
+                    <li className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 rounded-full bg-yellow-400" />
+                      Aadhaar Card (Front & Back)
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 rounded-full bg-yellow-400" />
+                      PAN Card
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 rounded-full bg-yellow-400" />
+                      Valid Mobile Number
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 rounded-full bg-yellow-400" />
+                      Active Email Address
+                    </li>
                   </ul>
                 </div>
 
@@ -232,7 +411,7 @@ export default function NewAccount() {
                       <span className="text-white/70">+91 92309 67187</span>
                     </a>
                     <a 
-                      href="https://wa.me/919230967187?text=Hi%2C%20I%20want%20to%20create%20a%20new%20Yek7Pay%20account"
+                      href="https://wa.me/919230967187?text=Hi%2C%20I%20need%20help%20with%20account%20registration"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-3 p-3 rounded-xl bg-green-500/20 hover:bg-green-500/30 transition-all text-sm font-bold text-green-400"
