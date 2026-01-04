@@ -236,76 +236,153 @@ export default function Features() {
             ))}
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.25 }}
-            className="mb-20 relative"
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-amber-500/20 via-yellow-500/10 to-amber-500/20 rounded-[3rem] blur-3xl" />
-            <div className="relative p-8 md:p-12 rounded-[3rem] bg-gradient-to-br from-amber-900/40 via-yellow-900/30 to-amber-900/40 border-2 border-amber-500/40 overflow-hidden">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-yellow-400/20 to-transparent rounded-full blur-3xl" />
-              <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-amber-400/20 to-transparent rounded-full blur-3xl" />
-              
-              <div className="relative z-10">
-                <div className="flex items-center justify-center gap-3 mb-6">
-                  <Crown className="w-10 h-10 text-yellow-400 animate-pulse" />
-                  <div className="px-4 py-1.5 rounded-full bg-gradient-to-r from-yellow-500 to-amber-500 text-black text-sm font-black uppercase tracking-wider">
-                    VIP Services
-                  </div>
-                  <Crown className="w-10 h-10 text-yellow-400 animate-pulse" />
-                </div>
+          <div className="grid lg:grid-cols-2 gap-6 mb-20">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.25 }}
+              className="relative h-full"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-amber-500/20 via-yellow-500/10 to-amber-500/20 rounded-[2rem] blur-3xl" />
+              <div className="relative h-full p-6 md:p-8 rounded-[2rem] bg-gradient-to-br from-amber-900/40 via-yellow-900/30 to-amber-900/40 border-2 border-amber-500/40 overflow-hidden">
+                <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-yellow-400/20 to-transparent rounded-full blur-3xl" />
+                <div className="absolute bottom-0 left-0 w-48 h-48 bg-gradient-to-tr from-amber-400/20 to-transparent rounded-full blur-3xl" />
                 
-                <h2 className="text-3xl md:text-5xl font-display font-black text-center mb-4">
-                  Become a <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 via-amber-400 to-yellow-300">Franchise or Distributor</span>
-                </h2>
-                <p className="text-xl text-amber-100/70 text-center max-w-3xl mx-auto mb-10">
-                  Take your business to the next level! Partner with Yek7Pay as a Franchise or Distributor and unlock exclusive benefits, higher commissions, and priority support.
-                </p>
-
-                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
-                  {[
-                    { icon: TrendingUp, title: "Higher Commissions", desc: "Earn up to 3x more" },
-                    { icon: Users, title: "Build Your Network", desc: "Onboard sub-agents" },
-                    { icon: HeadphonesIcon, title: "Priority Support", desc: "Dedicated manager" },
-                    { icon: Award, title: "Exclusive Benefits", desc: "VIP perks & rewards" }
-                  ].map((item, i) => (
-                    <div key={i} className="p-4 rounded-2xl bg-white/5 border border-amber-500/20 text-center hover:bg-white/10 transition-all">
-                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-yellow-500/30 to-amber-500/30 flex items-center justify-center mx-auto mb-3">
-                        <item.icon className="w-6 h-6 text-yellow-400" />
-                      </div>
-                      <h4 className="font-bold text-amber-100">{item.title}</h4>
-                      <p className="text-sm text-amber-200/50">{item.desc}</p>
+                <div className="relative z-10">
+                  <div className="flex items-center justify-center gap-2 mb-4">
+                    <Crown className="w-8 h-8 text-yellow-400 animate-pulse" />
+                    <div className="px-3 py-1 rounded-full bg-gradient-to-r from-yellow-500 to-amber-500 text-black text-xs font-black uppercase tracking-wider">
+                      VIP Services
                     </div>
-                  ))}
-                </div>
-
-                <div className="text-center">
-                  <p className="text-lg text-amber-100/80 mb-6 font-medium">Contact us for VIP Partnership</p>
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <a href="tel:+919230967189" className="flex items-center gap-3 px-6 py-4 rounded-2xl bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 transition-all hover:scale-105 shadow-lg shadow-green-500/30">
-                      <Phone className="w-5 h-5" />
-                      <span className="font-bold">+91 92309 67189</span>
-                    </a>
-                    <a href="tel:+919230967187" className="flex items-center gap-3 px-6 py-4 rounded-2xl bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 transition-all hover:scale-105 shadow-lg shadow-green-500/30">
-                      <Phone className="w-5 h-5" />
-                      <span className="font-bold">+91 92309 67187</span>
-                    </a>
+                    <Crown className="w-8 h-8 text-yellow-400 animate-pulse" />
                   </div>
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-4">
-                    <a href="mailto:info@yek7pay.com?subject=VIP%20Franchise%20Enquiry" className="flex items-center gap-3 px-6 py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 transition-all hover:scale-105 shadow-lg shadow-blue-500/30">
-                      <Mail className="w-5 h-5" />
-                      <span className="font-bold">info@yek7pay.com</span>
-                    </a>
-                    <a href="https://wa.me/919230967189?text=Hi%2C%20I%20am%20interested%20in%20Yek7Pay%20VIP%20Franchise%2FDistributor%20partnership" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 px-6 py-4 rounded-2xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 transition-all hover:scale-105 shadow-lg shadow-emerald-500/30">
-                      <MessageCircle className="w-5 h-5" />
-                      <span className="font-bold">WhatsApp Us</span>
-                    </a>
+                  
+                  <h2 className="text-2xl md:text-3xl font-display font-black text-center mb-3">
+                    Become a <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 via-amber-400 to-yellow-300">Franchise or Distributor</span>
+                  </h2>
+                  <p className="text-sm text-amber-100/70 text-center mb-6">
+                    Partner with Yek7Pay and unlock exclusive benefits, higher commissions, and priority support.
+                  </p>
+
+                  <div className="grid grid-cols-2 gap-3 mb-6">
+                    {[
+                      { icon: TrendingUp, title: "Higher Commissions", desc: "Earn up to 3x more" },
+                      { icon: Users, title: "Build Your Network", desc: "Onboard sub-agents" },
+                      { icon: HeadphonesIcon, title: "Priority Support", desc: "Dedicated manager" },
+                      { icon: Award, title: "Exclusive Benefits", desc: "VIP perks & rewards" }
+                    ].map((item, i) => (
+                      <div key={i} className="p-3 rounded-xl bg-white/5 border border-amber-500/20 text-center hover:bg-white/10 transition-all">
+                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-yellow-500/30 to-amber-500/30 flex items-center justify-center mx-auto mb-2">
+                          <item.icon className="w-5 h-5 text-yellow-400" />
+                        </div>
+                        <h4 className="font-bold text-amber-100 text-sm">{item.title}</h4>
+                        <p className="text-xs text-amber-200/50">{item.desc}</p>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="text-center">
+                    <p className="text-sm text-amber-100/80 mb-4 font-medium">Contact us for VIP Partnership</p>
+                    <div className="flex flex-col gap-2">
+                      <div className="flex gap-2 justify-center">
+                        <a href="tel:+919230967189" className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 transition-all hover:scale-105 text-sm">
+                          <Phone className="w-4 h-4" />
+                          <span className="font-bold">+91 92309 67189</span>
+                        </a>
+                        <a href="tel:+919230967187" className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 transition-all hover:scale-105 text-sm">
+                          <Phone className="w-4 h-4" />
+                          <span className="font-bold">+91 92309 67187</span>
+                        </a>
+                      </div>
+                      <div className="flex gap-2 justify-center">
+                        <a href="mailto:info@yek7pay.com?subject=VIP%20Franchise%20Enquiry" className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 transition-all hover:scale-105 text-sm">
+                          <Mail className="w-4 h-4" />
+                          <span className="font-bold">info@yek7pay.com</span>
+                        </a>
+                        <a href="https://wa.me/919230967189?text=Hi%2C%20I%20am%20interested%20in%20Yek7Pay%20VIP%20Franchise%2FDistributor%20partnership" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 transition-all hover:scale-105 text-sm">
+                          <MessageCircle className="w-4 h-4" />
+                          <span className="font-bold">WhatsApp</span>
+                        </a>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3 }}
+              className="relative h-full"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-purple-500/10 to-blue-500/20 rounded-[2rem] blur-3xl" />
+              <div className="relative h-full p-6 md:p-8 rounded-[2rem] bg-gradient-to-br from-blue-900/40 via-purple-900/30 to-blue-900/40 border-2 border-blue-500/40 overflow-hidden">
+                <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-blue-400/20 to-transparent rounded-full blur-3xl" />
+                <div className="absolute bottom-0 left-0 w-48 h-48 bg-gradient-to-tr from-purple-400/20 to-transparent rounded-full blur-3xl" />
+                
+                <div className="relative z-10">
+                  <div className="flex items-center justify-center gap-2 mb-4">
+                    <HeadphonesIcon className="w-8 h-8 text-blue-400 animate-pulse" />
+                    <div className="px-3 py-1 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white text-xs font-black uppercase tracking-wider">
+                      Support
+                    </div>
+                    <HeadphonesIcon className="w-8 h-8 text-blue-400 animate-pulse" />
+                  </div>
+                  
+                  <h2 className="text-2xl md:text-3xl font-display font-black text-center mb-3">
+                    Still Got a <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-300 via-purple-400 to-blue-300">Question?</span>
+                  </h2>
+                  <p className="text-sm text-blue-100/70 text-center mb-6">
+                    Our support team is here to help you 24/7. Reach out through any channel and we'll get back to you instantly.
+                  </p>
+
+                  <div className="grid grid-cols-2 gap-3 mb-6">
+                    {[
+                      { icon: Clock, title: "24/7 Available", desc: "Round the clock" },
+                      { icon: Zap, title: "Quick Response", desc: "Within minutes" },
+                      { icon: Shield, title: "Secure Support", desc: "Private & safe" },
+                      { icon: CheckCircle2, title: "Expert Help", desc: "Trained team" }
+                    ].map((item, i) => (
+                      <div key={i} className="p-3 rounded-xl bg-white/5 border border-blue-500/20 text-center hover:bg-white/10 transition-all">
+                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500/30 to-purple-500/30 flex items-center justify-center mx-auto mb-2">
+                          <item.icon className="w-5 h-5 text-blue-400" />
+                        </div>
+                        <h4 className="font-bold text-blue-100 text-sm">{item.title}</h4>
+                        <p className="text-xs text-blue-200/50">{item.desc}</p>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="text-center">
+                    <p className="text-sm text-blue-100/80 mb-4 font-medium">Get in touch with us</p>
+                    <div className="flex flex-col gap-2">
+                      <div className="flex gap-2 justify-center">
+                        <a href="tel:+919230967189" className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 transition-all hover:scale-105 text-sm">
+                          <Phone className="w-4 h-4" />
+                          <span className="font-bold">+91 92309 67189</span>
+                        </a>
+                        <a href="tel:+919230967187" className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 transition-all hover:scale-105 text-sm">
+                          <Phone className="w-4 h-4" />
+                          <span className="font-bold">+91 92309 67187</span>
+                        </a>
+                      </div>
+                      <div className="flex gap-2 justify-center">
+                        <a href="mailto:info@yek7pay.com?subject=Support%20Query" className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 transition-all hover:scale-105 text-sm">
+                          <Mail className="w-4 h-4" />
+                          <span className="font-bold">info@yek7pay.com</span>
+                        </a>
+                        <a href="https://wa.me/919230967187?text=Hi%2C%20I%20have%20a%20question%20about%20Yek7Pay%20services" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 transition-all hover:scale-105 text-sm">
+                          <MessageCircle className="w-4 h-4" />
+                          <span className="font-bold">WhatsApp</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
