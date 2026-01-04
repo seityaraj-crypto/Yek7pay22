@@ -851,7 +851,7 @@ export default function Home() {
       {/* VIP Franchise & Distributor Section */}
       <section className="py-24 bg-transparent">
         <div className="container mx-auto px-4">
-          <div className="bg-gradient-to-r from-amber-600/30 to-yellow-600/30 backdrop-blur-2xl rounded-[2.5rem] p-12 text-white border border-amber-500/20 shadow-2xl relative overflow-hidden group">
+          <div className="bg-gradient-to-r from-amber-500/30 via-yellow-500/20 to-blue-900/40 backdrop-blur-2xl rounded-[2.5rem] p-12 text-white border border-amber-500/20 shadow-2xl relative overflow-hidden group">
             <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />
             <div className="flex flex-col items-center text-center relative z-10">
               <div className="flex items-center gap-3 mb-6">
