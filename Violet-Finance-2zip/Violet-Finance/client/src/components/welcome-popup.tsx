@@ -12,7 +12,7 @@ export function WelcomePopup() {
     {
       title: "India's Leading",
       highlight: "Fintech Platform",
-      description: "Join 50,000+ businesses already growing with Yek7Pay",
+      description: "Join 100,000+ businesses already growing with Yek7Pay",
       icon: Rocket,
       gradient: "from-blue-500 to-purple-600"
     },
@@ -24,8 +24,8 @@ export function WelcomePopup() {
       gradient: "from-purple-500 to-pink-600"
     },
     {
-      title: "Earn Up To",
-      highlight: "₹1 Lakh/Month",
+      title: "Earn",
+      highlight: "₹1 Lakh+ Monthly",
       description: "Become a Yek7Pay partner and maximize your income",
       icon: Users,
       gradient: "from-pink-500 to-orange-500"
@@ -193,7 +193,7 @@ export function WelcomePopup() {
                   <div className="mt-6 flex items-center justify-center gap-6 text-sm text-white/50">
                     <div className="flex items-center gap-2">
                       <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                      <span>50,000+ Partners</span>
+                      <span>100,000+ Partners</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
@@ -228,10 +228,9 @@ export function WelcomePopup() {
 
                   <div className="space-y-3 mb-8">
                     <a
-                      href="https://play.google.com/store/apps/details?id=com.yek7pay"
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      href="/new-account"
                       className="flex items-center gap-4 p-4 rounded-2xl bg-gradient-to-r from-blue-600/20 to-purple-600/20 border border-blue-500/30 hover:border-blue-400/50 transition-all group cursor-pointer"
+                      onClick={handleClose}
                     >
                       <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
                         <UserPlus className="w-6 h-6 text-white" />
@@ -244,17 +243,16 @@ export function WelcomePopup() {
                     </a>
 
                     <a
-                      href="https://play.google.com/store/apps/details?id=com.yek7pay"
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      href="/login"
                       className="flex items-center gap-4 p-4 rounded-2xl bg-gradient-to-r from-green-600/20 to-teal-600/20 border border-green-500/30 hover:border-green-400/50 transition-all group cursor-pointer"
+                      onClick={handleClose}
                     >
                       <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-teal-600 flex items-center justify-center">
                         <LogIn className="w-6 h-6 text-white" />
                       </div>
                       <div className="flex-1">
                         <p className="font-bold text-white group-hover:text-green-300 transition-colors">Login</p>
-                        <p className="text-sm text-white/50">Access your existing account</p>
+                        <p className="text-sm text-white/50">Login to Yek7Pay</p>
                       </div>
                       <ArrowRight className="w-5 h-5 text-white/50 group-hover:text-white group-hover:translate-x-1 transition-all" />
                     </a>
