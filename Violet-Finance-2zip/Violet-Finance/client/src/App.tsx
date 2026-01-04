@@ -13,6 +13,8 @@ import Compliance from "@/pages/compliance";
 import Insurance from "@/pages/insurance";
 import BharatConnect from "@/pages/bbps";
 import Upgrade from "@/pages/upgrade";
+import Login from "@/pages/login";
+import NewAccount from "@/pages/new-account";
 import { Chatbot } from "@/components/chatbot";
 
 function ScrollToTop() {
@@ -34,6 +36,8 @@ function Router() {
       <Route path="/insurance" component={Insurance} />
       <Route path="/bbps" component={BharatConnect} />
       <Route path="/upgrade" component={Upgrade} />
+      <Route path="/login" component={Login} />
+      <Route path="/new-account" component={NewAccount} />
       <Route component={NotFound} />
     </Switch>
   );
