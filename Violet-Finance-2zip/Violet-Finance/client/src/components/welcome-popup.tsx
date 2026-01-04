@@ -236,8 +236,8 @@ export function WelcomePopup() {
                         <UserPlus className="w-6 h-6 text-white" />
                       </div>
                       <div className="flex-1">
-                        <p className="font-bold text-white group-hover:text-blue-300 transition-colors">Open Account</p>
-                        <p className="text-sm text-white/50">Create your free Yek7Pay account</p>
+                        <p className="font-bold text-white group-hover:text-blue-300 transition-colors">Create Your Account</p>
+                        <p className="text-sm text-white/50">Start your free Yek7Pay account now</p>
                       </div>
                       <ArrowRight className="w-5 h-5 text-white/50 group-hover:text-white group-hover:translate-x-1 transition-all" />
                     </a>

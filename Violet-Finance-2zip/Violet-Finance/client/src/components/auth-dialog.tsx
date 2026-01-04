@@ -209,7 +209,7 @@ export function AuthDialog({ isOpen, onOpenChange, defaultView = "menu" }: AuthD
                     <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors">
                       <UserPlus className="h-5 w-5" />
                     </div>
-                    <span>Open Account</span>
+                    <span>Create Your Account</span>
                   </div>
                   <span className="text-white/40 group-hover:text-white transition-colors">→</span>
                 </Button>

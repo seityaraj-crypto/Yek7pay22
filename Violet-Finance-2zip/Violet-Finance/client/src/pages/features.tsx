@@ -460,7 +460,7 @@ export default function Features() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href="/new-account">
                   <Button className="h-16 px-10 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 hover:from-blue-500 hover:via-purple-500 hover:to-pink-500 text-white rounded-full text-lg font-bold shadow-2xl shadow-purple-500/30 transition-all hover:scale-105">
-                    Open Free Account
+                    Create Your Account
                     <ArrowRight className="w-5 h-5 ml-2" />
                   </Button>
                 </Link>

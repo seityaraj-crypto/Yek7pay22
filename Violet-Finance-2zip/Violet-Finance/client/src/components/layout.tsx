@@ -133,7 +133,7 @@ export function Navbar() {
             Login
           </Button>
           <Button className="bg-gradient-to-r from-blue-950 via-blue-900 to-purple-800 hover:opacity-90 text-white border-0 shadow-[0_0_20px_rgba(59,130,246,0.3)] rounded-full px-4 md:px-6 h-9 md:h-10 text-xs md:text-sm font-bold transition-all hover:scale-105 active:scale-95" onClick={openMenu}>
-            Open Account
+            Create Account
           </Button>
 
           <div className="flex items-center gap-2">
@@ -160,7 +160,7 @@ export function Navbar() {
                        Login
                      </Button>
                      <Button className="w-full bg-gradient-to-r from-blue-950 via-blue-900 to-purple-800 border-0 hover:opacity-90 text-white rounded-full font-bold h-12 shadow-lg shadow-blue-500/10" onClick={() => { openMenu(); setIsOpen(false); }}>
-                       Open Account
+                       Create Account
                      </Button>
                    </div>
 
