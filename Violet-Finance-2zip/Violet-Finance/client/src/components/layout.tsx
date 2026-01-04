@@ -129,11 +129,8 @@ export function Navbar() {
         </div>
 
         <div className="flex items-center gap-3 md:gap-4">
-          <Button variant="ghost" className="text-sm text-slate-700 font-bold hover:text-blue-600 hover:bg-slate-200/50 hidden sm:flex" onClick={openLogin}>
-            Login
-          </Button>
           <Button className="bg-gradient-to-r from-blue-950 via-blue-900 to-purple-800 hover:opacity-90 text-white border-0 shadow-[0_0_20px_rgba(59,130,246,0.3)] rounded-full px-4 md:px-6 h-9 md:h-10 text-xs md:text-sm font-bold transition-all hover:scale-105 active:scale-95" onClick={openMenu}>
-            Create Account
+            Open Account / Login
           </Button>
 
           <div className="flex items-center gap-2">
