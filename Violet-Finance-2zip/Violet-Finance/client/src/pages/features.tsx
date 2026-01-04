@@ -1,14 +1,37 @@
 import { Navbar, Footer } from "@/components/layout";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { 
   ArrowLeft, Banknote, CreditCard, Smartphone, QrCode, Wallet, Building2, 
   Globe, FileText, Shield, Plane, Train, TrendingUp, Users, Zap, 
-  CheckCircle2, ArrowRight, Star, Award, Clock, HeadphonesIcon
+  CheckCircle2, ArrowRight, Star, Award, Clock, HeadphonesIcon, X, Sparkles
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
+import { useState, useEffect } from "react";
 
 export default function Features() {
+  const [showPromoPopup, setShowPromoPopup] = useState(false);
+  const [promoCount, setPromoCount] = useState(0);
+
+  useEffect(() => {
+    if (promoCount >= 3) return;
+
+    const timer = setTimeout(() => {
+      setShowPromoPopup(true);
+      setPromoCount(prev => prev + 1);
+    }, 10000);
+
+    return () => clearTimeout(timer);
+  }, [promoCount, showPromoPopup]);
+
+  useEffect(() => {
+    if (showPromoPopup) {
+      const hideTimer = setTimeout(() => {
+        setShowPromoPopup(false);
+      }, 4000);
+      return () => clearTimeout(hideTimer);
+    }
+  }, [showPromoPopup]);
   const services = [
     {
       icon: Banknote,
@@ -41,7 +64,8 @@ export default function Features() {
       tagline: "Your Pocket ATM",
       description: "Convert any location into a banking point with portable Micro ATM device. Earn on every transaction.",
       features: ["Portable Device", "All Bank Cards", "High Commission", "Quick Setup"],
-      gradient: "from-pink-500 to-rose-600"
+      gradient: "from-pink-500 to-rose-600",
+      comingSoon: true
     },
     {
       icon: QrCode,
@@ -104,6 +128,30 @@ export default function Features() {
 
   return (
     <div className="min-h-screen bg-[#0a0a2e] text-white">
+      <AnimatePresence>
+        {showPromoPopup && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8, y: -50 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.8, y: -50 }}
+            className="fixed top-24 left-1/2 -translate-x-1/2 z-50"
+          >
+            <div className="relative px-8 py-4 rounded-2xl bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 shadow-2xl shadow-purple-500/40 border border-white/20">
+              <button 
+                onClick={() => setShowPromoPopup(false)}
+                className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors"
+              >
+                <X className="w-4 h-4" />
+              </button>
+              <div className="flex items-center gap-3">
+                <Sparkles className="w-6 h-6 text-yellow-300 animate-pulse" />
+                <span className="text-lg font-bold text-white">India's Leading Fintech Platform</span>
+                <Sparkles className="w-6 h-6 text-yellow-300 animate-pulse" />
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
       <Navbar />
       
       <main className="pt-24 pb-24">
@@ -147,12 +195,19 @@ export default function Features() {
                 className={`relative p-6 rounded-3xl bg-white/5 border transition-all duration-300 hover:scale-[1.02] group ${
                   service.highlight 
                     ? 'border-blue-500/30 bg-gradient-to-br from-blue-600/10 to-purple-600/10' 
+                    : service.comingSoon
+                    ? 'border-amber-500/30 bg-gradient-to-br from-amber-600/10 to-orange-600/10'
                     : 'border-white/10 hover:border-white/20'
                 }`}
               >
                 {service.highlight && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-xs font-bold uppercase tracking-wider">
                     Most Popular
+                  </div>
+                )}
+                {service.comingSoon && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 text-xs font-bold uppercase tracking-wider animate-pulse shadow-lg shadow-orange-500/30">
+                    Coming Soon
                   </div>
                 )}
                 
