@@ -6,7 +6,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { UserPlus, LogIn, ShieldCheck, Zap, ArrowLeft, RefreshCw, Eye, EyeOff, Send, Upload, CreditCard, FileText, User, MapPin, Phone, Mail } from "lucide-react";
+import { UserPlus, LogIn, ShieldCheck, Zap, ArrowLeft, RefreshCw, Eye, EyeOff, Send, Upload, CreditCard, FileText, User, MapPin, Phone, Mail, Calendar, Lock, Camera, Navigation } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { useState, useEffect, useRef } from "react";
@@ -41,18 +41,63 @@ export function AuthDialog({ isOpen, onOpenChange, defaultView = "menu" }: AuthD
   const { toast } = useToast();
 
   const [regName, setRegName] = useState("");
+  const [regDob, setRegDob] = useState("");
   const [regEmail, setRegEmail] = useState("");
   const [regMobile, setRegMobile] = useState("");
   const [regAddress, setRegAddress] = useState("");
+  const [regPinCode, setRegPinCode] = useState("");
+  const [regCity, setRegCity] = useState("");
+  const [regState, setRegState] = useState("");
+  const [regPassword, setRegPassword] = useState("");
+  const [showRegPassword, setShowRegPassword] = useState(false);
   const [regAadhaar, setRegAadhaar] = useState("");
   const [regPan, setRegPan] = useState("");
   const [aadhaarFront, setAadhaarFront] = useState<File | null>(null);
   const [aadhaarBack, setAadhaarBack] = useState<File | null>(null);
   const [panImage, setPanImage] = useState<File | null>(null);
+  const [agentPhoto, setAgentPhoto] = useState<File | null>(null);
+  const [gpsLocation, setGpsLocation] = useState<string | null>(null);
+  const [isCapturingGps, setIsCapturingGps] = useState(false);
 
   const aadhaarFrontRef = useRef<HTMLInputElement>(null);
   const aadhaarBackRef = useRef<HTMLInputElement>(null);
   const panRef = useRef<HTMLInputElement>(null);
+  const agentPhotoRef = useRef<HTMLInputElement>(null);
+
+  const indianStates = [
+    "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", 
+    "Haryana", "Himachal Pradesh", "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", 
+    "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", 
+    "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", 
+    "Uttarakhand", "West Bengal", "Delhi", "Jammu & Kashmir", "Ladakh"
+  ];
+
+  const captureGpsLocation = () => {
+    setIsCapturingGps(true);
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setGpsLocation(`${latitude.toFixed(6)}, ${longitude.toFixed(6)}`);
+          setIsCapturingGps(false);
+        },
+        () => {
+          setGpsLocation("Location access denied");
+          setIsCapturingGps(false);
+        }
+      );
+    } else {
+      setGpsLocation("GPS not supported");
+      setIsCapturingGps(false);
+    }
+  };
+
+  const handleAgentPhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setAgentPhoto(e.target.files[0]);
+      captureGpsLocation();
+    }
+  };
 
   useEffect(() => {
     if (isOpen) {
@@ -68,14 +113,23 @@ export function AuthDialog({ isOpen, onOpenChange, defaultView = "menu" }: AuthD
       setOtpSent(false);
       setOtpLoading(false);
       setRegName("");
+      setRegDob("");
       setRegEmail("");
       setRegMobile("");
       setRegAddress("");
+      setRegPinCode("");
+      setRegCity("");
+      setRegState("");
+      setRegPassword("");
+      setShowRegPassword(false);
       setRegAadhaar("");
       setRegPan("");
       setAadhaarFront(null);
       setAadhaarBack(null);
       setPanImage(null);
+      setAgentPhoto(null);
+      setGpsLocation(null);
+      setIsCapturingGps(false);
     }
   }, [isOpen, defaultView]);
 
@@ -438,6 +492,20 @@ export function AuthDialog({ isOpen, onOpenChange, defaultView = "menu" }: AuthD
 
                 <div>
                   <label className="block text-xs font-bold text-white/60 mb-1.5 text-left flex items-center gap-2">
+                    <Calendar className="h-3 w-3" /> Date of Birth *
+                  </label>
+                  <input
+                    type="date"
+                    value={regDob}
+                    onChange={(e) => setRegDob(e.target.value)}
+                    className="w-full h-11 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:border-green-500/50 focus:outline-none transition-colors text-sm"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-bold text-white/60 mb-1.5 text-left flex items-center gap-2">
                     <Phone className="h-3 w-3" /> Mobile Number *
                   </label>
                   <input
@@ -448,19 +516,19 @@ export function AuthDialog({ isOpen, onOpenChange, defaultView = "menu" }: AuthD
                     className="w-full h-11 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:border-green-500/50 focus:outline-none transition-colors text-sm"
                   />
                 </div>
-              </div>
 
-              <div>
-                <label className="block text-xs font-bold text-white/60 mb-1.5 text-left flex items-center gap-2">
-                  <Mail className="h-3 w-3" /> Email Address *
-                </label>
-                <input
-                  type="email"
-                  value={regEmail}
-                  onChange={(e) => setRegEmail(e.target.value)}
-                  placeholder="your@email.com"
-                  className="w-full h-11 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:border-green-500/50 focus:outline-none transition-colors text-sm"
-                />
+                <div>
+                  <label className="block text-xs font-bold text-white/60 mb-1.5 text-left flex items-center gap-2">
+                    <Mail className="h-3 w-3" /> Email Address *
+                  </label>
+                  <input
+                    type="email"
+                    value={regEmail}
+                    onChange={(e) => setRegEmail(e.target.value)}
+                    placeholder="your@email.com"
+                    className="w-full h-11 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:border-green-500/50 focus:outline-none transition-colors text-sm"
+                  />
+                </div>
               </div>
 
               <div>
@@ -470,10 +538,79 @@ export function AuthDialog({ isOpen, onOpenChange, defaultView = "menu" }: AuthD
                 <textarea
                   value={regAddress}
                   onChange={(e) => setRegAddress(e.target.value)}
-                  placeholder="Enter your complete address with PIN code"
+                  placeholder="Enter your complete address"
                   rows={2}
                   className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:border-green-500/50 focus:outline-none transition-colors text-sm resize-none"
                 />
+              </div>
+
+              <div className="grid grid-cols-3 gap-3">
+                <div>
+                  <label className="block text-xs font-bold text-white/60 mb-1.5 text-left">PIN Code *</label>
+                  <input
+                    type="text"
+                    value={regPinCode}
+                    onChange={(e) => setRegPinCode(e.target.value.replace(/\D/g, "").slice(0, 6))}
+                    placeholder="6-digit"
+                    className="w-full h-11 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:border-green-500/50 focus:outline-none transition-colors text-sm"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-white/60 mb-1.5 text-left">City *</label>
+                  <input
+                    type="text"
+                    value={regCity}
+                    onChange={(e) => setRegCity(e.target.value)}
+                    placeholder="City"
+                    className="w-full h-11 px-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:border-green-500/50 focus:outline-none transition-colors text-sm"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-white/60 mb-1.5 text-left">State *</label>
+                  <select
+                    value={regState}
+                    onChange={(e) => setRegState(e.target.value)}
+                    className="w-full h-11 px-3 rounded-xl bg-white/5 border border-white/10 text-white focus:border-green-500/50 focus:outline-none transition-colors text-sm appearance-none"
+                  >
+                    <option value="" className="bg-[#0a0a2e]">Select</option>
+                    {indianStates.map(state => (
+                      <option key={state} value={state} className="bg-[#0a0a2e]">{state}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-bold text-white/60 mb-1.5 text-left">Country *</label>
+                  <input
+                    type="text"
+                    value="India"
+                    className="w-full h-11 px-4 rounded-xl bg-white/5 border border-white/10 text-white/70 focus:outline-none transition-colors text-sm cursor-not-allowed"
+                    readOnly
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-white/60 mb-1.5 text-left flex items-center gap-2">
+                    <Lock className="h-3 w-3" /> Create Password *
+                  </label>
+                  <div className="relative">
+                    <input
+                      type={showRegPassword ? "text" : "password"}
+                      value={regPassword}
+                      onChange={(e) => setRegPassword(e.target.value)}
+                      placeholder="Strong password"
+                      className="w-full h-11 px-4 pr-10 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:border-green-500/50 focus:outline-none transition-colors text-sm"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowRegPassword(!showRegPassword)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white"
+                    >
+                      {showRegPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                    </button>
+                  </div>
+                </div>
               </div>
 
               <div className="p-4 rounded-2xl bg-blue-500/5 border border-blue-500/10">
@@ -592,6 +729,51 @@ export function AuthDialog({ isOpen, onOpenChange, defaultView = "menu" }: AuthD
                       )}
                     </button>
                   </div>
+                </div>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-orange-500/5 border border-orange-500/10">
+                <h4 className="text-sm font-bold text-orange-400 mb-3 flex items-center gap-2">
+                  <Camera className="h-4 w-4" /> Agent Photo with GPS
+                </h4>
+                <div className="space-y-3">
+                  <input
+                    type="file"
+                    ref={agentPhotoRef}
+                    accept="image/*"
+                    capture="user"
+                    onChange={handleAgentPhotoChange}
+                    className="hidden"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => agentPhotoRef.current?.click()}
+                    className={`w-full h-24 rounded-xl border-2 border-dashed flex flex-col items-center justify-center gap-2 transition-colors ${agentPhoto ? 'border-green-500/50 bg-green-500/10' : 'border-white/10 bg-white/5 hover:border-orange-500/50'}`}
+                  >
+                    {agentPhoto ? (
+                      <>
+                        <Camera className="h-6 w-6 text-green-400" />
+                        <span className="text-xs text-green-400 font-bold">Photo Captured</span>
+                      </>
+                    ) : (
+                      <>
+                        <Camera className="h-6 w-6 text-white/40" />
+                        <span className="text-xs text-white/40">Click to capture selfie</span>
+                      </>
+                    )}
+                  </button>
+                  {gpsLocation && (
+                    <div className="flex items-center gap-2 p-2 rounded-lg bg-green-500/10 border border-green-500/20">
+                      <Navigation className="h-4 w-4 text-green-400" />
+                      <span className="text-xs text-green-400">GPS: {gpsLocation}</span>
+                    </div>
+                  )}
+                  {isCapturingGps && (
+                    <div className="flex items-center gap-2 p-2 rounded-lg bg-blue-500/10 border border-blue-500/20">
+                      <div className="h-4 w-4 border-2 border-blue-400 border-t-transparent rounded-full animate-spin" />
+                      <span className="text-xs text-blue-400">Capturing location...</span>
+                    </div>
+                  )}
                 </div>
               </div>
 
