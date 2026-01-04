@@ -325,34 +325,42 @@ export function Footer() {
             <Link href="/about" className="hover:text-blue-400 transition-all">About Us</Link>
             <Link href="/terms" className="hover:text-blue-400 transition-all">Terms of Service</Link>
             <Link href="/privacy" className="hover:text-blue-400 transition-all">Privacy Policy</Link>
-            <a href="/insurance" className="hover:text-blue-400 transition-all">Insurance</a>
-            <a href="/compliance" className="hover:text-blue-400 transition-all">Compliance</a>
             <a href="/upgrade" className="hover:text-blue-400 transition-all">Premium Upgrade</a>
           </div>
           <div className="mb-8">
             <h4 className="text-sm font-bold text-white mb-6 uppercase tracking-widest text-center">Our Trusted Partners</h4>
             <div className="flex flex-wrap justify-center items-center gap-8">
               <div className="flex flex-col items-center gap-2 px-6 py-3 bg-white/5 rounded-xl border border-white/10">
-                <div className="w-12 h-12 bg-gradient-to-br from-red-600 to-pink-600 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-black text-lg">A</span>
+                <div className="w-14 h-14 bg-white rounded-lg flex items-center justify-center overflow-hidden">
+                  <svg viewBox="0 0 100 100" className="w-12 h-12">
+                    <circle cx="50" cy="50" r="45" fill="#97144D"/>
+                    <path d="M30 65 L50 25 L70 65 L60 65 L50 45 L40 65 Z" fill="white"/>
+                  </svg>
                 </div>
                 <span className="text-xs text-white/70 font-medium">Axis Bank</span>
               </div>
               <div className="flex flex-col items-center gap-2 px-6 py-3 bg-white/5 rounded-xl border border-white/10">
-                <div className="w-12 h-12 bg-gradient-to-br from-red-500 to-red-600 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-black text-lg">A</span>
+                <div className="w-14 h-14 bg-white rounded-lg flex items-center justify-center overflow-hidden">
+                  <svg viewBox="0 0 100 100" className="w-12 h-12">
+                    <rect width="100" height="100" fill="#ED1C24"/>
+                    <path d="M20 70 Q50 20 80 70" stroke="white" strokeWidth="8" fill="none"/>
+                    <circle cx="50" cy="35" r="8" fill="white"/>
+                  </svg>
                 </div>
                 <span className="text-xs text-white/70 font-medium">Airtel</span>
               </div>
               <div className="flex flex-col items-center gap-2 px-6 py-3 bg-white/5 rounded-xl border border-white/10">
-                <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-black text-lg">F</span>
+                <div className="w-14 h-14 bg-white rounded-lg flex items-center justify-center overflow-hidden">
+                  <svg viewBox="0 0 100 100" className="w-12 h-12">
+                    <rect width="100" height="100" fill="#1E3A8A"/>
+                    <text x="50" y="60" textAnchor="middle" fill="white" fontSize="32" fontWeight="bold" fontFamily="Arial">fino</text>
+                  </svg>
                 </div>
                 <span className="text-xs text-white/70 font-medium">Fino Bank</span>
               </div>
               <div className="flex flex-col items-center gap-2 px-6 py-3 bg-white/5 rounded-xl border border-white/10">
-                <div className="w-12 h-12 bg-gradient-to-br from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-black text-lg">N</span>
+                <div className="w-14 h-14 bg-gradient-to-br from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
+                  <span className="text-white font-black text-xl">N</span>
                 </div>
                 <span className="text-xs text-white/70 font-medium">Neo Bank</span>
               </div>
