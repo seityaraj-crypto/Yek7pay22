@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, ShieldCheck, Zap, Globe, Coins, CheckCircle2, Send, Wallet, CreditCard, Smartphone, Banknote } from "lucide-react";
 import { AuthDialog } from "@/components/auth-dialog";
 import { useState, useEffect } from "react";
+import { Link } from "wouter";
 
 const heroTextSlides = [
   {
@@ -174,9 +175,11 @@ export function Hero() {
                 <Button size="lg" className="bg-primary hover:bg-primary/90 text-white h-14 px-10 rounded-full shadow-2xl neo-glow text-lg font-bold" onClick={() => setIsAuthOpen(true)}>
                   Get Started <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
-                <Button size="lg" variant="outline" className="h-14 px-10 rounded-full border-white/10 hover:bg-white/5 hover:text-white text-lg font-bold" onClick={() => setIsAuthOpen(true)}>
-                  Explore Features
-                </Button>
+                <Link href="/features">
+                  <Button size="lg" variant="outline" className="h-14 px-10 rounded-full border-white/10 hover:bg-white/5 hover:text-white text-lg font-bold">
+                    Explore Features
+                  </Button>
+                </Link>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-16 pt-8 border-t border-white/5">

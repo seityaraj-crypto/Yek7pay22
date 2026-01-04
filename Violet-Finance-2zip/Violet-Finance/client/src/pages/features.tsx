@@ -1,0 +1,274 @@
+import { Navbar, Footer } from "@/components/layout";
+import { motion } from "framer-motion";
+import { 
+  ArrowLeft, Banknote, CreditCard, Smartphone, QrCode, Wallet, Building2, 
+  Globe, FileText, Shield, Plane, Train, TrendingUp, Users, Zap, 
+  CheckCircle2, ArrowRight, Star, Award, Clock, HeadphonesIcon
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
+
+export default function Features() {
+  const services = [
+    {
+      icon: Banknote,
+      title: "Neo Bank Unlimited",
+      tagline: "Zero Limits, Maximum Growth",
+      description: "Send unlimited money daily with instant settlements. No daily caps, no restrictions - just seamless transactions for your growing business.",
+      features: ["Unlimited Daily Transfers", "T+0 Instant Settlement", "Zero Hidden Charges", "Pan-India Coverage"],
+      gradient: "from-blue-500 to-purple-600",
+      highlight: true
+    },
+    {
+      icon: Globe,
+      title: "Indo-Nepal Remittance",
+      tagline: "Cross-Border Made Simple",
+      description: "Fast and secure money transfers to Nepal with real-time exchange rates and instant delivery to beneficiaries.",
+      features: ["Real-Time Exchange Rates", "Instant Delivery", "RBI Authorized", "24/7 Service"],
+      gradient: "from-green-500 to-teal-600"
+    },
+    {
+      icon: CreditCard,
+      title: "AEPS Services",
+      tagline: "Banking at Doorstep",
+      description: "Offer Aadhaar-enabled payment services including cash withdrawal, balance enquiry, and mini statements using biometrics.",
+      features: ["Cash Withdrawal", "Balance Enquiry", "Mini Statement", "Aadhaar Pay"],
+      gradient: "from-orange-500 to-red-600"
+    },
+    {
+      icon: Smartphone,
+      title: "Micro ATM",
+      tagline: "Your Pocket ATM",
+      description: "Convert any location into a banking point with portable Micro ATM device. Earn on every transaction.",
+      features: ["Portable Device", "All Bank Cards", "High Commission", "Quick Setup"],
+      gradient: "from-pink-500 to-rose-600"
+    },
+    {
+      icon: QrCode,
+      title: "UPI QR & Soundbox",
+      tagline: "Accept Payments Instantly",
+      description: "Accept UPI payments with branded QR codes and get instant voice alerts with our smart soundbox device.",
+      features: ["Instant Payments", "Voice Alerts", "Settlement in Minutes", "Multi-Language"],
+      gradient: "from-purple-500 to-indigo-600"
+    },
+    {
+      icon: Wallet,
+      title: "PPI Wallet",
+      tagline: "Digital Wallet Solutions",
+      description: "Issue prepaid wallets to your customers for easy payments and top-ups. Earn on every wallet transaction.",
+      features: ["Easy Top-Up", "Bill Payments", "Money Transfer", "Rewards Points"],
+      gradient: "from-cyan-500 to-blue-600"
+    },
+    {
+      icon: Building2,
+      title: "Business Loans",
+      tagline: "Fuel Your Growth",
+      description: "Quick business loans with minimal documentation. Get funds within 24 hours to expand your operations.",
+      features: ["24hr Disbursement", "Minimal Docs", "Flexible Tenure", "Competitive Rates"],
+      gradient: "from-amber-500 to-orange-600"
+    },
+    {
+      icon: FileText,
+      title: "GST & Compliance",
+      tagline: "Complete Tax Solutions",
+      description: "GST registration, filing, ITR, and complete compliance services for hassle-free business operations.",
+      features: ["GST Registration", "Monthly Filing", "ITR Filing", "Audit Support"],
+      gradient: "from-emerald-500 to-green-600"
+    },
+    {
+      icon: Plane,
+      title: "Travel Booking",
+      tagline: "Flights & Hotels",
+      description: "Book domestic and international flights, hotels with instant confirmation and earn commission on every booking.",
+      features: ["All Airlines", "Best Prices", "Instant Confirmation", "High Commission"],
+      gradient: "from-sky-500 to-blue-600"
+    },
+    {
+      icon: Train,
+      title: "IRCTC Rail Booking",
+      tagline: "Train Tickets Made Easy",
+      description: "Book train tickets across India with instant confirmation. Tatkal and general bookings available.",
+      features: ["Tatkal Booking", "Pan-India Trains", "E-Tickets", "Quick Refunds"],
+      gradient: "from-red-500 to-pink-600"
+    }
+  ];
+
+  const whyChooseUs = [
+    { icon: TrendingUp, title: "Earn ₹1 Lakh+ Monthly", desc: "High commission rates on all services" },
+    { icon: Users, title: "100,000+ Partners", desc: "Join India's largest fintech network" },
+    { icon: Shield, title: "100% Secure", desc: "Bank-grade security & RBI compliant" },
+    { icon: Zap, title: "Instant Settlement", desc: "Get your money in minutes, not days" },
+    { icon: HeadphonesIcon, title: "24/7 Support", desc: "Dedicated support whenever you need" },
+    { icon: Award, title: "Best Commission", desc: "Highest payouts in the industry" }
+  ];
+
+  return (
+    <div className="min-h-screen bg-[#0a0a2e] text-white">
+      <Navbar />
+      
+      <main className="pt-24 pb-24">
+        <div className="container mx-auto px-4">
+          <Link href="/">
+            <motion.button
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="flex items-center gap-2 text-white/60 hover:text-white mb-8 transition-colors group"
+            >
+              <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
+              <span>Back to Home</span>
+            </motion.button>
+          </Link>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center mb-16"
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-bold mb-6">
+              <Star className="w-4 h-4" />
+              All-in-One Fintech Platform
+            </div>
+            <h1 className="text-4xl md:text-6xl font-display font-black mb-6">
+              Explore Our <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400">Features</span>
+            </h1>
+            <p className="text-xl text-white/60 max-w-3xl mx-auto">
+              Everything you need to transform your retail business into a profitable fintech service center. 
+              Join 100,000+ merchants earning big with Yek7Pay.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
+            {services.map((service, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.05 }}
+                className={`relative p-6 rounded-3xl bg-white/5 border transition-all duration-300 hover:scale-[1.02] group ${
+                  service.highlight 
+                    ? 'border-blue-500/30 bg-gradient-to-br from-blue-600/10 to-purple-600/10' 
+                    : 'border-white/10 hover:border-white/20'
+                }`}
+              >
+                {service.highlight && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-xs font-bold uppercase tracking-wider">
+                    Most Popular
+                  </div>
+                )}
+                
+                <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${service.gradient} flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform`}>
+                  <service.icon className="w-7 h-7 text-white" />
+                </div>
+                
+                <h3 className="text-xl font-bold mb-1">{service.title}</h3>
+                <p className={`text-sm font-medium bg-clip-text text-transparent bg-gradient-to-r ${service.gradient} mb-3`}>
+                  {service.tagline}
+                </p>
+                <p className="text-white/50 text-sm mb-4 leading-relaxed">
+                  {service.description}
+                </p>
+                
+                <ul className="space-y-2">
+                  {service.features.map((feature, i) => (
+                    <li key={i} className="flex items-center gap-2 text-sm text-white/70">
+                      <CheckCircle2 className="w-4 h-4 text-green-400 shrink-0" />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="mb-20"
+          >
+            <h2 className="text-3xl md:text-4xl font-display font-black text-center mb-12">
+              Why <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">Yek7Pay?</span>
+            </h2>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {whyChooseUs.map((item, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.4 + index * 0.05 }}
+                  className="p-6 rounded-2xl bg-gradient-to-br from-white/5 to-white/0 border border-white/10 flex items-start gap-4 hover:bg-white/10 transition-all"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center shrink-0">
+                    <item.icon className="w-6 h-6 text-blue-400" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-lg mb-1">{item.title}</h3>
+                    <p className="text-white/50 text-sm">{item.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.5 }}
+            className="p-10 md:p-16 rounded-[3rem] bg-gradient-to-br from-blue-600/20 via-purple-600/20 to-pink-600/20 border border-white/10 text-center relative overflow-hidden"
+          >
+            <div className="absolute top-0 left-0 w-full h-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none" />
+            <div className="relative z-10">
+              <h2 className="text-3xl md:text-5xl font-display font-black mb-6">
+                Ready to <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-pink-400">Boost Your Business?</span>
+              </h2>
+              <p className="text-xl text-white/60 mb-10 max-w-2xl mx-auto">
+                Join 100,000+ merchants already earning with Yek7Pay. Start your fintech journey today with zero investment.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link href="/new-account">
+                  <Button className="h-16 px-10 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 hover:from-blue-500 hover:via-purple-500 hover:to-pink-500 text-white rounded-full text-lg font-bold shadow-2xl shadow-purple-500/30 transition-all hover:scale-105">
+                    Open Free Account
+                    <ArrowRight className="w-5 h-5 ml-2" />
+                  </Button>
+                </Link>
+                <a href="https://wa.me/919230967187?text=Hi%2C%20I%20want%20to%20know%20more%20about%20Yek7Pay%20services" target="_blank" rel="noopener noreferrer">
+                  <Button variant="outline" className="h-16 px-10 rounded-full border-white/20 hover:bg-white/10 text-lg font-bold">
+                    Chat with Us
+                  </Button>
+                </a>
+              </div>
+
+              <div className="mt-10 flex items-center justify-center gap-8 text-sm text-white/50">
+                <div className="flex items-center gap-2">
+                  <Clock className="w-4 h-4" />
+                  <span>Quick Setup</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Shield className="w-4 h-4" />
+                  <span>100% Secure</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Zap className="w-4 h-4" />
+                  <span>Instant Activation</span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          <div className="mt-12 text-center">
+            <Link href="/">
+              <Button variant="ghost" className="text-white/60 hover:text-white">
+                <ArrowLeft className="w-4 h-4 mr-2" />
+                Back to Home
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </main>
+
+      <Footer />
+    </div>
+  );
+}
