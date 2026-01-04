@@ -67,7 +67,7 @@ export default function NewAccount() {
 
   return (
     <div className="min-h-screen bg-[#0a0a2e] text-white relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-1/2 h-screen z-0 opacity-30">
+      <div className="absolute top-0 right-0 w-1/2 h-screen z-0 opacity-30" style={{ maskImage: 'linear-gradient(to left, black 50%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to left, black 50%, transparent 100%)' }}>
         <NetworkDots />
       </div>
       <Navbar />

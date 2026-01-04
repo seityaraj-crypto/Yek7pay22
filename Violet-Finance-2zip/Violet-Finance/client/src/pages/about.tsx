@@ -6,7 +6,7 @@ import { NetworkDots } from "@/components/network-dots";
 export default function About() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#1a0b3b] via-[#0d0d2b] to-[#0a1a3a] text-white relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-1/2 h-screen z-0 opacity-30">
+      <div className="absolute top-0 right-0 w-1/2 h-screen z-0 opacity-30" style={{ maskImage: 'linear-gradient(to left, black 50%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to left, black 50%, transparent 100%)' }}>
         <NetworkDots />
       </div>
       <Navbar />
