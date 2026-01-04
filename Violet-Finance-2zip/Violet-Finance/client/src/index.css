@@ -156,11 +156,21 @@
 
 .dot {
   position: absolute;
-  width: 4px;
-  height: 4px;
-  background: rgba(99, 102, 241, 0.6);
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.9);
   border-radius: 50%;
-  box-shadow: 0 0 10px rgba(99, 102, 241, 0.5), 0 0 20px rgba(99, 102, 241, 0.3);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.4);
+}
+
+.dot.small {
+  width: 5px;
+  height: 5px;
+}
+
+.dot.large {
+  width: 12px;
+  height: 12px;
 }
 
 .dot::after {
@@ -169,26 +179,17 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 12px;
-  height: 12px;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.4) 0%, transparent 70%);
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
   border-radius: 50%;
-  animation: pulse-dot 3s ease-in-out infinite;
+  animation: pulse-dot 4s ease-in-out infinite;
 }
 
 .connection-line {
   position: absolute;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.3), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
   transform-origin: left center;
   animation: line-pulse 4s ease-in-out infinite;
-}
-
-.grid-overlay {
-  position: absolute;
-  inset: 0;
-  background-image: 
-    linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
-  background-size: 60px 60px;
 }
