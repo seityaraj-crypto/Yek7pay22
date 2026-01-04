@@ -14,6 +14,8 @@ export default function Features() {
   const [showPromoPopup, setShowPromoPopup] = useState(false);
   const [promoCount, setPromoCount] = useState(0);
   const [activeVipCard, setActiveVipCard] = useState<number | null>(null);
+  const [showVipContact, setShowVipContact] = useState(false);
+  const [vipContactOption, setVipContactOption] = useState<'call' | 'whatsapp' | 'email' | null>(null);
 
   const vipBenefits = [
     { 
@@ -377,24 +379,16 @@ export default function Features() {
                           ))}
                         </div>
                         
-                        <div className="flex gap-3">
-                          <a 
-                            href="tel:+919230967189" 
-                            className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 transition-all font-bold"
-                          >
-                            <Phone className="w-4 h-4" />
-                            Call Now
-                          </a>
-                          <a 
-                            href="https://wa.me/919230967189?text=Hi%2C%20I%20am%20interested%20in%20Yek7Pay%20VIP%20partnership" 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 transition-all font-bold"
-                          >
-                            <MessageCircle className="w-4 h-4" />
-                            WhatsApp
-                          </a>
-                        </div>
+                        <button 
+                          onClick={() => { setActiveVipCard(null); setShowVipContact(true); }}
+                          className="w-full relative py-4 rounded-xl font-black text-lg shadow-xl transition-all hover:scale-105 active:scale-95 overflow-hidden"
+                        >
+                          <div className="absolute inset-0 bg-gradient-to-r from-green-400 via-emerald-500 to-green-400 bg-[length:200%_100%] animate-[shimmer_2s_ease-in-out_infinite]" />
+                          <span className="relative z-10 flex items-center justify-center gap-3 text-white">
+                            <Phone className="w-5 h-5" />
+                            Contact Us
+                          </span>
+                        </button>
                       </motion.div>
                     </motion.div>
                   )}
@@ -402,26 +396,16 @@ export default function Features() {
 
                 <div className="text-center">
                   <p className="text-lg text-amber-100/80 mb-6 font-medium">Contact us for VIP Partnership</p>
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <a href="tel:+919230967189" className="flex items-center gap-3 px-6 py-4 rounded-2xl bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 transition-all hover:scale-105 shadow-lg shadow-green-500/30">
+                  <button 
+                    onClick={() => setShowVipContact(true)}
+                    className="relative px-12 py-4 rounded-2xl font-black text-lg shadow-xl transition-all hover:scale-105 active:scale-95 overflow-hidden"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-green-400 via-emerald-500 to-green-400 bg-[length:200%_100%] animate-[shimmer_2s_ease-in-out_infinite]" />
+                    <span className="relative z-10 flex items-center gap-3 text-white">
                       <Phone className="w-5 h-5" />
-                      <span className="font-bold">+91 92309 67189</span>
-                    </a>
-                    <a href="tel:+919230967187" className="flex items-center gap-3 px-6 py-4 rounded-2xl bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 transition-all hover:scale-105 shadow-lg shadow-green-500/30">
-                      <Phone className="w-5 h-5" />
-                      <span className="font-bold">+91 92309 67187</span>
-                    </a>
-                  </div>
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-4">
-                    <a href="mailto:info@yek7pay.com?subject=VIP%20Franchise%20Enquiry" className="flex items-center gap-3 px-6 py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 transition-all hover:scale-105 shadow-lg shadow-blue-500/30">
-                      <Mail className="w-5 h-5" />
-                      <span className="font-bold">info@yek7pay.com</span>
-                    </a>
-                    <a href="https://wa.me/919230967189?text=Hi%2C%20I%20am%20interested%20in%20Yek7Pay%20VIP%20Franchise%2FDistributor%20partnership" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 px-6 py-4 rounded-2xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 transition-all hover:scale-105 shadow-lg shadow-emerald-500/30">
-                      <MessageCircle className="w-5 h-5" />
-                      <span className="font-bold">WhatsApp Us</span>
-                    </a>
-                  </div>
+                      Contact Us
+                    </span>
+                  </button>
                 </div>
               </div>
             </div>
@@ -514,6 +498,154 @@ export default function Features() {
           </div>
         </div>
       </main>
+
+      {/* VIP Contact Modal */}
+      <AnimatePresence>
+        {showVipContact && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            onClick={() => { setShowVipContact(false); setVipContactOption(null); }}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="bg-gradient-to-br from-amber-900/40 via-yellow-900/30 to-amber-900/40 border-2 border-amber-500/30 rounded-3xl p-8 max-w-md w-full shadow-2xl relative backdrop-blur-xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button 
+                onClick={() => { setShowVipContact(false); setVipContactOption(null); }}
+                className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+              
+              {!vipContactOption ? (
+                <>
+                  <div className="text-center mb-6">
+                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center mx-auto mb-4 shadow-lg shadow-green-500/30">
+                      <Phone className="w-8 h-8 text-white" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-white">Contact Us</h3>
+                    <p className="text-amber-200/70">Choose how you'd like to reach us</p>
+                  </div>
+                  
+                  <div className="space-y-3">
+                    <button 
+                      onClick={() => setVipContactOption('call')}
+                      className="w-full flex items-center gap-4 p-4 rounded-2xl bg-white/10 border border-amber-400/30 hover:bg-white/20 transition-all group"
+                    >
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center">
+                        <Phone className="w-6 h-6 text-white" />
+                      </div>
+                      <div className="text-left">
+                        <h4 className="font-bold text-white">Call Us</h4>
+                        <p className="text-sm text-amber-200/60">Speak directly with our team</p>
+                      </div>
+                      <ArrowRight className="w-5 h-5 text-amber-400/50 ml-auto group-hover:translate-x-1 transition-transform" />
+                    </button>
+                    
+                    <button 
+                      onClick={() => setVipContactOption('whatsapp')}
+                      className="w-full flex items-center gap-4 p-4 rounded-2xl bg-white/10 border border-amber-400/30 hover:bg-white/20 transition-all group"
+                    >
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
+                        <MessageCircle className="w-6 h-6 text-white" />
+                      </div>
+                      <div className="text-left">
+                        <h4 className="font-bold text-white">WhatsApp</h4>
+                        <p className="text-sm text-amber-200/60">Chat with us instantly</p>
+                      </div>
+                      <ArrowRight className="w-5 h-5 text-amber-400/50 ml-auto group-hover:translate-x-1 transition-transform" />
+                    </button>
+                    
+                    <button 
+                      onClick={() => setVipContactOption('email')}
+                      className="w-full flex items-center gap-4 p-4 rounded-2xl bg-white/10 border border-amber-400/30 hover:bg-white/20 transition-all group"
+                    >
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center">
+                        <Mail className="w-6 h-6 text-white" />
+                      </div>
+                      <div className="text-left">
+                        <h4 className="font-bold text-white">Email</h4>
+                        <p className="text-sm text-amber-200/60">Send us a detailed message</p>
+                      </div>
+                      <ArrowRight className="w-5 h-5 text-amber-400/50 ml-auto group-hover:translate-x-1 transition-transform" />
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <button 
+                    onClick={() => setVipContactOption(null)}
+                    className="flex items-center gap-2 text-amber-300 hover:text-amber-200 transition-colors mb-4"
+                  >
+                    <ArrowRight className="w-4 h-4 rotate-180" />
+                    <span className="text-sm font-medium">Back</span>
+                  </button>
+                  
+                  {vipContactOption === 'call' && (
+                    <div className="text-center">
+                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center mx-auto mb-4 shadow-lg">
+                        <Phone className="w-8 h-8 text-white" />
+                      </div>
+                      <h3 className="text-2xl font-bold text-white mb-2">Call Us</h3>
+                      <p className="text-amber-200/70 mb-6">Tap to call any of our numbers</p>
+                      <div className="space-y-3">
+                        <a href="tel:+919230967189" className="flex items-center justify-center gap-3 p-4 rounded-2xl bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 transition-all font-bold text-white">
+                          <Phone className="w-5 h-5" />
+                          +91 92309 67189
+                        </a>
+                        <a href="tel:+919230967187" className="flex items-center justify-center gap-3 p-4 rounded-2xl bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 transition-all font-bold text-white">
+                          <Phone className="w-5 h-5" />
+                          +91 92309 67187
+                        </a>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {vipContactOption === 'whatsapp' && (
+                    <div className="text-center">
+                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center mx-auto mb-4 shadow-lg">
+                        <MessageCircle className="w-8 h-8 text-white" />
+                      </div>
+                      <h3 className="text-2xl font-bold text-white mb-2">WhatsApp</h3>
+                      <p className="text-amber-200/70 mb-6">Tap to chat with us on WhatsApp</p>
+                      <div className="space-y-3">
+                        <a href="https://wa.me/919230967189?text=Hi%2C%20I%20am%20interested%20in%20Yek7Pay%20VIP%20Franchise%2FDistributor%20partnership" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-3 p-4 rounded-2xl bg-gradient-to-r from-green-500 to-green-600 hover:from-green-400 hover:to-green-500 transition-all font-bold text-white">
+                          <MessageCircle className="w-5 h-5" />
+                          +91 92309 67189
+                        </a>
+                        <a href="https://wa.me/919230967187?text=Hi%2C%20I%20am%20interested%20in%20Yek7Pay%20VIP%20Franchise%2FDistributor%20partnership" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-3 p-4 rounded-2xl bg-gradient-to-r from-green-500 to-green-600 hover:from-green-400 hover:to-green-500 transition-all font-bold text-white">
+                          <MessageCircle className="w-5 h-5" />
+                          +91 92309 67187
+                        </a>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {vipContactOption === 'email' && (
+                    <div className="text-center">
+                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center mx-auto mb-4 shadow-lg">
+                        <Mail className="w-8 h-8 text-white" />
+                      </div>
+                      <h3 className="text-2xl font-bold text-white mb-2">Email Us</h3>
+                      <p className="text-amber-200/70 mb-6">Tap to send us an email</p>
+                      <a href="mailto:info@yek7pay.com?subject=VIP%20Franchise%20Enquiry" className="flex items-center justify-center gap-3 p-4 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 transition-all font-bold text-white">
+                        <Mail className="w-5 h-5" />
+                        info@yek7pay.com
+                      </a>
+                    </div>
+                  )}
+                </>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <Footer />
     </div>
