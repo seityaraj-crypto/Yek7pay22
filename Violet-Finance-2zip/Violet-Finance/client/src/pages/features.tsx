@@ -3,7 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { 
   ArrowLeft, Banknote, CreditCard, Smartphone, QrCode, Wallet, Building2, 
   Globe, FileText, Shield, Plane, Train, TrendingUp, Users, Zap, 
-  CheckCircle2, ArrowRight, Star, Award, Clock, HeadphonesIcon, X, Sparkles
+  CheckCircle2, ArrowRight, Star, Award, Clock, HeadphonesIcon, X, Sparkles,
+  Crown, Phone, Mail, MessageCircle
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
@@ -234,6 +235,77 @@ export default function Features() {
               </motion.div>
             ))}
           </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.25 }}
+            className="mb-20 relative"
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-amber-500/20 via-yellow-500/10 to-amber-500/20 rounded-[3rem] blur-3xl" />
+            <div className="relative p-8 md:p-12 rounded-[3rem] bg-gradient-to-br from-amber-900/40 via-yellow-900/30 to-amber-900/40 border-2 border-amber-500/40 overflow-hidden">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-yellow-400/20 to-transparent rounded-full blur-3xl" />
+              <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-amber-400/20 to-transparent rounded-full blur-3xl" />
+              
+              <div className="relative z-10">
+                <div className="flex items-center justify-center gap-3 mb-6">
+                  <Crown className="w-10 h-10 text-yellow-400 animate-pulse" />
+                  <div className="px-4 py-1.5 rounded-full bg-gradient-to-r from-yellow-500 to-amber-500 text-black text-sm font-black uppercase tracking-wider">
+                    VIP Services
+                  </div>
+                  <Crown className="w-10 h-10 text-yellow-400 animate-pulse" />
+                </div>
+                
+                <h2 className="text-3xl md:text-5xl font-display font-black text-center mb-4">
+                  Become a <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 via-amber-400 to-yellow-300">Franchise or Distributor</span>
+                </h2>
+                <p className="text-xl text-amber-100/70 text-center max-w-3xl mx-auto mb-10">
+                  Take your business to the next level! Partner with Yek7Pay as a Franchise or Distributor and unlock exclusive benefits, higher commissions, and priority support.
+                </p>
+
+                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+                  {[
+                    { icon: TrendingUp, title: "Higher Commissions", desc: "Earn up to 3x more" },
+                    { icon: Users, title: "Build Your Network", desc: "Onboard sub-agents" },
+                    { icon: HeadphonesIcon, title: "Priority Support", desc: "Dedicated manager" },
+                    { icon: Award, title: "Exclusive Benefits", desc: "VIP perks & rewards" }
+                  ].map((item, i) => (
+                    <div key={i} className="p-4 rounded-2xl bg-white/5 border border-amber-500/20 text-center hover:bg-white/10 transition-all">
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-yellow-500/30 to-amber-500/30 flex items-center justify-center mx-auto mb-3">
+                        <item.icon className="w-6 h-6 text-yellow-400" />
+                      </div>
+                      <h4 className="font-bold text-amber-100">{item.title}</h4>
+                      <p className="text-sm text-amber-200/50">{item.desc}</p>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="text-center">
+                  <p className="text-lg text-amber-100/80 mb-6 font-medium">Contact us for VIP Partnership</p>
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <a href="tel:+919230967189" className="flex items-center gap-3 px-6 py-4 rounded-2xl bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 transition-all hover:scale-105 shadow-lg shadow-green-500/30">
+                      <Phone className="w-5 h-5" />
+                      <span className="font-bold">+91 92309 67189</span>
+                    </a>
+                    <a href="tel:+919230967187" className="flex items-center gap-3 px-6 py-4 rounded-2xl bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 transition-all hover:scale-105 shadow-lg shadow-green-500/30">
+                      <Phone className="w-5 h-5" />
+                      <span className="font-bold">+91 92309 67187</span>
+                    </a>
+                  </div>
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-4">
+                    <a href="mailto:info@yek7pay.com?subject=VIP%20Franchise%20Enquiry" className="flex items-center gap-3 px-6 py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 transition-all hover:scale-105 shadow-lg shadow-blue-500/30">
+                      <Mail className="w-5 h-5" />
+                      <span className="font-bold">info@yek7pay.com</span>
+                    </a>
+                    <a href="https://wa.me/919230967189?text=Hi%2C%20I%20am%20interested%20in%20Yek7Pay%20VIP%20Franchise%2FDistributor%20partnership" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 px-6 py-4 rounded-2xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 transition-all hover:scale-105 shadow-lg shadow-emerald-500/30">
+                      <MessageCircle className="w-5 h-5" />
+                      <span className="font-bold">WhatsApp Us</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
