@@ -255,18 +255,20 @@ export function AuthDialog({ isOpen, onOpenChange, defaultView = "menu" }: AuthD
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <Button 
-                  className="w-full h-16 bg-gradient-to-r from-blue-950 via-blue-900 to-purple-800 border-0 text-white rounded-2xl font-bold text-lg flex items-center justify-between px-6 group"
-                  onClick={() => setView("register")}
-                >
-                  <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors">
-                      <UserPlus className="h-5 w-5" />
+                <Link href="/new-account">
+                  <Button 
+                    className="w-full h-16 bg-gradient-to-r from-blue-950 via-blue-900 to-purple-800 border-0 text-white rounded-2xl font-bold text-lg flex items-center justify-between px-6 group"
+                    onClick={() => onOpenChange(false)}
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors">
+                        <UserPlus className="h-5 w-5" />
+                      </div>
+                      <span>Create Your Account</span>
                     </div>
-                    <span>Create Your Account</span>
-                  </div>
-                  <span className="text-white/40 group-hover:text-white transition-colors">→</span>
-                </Button>
+                    <span className="text-white/40 group-hover:text-white transition-colors">→</span>
+                  </Button>
+                </Link>
               </motion.div>
 
               <motion.div
@@ -449,9 +451,9 @@ export function AuthDialog({ isOpen, onOpenChange, defaultView = "menu" }: AuthD
 
               <div className="flex justify-between text-xs">
                 <a href="#" className="text-blue-400 hover:underline">Forgot Password?</a>
-                <button onClick={() => setView("register")} className="text-blue-400 hover:underline">
+                <Link href="/new-account" onClick={() => onOpenChange(false)} className="text-blue-400 hover:underline">
                   Create Account
-                </button>
+                </Link>
               </div>
             </div>
           </>
