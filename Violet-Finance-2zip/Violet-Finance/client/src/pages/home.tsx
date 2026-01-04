@@ -868,20 +868,29 @@ export default function Home() {
               <p className="text-xl text-amber-100/80 font-medium mb-8 max-w-2xl">Unlock exclusive benefits, higher commissions, and priority support with Yek7Pay VIP partnership.</p>
               
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 w-full max-w-4xl">
-                {vipBenefits.map((item, i) => (
-                  <div 
-                    key={i} 
-                    onClick={() => setActiveVipCard(i)}
-                    className="p-4 rounded-2xl bg-white/5 border border-amber-500/20 text-center hover:bg-white/10 transition-all cursor-pointer hover:scale-105 hover:border-yellow-400/50 group/card"
-                  >
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-yellow-500/30 to-amber-500/30 flex items-center justify-center mx-auto mb-3 group-hover/card:from-yellow-500/50 group-hover/card:to-amber-500/50 transition-all">
-                      <item.icon className="w-6 h-6 text-yellow-400" />
+                {vipBenefits.map((item, i) => {
+                  const cardGradients = [
+                    { bg: 'from-rose-500/20 via-pink-500/15 to-orange-500/20', border: 'border-rose-400/40 hover:border-rose-300', icon: 'from-rose-500 to-orange-500', iconColor: 'text-white' },
+                    { bg: 'from-blue-500/20 via-cyan-500/15 to-teal-500/20', border: 'border-cyan-400/40 hover:border-cyan-300', icon: 'from-blue-500 to-teal-500', iconColor: 'text-white' },
+                    { bg: 'from-purple-500/20 via-violet-500/15 to-indigo-500/20', border: 'border-purple-400/40 hover:border-purple-300', icon: 'from-purple-500 to-indigo-500', iconColor: 'text-white' },
+                    { bg: 'from-amber-500/20 via-yellow-500/15 to-lime-500/20', border: 'border-yellow-400/40 hover:border-yellow-300', icon: 'from-amber-500 to-lime-500', iconColor: 'text-white' }
+                  ];
+                  const gradient = cardGradients[i];
+                  return (
+                    <div 
+                      key={i} 
+                      onClick={() => setActiveVipCard(i)}
+                      className={`p-4 rounded-2xl bg-gradient-to-br ${gradient.bg} border ${gradient.border} text-center hover:bg-white/10 transition-all cursor-pointer hover:scale-105 group/card shadow-lg`}
+                    >
+                      <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${gradient.icon} flex items-center justify-center mx-auto mb-3 shadow-lg group-hover/card:scale-110 transition-transform`}>
+                        <item.icon className={`w-6 h-6 ${gradient.iconColor}`} />
+                      </div>
+                      <h4 className="font-bold text-white">{item.title}</h4>
+                      <p className="text-sm text-white/60">{item.desc}</p>
+                      <p className="text-xs text-white/50 mt-2 opacity-0 group-hover/card:opacity-100 transition-opacity">Click for details</p>
                     </div>
-                    <h4 className="font-bold text-amber-100">{item.title}</h4>
-                    <p className="text-sm text-amber-200/50">{item.desc}</p>
-                    <p className="text-xs text-yellow-400/70 mt-2 opacity-0 group-hover/card:opacity-100 transition-opacity">Click for details</p>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
 
               <button 
