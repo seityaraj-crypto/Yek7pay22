@@ -232,6 +232,13 @@ export default function Home() {
   const [vipContactOption, setVipContactOption] = useState<'call' | 'whatsapp' | 'email' | null>(null);
   const [showAppointmentContact, setShowAppointmentContact] = useState(false);
   const [appointmentContactOption, setAppointmentContactOption] = useState<'call' | 'whatsapp' | null>(null);
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState<string | null>(null);
+
+  const timeSlots = [
+    "09:00 AM", "09:30 AM", "10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM",
+    "12:00 PM", "12:30 PM", "01:00 PM", "01:30 PM", "02:00 PM", "02:30 PM",
+    "03:00 PM", "03:30 PM", "04:00 PM", "04:30 PM", "05:00 PM", "05:30 PM", "06:00 PM"
+  ];
 
   const vipBenefits = [
     { 
@@ -297,13 +304,6 @@ export default function Home() {
       setActiveNumber(null);
     }
   };
-
-  const timeSlots = [
-    "09:00 AM", "09:30 AM", "10:00 AM", "10:30 AM",
-    "11:00 AM", "11:30 AM", "12:00 PM", "12:30 PM",
-    "02:00 PM", "02:30 PM", "03:00 PM", "03:30 PM",
-    "04:00 PM", "04:30 PM", "05:00 PM", "05:30 PM"
-  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0a1a3a] via-[#0d0d2b] to-[#1a0b3b] text-white">
@@ -1118,7 +1118,7 @@ export default function Home() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-            onClick={() => { setShowAppointmentContact(false); setAppointmentContactOption(null); }}
+            onClick={() => { setShowAppointmentContact(false); setAppointmentContactOption(null); setSelectedTimeSlot(null); }}
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
@@ -1128,20 +1128,50 @@ export default function Home() {
               onClick={(e) => e.stopPropagation()}
             >
               <button 
-                onClick={() => { setShowAppointmentContact(false); setAppointmentContactOption(null); }}
+                onClick={() => { setShowAppointmentContact(false); setAppointmentContactOption(null); setSelectedTimeSlot(null); }}
                 className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
               
-              {!appointmentContactOption ? (
+              {!selectedTimeSlot ? (
                 <>
                   <div className="text-center mb-6">
                     <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mx-auto mb-4 shadow-lg shadow-purple-500/30">
                       <Clock className="w-8 h-8 text-white" />
                     </div>
-                    <h3 className="text-2xl font-bold text-white">Make an Appointment</h3>
-                    <p className="text-purple-200/70">Choose how you'd like to reach us</p>
+                    <h3 className="text-2xl font-bold text-white">Select Time Slot</h3>
+                    <p className="text-purple-200/70">Choose your preferred appointment time</p>
+                  </div>
+                  
+                  <div className="grid grid-cols-3 gap-2 max-h-64 overflow-y-auto pr-2">
+                    {timeSlots.map((time) => (
+                      <button
+                        key={time}
+                        onClick={() => setSelectedTimeSlot(time)}
+                        className="p-3 rounded-xl bg-white/10 border border-purple-400/30 hover:bg-purple-500/30 hover:border-purple-400 transition-all text-white font-medium text-sm"
+                      >
+                        {time}
+                      </button>
+                    ))}
+                  </div>
+                </>
+              ) : !appointmentContactOption ? (
+                <>
+                  <button 
+                    onClick={() => setSelectedTimeSlot(null)}
+                    className="flex items-center gap-2 text-purple-300 hover:text-purple-200 transition-colors mb-4"
+                  >
+                    <ArrowRight className="w-4 h-4 rotate-180" />
+                    <span className="text-sm font-medium">Change Time</span>
+                  </button>
+                  
+                  <div className="text-center mb-6">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/20 border border-purple-400/30 mb-4">
+                      <Clock className="w-4 h-4 text-purple-300" />
+                      <span className="text-purple-200 font-bold">{selectedTimeSlot}</span>
+                    </div>
+                    <h3 className="text-xl font-bold text-white">How would you like to book?</h3>
                   </div>
                   
                   <div className="space-y-3">
@@ -1184,13 +1214,18 @@ export default function Home() {
                     <span className="text-sm font-medium">Back</span>
                   </button>
                   
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/20 border border-purple-400/30 mb-4 mx-auto">
+                    <Clock className="w-4 h-4 text-purple-300" />
+                    <span className="text-purple-200 font-bold">{selectedTimeSlot}</span>
+                  </div>
+                  
                   {appointmentContactOption === 'call' && (
                     <div className="text-center">
                       <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center mx-auto mb-4 shadow-lg">
                         <Phone className="w-8 h-8 text-white" />
                       </div>
                       <h3 className="text-2xl font-bold text-white mb-2">Call Us</h3>
-                      <p className="text-purple-200/70 mb-6">Tap to call and book your appointment</p>
+                      <p className="text-purple-200/70 mb-6">Tap to call and confirm your {selectedTimeSlot} appointment</p>
                       <div className="space-y-3">
                         <a href="tel:+919230967189" className="flex items-center justify-center gap-3 p-4 rounded-2xl bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 transition-all font-bold text-white">
                           <Phone className="w-5 h-5" />
@@ -1210,13 +1245,13 @@ export default function Home() {
                         <MessageCircle className="w-8 h-8 text-white" />
                       </div>
                       <h3 className="text-2xl font-bold text-white mb-2">WhatsApp</h3>
-                      <p className="text-purple-200/70 mb-6">Tap to book via WhatsApp</p>
+                      <p className="text-purple-200/70 mb-6">Tap to book your {selectedTimeSlot} appointment</p>
                       <div className="space-y-3">
-                        <a href="https://wa.me/919230967189?text=Hello%2C%20I%20would%20like%20to%20make%20an%20appointment%20for%20Tax%20Audit%2FCompliance%20services" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-3 p-4 rounded-2xl bg-gradient-to-r from-green-500 to-green-600 hover:from-green-400 hover:to-green-500 transition-all font-bold text-white">
+                        <a href={`https://wa.me/919230967189?text=Hello%2C%20I%20would%20like%20to%20make%20an%20appointment%20for%20Tax%20Audit%2FCompliance%20services%20at%20${encodeURIComponent(selectedTimeSlot)}`} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-3 p-4 rounded-2xl bg-gradient-to-r from-green-500 to-green-600 hover:from-green-400 hover:to-green-500 transition-all font-bold text-white">
                           <MessageCircle className="w-5 h-5" />
                           +91 92309 67189
                         </a>
-                        <a href="https://wa.me/919230967187?text=Hello%2C%20I%20would%20like%20to%20make%20an%20appointment%20for%20Tax%20Audit%2FCompliance%20services" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-3 p-4 rounded-2xl bg-gradient-to-r from-green-500 to-green-600 hover:from-green-400 hover:to-green-500 transition-all font-bold text-white">
+                        <a href={`https://wa.me/919230967187?text=Hello%2C%20I%20would%20like%20to%20make%20an%20appointment%20for%20Tax%20Audit%2FCompliance%20services%20at%20${encodeURIComponent(selectedTimeSlot)}`} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-3 p-4 rounded-2xl bg-gradient-to-r from-green-500 to-green-600 hover:from-green-400 hover:to-green-500 transition-all font-bold text-white">
                           <MessageCircle className="w-5 h-5" />
                           +91 92309 67187
                         </a>
