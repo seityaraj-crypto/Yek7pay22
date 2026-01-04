@@ -1,6 +1,6 @@
 import { Navbar, Footer } from "@/components/layout";
 import { motion } from "framer-motion";
-import { UserPlus, User, Mail, Phone, Lock, Eye, EyeOff, MapPin, Calendar, CreditCard, Upload, FileText, ArrowRight, CheckCircle2, Shield, Image } from "lucide-react";
+import { UserPlus, User, Mail, Phone, Lock, Eye, EyeOff, MapPin, Calendar, CreditCard, Upload, FileText, ArrowRight, CheckCircle2, Shield, Image, Camera, Navigation } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState, useRef } from "react";
 
@@ -9,10 +9,42 @@ export default function NewAccount() {
   const [aadhaarFront, setAadhaarFront] = useState<File | null>(null);
   const [aadhaarBack, setAadhaarBack] = useState<File | null>(null);
   const [panPhoto, setPanPhoto] = useState<File | null>(null);
+  const [agentPhoto, setAgentPhoto] = useState<File | null>(null);
+  const [gpsLocation, setGpsLocation] = useState<string | null>(null);
+  const [isCapturingLocation, setIsCapturingLocation] = useState(false);
   
   const aadhaarFrontRef = useRef<HTMLInputElement>(null);
   const aadhaarBackRef = useRef<HTMLInputElement>(null);
   const panPhotoRef = useRef<HTMLInputElement>(null);
+  const agentPhotoRef = useRef<HTMLInputElement>(null);
+
+  const captureGpsLocation = () => {
+    setIsCapturingLocation(true);
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setGpsLocation(`${latitude.toFixed(6)}, ${longitude.toFixed(6)}`);
+          setIsCapturingLocation(false);
+        },
+        (error) => {
+          console.error("Error getting location:", error);
+          setGpsLocation("Location access denied");
+          setIsCapturingLocation(false);
+        }
+      );
+    } else {
+      setGpsLocation("GPS not supported");
+      setIsCapturingLocation(false);
+    }
+  };
+
+  const handleAgentPhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setAgentPhoto(e.target.files[0]);
+      captureGpsLocation();
+    }
+  };
 
   const handleFileChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -322,6 +354,72 @@ export default function NewAccount() {
                     </div>
                   </div>
 
+                  <div className="border-t border-white/10 pt-6">
+                    <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
+                      <Camera className="w-5 h-5 text-cyan-400" />
+                      Agent Photo with GPS (KYC)
+                    </h3>
+                    
+                    <div className="p-6 rounded-2xl bg-gradient-to-br from-cyan-600/10 to-blue-600/10 border border-cyan-500/20">
+                      <p className="text-sm text-white/60 mb-4">
+                        Please take a clear photo of yourself for KYC verification. Your GPS location will be automatically captured.
+                      </p>
+                      
+                      <input
+                        type="file"
+                        ref={agentPhotoRef}
+                        onChange={handleAgentPhotoChange}
+                        accept="image/*"
+                        capture="user"
+                        className="hidden"
+                      />
+                      
+                      <button
+                        type="button"
+                        onClick={() => agentPhotoRef.current?.click()}
+                        className={`w-full p-8 rounded-xl border-2 border-dashed transition-all flex flex-col items-center gap-4 ${
+                          agentPhoto 
+                            ? 'border-green-500/50 bg-green-500/10' 
+                            : 'border-cyan-400/30 bg-cyan-500/5 hover:border-cyan-400/50 hover:bg-cyan-500/10'
+                        }`}
+                      >
+                        {agentPhoto ? (
+                          <>
+                            <div className="w-20 h-20 rounded-full bg-green-500/20 flex items-center justify-center">
+                              <CheckCircle2 className="w-10 h-10 text-green-400" />
+                            </div>
+                            <div className="text-center">
+                              <span className="text-sm text-green-400 font-bold block">{agentPhoto.name}</span>
+                              {gpsLocation && (
+                                <div className="flex items-center justify-center gap-2 mt-2 text-xs text-cyan-400">
+                                  <Navigation className="w-3 h-3" />
+                                  <span>{gpsLocation}</span>
+                                </div>
+                              )}
+                            </div>
+                          </>
+                        ) : (
+                          <>
+                            <div className="w-20 h-20 rounded-full bg-cyan-500/10 flex items-center justify-center">
+                              <Camera className="w-10 h-10 text-cyan-400" />
+                            </div>
+                            <div className="text-center">
+                              <span className="text-white font-bold block mb-1">Take Photo</span>
+                              <span className="text-sm text-white/40">GPS location will be captured automatically</span>
+                            </div>
+                          </>
+                        )}
+                      </button>
+                      
+                      {isCapturingLocation && (
+                        <div className="mt-4 flex items-center justify-center gap-2 text-cyan-400 text-sm">
+                          <div className="w-4 h-4 border-2 border-cyan-400 border-t-transparent rounded-full animate-spin" />
+                          <span>Capturing GPS location...</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
                   <div className="flex items-start gap-3 pt-4">
                     <input type="checkbox" className="w-5 h-5 mt-0.5 rounded border-white/20 bg-white/5 text-blue-500 focus:ring-blue-500/20" required />
                     <span className="text-sm text-white/50">
@@ -385,6 +483,10 @@ export default function NewAccount() {
                     <li className="flex items-center gap-2">
                       <div className="w-1.5 h-1.5 rounded-full bg-yellow-400" />
                       PAN Card
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+                      Agent Photo with GPS
                     </li>
                     <li className="flex items-center gap-2">
                       <div className="w-1.5 h-1.5 rounded-full bg-yellow-400" />
