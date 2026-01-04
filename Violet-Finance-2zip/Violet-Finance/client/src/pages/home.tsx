@@ -586,6 +586,66 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Still Got a Question Section */}
+      <section className="py-16 bg-transparent">
+        <div className="container mx-auto px-4">
+          <div className="p-8 md:p-12 bg-white/5 backdrop-blur-xl rounded-[2.5rem] border border-white/10 max-w-3xl mx-auto">
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-2 text-center">Still got a Question?</h2>
+            <p className="text-sm text-white/60 mb-8 text-center">Write to us for more information</p>
+            <form className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input 
+                  type="text" 
+                  placeholder="Your Name" 
+                  className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-white/40 focus:outline-none focus:border-blue-500 transition-colors"
+                />
+                <div className="flex gap-2">
+                  <select className="px-3 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:border-blue-500 transition-colors">
+                    <option value="+91">+91</option>
+                    <option value="+977">+977</option>
+                    <option value="+1">+1</option>
+                    <option value="+44">+44</option>
+                    <option value="+971">+971</option>
+                    <option value="+65">+65</option>
+                    <option value="+61">+61</option>
+                  </select>
+                  <input 
+                    type="tel" 
+                    placeholder="Phone Number" 
+                    className="flex-1 px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-white/40 focus:outline-none focus:border-blue-500 transition-colors"
+                  />
+                </div>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input 
+                  type="email" 
+                  placeholder="Email Address" 
+                  className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-white/40 focus:outline-none focus:border-blue-500 transition-colors"
+                />
+                <select className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:border-blue-500 transition-colors">
+                  <option value="">Choose Service</option>
+                  <option value="dmt">Advance DMT</option>
+                  <option value="neobank">Neo Bank</option>
+                  <option value="nepal">Indo-Nepal Remit</option>
+                  <option value="aeps">AEPS Withdrawal</option>
+                  <option value="bbps">Bharat Connect (BBPS)</option>
+                  <option value="mpos">mPOS Solutions</option>
+                  <option value="travel">Travel Bookings</option>
+                  <option value="gst">GST & Compliance</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <button 
+                type="submit" 
+                className="w-full py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-bold rounded-xl transition-all hover:scale-[1.02] shadow-lg shadow-blue-500/20"
+              >
+                Send Message
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
       <Footer />
       <AuthDialog isOpen={isAuthOpen} onOpenChange={setIsAuthOpen} />
 
