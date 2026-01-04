@@ -305,8 +305,90 @@ export default function Home() {
     }
   };
 
+  const dots = [
+    { x: '5%', y: '15%', delay: 0 },
+    { x: '15%', y: '35%', delay: 0.5 },
+    { x: '25%', y: '20%', delay: 1 },
+    { x: '35%', y: '45%', delay: 1.5 },
+    { x: '45%', y: '25%', delay: 2 },
+    { x: '55%', y: '55%', delay: 0.3 },
+    { x: '65%', y: '30%', delay: 0.8 },
+    { x: '75%', y: '50%', delay: 1.2 },
+    { x: '85%', y: '20%', delay: 1.8 },
+    { x: '92%', y: '40%', delay: 0.6 },
+    { x: '10%', y: '65%', delay: 1.1 },
+    { x: '30%', y: '75%', delay: 0.4 },
+    { x: '50%', y: '70%', delay: 1.6 },
+    { x: '70%', y: '80%', delay: 0.9 },
+    { x: '88%', y: '70%', delay: 1.4 },
+    { x: '20%', y: '85%', delay: 0.7 },
+    { x: '60%', y: '90%', delay: 1.3 },
+    { x: '80%', y: '88%', delay: 0.2 },
+  ];
+
+  const connections = [
+    { x1: '5%', y1: '15%', x2: '15%', y2: '35%', delay: 0 },
+    { x1: '15%', y1: '35%', x2: '25%', y2: '20%', delay: 0.5 },
+    { x1: '25%', y1: '20%', x2: '35%', y2: '45%', delay: 1 },
+    { x1: '35%', y1: '45%', x2: '45%', y2: '25%', delay: 1.5 },
+    { x1: '45%', y1: '25%', x2: '55%', y2: '55%', delay: 0.3 },
+    { x1: '55%', y1: '55%', x2: '65%', y2: '30%', delay: 0.8 },
+    { x1: '65%', y1: '30%', x2: '75%', y2: '50%', delay: 1.2 },
+    { x1: '75%', y1: '50%', x2: '85%', y2: '20%', delay: 0.6 },
+    { x1: '85%', y1: '20%', x2: '92%', y2: '40%', delay: 1.1 },
+    { x1: '10%', y1: '65%', x2: '30%', y2: '75%', delay: 0.4 },
+    { x1: '30%', y1: '75%', x2: '50%', y2: '70%', delay: 1.6 },
+    { x1: '50%', y1: '70%', x2: '70%', y2: '80%', delay: 0.9 },
+    { x1: '70%', y1: '80%', x2: '88%', y2: '70%', delay: 1.4 },
+  ];
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0a1a3a] via-[#0d0d2b] to-[#1a0b3b] text-white">
+    <div className="min-h-screen bg-gradient-to-br from-[#0a1a3a] via-[#0d0d2b] to-[#1a0b3b] text-white relative">
+      <div className="connected-dots-bg">
+        <div className="grid-overlay" />
+        {dots.map((dot, i) => (
+          <motion.div
+            key={i}
+            className="dot"
+            style={{ left: dot.x, top: dot.y }}
+            animate={{
+              y: [0, -15, 0, 10, 0],
+              x: [0, 5, -5, 3, 0],
+              scale: [1, 1.2, 1, 0.9, 1],
+            }}
+            transition={{
+              duration: 6 + i * 0.3,
+              repeat: Infinity,
+              delay: dot.delay,
+              ease: "easeInOut",
+            }}
+          />
+        ))}
+        <svg className="absolute inset-0 w-full h-full pointer-events-none">
+          {connections.map((conn, i) => (
+            <motion.line
+              key={i}
+              x1={conn.x1}
+              y1={conn.y1}
+              x2={conn.x2}
+              y2={conn.y2}
+              stroke="rgba(99, 102, 241, 0.2)"
+              strokeWidth="1"
+              initial={{ pathLength: 0, opacity: 0 }}
+              animate={{ 
+                pathLength: [0, 1, 1, 0],
+                opacity: [0, 0.4, 0.4, 0]
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                delay: conn.delay,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+        </svg>
+      </div>
       <WelcomePopup />
       <Navbar />
       
