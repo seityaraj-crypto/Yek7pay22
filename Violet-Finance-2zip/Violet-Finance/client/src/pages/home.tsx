@@ -231,7 +231,7 @@ export default function Home() {
   const [showVipContact, setShowVipContact] = useState(false);
   const [vipContactOption, setVipContactOption] = useState<'call' | 'whatsapp' | 'email' | null>(null);
   const [showAppointmentContact, setShowAppointmentContact] = useState(false);
-  const [appointmentContactOption, setAppointmentContactOption] = useState<'call' | 'whatsapp' | null>(null);
+  const [appointmentContactOption, setAppointmentContactOption] = useState<'call' | 'whatsapp' | 'email' | null>(null);
   const [selectedTimeSlot, setSelectedTimeSlot] = useState<string | null>(null);
 
   const timeSlots = [
@@ -1202,6 +1202,20 @@ export default function Home() {
                       </div>
                       <ArrowRight className="w-5 h-5 text-purple-400/50 ml-auto group-hover:translate-x-1 transition-transform" />
                     </button>
+                    
+                    <button 
+                      onClick={() => setAppointmentContactOption('email')}
+                      className="w-full flex items-center gap-4 p-4 rounded-2xl bg-white/10 border border-purple-400/30 hover:bg-white/20 transition-all group"
+                    >
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-400 to-indigo-600 flex items-center justify-center">
+                        <Mail className="w-6 h-6 text-white" />
+                      </div>
+                      <div className="text-left">
+                        <h4 className="font-bold text-white">Email</h4>
+                        <p className="text-sm text-purple-200/60">Book via email</p>
+                      </div>
+                      <ArrowRight className="w-5 h-5 text-purple-400/50 ml-auto group-hover:translate-x-1 transition-transform" />
+                    </button>
                   </div>
                 </>
               ) : (
@@ -1254,6 +1268,22 @@ export default function Home() {
                         <a href={`https://wa.me/919230967187?text=Hello%2C%20I%20would%20like%20to%20make%20an%20appointment%20for%20Tax%20Audit%2FCompliance%20services%20at%20${encodeURIComponent(selectedTimeSlot)}`} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-3 p-4 rounded-2xl bg-gradient-to-r from-green-500 to-green-600 hover:from-green-400 hover:to-green-500 transition-all font-bold text-white">
                           <MessageCircle className="w-5 h-5" />
                           +91 92309 67187
+                        </a>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {appointmentContactOption === 'email' && (
+                    <div className="text-center">
+                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-400 to-indigo-600 flex items-center justify-center mx-auto mb-4 shadow-lg">
+                        <Mail className="w-8 h-8 text-white" />
+                      </div>
+                      <h3 className="text-2xl font-bold text-white mb-2">Email Us</h3>
+                      <p className="text-purple-200/70 mb-6">Tap to email and book your {selectedTimeSlot} appointment</p>
+                      <div className="space-y-3">
+                        <a href={`mailto:info@yek7pay.com?subject=Appointment%20Request%20for%20${encodeURIComponent(selectedTimeSlot)}&body=Hello%2C%0A%0AI%20would%20like%20to%20make%20an%20appointment%20for%20Tax%20Audit%2FCompliance%20services%20at%20${encodeURIComponent(selectedTimeSlot)}.%0A%0APlease%20confirm%20the%20availability.%0A%0AThank%20you.`} className="flex items-center justify-center gap-3 p-4 rounded-2xl bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-400 hover:to-indigo-500 transition-all font-bold text-white">
+                          <Mail className="w-5 h-5" />
+                          info@yek7pay.com
                         </a>
                       </div>
                     </div>
