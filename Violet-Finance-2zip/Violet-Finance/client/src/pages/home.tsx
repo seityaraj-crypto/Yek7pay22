@@ -888,8 +888,8 @@ export default function Home() {
                 onClick={() => setShowVipContact(true)}
                 className="relative px-10 py-4 rounded-2xl font-black text-lg shadow-xl transition-all hover:scale-105 active:scale-95 overflow-hidden group/btn"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-400 bg-[length:200%_100%] animate-[shimmer_2s_ease-in-out_infinite]" />
-                <span className="relative z-10 flex items-center gap-3 text-black">
+                <div className="absolute inset-0 bg-gradient-to-r from-green-400 via-emerald-500 to-green-400 bg-[length:200%_100%] animate-[shimmer_2s_ease-in-out_infinite]" />
+                <span className="relative z-10 flex items-center gap-3 text-white">
                   <Phone className="w-5 h-5" />
                   Contact Us
                 </span>
