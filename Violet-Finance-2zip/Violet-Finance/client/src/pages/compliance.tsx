@@ -207,9 +207,13 @@ export default function Compliance() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#1a0b3b] via-[#0d0d2b] to-[#0a1a3a] text-white relative">
-      <NetworkDots className="absolute top-20 right-0 w-72 h-72 opacity-40" />
-      <NetworkDots className="absolute bottom-32 left-0 w-56 h-56 opacity-30" />
+    <div className="min-h-screen bg-gradient-to-b from-[#1a0b3b] via-[#0d0d2b] to-[#0a1a3a] text-white relative overflow-hidden">
+      <div className="absolute top-20 right-0 w-72 h-72 z-0">
+        <NetworkDots />
+      </div>
+      <div className="absolute bottom-32 left-0 w-56 h-56 z-0">
+        <NetworkDots />
+      </div>
       <Navbar />
       
       <main className="container mx-auto px-4 pt-32 pb-24">

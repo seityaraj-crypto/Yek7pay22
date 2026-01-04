@@ -183,9 +183,13 @@ export default function Features() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#0a0a2e] text-white relative">
-      <NetworkDots className="absolute top-24 right-0 w-80 h-80 opacity-40" />
-      <NetworkDots className="absolute bottom-40 left-0 w-60 h-60 opacity-30" />
+    <div className="min-h-screen bg-[#0a0a2e] text-white relative overflow-hidden">
+      <div className="absolute top-24 right-0 w-80 h-80 z-0">
+        <NetworkDots />
+      </div>
+      <div className="absolute bottom-40 left-0 w-64 h-64 z-0">
+        <NetworkDots />
+      </div>
       <AnimatePresence>
         {showPromoPopup && (
           <motion.div

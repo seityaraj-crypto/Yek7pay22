@@ -24,21 +24,22 @@ export function NetworkDots({ className = "" }: NetworkDotsProps) {
     }> = [];
 
     const resize = () => {
-      canvas.width = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width || 300;
+      canvas.height = rect.height || 300;
       initParticles();
     };
 
     const initParticles = () => {
       particles = [];
-      const particleCount = Math.floor((canvas.width * canvas.height) / 15000);
-      for (let i = 0; i < Math.min(particleCount, 50); i++) {
+      const particleCount = Math.floor((canvas.width * canvas.height) / 5000);
+      for (let i = 0; i < Math.min(Math.max(particleCount, 20), 80); i++) {
         particles.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          vx: (Math.random() - 0.5) * 0.5,
-          vy: (Math.random() - 0.5) * 0.5,
-          radius: Math.random() * 2 + 1,
+          vx: (Math.random() - 0.5) * 0.6,
+          vy: (Math.random() - 0.5) * 0.6,
+          radius: Math.random() * 2.5 + 1.5,
         });
       }
     };
@@ -55,7 +56,10 @@ export function NetworkDots({ className = "" }: NetworkDotsProps) {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(99, 102, 241, 0.4)";
+        const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius);
+        gradient.addColorStop(0, "rgba(168, 85, 247, 0.9)");
+        gradient.addColorStop(1, "rgba(99, 102, 241, 0.5)");
+        ctx.fillStyle = gradient;
         ctx.fill();
 
         for (let j = i + 1; j < particles.length; j++) {
@@ -68,8 +72,8 @@ export function NetworkDots({ className = "" }: NetworkDotsProps) {
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(139, 92, 246, ${0.2 * (1 - dist / 120)})`;
-            ctx.lineWidth = 0.5;
+            ctx.strokeStyle = `rgba(139, 92, 246, ${0.6 * (1 - dist / 120)})`;
+            ctx.lineWidth = 1.2;
             ctx.stroke();
           }
         }
@@ -92,7 +96,8 @@ export function NetworkDots({ className = "" }: NetworkDotsProps) {
   return (
     <canvas
       ref={canvasRef}
-      className={`pointer-events-none ${className}`}
+      className={`pointer-events-none absolute ${className}`}
+      style={{ width: "100%", height: "100%", zIndex: 1 }}
     />
   );
 }

@@ -307,9 +307,13 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0a1a3a] via-[#0d0d2b] to-[#1a0b3b] text-white relative">
-      <NetworkDots className="absolute top-32 right-0 w-72 h-72 opacity-40" />
-      <NetworkDots className="absolute top-[60%] left-0 w-64 h-64 opacity-30" />
+    <div className="min-h-screen bg-gradient-to-br from-[#0a1a3a] via-[#0d0d2b] to-[#1a0b3b] text-white relative overflow-hidden">
+      <div className="absolute top-32 right-0 w-80 h-80 z-0">
+        <NetworkDots />
+      </div>
+      <div className="absolute top-[55%] left-0 w-72 h-72 z-0">
+        <NetworkDots />
+      </div>
       <WelcomePopup />
       <Navbar />
       
