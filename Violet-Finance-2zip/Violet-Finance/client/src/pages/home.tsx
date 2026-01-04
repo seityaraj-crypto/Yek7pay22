@@ -669,29 +669,16 @@ export default function Home() {
               </Button>
             </Link>
 
-            <div className="flex flex-col sm:flex-row gap-4">
-              <button 
-                onClick={() => setShowAppointmentContact(true)}
-                className="relative px-10 py-4 rounded-2xl font-black text-lg shadow-xl transition-all hover:scale-105 active:scale-95 overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 bg-[length:200%_100%] animate-[shimmer_2s_ease-in-out_infinite]" />
-                <span className="relative z-10 flex items-center gap-3 text-white">
-                  <Clock className="w-5 h-5" />
-                  Make an Appointment 1
-                </span>
-              </button>
-              
-              <button 
-                onClick={() => setShowAppointmentContact(true)}
-                className="relative px-10 py-4 rounded-2xl font-black text-lg shadow-xl transition-all hover:scale-105 active:scale-95 overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-500 to-pink-500 bg-[length:200%_100%] animate-[shimmer_2s_ease-in-out_infinite]" />
-                <span className="relative z-10 flex items-center gap-3 text-white">
-                  <Clock className="w-5 h-5" />
-                  Make an Appointment 2
-                </span>
-              </button>
-            </div>
+            <button 
+              onClick={() => setShowAppointmentContact(true)}
+              className="relative px-10 py-4 rounded-2xl font-black text-lg shadow-xl transition-all hover:scale-105 active:scale-95 overflow-hidden"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 bg-[length:200%_100%] animate-[shimmer_2s_ease-in-out_infinite]" />
+              <span className="relative z-10 flex items-center gap-3 text-white">
+                <Clock className="w-5 h-5" />
+                Make an Appointment
+              </span>
+            </button>
           </div>
         </div>
       </section>
