@@ -953,24 +953,16 @@ export default function Home() {
                 ))}
               </div>
               
-              <div className="flex gap-3">
-                <a 
-                  href="tel:+919230967189" 
-                  className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 transition-all font-bold"
-                >
-                  <Phone className="w-4 h-4" />
-                  Call Now
-                </a>
-                <a 
-                  href="https://wa.me/919230967189?text=Hi%2C%20I%20am%20interested%20in%20Yek7Pay%20VIP%20partnership" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 transition-all font-bold"
-                >
-                  <MessageCircle className="w-4 h-4" />
-                  WhatsApp
-                </a>
-              </div>
+              <button 
+                onClick={() => { setActiveVipCard(null); setShowVipContact(true); }}
+                className="w-full relative py-4 rounded-xl font-black text-lg shadow-xl transition-all hover:scale-105 active:scale-95 overflow-hidden"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-green-400 via-emerald-500 to-green-400 bg-[length:200%_100%] animate-[shimmer_2s_ease-in-out_infinite]" />
+                <span className="relative z-10 flex items-center justify-center gap-3 text-white">
+                  <Phone className="w-5 h-5" />
+                  Contact Us
+                </span>
+              </button>
             </motion.div>
           </motion.div>
         )}
