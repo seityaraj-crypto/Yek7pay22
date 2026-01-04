@@ -13,6 +13,58 @@ import { useState, useEffect } from "react";
 export default function Features() {
   const [showPromoPopup, setShowPromoPopup] = useState(false);
   const [promoCount, setPromoCount] = useState(0);
+  const [activeVipCard, setActiveVipCard] = useState<number | null>(null);
+
+  const vipBenefits = [
+    { 
+      icon: TrendingUp, 
+      title: "Higher Commissions", 
+      desc: "Earn up to 3x more",
+      features: [
+        "Up to 3x higher commission rates on all services",
+        "Special bonus payouts on monthly targets",
+        "Additional incentives on new agent onboarding",
+        "Quarterly performance rewards",
+        "Early access to new high-margin products"
+      ]
+    },
+    { 
+      icon: Users, 
+      title: "Build Your Network", 
+      desc: "Onboard sub-agents",
+      features: [
+        "Onboard unlimited sub-agents under your network",
+        "Earn override commissions on sub-agent transactions",
+        "Dedicated recruitment support & training materials",
+        "Territory exclusivity options available",
+        "Network performance dashboard & analytics"
+      ]
+    },
+    { 
+      icon: HeadphonesIcon, 
+      title: "Priority Support", 
+      desc: "Dedicated manager",
+      features: [
+        "Dedicated relationship manager assigned",
+        "Priority 24/7 WhatsApp & call support",
+        "Faster issue resolution (< 2 hours SLA)",
+        "Direct escalation to senior management",
+        "Monthly business review calls"
+      ]
+    },
+    { 
+      icon: Award, 
+      title: "Exclusive Benefits", 
+      desc: "VIP perks & rewards",
+      features: [
+        "VIP badge & certification for your business",
+        "Featured listing on Yek7Pay partner directory",
+        "Exclusive invites to annual partner summit",
+        "Early access to new products & features",
+        "Special financing options for business expansion"
+      ]
+    }
+  ];
 
   useEffect(() => {
     if (promoCount >= 3) return;
@@ -264,21 +316,89 @@ export default function Features() {
                 </p>
 
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
-                  {[
-                    { icon: TrendingUp, title: "Higher Commissions", desc: "Earn up to 3x more" },
-                    { icon: Users, title: "Build Your Network", desc: "Onboard sub-agents" },
-                    { icon: HeadphonesIcon, title: "Priority Support", desc: "Dedicated manager" },
-                    { icon: Award, title: "Exclusive Benefits", desc: "VIP perks & rewards" }
-                  ].map((item, i) => (
-                    <div key={i} className="p-4 rounded-2xl bg-white/5 border border-amber-500/20 text-center hover:bg-white/10 transition-all">
-                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-yellow-500/30 to-amber-500/30 flex items-center justify-center mx-auto mb-3">
+                  {vipBenefits.map((item, i) => (
+                    <div 
+                      key={i} 
+                      onClick={() => setActiveVipCard(i)}
+                      className="p-4 rounded-2xl bg-white/5 border border-amber-500/20 text-center hover:bg-white/10 transition-all cursor-pointer hover:scale-105 hover:border-yellow-400/50 group"
+                    >
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-yellow-500/30 to-amber-500/30 flex items-center justify-center mx-auto mb-3 group-hover:from-yellow-500/50 group-hover:to-amber-500/50 transition-all">
                         <item.icon className="w-6 h-6 text-yellow-400" />
                       </div>
                       <h4 className="font-bold text-amber-100">{item.title}</h4>
                       <p className="text-sm text-amber-200/50">{item.desc}</p>
+                      <p className="text-xs text-yellow-400/70 mt-2 opacity-0 group-hover:opacity-100 transition-opacity">Click for details</p>
                     </div>
                   ))}
                 </div>
+
+                <AnimatePresence>
+                  {activeVipCard !== null && (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+                      onClick={() => setActiveVipCard(null)}
+                    >
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                        className="bg-gradient-to-br from-amber-900/90 via-yellow-900/80 to-amber-900/90 border-2 border-amber-500/50 rounded-3xl p-8 max-w-md w-full shadow-2xl relative"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <button 
+                          onClick={() => setActiveVipCard(null)}
+                          className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
+                        >
+                          <X className="w-5 h-5" />
+                        </button>
+                        
+                        <div className="flex items-center gap-4 mb-6">
+                          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-yellow-500 to-amber-500 flex items-center justify-center shadow-lg shadow-yellow-500/30">
+                            {(() => {
+                              const IconComponent = vipBenefits[activeVipCard].icon;
+                              return <IconComponent className="w-8 h-8 text-white" />;
+                            })()}
+                          </div>
+                          <div>
+                            <h3 className="text-2xl font-bold text-white">{vipBenefits[activeVipCard].title}</h3>
+                            <p className="text-amber-200/70">{vipBenefits[activeVipCard].desc}</p>
+                          </div>
+                        </div>
+                        
+                        <div className="space-y-3 mb-6">
+                          {vipBenefits[activeVipCard].features.map((feature, idx) => (
+                            <div key={idx} className="flex items-start gap-3">
+                              <CheckCircle2 className="w-5 h-5 text-green-400 shrink-0 mt-0.5" />
+                              <span className="text-amber-100/90">{feature}</span>
+                            </div>
+                          ))}
+                        </div>
+                        
+                        <div className="flex gap-3">
+                          <a 
+                            href="tel:+919230967189" 
+                            className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 transition-all font-bold"
+                          >
+                            <Phone className="w-4 h-4" />
+                            Call Now
+                          </a>
+                          <a 
+                            href="https://wa.me/919230967189?text=Hi%2C%20I%20am%20interested%20in%20Yek7Pay%20VIP%20partnership" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 transition-all font-bold"
+                          >
+                            <MessageCircle className="w-4 h-4" />
+                            WhatsApp
+                          </a>
+                        </div>
+                      </motion.div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
 
                 <div className="text-center">
                   <p className="text-lg text-amber-100/80 mb-6 font-medium">Contact us for VIP Partnership</p>
