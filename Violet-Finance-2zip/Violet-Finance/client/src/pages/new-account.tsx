@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { UserPlus, User, Mail, Phone, Lock, Eye, EyeOff, MapPin, Calendar, CreditCard, Upload, FileText, ArrowRight, CheckCircle2, Shield, Image, Camera, Navigation } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState, useRef } from "react";
+import { NetworkDots } from "@/components/network-dots";
 
 export default function NewAccount() {
   const [showPassword, setShowPassword] = useState(false);
@@ -65,7 +66,9 @@ export default function NewAccount() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#0a0a2e] text-white">
+    <div className="min-h-screen bg-[#0a0a2e] text-white relative">
+      <NetworkDots className="absolute top-24 right-0 w-64 h-64 opacity-40" />
+      <NetworkDots className="absolute bottom-40 left-0 w-56 h-56 opacity-30" />
       <Navbar />
       
       <main className="pt-32 pb-24">

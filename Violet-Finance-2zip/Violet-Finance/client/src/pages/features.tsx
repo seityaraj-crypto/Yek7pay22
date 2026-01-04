@@ -9,6 +9,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { useState, useEffect } from "react";
+import { NetworkDots } from "@/components/network-dots";
 
 export default function Features() {
   const [showPromoPopup, setShowPromoPopup] = useState(false);
@@ -182,7 +183,9 @@ export default function Features() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#0a0a2e] text-white">
+    <div className="min-h-screen bg-[#0a0a2e] text-white relative">
+      <NetworkDots className="absolute top-24 right-0 w-80 h-80 opacity-40" />
+      <NetworkDots className="absolute bottom-40 left-0 w-60 h-60 opacity-30" />
       <AnimatePresence>
         {showPromoPopup && (
           <motion.div

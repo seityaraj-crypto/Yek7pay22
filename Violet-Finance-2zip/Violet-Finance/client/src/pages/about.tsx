@@ -1,10 +1,13 @@
 import { Navbar, Footer } from "@/components/layout";
 import { motion } from "framer-motion";
 import { Building2, Target, Eye, ShieldCheck, Zap, Globe, Landmark, CreditCard, QrCode, Smartphone, Briefcase, Plane, ClipboardCheck } from "lucide-react";
+import { NetworkDots } from "@/components/network-dots";
 
 export default function About() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#1a0b3b] via-[#0d0d2b] to-[#0a1a3a] text-white">
+    <div className="min-h-screen bg-gradient-to-b from-[#1a0b3b] via-[#0d0d2b] to-[#0a1a3a] text-white relative">
+      <NetworkDots className="absolute top-20 right-0 w-80 h-80 opacity-50" />
+      <NetworkDots className="absolute bottom-40 left-0 w-64 h-64 opacity-40" />
       <Navbar />
       
       <main className="container mx-auto px-4 pt-32 pb-24">

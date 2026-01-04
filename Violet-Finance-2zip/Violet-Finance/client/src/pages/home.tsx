@@ -4,6 +4,7 @@ import { ServiceCard } from "@/components/service-card";
 import { SectionHeader } from "@/components/section-header";
 import { AuthDialog } from "@/components/auth-dialog";
 import { WelcomePopup } from "@/components/welcome-popup";
+import { NetworkDots } from "@/components/network-dots";
 import { useState } from "react";
 import { Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
@@ -306,7 +307,9 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0a1a3a] via-[#0d0d2b] to-[#1a0b3b] text-white">
+    <div className="min-h-screen bg-gradient-to-br from-[#0a1a3a] via-[#0d0d2b] to-[#1a0b3b] text-white relative">
+      <NetworkDots className="absolute top-32 right-0 w-72 h-72 opacity-40" />
+      <NetworkDots className="absolute top-[60%] left-0 w-64 h-64 opacity-30" />
       <WelcomePopup />
       <Navbar />
       
@@ -412,7 +415,7 @@ export default function Home() {
             <ServiceCard 
               icon={Send}
               title="Advance DMT"
-              description={<>Seamlessly transfer funds to any bank account in India instantly with Yek7pay's <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-blue-500 font-bold">24/7</span> DMT service.</>}
+              description="Seamlessly transfer funds to any bank account in India instantly with Yek7pay's 24/7 DMT service."
               delay={0.1}
               variant="featured"
               features={[
