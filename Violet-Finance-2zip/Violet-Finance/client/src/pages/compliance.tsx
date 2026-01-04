@@ -1,6 +1,6 @@
 import { Navbar, Footer } from "@/components/layout";
 import { motion, AnimatePresence } from "framer-motion";
-import { ClipboardCheck, FileText, Scale, Building, Upload, CheckCircle2, AlertCircle, Zap, ArrowLeft, MessageCircle, Clock, X, IndianRupee, Briefcase, Shield, Award, FileCheck, Stamp } from "lucide-react";
+import { ClipboardCheck, FileText, Scale, Building, Upload, CheckCircle2, AlertCircle, Zap, ArrowLeft, MessageCircle, Clock, X, IndianRupee, Briefcase, Shield, Award, FileCheck, Stamp, Phone, Mail, ArrowRight } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -143,6 +143,9 @@ export default function Compliance() {
   const [files, setFiles] = useState<File[]>([]);
   const [showTimePicker, setShowTimePicker] = useState(false);
   const [activeNumber, setActiveNumber] = useState<string | null>(null);
+  const [showAppointmentContact, setShowAppointmentContact] = useState(false);
+  const [appointmentContactOption, setAppointmentContactOption] = useState<'call' | 'whatsapp' | 'email' | null>(null);
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState<string | null>(null);
   const { toast } = useToast();
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -197,10 +200,9 @@ export default function Compliance() {
   };
 
   const timeSlots = [
-    "09:00 AM", "09:30 AM", "10:00 AM", "10:30 AM",
-    "11:00 AM", "11:30 AM", "12:00 PM", "12:30 PM",
-    "02:00 PM", "02:30 PM", "03:00 PM", "03:30 PM",
-    "04:00 PM", "04:30 PM", "05:00 PM", "05:30 PM"
+    "09:00 AM", "09:30 AM", "10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM",
+    "12:00 PM", "12:30 PM", "01:00 PM", "01:30 PM", "02:00 PM", "02:30 PM",
+    "03:00 PM", "03:30 PM", "04:00 PM", "04:30 PM", "05:00 PM", "05:30 PM", "06:00 PM"
   ];
 
   return (
@@ -233,24 +235,16 @@ export default function Compliance() {
               <CheckCircle2 className="text-emerald-400 h-6 w-6" />
               Explore All Compliance Services
             </h2>
-            <div className="flex flex-col sm:flex-row gap-3">
-              <Button 
-                variant="outline"
-                className="bg-purple-400/10 hover:bg-purple-400/20 text-white rounded-full px-8 h-12 font-bold shadow-lg shadow-purple-500/10 transition-all hover:scale-105 active:scale-95 flex items-center gap-2 border border-purple-500/20"
-                onClick={() => handleWhatsAppAppointment("919230967187")}
-              >
-                <MessageCircle className="h-5 w-5 fill-[#25D366] text-[#25D366]" />
-                <span className="text-sm">Make an Appointment 1</span>
-              </Button>
-              <Button 
-                variant="outline"
-                className="bg-purple-400/10 hover:bg-purple-400/20 text-white rounded-full px-8 h-12 font-bold shadow-lg shadow-purple-500/10 transition-all hover:scale-105 active:scale-95 flex items-center gap-2 border border-purple-500/20"
-                onClick={() => handleWhatsAppAppointment("919230967189")}
-              >
-                <MessageCircle className="h-5 w-5 fill-[#25D366] text-[#25D366]" />
-                <span className="text-sm">Make an Appointment 2</span>
-              </Button>
-            </div>
+            <button 
+              onClick={() => setShowAppointmentContact(true)}
+              className="relative px-10 py-4 rounded-2xl font-black text-lg shadow-xl transition-all hover:scale-105 active:scale-95 overflow-hidden"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 bg-[length:200%_100%] animate-[shimmer_2s_ease-in-out_infinite]" />
+              <span className="relative z-10 flex items-center gap-3 text-white">
+                <Clock className="w-5 h-5" />
+                Make an Appointment
+              </span>
+            </button>
           </div>
 
           <div className="space-y-8">
@@ -390,6 +384,191 @@ export default function Compliance() {
               </div>
             </motion.div>
           </div>
+        )}
+      </AnimatePresence>
+
+      {/* Unified Appointment Contact Modal */}
+      <AnimatePresence>
+        {showAppointmentContact && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            onClick={() => { setShowAppointmentContact(false); setAppointmentContactOption(null); setSelectedTimeSlot(null); }}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="bg-gradient-to-br from-purple-900/40 via-pink-900/30 to-purple-900/40 border-2 border-purple-500/30 rounded-3xl p-8 max-w-md w-full shadow-2xl relative backdrop-blur-xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button 
+                onClick={() => { setShowAppointmentContact(false); setAppointmentContactOption(null); setSelectedTimeSlot(null); }}
+                className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+              
+              {!selectedTimeSlot ? (
+                <>
+                  <div className="text-center mb-6">
+                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mx-auto mb-4 shadow-lg shadow-purple-500/30">
+                      <Clock className="w-8 h-8 text-white" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-white">Select Time Slot</h3>
+                    <p className="text-purple-200/70">Choose your preferred appointment time</p>
+                  </div>
+                  
+                  <div className="grid grid-cols-3 gap-2 max-h-64 overflow-y-auto pr-2">
+                    {timeSlots.map((time) => (
+                      <button
+                        key={time}
+                        onClick={() => setSelectedTimeSlot(time)}
+                        className="p-3 rounded-xl bg-white/10 border border-purple-400/30 hover:bg-purple-500/30 hover:border-purple-400 transition-all text-white font-medium text-sm"
+                      >
+                        {time}
+                      </button>
+                    ))}
+                  </div>
+                </>
+              ) : !appointmentContactOption ? (
+                <>
+                  <button 
+                    onClick={() => setSelectedTimeSlot(null)}
+                    className="flex items-center gap-2 text-purple-300 hover:text-purple-200 transition-colors mb-4"
+                  >
+                    <ArrowRight className="w-4 h-4 rotate-180" />
+                    <span className="text-sm font-medium">Change Time</span>
+                  </button>
+                  
+                  <div className="text-center mb-6">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/20 border border-purple-400/30 mb-4">
+                      <Clock className="w-4 h-4 text-purple-300" />
+                      <span className="text-purple-200 font-bold">{selectedTimeSlot}</span>
+                    </div>
+                    <h3 className="text-xl font-bold text-white">How would you like to book?</h3>
+                  </div>
+                  
+                  <div className="space-y-3">
+                    <button 
+                      onClick={() => setAppointmentContactOption('call')}
+                      className="w-full flex items-center gap-4 p-4 rounded-2xl bg-white/10 border border-purple-400/30 hover:bg-white/20 transition-all group"
+                    >
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center">
+                        <Phone className="w-6 h-6 text-white" />
+                      </div>
+                      <div className="text-left">
+                        <h4 className="font-bold text-white">Call Us</h4>
+                        <p className="text-sm text-purple-200/60">Schedule via phone call</p>
+                      </div>
+                      <ArrowRight className="w-5 h-5 text-purple-400/50 ml-auto group-hover:translate-x-1 transition-transform" />
+                    </button>
+                    
+                    <button 
+                      onClick={() => setAppointmentContactOption('whatsapp')}
+                      className="w-full flex items-center gap-4 p-4 rounded-2xl bg-white/10 border border-purple-400/30 hover:bg-white/20 transition-all group"
+                    >
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
+                        <MessageCircle className="w-6 h-6 text-white" />
+                      </div>
+                      <div className="text-left">
+                        <h4 className="font-bold text-white">WhatsApp</h4>
+                        <p className="text-sm text-purple-200/60">Book via WhatsApp chat</p>
+                      </div>
+                      <ArrowRight className="w-5 h-5 text-purple-400/50 ml-auto group-hover:translate-x-1 transition-transform" />
+                    </button>
+                    
+                    <button 
+                      onClick={() => setAppointmentContactOption('email')}
+                      className="w-full flex items-center gap-4 p-4 rounded-2xl bg-white/10 border border-purple-400/30 hover:bg-white/20 transition-all group"
+                    >
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-400 to-indigo-600 flex items-center justify-center">
+                        <Mail className="w-6 h-6 text-white" />
+                      </div>
+                      <div className="text-left">
+                        <h4 className="font-bold text-white">Email</h4>
+                        <p className="text-sm text-purple-200/60">Book via email</p>
+                      </div>
+                      <ArrowRight className="w-5 h-5 text-purple-400/50 ml-auto group-hover:translate-x-1 transition-transform" />
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <button 
+                    onClick={() => setAppointmentContactOption(null)}
+                    className="flex items-center gap-2 text-purple-300 hover:text-purple-200 transition-colors mb-4"
+                  >
+                    <ArrowRight className="w-4 h-4 rotate-180" />
+                    <span className="text-sm font-medium">Back</span>
+                  </button>
+                  
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/20 border border-purple-400/30 mb-4 mx-auto">
+                    <Clock className="w-4 h-4 text-purple-300" />
+                    <span className="text-purple-200 font-bold">{selectedTimeSlot}</span>
+                  </div>
+                  
+                  {appointmentContactOption === 'call' && (
+                    <div className="text-center">
+                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center mx-auto mb-4 shadow-lg">
+                        <Phone className="w-8 h-8 text-white" />
+                      </div>
+                      <h3 className="text-2xl font-bold text-white mb-2">Call Us</h3>
+                      <p className="text-purple-200/70 mb-6">Tap to call and confirm your {selectedTimeSlot} appointment</p>
+                      <div className="space-y-3">
+                        <a href="tel:+919230967189" className="flex items-center justify-center gap-3 p-4 rounded-2xl bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 transition-all font-bold text-white">
+                          <Phone className="w-5 h-5" />
+                          +91 92309 67189
+                        </a>
+                        <a href="tel:+919230967187" className="flex items-center justify-center gap-3 p-4 rounded-2xl bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 transition-all font-bold text-white">
+                          <Phone className="w-5 h-5" />
+                          +91 92309 67187
+                        </a>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {appointmentContactOption === 'whatsapp' && (
+                    <div className="text-center">
+                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center mx-auto mb-4 shadow-lg">
+                        <MessageCircle className="w-8 h-8 text-white" />
+                      </div>
+                      <h3 className="text-2xl font-bold text-white mb-2">WhatsApp</h3>
+                      <p className="text-purple-200/70 mb-6">Tap to book your {selectedTimeSlot} appointment</p>
+                      <div className="space-y-3">
+                        <a href={`https://wa.me/919230967189?text=Hello%2C%20I%20would%20like%20to%20make%20an%20appointment%20for%20Tax%20Audit%2FCompliance%20services%20at%20${encodeURIComponent(selectedTimeSlot)}`} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-3 p-4 rounded-2xl bg-gradient-to-r from-green-500 to-green-600 hover:from-green-400 hover:to-green-500 transition-all font-bold text-white">
+                          <MessageCircle className="w-5 h-5" />
+                          +91 92309 67189
+                        </a>
+                        <a href={`https://wa.me/919230967187?text=Hello%2C%20I%20would%20like%20to%20make%20an%20appointment%20for%20Tax%20Audit%2FCompliance%20services%20at%20${encodeURIComponent(selectedTimeSlot)}`} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-3 p-4 rounded-2xl bg-gradient-to-r from-green-500 to-green-600 hover:from-green-400 hover:to-green-500 transition-all font-bold text-white">
+                          <MessageCircle className="w-5 h-5" />
+                          +91 92309 67187
+                        </a>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {appointmentContactOption === 'email' && (
+                    <div className="text-center">
+                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-400 to-indigo-600 flex items-center justify-center mx-auto mb-4 shadow-lg">
+                        <Mail className="w-8 h-8 text-white" />
+                      </div>
+                      <h3 className="text-2xl font-bold text-white mb-2">Email Us</h3>
+                      <p className="text-purple-200/70 mb-6">Tap to email and book your {selectedTimeSlot} appointment</p>
+                      <div className="space-y-3">
+                        <a href={`mailto:info@yek7pay.com?subject=Appointment%20Request%20for%20${encodeURIComponent(selectedTimeSlot)}&body=Hello%2C%0A%0AI%20would%20like%20to%20make%20an%20appointment%20for%20Tax%20Audit%2FCompliance%20services%20at%20${encodeURIComponent(selectedTimeSlot)}.%0A%0APlease%20confirm%20the%20availability.%0A%0AThank%20you.`} className="flex items-center justify-center gap-3 p-4 rounded-2xl bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-400 hover:to-indigo-500 transition-all font-bold text-white">
+                          <Mail className="w-5 h-5" />
+                          info@yek7pay.com
+                        </a>
+                      </div>
+                    </div>
+                  )}
+                </>
+              )}
+            </motion.div>
+          </motion.div>
         )}
       </AnimatePresence>
 
