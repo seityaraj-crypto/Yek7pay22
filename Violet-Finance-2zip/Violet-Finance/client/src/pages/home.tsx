@@ -3,6 +3,7 @@ import { Hero } from "@/components/hero";
 import { ServiceCard } from "@/components/service-card";
 import { SectionHeader } from "@/components/section-header";
 import { AuthDialog } from "@/components/auth-dialog";
+import { WelcomePopup } from "@/components/welcome-popup";
 import { useState } from "react";
 import { Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
@@ -249,6 +250,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0a1a3a] via-[#0d0d2b] to-[#1a0b3b] text-white">
+      <WelcomePopup />
       <Navbar />
       
       <Hero />
