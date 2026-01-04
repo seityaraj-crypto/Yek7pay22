@@ -14,12 +14,9 @@ export function NetworkDots({ className = "" }: NetworkDotsProps) {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    let animationId: number;
     let particles: Array<{
       x: number;
       y: number;
-      vx: number;
-      vy: number;
       radius: number;
     }> = [];
 
@@ -28,6 +25,7 @@ export function NetworkDots({ className = "" }: NetworkDotsProps) {
       canvas.width = rect.width || 600;
       canvas.height = rect.height || 400;
       initParticles();
+      draw();
     };
 
     const initParticles = () => {
@@ -37,8 +35,6 @@ export function NetworkDots({ className = "" }: NetworkDotsProps) {
         particles.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          vx: (Math.random() - 0.5) * 0.5,
-          vy: (Math.random() - 0.5) * 0.5,
           radius: Math.random() * 2.5 + 1.5,
         });
       }
@@ -48,12 +44,6 @@ export function NetworkDots({ className = "" }: NetworkDotsProps) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       particles.forEach((p, i) => {
-        p.x += p.vx;
-        p.y += p.vy;
-
-        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
-
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
         const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius);
@@ -78,18 +68,14 @@ export function NetworkDots({ className = "" }: NetworkDotsProps) {
           }
         }
       });
-
-      animationId = requestAnimationFrame(draw);
     };
 
     resize();
-    draw();
 
     window.addEventListener("resize", resize);
 
     return () => {
       window.removeEventListener("resize", resize);
-      cancelAnimationFrame(animationId);
     };
   }, []);
 

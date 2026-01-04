@@ -184,7 +184,7 @@ export default function Features() {
 
   return (
     <div className="min-h-screen bg-[#0a0a2e] text-white relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-1/2 h-screen z-0 opacity-60">
+      <div className="absolute top-0 right-0 w-1/2 h-screen z-0 opacity-30">
         <NetworkDots />
       </div>
       <AnimatePresence>
