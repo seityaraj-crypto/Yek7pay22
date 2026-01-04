@@ -298,13 +298,13 @@ export default function Home() {
             </div>
             
             <div className="max-w-3xl relative z-10">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-blue-500/10 to-pink-500/10 text-blue-400 text-xs font-bold mb-8 border border-white/10">
+              <span className="text-primary font-bold text-sm tracking-wider uppercase mb-3 block">
                 ✈️ Travel & Lifestyle
-              </div>
-              <h2 className="text-4xl md:text-7xl font-display font-black text-white mb-8 leading-tight">
-                Book <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-pink-400 to-blue-400">Flights, Hotels</span> & <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-blue-400">Buses</span> Instantly
+              </span>
+              <h2 className="text-3xl md:text-4xl font-display font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-blue-400 to-purple-500">
+                Book Flights, Hotels & Buses Instantly
               </h2>
-              <p className="text-xl text-gray-300 mb-12 font-medium leading-relaxed">
+              <p className="text-lg text-white mb-12">
                 Experience the world with Yek7pay. Get exclusive deals on domestic and international bookings with the lowest convenience fees in the industry.
               </p>
               
