@@ -743,151 +743,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* VIP Franchise & Distributor Section */}
-      <section className="py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-amber-500/10 via-yellow-500/5 to-amber-500/10" />
-        <div className="container mx-auto px-4 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="relative"
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-amber-500/20 via-yellow-500/10 to-amber-500/20 rounded-[3rem] blur-3xl" />
-            <div className="relative p-8 md:p-16 rounded-[3rem] bg-gradient-to-br from-amber-900/40 via-yellow-900/30 to-amber-900/40 border-2 border-amber-500/40 overflow-hidden">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-yellow-400/20 to-transparent rounded-full blur-3xl" />
-              <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-amber-400/20 to-transparent rounded-full blur-3xl" />
-              
-              <div className="relative z-10">
-                <div className="flex items-center justify-center gap-3 mb-6">
-                  <Crown className="w-10 h-10 text-yellow-400 animate-pulse" />
-                  <div className="px-4 py-1.5 rounded-full bg-gradient-to-r from-yellow-500 to-amber-500 text-black text-sm font-black uppercase tracking-wider">
-                    VIP Services
-                  </div>
-                  <Crown className="w-10 h-10 text-yellow-400 animate-pulse" />
-                </div>
-                
-                <h2 className="text-3xl md:text-5xl font-display font-black text-center mb-4">
-                  Become a <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 via-amber-400 to-yellow-300">Franchise or Distributor</span>
-                </h2>
-                <p className="text-xl text-amber-100/70 text-center max-w-3xl mx-auto mb-10">
-                  Take your business to the next level! Partner with Yek7Pay as a Franchise or Distributor and unlock exclusive benefits, higher commissions, and priority support.
-                </p>
-
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
-                  {vipBenefits.map((item, i) => (
-                    <div 
-                      key={i} 
-                      onClick={() => setActiveVipCard(i)}
-                      className="p-4 rounded-2xl bg-white/5 border border-amber-500/20 text-center hover:bg-white/10 transition-all cursor-pointer hover:scale-105 hover:border-yellow-400/50 group"
-                    >
-                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-yellow-500/30 to-amber-500/30 flex items-center justify-center mx-auto mb-3 group-hover:from-yellow-500/50 group-hover:to-amber-500/50 transition-all">
-                        <item.icon className="w-6 h-6 text-yellow-400" />
-                      </div>
-                      <h4 className="font-bold text-amber-100">{item.title}</h4>
-                      <p className="text-sm text-amber-200/50">{item.desc}</p>
-                      <p className="text-xs text-yellow-400/70 mt-2 opacity-0 group-hover:opacity-100 transition-opacity">Click for details</p>
-                    </div>
-                  ))}
-                </div>
-
-                <AnimatePresence>
-                  {activeVipCard !== null && (
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-                      onClick={() => setActiveVipCard(null)}
-                    >
-                      <motion.div
-                        initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                        animate={{ opacity: 1, scale: 1, y: 0 }}
-                        exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                        className="bg-gradient-to-br from-amber-900/90 via-yellow-900/80 to-amber-900/90 border-2 border-amber-500/50 rounded-3xl p-8 max-w-md w-full shadow-2xl"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <button 
-                          onClick={() => setActiveVipCard(null)}
-                          className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
-                        >
-                          <X className="w-5 h-5" />
-                        </button>
-                        
-                        <div className="flex items-center gap-4 mb-6">
-                          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-yellow-500 to-amber-500 flex items-center justify-center shadow-lg shadow-yellow-500/30">
-                            {(() => {
-                              const IconComponent = vipBenefits[activeVipCard].icon;
-                              return <IconComponent className="w-8 h-8 text-white" />;
-                            })()}
-                          </div>
-                          <div>
-                            <h3 className="text-2xl font-bold text-white">{vipBenefits[activeVipCard].title}</h3>
-                            <p className="text-amber-200/70">{vipBenefits[activeVipCard].desc}</p>
-                          </div>
-                        </div>
-                        
-                        <div className="space-y-3 mb-6">
-                          {vipBenefits[activeVipCard].features.map((feature, idx) => (
-                            <div key={idx} className="flex items-start gap-3">
-                              <CheckCircle2 className="w-5 h-5 text-green-400 shrink-0 mt-0.5" />
-                              <span className="text-amber-100/90">{feature}</span>
-                            </div>
-                          ))}
-                        </div>
-                        
-                        <div className="flex gap-3">
-                          <a 
-                            href="tel:+919230967189" 
-                            className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 transition-all font-bold"
-                          >
-                            <Phone className="w-4 h-4" />
-                            Call Now
-                          </a>
-                          <a 
-                            href="https://wa.me/919230967189?text=Hi%2C%20I%20am%20interested%20in%20Yek7Pay%20VIP%20partnership" 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 transition-all font-bold"
-                          >
-                            <MessageCircle className="w-4 h-4" />
-                            WhatsApp
-                          </a>
-                        </div>
-                      </motion.div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-
-                <div className="text-center">
-                  <p className="text-lg text-amber-100/80 mb-6 font-medium">Contact us for VIP Partnership</p>
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <a href="tel:+919230967189" className="flex items-center gap-3 px-6 py-4 rounded-2xl bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 transition-all hover:scale-105 shadow-lg shadow-green-500/30">
-                      <Phone className="w-5 h-5" />
-                      <span className="font-bold">+91 92309 67189</span>
-                    </a>
-                    <a href="tel:+919230967187" className="flex items-center gap-3 px-6 py-4 rounded-2xl bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 transition-all hover:scale-105 shadow-lg shadow-green-500/30">
-                      <Phone className="w-5 h-5" />
-                      <span className="font-bold">+91 92309 67187</span>
-                    </a>
-                  </div>
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-4">
-                    <a href="mailto:info@yek7pay.com?subject=VIP%20Franchise%20Enquiry" className="flex items-center gap-3 px-6 py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 transition-all hover:scale-105 shadow-lg shadow-blue-500/30">
-                      <Mail className="w-5 h-5" />
-                      <span className="font-bold">info@yek7pay.com</span>
-                    </a>
-                    <a href="https://wa.me/919230967189?text=Hi%2C%20I%20am%20interested%20in%20Yek7Pay%20VIP%20Franchise%2FDistributor%20partnership" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 px-6 py-4 rounded-2xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 transition-all hover:scale-105 shadow-lg shadow-emerald-500/30">
-                      <MessageCircle className="w-5 h-5" />
-                      <span className="font-bold">WhatsApp Us</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
       {/* Payment Solutions Section */}
       <section className="py-24 bg-black/20">
         <div className="container mx-auto px-4">
@@ -990,6 +845,122 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* VIP Franchise & Distributor Section */}
+      <section className="py-24 bg-transparent">
+        <div className="container mx-auto px-4">
+          <div className="bg-gradient-to-r from-amber-600/60 to-yellow-600/60 backdrop-blur-2xl rounded-[2.5rem] p-12 text-white border border-amber-500/30 shadow-2xl relative overflow-hidden group">
+            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />
+            <div className="flex flex-col items-center text-center relative z-10">
+              <div className="flex items-center gap-3 mb-6">
+                <Crown className="w-8 h-8 text-yellow-300 animate-pulse" />
+                <div className="px-4 py-1.5 rounded-full bg-gradient-to-r from-yellow-400 to-amber-400 text-black text-sm font-black uppercase tracking-wider">
+                  VIP Services
+                </div>
+                <Crown className="w-8 h-8 text-yellow-300 animate-pulse" />
+              </div>
+              
+              <h2 className="text-4xl md:text-5xl font-black mb-4 leading-tight">Become a Franchise or Distributor</h2>
+              <p className="text-xl text-amber-100/80 font-medium mb-8 max-w-2xl">Unlock exclusive benefits, higher commissions, and priority support with Yek7Pay VIP partnership.</p>
+              
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 w-full max-w-4xl">
+                {vipBenefits.map((item, i) => (
+                  <div 
+                    key={i} 
+                    onClick={() => setActiveVipCard(i)}
+                    className="p-4 rounded-2xl bg-white/10 border border-amber-400/30 text-center hover:bg-white/20 transition-all cursor-pointer hover:scale-105 group/card"
+                  >
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-yellow-400 to-amber-500 flex items-center justify-center mx-auto mb-2">
+                      <item.icon className="w-5 h-5 text-black" />
+                    </div>
+                    <h4 className="font-bold text-white text-sm">{item.title}</h4>
+                    <p className="text-xs text-amber-200/60 mt-1 opacity-0 group-hover/card:opacity-100 transition-opacity">Click for details</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex flex-wrap gap-4 justify-center">
+                <a href="tel:+919230967189" className="flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-amber-700 hover:bg-amber-100 transition-all font-bold shadow-lg">
+                  <Phone className="w-5 h-5" />
+                  +91 92309 67189
+                </a>
+                <a href="https://wa.me/919230967189?text=Hi%2C%20I%20am%20interested%20in%20Yek7Pay%20VIP%20Franchise%2FDistributor%20partnership" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-6 py-3 rounded-xl bg-green-500 hover:bg-green-400 transition-all font-bold shadow-lg">
+                  <MessageCircle className="w-5 h-5" />
+                  WhatsApp Us
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <AnimatePresence>
+        {activeVipCard !== null && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            onClick={() => setActiveVipCard(null)}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="bg-gradient-to-br from-amber-900/90 via-yellow-900/80 to-amber-900/90 border-2 border-amber-500/50 rounded-3xl p-8 max-w-md w-full shadow-2xl relative"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button 
+                onClick={() => setActiveVipCard(null)}
+                className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+              
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-yellow-500 to-amber-500 flex items-center justify-center shadow-lg shadow-yellow-500/30">
+                  {(() => {
+                    const IconComponent = vipBenefits[activeVipCard].icon;
+                    return <IconComponent className="w-8 h-8 text-white" />;
+                  })()}
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-white">{vipBenefits[activeVipCard].title}</h3>
+                  <p className="text-amber-200/70">{vipBenefits[activeVipCard].desc}</p>
+                </div>
+              </div>
+              
+              <div className="space-y-3 mb-6">
+                {vipBenefits[activeVipCard].features.map((feature, idx) => (
+                  <div key={idx} className="flex items-start gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-green-400 shrink-0 mt-0.5" />
+                    <span className="text-amber-100/90">{feature}</span>
+                  </div>
+                ))}
+              </div>
+              
+              <div className="flex gap-3">
+                <a 
+                  href="tel:+919230967189" 
+                  className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 transition-all font-bold"
+                >
+                  <Phone className="w-4 h-4" />
+                  Call Now
+                </a>
+                <a 
+                  href="https://wa.me/919230967189?text=Hi%2C%20I%20am%20interested%20in%20Yek7Pay%20VIP%20partnership" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 transition-all font-bold"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  WhatsApp
+                </a>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Still Got a Question Section */}
       <section className="py-16 bg-transparent">
