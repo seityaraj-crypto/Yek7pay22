@@ -19,7 +19,7 @@ export default function Features() {
     const timer = setTimeout(() => {
       setShowPromoPopup(true);
       setPromoCount(prev => prev + 1);
-    }, 10000);
+    }, 50000);
 
     return () => clearTimeout(timer);
   }, [promoCount, showPromoPopup]);
