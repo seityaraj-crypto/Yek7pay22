@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Menu, Shield, Bell, ChevronDown, Landmark, Send, Globe, Fingerprint, CreditCard, Banknote, Briefcase, Zap, Receipt, Plane, Train, Building2, ClipboardCheck, Smartphone, TabletSmartphone } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -19,6 +19,18 @@ export function Navbar() {
   const [isAuthOpen, setIsAuthOpen] = React.useState(false);
   const [authView, setAuthView] = React.useState<"menu" | "login">("menu");
   const [expandedCategory, setExpandedCategory] = React.useState<string | null>(null);
+  const [, setLocation] = useLocation();
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const goHome = () => {
+    setLocation('/');
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
+  };
 
   const openLogin = () => {
     setAuthView("login");
@@ -69,7 +81,7 @@ export function Navbar() {
   return (
     <nav className="fixed w-full z-50 top-0 border-b border-white/5 bg-[#f5f5f7]/95 backdrop-blur-xl h-14 flex items-center shadow-sm">
       <div className="container mx-auto px-4 flex items-center justify-between">
-        <Link href="/" className="flex items-center group">
+        <button onClick={goHome} className="flex items-center group cursor-pointer">
           <div className="relative">
              <img 
                src={logoImg} 
@@ -77,11 +89,11 @@ export function Navbar() {
                className="h-10 w-auto transition-all duration-500 group-hover:scale-110 brightness-110 drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]" 
              />
           </div>
-        </Link>
+        </button>
 
         {/* Desktop Nav */}
         <div className="hidden lg:flex items-center gap-6">
-          <Link href="/" className="text-sm font-bold text-slate-700 hover:text-blue-600 active:text-purple-600 transition-all uppercase tracking-widest px-4 h-9 flex items-center rounded-lg hover:bg-blue-50/50">Home</Link>
+          <button onClick={goHome} className="text-sm font-bold text-slate-700 hover:text-blue-600 active:text-purple-600 transition-all uppercase tracking-widest px-4 h-9 flex items-center rounded-lg hover:bg-blue-50/50 cursor-pointer">Home</button>
           
           <DropdownMenu>
             <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-bold text-slate-700 hover:text-blue-600 active:text-purple-600 transition-all uppercase tracking-widest outline-none px-4 h-9 rounded-lg hover:bg-blue-50/50">
