@@ -850,9 +850,11 @@ export default function Home() {
 
       {/* VIP Franchise & Distributor Section */}
       <section className="py-24 bg-transparent">
-        <div className="container mx-auto px-4">
-          <div className="bg-gradient-to-r from-amber-500/30 via-yellow-500/20 to-blue-900/40 backdrop-blur-2xl rounded-[2.5rem] p-12 text-white border border-amber-500/20 shadow-2xl relative overflow-hidden group">
-            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />
+        <div className="container mx-auto px-4 relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-amber-500/20 via-yellow-500/10 to-amber-500/20 rounded-[2.5rem] blur-3xl" />
+          <div className="relative bg-gradient-to-br from-amber-900/40 via-yellow-900/30 to-amber-900/40 backdrop-blur-2xl rounded-[2.5rem] p-12 text-white border-2 border-amber-500/40 shadow-2xl overflow-hidden group">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-yellow-400/20 to-transparent rounded-full blur-3xl" />
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-amber-400/20 to-transparent rounded-full blur-3xl" />
             <div className="flex flex-col items-center text-center relative z-10">
               <div className="flex items-center gap-3 mb-6">
                 <Crown className="w-8 h-8 text-yellow-300 animate-pulse" />
@@ -870,13 +872,14 @@ export default function Home() {
                   <div 
                     key={i} 
                     onClick={() => setActiveVipCard(i)}
-                    className="p-4 rounded-2xl bg-white/10 border border-amber-400/30 text-center hover:bg-white/20 transition-all cursor-pointer hover:scale-105 group/card"
+                    className="p-4 rounded-2xl bg-white/5 border border-amber-500/20 text-center hover:bg-white/10 transition-all cursor-pointer hover:scale-105 hover:border-yellow-400/50 group/card"
                   >
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-yellow-400 to-amber-500 flex items-center justify-center mx-auto mb-2">
-                      <item.icon className="w-5 h-5 text-black" />
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-yellow-500/30 to-amber-500/30 flex items-center justify-center mx-auto mb-3 group-hover/card:from-yellow-500/50 group-hover/card:to-amber-500/50 transition-all">
+                      <item.icon className="w-6 h-6 text-yellow-400" />
                     </div>
-                    <h4 className="font-bold text-white text-sm">{item.title}</h4>
-                    <p className="text-xs text-amber-200/60 mt-1 opacity-0 group-hover/card:opacity-100 transition-opacity">Click for details</p>
+                    <h4 className="font-bold text-amber-100">{item.title}</h4>
+                    <p className="text-sm text-amber-200/50">{item.desc}</p>
+                    <p className="text-xs text-yellow-400/70 mt-2 opacity-0 group-hover/card:opacity-100 transition-opacity">Click for details</p>
                   </div>
                 ))}
               </div>
