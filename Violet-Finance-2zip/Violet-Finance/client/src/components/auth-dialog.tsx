@@ -414,7 +414,7 @@ export function AuthDialog({ isOpen, onOpenChange, defaultView = "menu" }: AuthD
                 <UserPlus className="h-7 w-7" />
               </div>
               <DialogTitle className="text-2xl font-display font-black text-center bg-clip-text text-transparent bg-gradient-to-r from-green-400 via-emerald-400 to-teal-400 mb-1">
-                Open New Account
+                Create Your Account
               </DialogTitle>
               <DialogDescription className="text-white/60 text-sm text-center mb-2">
                 Complete KYC to start using Yek7Pay services
