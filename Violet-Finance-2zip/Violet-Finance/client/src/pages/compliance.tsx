@@ -1,54 +1,142 @@
 import { Navbar, Footer } from "@/components/layout";
 import { motion, AnimatePresence } from "framer-motion";
-import { ClipboardCheck, FileText, Scale, Building, Upload, CheckCircle2, AlertCircle, Zap, ArrowLeft, MessageCircle, Clock, X } from "lucide-react";
+import { ClipboardCheck, FileText, Scale, Building, Upload, CheckCircle2, AlertCircle, Zap, ArrowLeft, MessageCircle, Clock, X, IndianRupee, Briefcase, Shield, Award, FileCheck, Stamp } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Link } from "wouter";
 
-const complianceServices = [
+const serviceCategories = [
   {
-    id: "gst-filing",
-    title: "GST Filing & Return",
-    description: "Monthly and quarterly GST return filing for regular and composition taxpayers.",
+    id: "income-tax",
+    title: "Income Tax Filing (ITR)",
     icon: FileText,
     color: "text-blue-400",
-    bgColor: "bg-blue-400/10"
+    bgColor: "bg-blue-400/10",
+    services: [
+      { name: "Salaried Individual", frequency: "Annual", price: "₹499" },
+      { name: "Business / Professionals", frequency: "Annual", price: "₹1,499" },
+      { name: "Capital Gain / Multiple Sources", frequency: "Annual", price: "₹1,999" },
+      { name: "Previous Year's ITR (Missed ITRs - up to 5 lakh)", frequency: "Annual", price: "₹2,499" },
+    ]
   },
   {
-    id: "itr-filing",
-    title: "ITR Filing",
-    description: "Income Tax Return filing for individuals, professionals, and business entities.",
+    id: "income-tax-other",
+    title: "Income Tax - Other",
     icon: ClipboardCheck,
     color: "text-purple-400",
-    bgColor: "bg-purple-400/10"
+    bgColor: "bg-purple-400/10",
+    services: [
+      { name: "TDS Return Filing", frequency: "Quarterly", price: "₹2,999" },
+      { name: "Advance Tax Computation", frequency: "Quarterly", price: "₹2,999" },
+    ]
   },
   {
-    id: "tax-audit",
-    title: "Deep Tax related",
-    description: "Comprehensive statutory tax audit services by certified professionals. We provide deep tax analysis, compliance verification, and risk assessment to ensure your business stays ahead of regulatory requirements.",
+    id: "gst-services",
+    title: "GST Services",
     icon: Scale,
     color: "text-amber-400",
-    bgColor: "bg-amber-400/10"
+    bgColor: "bg-amber-400/10",
+    services: [
+      { name: "GST Registration", frequency: "One-time", price: "₹2,999" },
+      { name: "GST Return Filing (GSTR-1 & GSTR 3B) - NIL Return", frequency: "Monthly", price: "₹499" },
+      { name: "GST Return Filing (GSTR-1 & GSTR 3B) - Transaction based", frequency: "Monthly", price: "₹1,499" },
+      { name: "GST Annual Return (GSTR 9)", frequency: "Annual", price: "₹2,499" },
+      { name: "GST Refund (Exporter)", frequency: "Quarterly", price: "₹2,999" },
+      { name: "GST Notice Reply", frequency: "Ad-hoc", price: "Case to case" },
+      { name: "E-Way Bill Generation", frequency: "Ad-hoc", price: "₹499" },
+    ]
   },
   {
-    id: "company-formation",
-    title: "Company Formation",
-    description: "End-to-end assistance with PVT LTD, LLP, and OPC registration and incorporation.",
+    id: "corporate",
+    title: "Corporate Secretarial Services",
     icon: Building,
     color: "text-emerald-400",
-    bgColor: "bg-emerald-400/10"
+    bgColor: "bg-emerald-400/10",
+    services: [
+      { name: "Pvt. Ltd. / LLP Incorporation", frequency: "One-time", price: "₹9,999" },
+      { name: "ROC Annual Filing (AOC-4, MGT-7)", frequency: "Annual", price: "₹9,999" },
+      { name: "Director KYC (DIR-3)", frequency: "Annual", price: "₹499" },
+      { name: "Other MCA Related Work", frequency: "Ad-hoc", price: "Case to case" },
+    ]
   },
   {
-    id: "other",
-    title: "Other Services",
-    description: "Need something else? Upload your documents and tell us your requirements.",
-    icon: Zap,
-    color: "text-rose-400",
-    bgColor: "bg-rose-400/10"
+    id: "accounting",
+    title: "Accounting & Reports",
+    icon: Briefcase,
+    color: "text-cyan-400",
+    bgColor: "bg-cyan-400/10",
+    services: [
+      { name: "Monthly Accounting & Bookkeeping", frequency: "Monthly", price: "₹4,999" },
+      { name: "Balance Sheet & P&L Preparation", frequency: "Annual", price: "₹4,999" },
+      { name: "Tax Audit (u/s 44AB)", frequency: "Annual", price: "₹14,999" },
+    ]
+  },
+  {
+    id: "certificates",
+    title: "Certificates & Registrations",
+    icon: Award,
+    color: "text-pink-400",
+    bgColor: "bg-pink-400/10",
+    services: [
+      { name: "CA Certificate / Net Worth Certificate", frequency: "Ad-hoc", price: "₹2,999" },
+      { name: "Shareholding Certificate by CA", frequency: "Ad-hoc", price: "₹2,999" },
+      { name: "Project Report for Bank Loan", frequency: "Ad-hoc", price: "₹2,999" },
+      { name: "Turnover Certificate", frequency: "Ad-hoc", price: "₹2,999" },
+      { name: "Projected Financials", frequency: "Ad-hoc", price: "₹2,999" },
+    ]
+  },
+  {
+    id: "digital-legal",
+    title: "Digital & Legal",
+    icon: Shield,
+    color: "text-indigo-400",
+    bgColor: "bg-indigo-400/10",
+    services: [
+      { name: "Digital Signature Certificate (DSC)", frequency: "One-time", price: "₹1,999" },
+      { name: "PAN / TAN Application", frequency: "One-time", price: "₹499" },
+      { name: "PAN / TAN Correction", frequency: "One-time", price: "₹499" },
+    ]
+  },
+  {
+    id: "licenses",
+    title: "Other Licences",
+    icon: Stamp,
+    color: "text-orange-400",
+    bgColor: "bg-orange-400/10",
+    services: [
+      { name: "Shop Act / Gumasta License", frequency: "One-time", price: "₹2,499" },
+      { name: "FSSAI Registration (Food License)", frequency: "One-time", price: "₹2,499" },
+      { name: "Import Export Code (IEC)", frequency: "One-time", price: "₹999" },
+      { name: "UDYAM / MSME Registration", frequency: "One-time", price: "₹999" },
+      { name: "Trade License (Municipal)", frequency: "One-time", price: "₹2,499" },
+      { name: "Labour License (Contractor/Establishment)", frequency: "One-time", price: "₹2,999" },
+      { name: "Professional Tax Registration", frequency: "One-time", price: "₹1,999" },
+      { name: "ISO Certification", frequency: "One-time", price: "₹6,999" },
+      { name: "Trademark Registration", frequency: "One-time", price: "₹4,999" },
+      { name: "Copyright Registration", frequency: "One-time", price: "₹4,999" },
+      { name: "PF / ESIC Registration", frequency: "One-time", price: "₹2,499" },
+      { name: "Startup India / DPIIT Registration", frequency: "One-time", price: "₹4,999" },
+      { name: "GEM Portal Registration", frequency: "One-time", price: "₹1,499" },
+      { name: "Pollution Control NOC (SPCB)", frequency: "One-time", price: "₹5,999" },
+      { name: "Fire Safety NOC", frequency: "One-time", price: "₹3,999" },
+      { name: "Drug License", frequency: "One-time", price: "₹5,999" },
+      { name: "Liquor License", frequency: "One-time", price: "₹24,999" },
+      { name: "Trade Mark Objection / Reply Handling", frequency: "One-time", price: "₹2,499" },
+      { name: "Patent Registration", frequency: "One-time", price: "₹9,999" },
+    ]
   }
 ];
+
+const complianceServices = serviceCategories.map(cat => ({
+  id: cat.id,
+  title: cat.title,
+  description: `${cat.services.length} services available`,
+  icon: cat.icon,
+  color: cat.color,
+  bgColor: cat.bgColor
+}));
 
 export default function Compliance() {
   const [selectedService, setSelectedService] = useState<string | null>(null);
@@ -140,121 +228,108 @@ export default function Compliance() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            {/* Service Selection */}
-            <div className="lg:col-span-2 space-y-8">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-6">
-                <h2 className="text-2xl font-bold flex items-center gap-3">
-                  <CheckCircle2 className="text-emerald-400 h-6 w-6" />
-                  Select Service
-                </h2>
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <Button 
-                    variant="outline"
-                    className="bg-purple-400/10 hover:bg-purple-400/20 text-white rounded-full px-8 h-12 font-bold shadow-lg shadow-purple-500/10 transition-all hover:scale-105 active:scale-95 flex items-center gap-2 border border-purple-500/20"
-                    onClick={() => handleWhatsAppAppointment("919230967187")}
-                  >
-                    <MessageCircle className="h-5 w-5 fill-[#25D366] text-[#25D366]" />
-                    <span className="text-sm">Make an Appointment 1</span>
-                  </Button>
-                  <Button 
-                    variant="outline"
-                    className="bg-purple-400/10 hover:bg-purple-400/20 text-white rounded-full px-8 h-12 font-bold shadow-lg shadow-purple-500/10 transition-all hover:scale-105 active:scale-95 flex items-center gap-2 border border-purple-500/20"
-                    onClick={() => handleWhatsAppAppointment("919230967189")}
-                  >
-                    <MessageCircle className="h-5 w-5 fill-[#25D366] text-[#25D366]" />
-                    <span className="text-sm">Make an Appointment 2</span>
-                  </Button>
-                </div>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {complianceServices.map((service) => (
-                  <motion.div
-                    key={service.id}
-                    whileHover={{ scale: 1.05, translateY: -10 }}
-                    whileTap={{ scale: 0.95 }}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <Card 
-                      className={`cursor-pointer h-full transition-all duration-300 border-white/10 hover:border-emerald-500/50 bg-white/5 backdrop-blur-xl group ${
-                        selectedService === service.id ? 'ring-2 ring-emerald-500 bg-white/10 border-emerald-500/50' : ''
-                      }`}
-                      onClick={() => setSelectedService(service.id)}
-                    >
-                      <CardHeader>
-                        <div className={`w-12 h-12 rounded-2xl ${service.bgColor} flex items-center justify-center ${service.color} mb-4 group-hover:scale-110 transition-transform shadow-lg`}>
-                          <service.icon className="h-6 w-6" />
-                        </div>
-                        <CardTitle className="text-white text-xl">{service.title}</CardTitle>
-                        <CardDescription className="text-white/50">{service.description}</CardDescription>
-                      </CardHeader>
-                    </Card>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-
-            {/* Upload Section */}
-            <div className="space-y-8">
-              <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
-                <Upload className="text-blue-400 h-6 w-6" />
-                Document Upload
-              </h2>
-              <Card className="bg-white/5 backdrop-blur-xl border-white/10 p-8 text-center border-dashed border-2 hover:border-blue-500/50 transition-colors group relative">
-                <input 
-                  type="file" 
-                  multiple 
-                  onChange={handleFileUpload}
-                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                />
-                <div className="space-y-4">
-                  <div className="w-16 h-16 rounded-full bg-blue-500/20 flex items-center justify-center mx-auto text-blue-400 group-hover:scale-110 transition-transform">
-                    <Upload className="h-8 w-8" />
-                  </div>
-                  <div>
-                    <p className="font-bold text-lg text-white">Click or drag files here</p>
-                    <p className="text-sm text-white/40">Upload PAN, Aadhaar, and other relevant documents</p>
-                  </div>
-                </div>
-              </Card>
-
-              {files.length > 0 && (
-                <div className="space-y-3">
-                  <p className="text-sm font-bold text-white/60 uppercase tracking-widest">Selected Files ({files.length})</p>
-                  <div className="space-y-2">
-                    {files.map((file, i) => (
-                      <div key={i} className="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/10">
-                        <span className="text-sm truncate max-w-[200px]">{file.name}</span>
-                        <Button 
-                          variant="ghost" 
-                          size="sm" 
-                          className="h-8 w-8 text-white/40 hover:text-red-400"
-                          onClick={() => setFiles(prev => prev.filter((_, idx) => idx !== i))}
-                        >
-                          ×
-                        </Button>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
+            <h2 className="text-2xl font-bold flex items-center gap-3">
+              <CheckCircle2 className="text-emerald-400 h-6 w-6" />
+              Explore All Compliance Services
+            </h2>
+            <div className="flex flex-col sm:flex-row gap-3">
               <Button 
-                className="w-full h-14 text-lg font-bold bg-gradient-to-r from-emerald-500 to-blue-500 hover:opacity-90 shadow-lg shadow-emerald-500/20 rounded-2xl transition-all active:scale-95"
-                onClick={handleSubmit}
-                disabled={!selectedService || files.length === 0}
+                variant="outline"
+                className="bg-purple-400/10 hover:bg-purple-400/20 text-white rounded-full px-8 h-12 font-bold shadow-lg shadow-purple-500/10 transition-all hover:scale-105 active:scale-95 flex items-center gap-2 border border-purple-500/20"
+                onClick={() => handleWhatsAppAppointment("919230967187")}
               >
-                Submit Request
+                <MessageCircle className="h-5 w-5 fill-[#25D366] text-[#25D366]" />
+                <span className="text-sm">Make an Appointment 1</span>
               </Button>
+              <Button 
+                variant="outline"
+                className="bg-purple-400/10 hover:bg-purple-400/20 text-white rounded-full px-8 h-12 font-bold shadow-lg shadow-purple-500/10 transition-all hover:scale-105 active:scale-95 flex items-center gap-2 border border-purple-500/20"
+                onClick={() => handleWhatsAppAppointment("919230967189")}
+              >
+                <MessageCircle className="h-5 w-5 fill-[#25D366] text-[#25D366]" />
+                <span className="text-sm">Make an Appointment 2</span>
+              </Button>
+            </div>
+          </div>
 
-              <div className="p-4 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex gap-4">
-                <AlertCircle className="h-5 w-5 text-blue-400 shrink-0" />
-                <p className="text-xs text-blue-200/70 leading-relaxed">
-                  Our compliance experts typically respond within 24-48 business hours after document verification.
-                </p>
+          <div className="space-y-8">
+            {serviceCategories.map((category, catIndex) => (
+              <motion.div
+                key={category.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: catIndex * 0.1 }}
+              >
+                <Card className="bg-white/5 backdrop-blur-xl border-white/10 overflow-hidden">
+                  <CardHeader className="border-b border-white/10">
+                    <div className="flex items-center gap-4">
+                      <div className={`w-12 h-12 rounded-2xl ${category.bgColor} flex items-center justify-center ${category.color} shadow-lg`}>
+                        <category.icon className="h-6 w-6" />
+                      </div>
+                      <div>
+                        <CardTitle className="text-white text-xl">{category.title}</CardTitle>
+                        <CardDescription className="text-white/50">{category.services.length} services available</CardDescription>
+                      </div>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="p-0">
+                    <div className="divide-y divide-white/5">
+                      {category.services.map((service, serviceIndex) => (
+                        <div 
+                          key={serviceIndex} 
+                          className="flex flex-col md:flex-row md:items-center justify-between p-4 hover:bg-white/5 transition-colors gap-3"
+                        >
+                          <div className="flex-1">
+                            <p className="text-white font-medium">{service.name}</p>
+                            <span className="text-xs text-white/40 bg-white/5 px-2 py-1 rounded-full inline-block mt-1">
+                              {service.frequency}
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-4">
+                            <span className={`text-lg font-bold ${category.color}`}>
+                              {service.price}
+                            </span>
+                            <Button
+                              size="sm"
+                              className="bg-gradient-to-r from-emerald-500 to-blue-500 hover:opacity-90 text-white rounded-full px-4 h-8 text-xs font-bold"
+                              onClick={() => {
+                                const message = encodeURIComponent(`Hi, I'm interested in ${service.name} (${category.title}) - ${service.price}. Please provide more details.`);
+                                window.open(`https://wa.me/919230967187?text=${message}`, '_blank');
+                              }}
+                            >
+                              Enquire Now
+                            </Button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="mt-12 p-6 rounded-2xl bg-gradient-to-r from-emerald-500/10 to-blue-500/10 border border-emerald-500/20">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-2xl bg-emerald-500/20 flex items-center justify-center text-emerald-400">
+                  <AlertCircle className="h-6 w-6" />
+                </div>
+                <div>
+                  <p className="text-white font-bold">Need Custom Service?</p>
+                  <p className="text-sm text-white/60">Contact us for customized compliance solutions for your business</p>
+                </div>
               </div>
+              <Button
+                className="bg-gradient-to-r from-emerald-500 to-blue-500 hover:opacity-90 text-white rounded-full px-8 h-12 font-bold"
+                onClick={() => {
+                  const message = encodeURIComponent(`Hi, I need a custom compliance service. Please help me with my requirements.`);
+                  window.open(`https://wa.me/919230967187?text=${message}`, '_blank');
+                }}
+              >
+                Contact Us
+              </Button>
             </div>
           </div>
         </motion.div>
