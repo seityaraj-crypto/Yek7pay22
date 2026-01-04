@@ -308,10 +308,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0a1a3a] via-[#0d0d2b] to-[#1a0b3b] text-white relative overflow-hidden">
-      <div className="absolute top-32 right-0 w-80 h-80 z-0">
-        <NetworkDots />
-      </div>
-      <div className="absolute top-[55%] left-0 w-72 h-72 z-0">
+      <div className="absolute top-0 right-0 w-1/2 h-screen z-0 opacity-60">
         <NetworkDots />
       </div>
       <WelcomePopup />

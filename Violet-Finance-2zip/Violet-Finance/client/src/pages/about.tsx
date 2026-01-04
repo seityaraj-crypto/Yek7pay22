@@ -6,10 +6,7 @@ import { NetworkDots } from "@/components/network-dots";
 export default function About() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#1a0b3b] via-[#0d0d2b] to-[#0a1a3a] text-white relative overflow-hidden">
-      <div className="absolute top-20 right-0 w-80 h-80 z-0">
-        <NetworkDots />
-      </div>
-      <div className="absolute bottom-40 left-0 w-64 h-64 z-0">
+      <div className="absolute top-0 right-0 w-1/2 h-screen z-0 opacity-60">
         <NetworkDots />
       </div>
       <Navbar />
