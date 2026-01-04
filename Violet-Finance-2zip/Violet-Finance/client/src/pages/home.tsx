@@ -301,7 +301,7 @@ export default function Home() {
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-blue-500/10 to-pink-500/10 text-blue-400 text-xs font-bold mb-8 border border-white/10">
                 ✈️ Travel & Lifestyle
               </div>
-              <h2 className="text-3xl md:text-4xl font-display font-black text-white mb-8 leading-tight">
+              <h2 className="text-4xl md:text-5xl font-display font-black text-white mb-8 leading-tight">
                 Book <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-pink-400 to-blue-400">Flights, Hotels</span> & <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-blue-400">Buses</span> Instantly
               </h2>
               <p className="text-xl text-gray-300 mb-12 font-medium leading-relaxed">
