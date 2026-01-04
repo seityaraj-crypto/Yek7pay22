@@ -179,15 +179,78 @@ export default function NewAccount() {
                     </div>
                   </div>
 
-                  <div className="grid md:grid-cols-2 gap-5">
+                  <div className="grid md:grid-cols-3 gap-5">
                     <div>
                       <label className="block text-sm font-bold text-white/60 mb-2">PIN Code *</label>
                       <input
                         type="text"
-                        placeholder="Enter 6-digit PIN code"
+                        placeholder="6-digit PIN"
                         maxLength={6}
                         className="w-full px-4 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all"
                         required
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-bold text-white/60 mb-2">City *</label>
+                      <input
+                        type="text"
+                        placeholder="Enter city"
+                        className="w-full px-4 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-bold text-white/60 mb-2">State *</label>
+                      <select
+                        className="w-full px-4 py-4 rounded-xl bg-white/5 border border-white/10 text-white focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all appearance-none"
+                        required
+                      >
+                        <option value="" className="bg-[#0a0a2e]">Select State</option>
+                        <option value="Andhra Pradesh" className="bg-[#0a0a2e]">Andhra Pradesh</option>
+                        <option value="Arunachal Pradesh" className="bg-[#0a0a2e]">Arunachal Pradesh</option>
+                        <option value="Assam" className="bg-[#0a0a2e]">Assam</option>
+                        <option value="Bihar" className="bg-[#0a0a2e]">Bihar</option>
+                        <option value="Chhattisgarh" className="bg-[#0a0a2e]">Chhattisgarh</option>
+                        <option value="Goa" className="bg-[#0a0a2e]">Goa</option>
+                        <option value="Gujarat" className="bg-[#0a0a2e]">Gujarat</option>
+                        <option value="Haryana" className="bg-[#0a0a2e]">Haryana</option>
+                        <option value="Himachal Pradesh" className="bg-[#0a0a2e]">Himachal Pradesh</option>
+                        <option value="Jharkhand" className="bg-[#0a0a2e]">Jharkhand</option>
+                        <option value="Karnataka" className="bg-[#0a0a2e]">Karnataka</option>
+                        <option value="Kerala" className="bg-[#0a0a2e]">Kerala</option>
+                        <option value="Madhya Pradesh" className="bg-[#0a0a2e]">Madhya Pradesh</option>
+                        <option value="Maharashtra" className="bg-[#0a0a2e]">Maharashtra</option>
+                        <option value="Manipur" className="bg-[#0a0a2e]">Manipur</option>
+                        <option value="Meghalaya" className="bg-[#0a0a2e]">Meghalaya</option>
+                        <option value="Mizoram" className="bg-[#0a0a2e]">Mizoram</option>
+                        <option value="Nagaland" className="bg-[#0a0a2e]">Nagaland</option>
+                        <option value="Odisha" className="bg-[#0a0a2e]">Odisha</option>
+                        <option value="Punjab" className="bg-[#0a0a2e]">Punjab</option>
+                        <option value="Rajasthan" className="bg-[#0a0a2e]">Rajasthan</option>
+                        <option value="Sikkim" className="bg-[#0a0a2e]">Sikkim</option>
+                        <option value="Tamil Nadu" className="bg-[#0a0a2e]">Tamil Nadu</option>
+                        <option value="Telangana" className="bg-[#0a0a2e]">Telangana</option>
+                        <option value="Tripura" className="bg-[#0a0a2e]">Tripura</option>
+                        <option value="Uttar Pradesh" className="bg-[#0a0a2e]">Uttar Pradesh</option>
+                        <option value="Uttarakhand" className="bg-[#0a0a2e]">Uttarakhand</option>
+                        <option value="West Bengal" className="bg-[#0a0a2e]">West Bengal</option>
+                        <option value="Delhi" className="bg-[#0a0a2e]">Delhi</option>
+                        <option value="Jammu & Kashmir" className="bg-[#0a0a2e]">Jammu & Kashmir</option>
+                        <option value="Ladakh" className="bg-[#0a0a2e]">Ladakh</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-5">
+                    <div>
+                      <label className="block text-sm font-bold text-white/60 mb-2">Country *</label>
+                      <input
+                        type="text"
+                        value="India"
+                        className="w-full px-4 py-4 rounded-xl bg-white/5 border border-white/10 text-white/70 focus:outline-none cursor-not-allowed"
+                        readOnly
                       />
                     </div>
 
@@ -477,24 +540,28 @@ export default function NewAccount() {
                   </h3>
                   <ul className="space-y-2 text-sm text-white/60">
                     <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 rounded-full bg-yellow-400" />
-                      Aadhaar Card (Front & Back)
+                      <div className="w-1.5 h-1.5 rounded-full bg-blue-400" />
+                      Full Name & Date of Birth
                     </li>
                     <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 rounded-full bg-yellow-400" />
-                      PAN Card
+                      <div className="w-1.5 h-1.5 rounded-full bg-blue-400" />
+                      Mobile Number & Email
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 rounded-full bg-blue-400" />
+                      Full Address with PIN, City, State
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 rounded-full bg-purple-400" />
+                      Aadhaar Card (Front & Back Photo)
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 rounded-full bg-orange-400" />
+                      PAN Card with Photo
                     </li>
                     <li className="flex items-center gap-2">
                       <div className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
-                      Agent Photo with GPS
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 rounded-full bg-yellow-400" />
-                      Valid Mobile Number
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 rounded-full bg-yellow-400" />
-                      Active Email Address
+                      Agent Photo with GPS Location
                     </li>
                   </ul>
                 </div>
