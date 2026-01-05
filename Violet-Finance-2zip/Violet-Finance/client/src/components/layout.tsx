@@ -79,20 +79,20 @@ export function Navbar() {
   ];
 
   return (
-    <nav className="fixed w-full z-50 top-0 border-b border-purple-400/30 bg-gradient-to-r from-[#f5f5f0] via-[#7c3aed] via-35% via-[#1e3a8a] via-65% to-[#db2777] backdrop-blur-2xl h-16 flex items-center shadow-[0_4px_30px_rgba(124,58,237,0.25)]">
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-500/10 to-pink-500/15 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-amber-200/40 via-purple-500/60 to-pink-500/70" />
+    <nav className="fixed w-full z-50 top-0 border-b border-cyan-400/20 bg-gradient-to-r from-[#0f172a] via-[#1e3a5f] via-30% via-[#312e81] via-60% to-[#7c3aed] backdrop-blur-2xl h-16 flex items-center shadow-[0_4px_30px_rgba(14,165,233,0.2)]">
+      <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-blue-500/10 to-purple-500/15 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-cyan-400/50 via-blue-500/60 to-purple-500/70" />
       <div className="container mx-auto px-4 flex items-center justify-between relative">
         <button onClick={goHome} className="flex items-center group cursor-pointer">
           <div className="relative">
-             <div className="absolute -inset-3 bg-gradient-to-r from-purple-600/30 via-blue-500/30 to-pink-500/30 rounded-2xl blur-xl opacity-60 group-hover:opacity-100 transition-all duration-500 animate-pulse" />
-             <div className="absolute -inset-1 bg-gradient-to-br from-white/80 to-white/40 rounded-xl" />
+             <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500/40 via-blue-500/40 to-purple-500/40 rounded-2xl blur-xl opacity-70 group-hover:opacity-100 transition-all duration-500" />
+             <div className="absolute -inset-1 bg-gradient-to-br from-slate-800/90 to-slate-900/80 rounded-xl border border-cyan-400/30" />
              <img 
                src={logoImg} 
                alt="Yek7pay" 
-               className="h-11 w-auto relative transition-all duration-500 group-hover:scale-110 group-hover:-rotate-2 drop-shadow-[0_4px_8px_rgba(0,0,0,0.3)] [filter:drop-shadow(2px_2px_0px_rgba(124,58,237,0.4))_drop-shadow(-1px_-1px_0px_rgba(255,255,255,0.8))]" 
+               className="h-11 w-auto relative transition-all duration-500 group-hover:scale-110 group-hover:-rotate-2 drop-shadow-[0_6px_12px_rgba(0,0,0,0.5)] [filter:drop-shadow(0_0_8px_rgba(34,211,238,0.5))_drop-shadow(2px_2px_0px_rgba(124,58,237,0.6))]" 
                style={{
-                 transform: 'perspective(500px) rotateY(-5deg)',
+                 transform: 'perspective(500px) rotateY(-5deg) rotateX(2deg)',
                }}
              />
           </div>
@@ -100,15 +100,15 @@ export function Navbar() {
 
         {/* Desktop Nav */}
         <div className="hidden lg:flex items-center gap-2">
-          <button onClick={goHome} className="text-sm font-semibold text-white hover:text-pink-200 active:text-purple-200 transition-all uppercase tracking-wider px-5 h-10 flex items-center rounded-xl hover:bg-white/10 cursor-pointer relative group">
+          <button onClick={goHome} className="text-sm font-semibold text-white hover:text-cyan-300 active:text-purple-300 transition-all uppercase tracking-wider px-5 h-10 flex items-center rounded-xl hover:bg-white/10 cursor-pointer relative group">
             <span className="relative z-10 drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]">Home</span>
-            <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-white/10 to-pink-500/20 opacity-0 group-hover:opacity-100 transition-all" />
+            <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-cyan-500/10 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-all" />
           </button>
           
           <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center gap-1.5 text-sm font-semibold text-white hover:text-pink-200 active:text-purple-200 transition-all uppercase tracking-wider outline-none px-5 h-10 rounded-xl hover:bg-white/10 relative group">
+            <DropdownMenuTrigger className="flex items-center gap-1.5 text-sm font-semibold text-white hover:text-cyan-300 active:text-purple-300 transition-all uppercase tracking-wider outline-none px-5 h-10 rounded-xl hover:bg-white/10 relative group">
               <span className="relative z-10 drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]">Services</span> <ChevronDown className="h-4 w-4 relative z-10 drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]" />
-              <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-white/10 to-pink-500/20 opacity-0 group-hover:opacity-100 transition-all" />
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-cyan-500/10 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-all" />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-[600px] p-6 bg-[#0d0d2b]/95 backdrop-blur-2xl border-white/10 shadow-[0_0_40px_rgba(0,0,0,0.5)] rounded-3xl mt-2">
               <div className="grid grid-cols-3 gap-8">
@@ -135,13 +135,13 @@ export function Navbar() {
             </DropdownMenuContent>
           </DropdownMenu>
 
-          <a href="/bbps" className="text-sm font-semibold text-white hover:text-pink-200 transition-all uppercase tracking-wider px-5 h-10 flex items-center rounded-xl hover:bg-white/10 relative group">
+          <a href="/bbps" className="text-sm font-semibold text-white hover:text-cyan-300 transition-all uppercase tracking-wider px-5 h-10 flex items-center rounded-xl hover:bg-white/10 relative group">
             <span className="relative z-10 drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]">Bharat Connect</span>
-            <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-white/10 to-pink-500/20 opacity-0 group-hover:opacity-100 transition-all" />
+            <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-cyan-500/10 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-all" />
           </a>
-          <Link href="/about" className="text-sm font-semibold text-white hover:text-pink-200 transition-all uppercase tracking-wider px-5 h-10 flex items-center rounded-xl hover:bg-white/10 relative group">
+          <Link href="/about" className="text-sm font-semibold text-white hover:text-cyan-300 transition-all uppercase tracking-wider px-5 h-10 flex items-center rounded-xl hover:bg-white/10 relative group">
             <span className="relative z-10 drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]">About Us</span>
-            <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-white/10 to-pink-500/20 opacity-0 group-hover:opacity-100 transition-all" />
+            <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-cyan-500/10 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-all" />
           </Link>
         </div>
 
