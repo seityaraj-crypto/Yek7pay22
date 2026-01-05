@@ -79,17 +79,17 @@ export function Navbar() {
   ];
 
   return (
-    <nav className="fixed w-full z-50 top-0 border-b border-cyan-400/30 bg-gradient-to-r from-[#020617] via-[#0f172a] via-25% via-[#1e293b] via-50% via-[#1e3a5f] via-75% to-[#312e81] backdrop-blur-2xl h-16 flex items-center shadow-[0_4px_30px_rgba(14,165,233,0.25)]">
-      <div className="absolute inset-0 bg-gradient-to-r from-slate-900/50 via-transparent to-indigo-900/30 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-cyan-400/60 via-blue-400/50 to-purple-500/60" />
+    <nav className="fixed w-full z-50 top-0 border-b border-slate-300/30 bg-gradient-to-r from-[#f8f7f4] via-[#e2e0dc] via-15% via-[#1e293b] via-40% via-[#1e3a5f] via-70% to-[#312e81] backdrop-blur-2xl h-16 flex items-center shadow-[0_4px_30px_rgba(14,165,233,0.2)]">
+      <div className="absolute inset-0 bg-gradient-to-r from-white/30 via-transparent to-indigo-900/20 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-slate-300/50 via-blue-400/50 to-purple-500/60" />
       <div className="container mx-auto px-4 flex items-center justify-between relative">
         <button onClick={goHome} className="flex items-center group cursor-pointer">
           <div className="relative">
-             <div className="absolute -inset-3 bg-gradient-to-r from-cyan-400/50 to-blue-500/50 rounded-xl blur-lg opacity-80 group-hover:opacity-100 transition-all duration-500" />
+             <div className="absolute -inset-3 bg-gradient-to-r from-indigo-500/40 to-purple-500/40 rounded-xl blur-lg opacity-70 group-hover:opacity-100 transition-all duration-500" />
              <img 
                src={logoImg} 
                alt="Yek7pay" 
-               className="h-10 w-auto relative transition-all duration-300 group-hover:scale-105 brightness-110 [filter:drop-shadow(0_0_15px_rgba(34,211,238,0.7))_drop-shadow(0_0_25px_rgba(56,189,248,0.5))]" 
+               className="h-10 w-auto relative transition-all duration-300 group-hover:scale-105 [filter:drop-shadow(0_2px_4px_rgba(0,0,0,0.2))_drop-shadow(0_0_12px_rgba(99,102,241,0.5))]" 
              />
           </div>
         </button>
