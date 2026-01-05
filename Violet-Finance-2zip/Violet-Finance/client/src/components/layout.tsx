@@ -79,9 +79,9 @@ export function Navbar() {
   ];
 
   return (
-    <nav className="fixed w-full z-50 top-0 border-b border-cyan-500/10 bg-gradient-to-r from-[#0a0f1a]/98 via-[#0d1525]/98 to-[#0a1628]/98 backdrop-blur-2xl h-16 flex items-center shadow-[0_4px_30px_rgba(0,0,0,0.4),0_0_40px_rgba(56,189,248,0.05)]">
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 via-transparent to-purple-600/5 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent" />
+    <nav className="fixed w-full z-50 top-0 border-b border-slate-200/50 bg-gradient-to-r from-[#f8fafc]/98 via-[#f1f5f9]/98 to-[#f8fafc]/98 backdrop-blur-2xl h-16 flex items-center shadow-[0_4px_20px_rgba(0,0,0,0.08)]">
+      <div className="absolute inset-0 bg-gradient-to-r from-blue-50/30 via-transparent to-purple-50/30 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-400/20 to-transparent" />
       <div className="container mx-auto px-4 flex items-center justify-between relative">
         <button onClick={goHome} className="flex items-center group cursor-pointer">
           <div className="relative">
@@ -89,22 +89,22 @@ export function Navbar() {
              <img 
                src={logoImg} 
                alt="Yek7pay" 
-               className="h-10 w-auto relative transition-all duration-500 group-hover:scale-105 brightness-110 drop-shadow-[0_0_20px_rgba(56,189,248,0.4)]" 
+               className="h-10 w-auto relative transition-all duration-500 group-hover:scale-105 drop-shadow-[0_0_15px_rgba(59,130,246,0.3)]" 
              />
           </div>
         </button>
 
         {/* Desktop Nav */}
         <div className="hidden lg:flex items-center gap-2">
-          <button onClick={goHome} className="text-sm font-semibold text-white/80 hover:text-cyan-400 active:text-purple-400 transition-all uppercase tracking-wider px-5 h-10 flex items-center rounded-xl hover:bg-white/5 cursor-pointer relative group">
+          <button onClick={goHome} className="text-sm font-semibold text-slate-700 hover:text-blue-600 active:text-purple-600 transition-all uppercase tracking-wider px-5 h-10 flex items-center rounded-xl hover:bg-blue-50/50 cursor-pointer relative group">
             <span className="relative z-10">Home</span>
-            <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-cyan-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-all" />
+            <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-100/50 to-purple-100/50 opacity-0 group-hover:opacity-100 transition-all" />
           </button>
           
           <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center gap-1.5 text-sm font-semibold text-white/80 hover:text-cyan-400 active:text-purple-400 transition-all uppercase tracking-wider outline-none px-5 h-10 rounded-xl hover:bg-white/5 relative group">
+            <DropdownMenuTrigger className="flex items-center gap-1.5 text-sm font-semibold text-slate-700 hover:text-blue-600 active:text-purple-600 transition-all uppercase tracking-wider outline-none px-5 h-10 rounded-xl hover:bg-blue-50/50 relative group">
               <span className="relative z-10">Services</span> <ChevronDown className="h-4 w-4 relative z-10" />
-              <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-cyan-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-all" />
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-100/50 to-purple-100/50 opacity-0 group-hover:opacity-100 transition-all" />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-[600px] p-6 bg-[#0d0d2b]/95 backdrop-blur-2xl border-white/10 shadow-[0_0_40px_rgba(0,0,0,0.5)] rounded-3xl mt-2">
               <div className="grid grid-cols-3 gap-8">
@@ -131,32 +131,32 @@ export function Navbar() {
             </DropdownMenuContent>
           </DropdownMenu>
 
-          <a href="/bbps" className="text-sm font-semibold text-white/80 hover:text-cyan-400 transition-all uppercase tracking-wider px-5 h-10 flex items-center rounded-xl hover:bg-white/5 relative group">
+          <a href="/bbps" className="text-sm font-semibold text-slate-700 hover:text-blue-600 transition-all uppercase tracking-wider px-5 h-10 flex items-center rounded-xl hover:bg-blue-50/50 relative group">
             <span className="relative z-10">Bharat Connect</span>
-            <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-cyan-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-all" />
+            <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-100/50 to-purple-100/50 opacity-0 group-hover:opacity-100 transition-all" />
           </a>
-          <Link href="/about" className="text-sm font-semibold text-white/80 hover:text-cyan-400 transition-all uppercase tracking-wider px-5 h-10 flex items-center rounded-xl hover:bg-white/5 relative group">
+          <Link href="/about" className="text-sm font-semibold text-slate-700 hover:text-blue-600 transition-all uppercase tracking-wider px-5 h-10 flex items-center rounded-xl hover:bg-blue-50/50 relative group">
             <span className="relative z-10">About Us</span>
-            <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-cyan-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-all" />
+            <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-100/50 to-purple-100/50 opacity-0 group-hover:opacity-100 transition-all" />
           </Link>
         </div>
 
         <div className="flex items-center gap-3 md:gap-4">
-          <Button className="bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 hover:from-cyan-400 hover:via-blue-400 hover:to-purple-500 text-white border-0 shadow-[0_0_25px_rgba(56,189,248,0.4),0_0_50px_rgba(139,92,246,0.2)] rounded-full px-5 md:px-7 h-10 md:h-11 text-xs md:text-sm font-bold transition-all hover:scale-105 active:scale-95 relative overflow-hidden group" onClick={openMenu}>
+          <Button className="bg-gradient-to-r from-blue-600 via-blue-700 to-purple-700 hover:from-blue-500 hover:via-blue-600 hover:to-purple-600 text-white border-0 shadow-[0_4px_20px_rgba(59,130,246,0.35)] rounded-full px-5 md:px-7 h-10 md:h-11 text-xs md:text-sm font-bold transition-all hover:scale-105 active:scale-95 relative overflow-hidden group" onClick={openMenu}>
             <span className="relative z-10">Open Account / Login</span>
             <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-all" />
           </Button>
 
           <div className="flex items-center gap-2">
-             <Button variant="ghost" size="icon" className="text-cyan-400 relative hover:text-cyan-300 hover:bg-white/5 hidden sm:flex rounded-xl">
+             <Button variant="ghost" size="icon" className="text-blue-600 relative hover:text-blue-700 hover:bg-blue-50 hidden sm:flex rounded-xl">
                <Bell className="h-5 w-5" />
-               <span className="absolute top-2 right-2 w-2 h-2 bg-cyan-400 rounded-full animate-pulse shadow-[0_0_8px_rgba(56,189,248,0.8)]" />
+               <span className="absolute top-2 right-2 w-2 h-2 bg-blue-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(59,130,246,0.8)]" />
              </Button>
              
              {/* Mobile Nav Toggle */}
              <Sheet open={isOpen} onOpenChange={setIsOpen}>
                <SheetTrigger asChild className="lg:hidden">
-                 <Button variant="ghost" size="icon" className="text-white hover:bg-white/10 rounded-xl">
+                 <Button variant="ghost" size="icon" className="text-slate-700 hover:bg-blue-50 rounded-xl">
                    <Menu className="h-6 w-6" />
                  </Button>
                </SheetTrigger>
