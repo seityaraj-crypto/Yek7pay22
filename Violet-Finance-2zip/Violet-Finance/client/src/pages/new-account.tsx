@@ -208,41 +208,41 @@ export default function NewAccount() {
                     <div>
                       <label className="block text-sm font-bold text-white/60 mb-2">State *</label>
                       <select
-                        className="w-full px-4 py-4 rounded-xl bg-white/5 border border-white/10 text-white focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all appearance-none"
+                        className="w-full px-4 py-4 rounded-xl bg-[#1a1a3e] border border-white/10 text-white focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all appearance-none"
                         required
                       >
-                        <option value="" className="bg-[#0a0a2e]">Select State</option>
-                        <option value="Andhra Pradesh" className="bg-[#0a0a2e]">Andhra Pradesh</option>
-                        <option value="Arunachal Pradesh" className="bg-[#0a0a2e]">Arunachal Pradesh</option>
-                        <option value="Assam" className="bg-[#0a0a2e]">Assam</option>
-                        <option value="Bihar" className="bg-[#0a0a2e]">Bihar</option>
-                        <option value="Chhattisgarh" className="bg-[#0a0a2e]">Chhattisgarh</option>
-                        <option value="Goa" className="bg-[#0a0a2e]">Goa</option>
-                        <option value="Gujarat" className="bg-[#0a0a2e]">Gujarat</option>
-                        <option value="Haryana" className="bg-[#0a0a2e]">Haryana</option>
-                        <option value="Himachal Pradesh" className="bg-[#0a0a2e]">Himachal Pradesh</option>
-                        <option value="Jharkhand" className="bg-[#0a0a2e]">Jharkhand</option>
-                        <option value="Karnataka" className="bg-[#0a0a2e]">Karnataka</option>
-                        <option value="Kerala" className="bg-[#0a0a2e]">Kerala</option>
-                        <option value="Madhya Pradesh" className="bg-[#0a0a2e]">Madhya Pradesh</option>
-                        <option value="Maharashtra" className="bg-[#0a0a2e]">Maharashtra</option>
-                        <option value="Manipur" className="bg-[#0a0a2e]">Manipur</option>
-                        <option value="Meghalaya" className="bg-[#0a0a2e]">Meghalaya</option>
-                        <option value="Mizoram" className="bg-[#0a0a2e]">Mizoram</option>
-                        <option value="Nagaland" className="bg-[#0a0a2e]">Nagaland</option>
-                        <option value="Odisha" className="bg-[#0a0a2e]">Odisha</option>
-                        <option value="Punjab" className="bg-[#0a0a2e]">Punjab</option>
-                        <option value="Rajasthan" className="bg-[#0a0a2e]">Rajasthan</option>
-                        <option value="Sikkim" className="bg-[#0a0a2e]">Sikkim</option>
-                        <option value="Tamil Nadu" className="bg-[#0a0a2e]">Tamil Nadu</option>
-                        <option value="Telangana" className="bg-[#0a0a2e]">Telangana</option>
-                        <option value="Tripura" className="bg-[#0a0a2e]">Tripura</option>
-                        <option value="Uttar Pradesh" className="bg-[#0a0a2e]">Uttar Pradesh</option>
-                        <option value="Uttarakhand" className="bg-[#0a0a2e]">Uttarakhand</option>
-                        <option value="West Bengal" className="bg-[#0a0a2e]">West Bengal</option>
-                        <option value="Delhi" className="bg-[#0a0a2e]">Delhi</option>
-                        <option value="Jammu & Kashmir" className="bg-[#0a0a2e]">Jammu & Kashmir</option>
-                        <option value="Ladakh" className="bg-[#0a0a2e]">Ladakh</option>
+                        <option value="" className="bg-[#1a1a3e] text-white">Select State</option>
+                        <option value="Andhra Pradesh" className="bg-[#1a1a3e] text-white">Andhra Pradesh</option>
+                        <option value="Arunachal Pradesh" className="bg-[#1a1a3e] text-white">Arunachal Pradesh</option>
+                        <option value="Assam" className="bg-[#1a1a3e] text-white">Assam</option>
+                        <option value="Bihar" className="bg-[#1a1a3e] text-white">Bihar</option>
+                        <option value="Chhattisgarh" className="bg-[#1a1a3e] text-white">Chhattisgarh</option>
+                        <option value="Goa" className="bg-[#1a1a3e] text-white">Goa</option>
+                        <option value="Gujarat" className="bg-[#1a1a3e] text-white">Gujarat</option>
+                        <option value="Haryana" className="bg-[#1a1a3e] text-white">Haryana</option>
+                        <option value="Himachal Pradesh" className="bg-[#1a1a3e] text-white">Himachal Pradesh</option>
+                        <option value="Jharkhand" className="bg-[#1a1a3e] text-white">Jharkhand</option>
+                        <option value="Karnataka" className="bg-[#1a1a3e] text-white">Karnataka</option>
+                        <option value="Kerala" className="bg-[#1a1a3e] text-white">Kerala</option>
+                        <option value="Madhya Pradesh" className="bg-[#1a1a3e] text-white">Madhya Pradesh</option>
+                        <option value="Maharashtra" className="bg-[#1a1a3e] text-white">Maharashtra</option>
+                        <option value="Manipur" className="bg-[#1a1a3e] text-white">Manipur</option>
+                        <option value="Meghalaya" className="bg-[#1a1a3e] text-white">Meghalaya</option>
+                        <option value="Mizoram" className="bg-[#1a1a3e] text-white">Mizoram</option>
+                        <option value="Nagaland" className="bg-[#1a1a3e] text-white">Nagaland</option>
+                        <option value="Odisha" className="bg-[#1a1a3e] text-white">Odisha</option>
+                        <option value="Punjab" className="bg-[#1a1a3e] text-white">Punjab</option>
+                        <option value="Rajasthan" className="bg-[#1a1a3e] text-white">Rajasthan</option>
+                        <option value="Sikkim" className="bg-[#1a1a3e] text-white">Sikkim</option>
+                        <option value="Tamil Nadu" className="bg-[#1a1a3e] text-white">Tamil Nadu</option>
+                        <option value="Telangana" className="bg-[#1a1a3e] text-white">Telangana</option>
+                        <option value="Tripura" className="bg-[#1a1a3e] text-white">Tripura</option>
+                        <option value="Uttar Pradesh" className="bg-[#1a1a3e] text-white">Uttar Pradesh</option>
+                        <option value="Uttarakhand" className="bg-[#1a1a3e] text-white">Uttarakhand</option>
+                        <option value="West Bengal" className="bg-[#1a1a3e] text-white">West Bengal</option>
+                        <option value="Delhi" className="bg-[#1a1a3e] text-white">Delhi</option>
+                        <option value="Jammu & Kashmir" className="bg-[#1a1a3e] text-white">Jammu & Kashmir</option>
+                        <option value="Ladakh" className="bg-[#1a1a3e] text-white">Ladakh</option>
                       </select>
                     </div>
                   </div>
