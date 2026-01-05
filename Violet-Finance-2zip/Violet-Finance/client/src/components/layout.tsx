@@ -79,25 +79,32 @@ export function Navbar() {
   ];
 
   return (
-    <nav className="fixed w-full z-50 top-0 border-b border-white/5 bg-[#f5f5f7]/95 backdrop-blur-xl h-14 flex items-center shadow-sm">
-      <div className="container mx-auto px-4 flex items-center justify-between">
+    <nav className="fixed w-full z-50 top-0 border-b border-cyan-500/10 bg-gradient-to-r from-[#0a0f1a]/98 via-[#0d1525]/98 to-[#0a1628]/98 backdrop-blur-2xl h-16 flex items-center shadow-[0_4px_30px_rgba(0,0,0,0.4),0_0_40px_rgba(56,189,248,0.05)]">
+      <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 via-transparent to-purple-600/5 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent" />
+      <div className="container mx-auto px-4 flex items-center justify-between relative">
         <button onClick={goHome} className="flex items-center group cursor-pointer">
           <div className="relative">
+             <div className="absolute -inset-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-xl blur-lg opacity-0 group-hover:opacity-100 transition-all duration-500" />
              <img 
                src={logoImg} 
                alt="Yek7pay" 
-               className="h-10 w-auto transition-all duration-500 group-hover:scale-110 brightness-110 drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]" 
+               className="h-10 w-auto relative transition-all duration-500 group-hover:scale-105 brightness-110 drop-shadow-[0_0_20px_rgba(56,189,248,0.4)]" 
              />
           </div>
         </button>
 
         {/* Desktop Nav */}
-        <div className="hidden lg:flex items-center gap-6">
-          <button onClick={goHome} className="text-sm font-bold text-slate-700 hover:text-blue-600 active:text-purple-600 transition-all uppercase tracking-widest px-4 h-9 flex items-center rounded-lg hover:bg-blue-50/50 cursor-pointer">Home</button>
+        <div className="hidden lg:flex items-center gap-2">
+          <button onClick={goHome} className="text-sm font-semibold text-white/80 hover:text-cyan-400 active:text-purple-400 transition-all uppercase tracking-wider px-5 h-10 flex items-center rounded-xl hover:bg-white/5 cursor-pointer relative group">
+            <span className="relative z-10">Home</span>
+            <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-cyan-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-all" />
+          </button>
           
           <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-bold text-slate-700 hover:text-blue-600 active:text-purple-600 transition-all uppercase tracking-widest outline-none px-4 h-9 rounded-lg hover:bg-blue-50/50">
-              Services <ChevronDown className="h-4 w-4" />
+            <DropdownMenuTrigger className="flex items-center gap-1.5 text-sm font-semibold text-white/80 hover:text-cyan-400 active:text-purple-400 transition-all uppercase tracking-wider outline-none px-5 h-10 rounded-xl hover:bg-white/5 relative group">
+              <span className="relative z-10">Services</span> <ChevronDown className="h-4 w-4 relative z-10" />
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-cyan-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-all" />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-[600px] p-6 bg-[#0d0d2b]/95 backdrop-blur-2xl border-white/10 shadow-[0_0_40px_rgba(0,0,0,0.5)] rounded-3xl mt-2">
               <div className="grid grid-cols-3 gap-8">
@@ -124,44 +131,51 @@ export function Navbar() {
             </DropdownMenuContent>
           </DropdownMenu>
 
-          <a href="/bbps" className="text-sm font-bold text-slate-700 hover:text-blue-600 transition-all uppercase tracking-widest px-4 h-9 flex items-center rounded-lg hover:bg-slate-200/50">Bharat Connect</a>
-          <Link href="/about" className="text-sm font-bold text-slate-700 hover:text-blue-600 transition-all uppercase tracking-widest px-4 h-9 flex items-center rounded-lg hover:bg-slate-200/50">About Us</Link>
+          <a href="/bbps" className="text-sm font-semibold text-white/80 hover:text-cyan-400 transition-all uppercase tracking-wider px-5 h-10 flex items-center rounded-xl hover:bg-white/5 relative group">
+            <span className="relative z-10">Bharat Connect</span>
+            <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-cyan-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-all" />
+          </a>
+          <Link href="/about" className="text-sm font-semibold text-white/80 hover:text-cyan-400 transition-all uppercase tracking-wider px-5 h-10 flex items-center rounded-xl hover:bg-white/5 relative group">
+            <span className="relative z-10">About Us</span>
+            <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-cyan-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-all" />
+          </Link>
         </div>
 
         <div className="flex items-center gap-3 md:gap-4">
-          <Button className="bg-gradient-to-r from-blue-950 via-blue-900 to-purple-800 hover:opacity-90 text-white border-0 shadow-[0_0_20px_rgba(59,130,246,0.3)] rounded-full px-4 md:px-6 h-9 md:h-10 text-xs md:text-sm font-bold transition-all hover:scale-105 active:scale-95" onClick={openMenu}>
-            Open Account / Login
+          <Button className="bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 hover:from-cyan-400 hover:via-blue-400 hover:to-purple-500 text-white border-0 shadow-[0_0_25px_rgba(56,189,248,0.4),0_0_50px_rgba(139,92,246,0.2)] rounded-full px-5 md:px-7 h-10 md:h-11 text-xs md:text-sm font-bold transition-all hover:scale-105 active:scale-95 relative overflow-hidden group" onClick={openMenu}>
+            <span className="relative z-10">Open Account / Login</span>
+            <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-all" />
           </Button>
 
           <div className="flex items-center gap-2">
-             <Button variant="ghost" size="icon" className="text-blue-400 relative hover:text-primary hover:bg-blue-50 hidden sm:flex">
+             <Button variant="ghost" size="icon" className="text-cyan-400 relative hover:text-cyan-300 hover:bg-white/5 hidden sm:flex rounded-xl">
                <Bell className="h-5 w-5" />
-               <span className="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full border-2 border-white" />
+               <span className="absolute top-2 right-2 w-2 h-2 bg-cyan-400 rounded-full animate-pulse shadow-[0_0_8px_rgba(56,189,248,0.8)]" />
              </Button>
              
              {/* Mobile Nav Toggle */}
              <Sheet open={isOpen} onOpenChange={setIsOpen}>
                <SheetTrigger asChild className="lg:hidden">
-                 <Button variant="ghost" size="icon" className="text-blue-900">
+                 <Button variant="ghost" size="icon" className="text-white hover:bg-white/10 rounded-xl">
                    <Menu className="h-6 w-6" />
                  </Button>
                </SheetTrigger>
-               <SheetContent className="bg-blue-50 border-l border-blue-100 w-[320px] text-blue-950">
+               <SheetContent className="bg-gradient-to-br from-[#0a0f1a] via-[#0d1525] to-[#0a1628] border-l border-cyan-500/20 w-[320px] text-white">
                  <div className="flex flex-col gap-8 mt-12">
                    <div className="flex items-center justify-center mb-4">
                      <img src={logoImg} alt="Yek7pay" className="h-10 w-auto" />
                    </div>
                    
                    <div className="grid grid-cols-1 gap-4">
-                     <Button variant="outline" className="w-full border-blue-200 text-blue-900 font-bold hover:bg-blue-100/50 h-12" onClick={() => { openLogin(); setIsOpen(false); }}>
+                     <Button variant="outline" className="w-full border-cyan-500/30 text-white font-bold hover:bg-white/10 hover:border-cyan-400 h-12 rounded-xl" onClick={() => { openLogin(); setIsOpen(false); }}>
                        Login
                      </Button>
-                     <Button className="w-full bg-gradient-to-r from-blue-950 via-blue-900 to-purple-800 border-0 hover:opacity-90 text-white rounded-full font-bold h-12 shadow-lg shadow-blue-500/10" onClick={() => { openMenu(); setIsOpen(false); }}>
+                     <Button className="w-full bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 border-0 hover:opacity-90 text-white rounded-full font-bold h-12 shadow-lg shadow-cyan-500/30" onClick={() => { openMenu(); setIsOpen(false); }}>
                        Create Account
                      </Button>
                    </div>
 
-                   <div className="space-y-2 pt-4 border-t border-blue-100 max-h-[60vh] overflow-y-auto">
+                   <div className="space-y-2 pt-4 border-t border-white/10 max-h-[60vh] overflow-y-auto">
                      {[
                        {
                          label: "Banking & Remittance",
@@ -199,18 +213,18 @@ export function Navbar() {
                          ]
                        }
                      ].map((category) => (
-                       <div key={category.label} className="border border-blue-100 rounded-lg overflow-hidden">
+                       <div key={category.label} className="border border-white/10 rounded-xl overflow-hidden">
                          <button
                            onClick={() => setExpandedCategory(expandedCategory === category.label ? null : category.label)}
-                           className="w-full flex items-center justify-between px-4 py-3 bg-blue-100/50 hover:bg-blue-100 transition-colors"
+                           className="w-full flex items-center justify-between px-4 py-3 bg-white/5 hover:bg-white/10 transition-colors"
                          >
-                           <span className="text-sm font-bold text-blue-900">{category.label}</span>
-                           <ChevronDown className={`h-4 w-4 text-blue-600 transition-transform ${expandedCategory === category.label ? 'rotate-180' : ''}`} />
+                           <span className="text-sm font-bold text-white">{category.label}</span>
+                           <ChevronDown className={`h-4 w-4 text-cyan-400 transition-transform ${expandedCategory === category.label ? 'rotate-180' : ''}`} />
                          </button>
                          {expandedCategory === category.label && (
-                           <div className="grid grid-cols-2 gap-2 p-3 bg-white">
+                           <div className="grid grid-cols-2 gap-2 p-3 bg-white/5">
                              {category.items.map((link) => (
-                               <a key={link.name} href={link.href} className="text-sm text-blue-900 hover:text-primary py-1" onClick={() => setIsOpen(false)}>
+                               <a key={link.name} href={link.href} className="text-sm text-white/70 hover:text-cyan-400 py-1 transition-colors" onClick={() => setIsOpen(false)}>
                                  {link.name}
                                </a>
                              ))}
