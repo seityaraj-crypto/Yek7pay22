@@ -79,9 +79,9 @@ export function Navbar() {
   ];
 
   return (
-    <nav className="fixed w-full z-50 top-0 border-b border-slate-400/40 bg-gradient-to-r from-[#cbd5e1]/98 via-[#c4cdd8]/98 to-[#cbd5e1]/98 backdrop-blur-2xl h-16 flex items-center shadow-[0_4px_20px_rgba(0,0,0,0.12)]">
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-200/15 via-transparent to-purple-200/15 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/30 to-transparent" />
+    <nav className="fixed w-full z-50 top-0 border-b border-slate-300/30 bg-gradient-to-r from-white via-[#e8eef8] via-40% via-[#dce4f2] via-60% to-[#1e3a8a]/90 backdrop-blur-2xl h-16 flex items-center shadow-[0_4px_25px_rgba(30,58,138,0.15)]">
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-100/20 to-purple-500/10 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-blue-200/30 via-blue-400/50 to-purple-500/60" />
       <div className="container mx-auto px-4 flex items-center justify-between relative">
         <button onClick={goHome} className="flex items-center group cursor-pointer">
           <div className="relative">
@@ -148,15 +148,15 @@ export function Navbar() {
           </Button>
 
           <div className="flex items-center gap-2">
-             <Button variant="ghost" size="icon" className="text-blue-600 relative hover:text-blue-700 hover:bg-blue-50 hidden sm:flex rounded-xl">
+             <Button variant="ghost" size="icon" className="text-white relative hover:text-blue-200 hover:bg-white/10 hidden sm:flex rounded-xl">
                <Bell className="h-5 w-5" />
-               <span className="absolute top-2 right-2 w-2 h-2 bg-blue-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(59,130,246,0.8)]" />
+               <span className="absolute top-2 right-2 w-2 h-2 bg-cyan-400 rounded-full animate-pulse shadow-[0_0_8px_rgba(34,211,238,0.8)]" />
              </Button>
              
              {/* Mobile Nav Toggle */}
              <Sheet open={isOpen} onOpenChange={setIsOpen}>
                <SheetTrigger asChild className="lg:hidden">
-                 <Button variant="ghost" size="icon" className="text-slate-700 hover:bg-blue-50 rounded-xl">
+                 <Button variant="ghost" size="icon" className="text-white hover:bg-white/10 rounded-xl">
                    <Menu className="h-6 w-6" />
                  </Button>
                </SheetTrigger>
