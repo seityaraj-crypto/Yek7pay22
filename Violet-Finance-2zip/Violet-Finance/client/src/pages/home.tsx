@@ -164,8 +164,8 @@ function ContactForm() {
             className="px-3 py-3 bg-[#0d1b3e] border border-white/10 rounded-xl text-white focus:outline-none focus:border-blue-500 transition-colors min-w-[120px]"
             style={{ backgroundColor: '#0d1b3e', color: 'white' }}
           >
-            {countryCodes.map((c, index) => (
-              <option key={`${c.code}-${c.country}-${index}`} value={c.code} style={{ backgroundColor: '#0d1b3e', color: 'white' }}>
+            {countryCodes.map((c) => (
+              <option key={c.code} value={c.code} style={{ backgroundColor: '#0d1b3e', color: 'white' }}>
                 {c.flag} {c.code}
               </option>
             ))}
