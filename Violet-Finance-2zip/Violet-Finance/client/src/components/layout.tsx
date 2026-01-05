@@ -88,8 +88,8 @@ export function Navbar() {
                alt="Yek7pay" 
                className="h-10 w-auto transition-all duration-500 group-hover:scale-110 brightness-110" 
                style={{ 
-                 transform: 'rotateY(-8deg) rotateX(5deg)',
-                 filter: 'drop-shadow(3px 3px 2px rgba(0,0,0,0.3)) drop-shadow(-1px -1px 1px rgba(255,255,255,0.2))',
+                 transform: 'rotateY(-5deg) rotateX(3deg)',
+                 filter: 'drop-shadow(2px 2px 1px rgba(0,0,0,0.2)) drop-shadow(-1px -1px 1px rgba(255,255,255,0.1))',
                  transformStyle: 'preserve-3d'
                }}
              />
@@ -248,8 +248,8 @@ export function Footer() {
                 alt="Yek7pay" 
                 className="h-16 w-auto brightness-110" 
                 style={{ 
-                  transform: 'rotateY(-8deg) rotateX(5deg)',
-                  filter: 'drop-shadow(4px 4px 3px rgba(0,0,0,0.4)) drop-shadow(-2px -2px 2px rgba(255,255,255,0.15))',
+                  transform: 'rotateY(-5deg) rotateX(3deg)',
+                  filter: 'drop-shadow(2px 2px 2px rgba(0,0,0,0.25)) drop-shadow(-1px -1px 1px rgba(255,255,255,0.1))',
                   transformStyle: 'preserve-3d'
                 }}
               />
