@@ -146,14 +146,14 @@ export function Navbar() {
                    <Menu className="h-6 w-6" />
                  </Button>
                </SheetTrigger>
-               <SheetContent className="bg-[#0d0d2b] border-l border-white/10 w-[320px] text-white">
+               <SheetContent className="bg-blue-50 border-l border-blue-100 w-[320px] text-blue-950">
                  <div className="flex flex-col gap-8 mt-12">
                    <div className="flex items-center justify-center mb-4">
                      <img src={logoImg} alt="Yek7pay" className="h-10 w-auto" />
                    </div>
                    
                    <div className="grid grid-cols-1 gap-4">
-                     <Button variant="outline" className="w-full border-white/20 text-white font-bold hover:bg-white/10 h-12" onClick={() => { openLogin(); setIsOpen(false); }}>
+                     <Button variant="outline" className="w-full border-blue-200 text-blue-900 font-bold hover:bg-blue-100/50 h-12" onClick={() => { openLogin(); setIsOpen(false); }}>
                        Login
                      </Button>
                      <Button className="w-full bg-gradient-to-r from-blue-950 via-blue-900 to-purple-800 border-0 hover:opacity-90 text-white rounded-full font-bold h-12 shadow-lg shadow-blue-500/10" onClick={() => { openMenu(); setIsOpen(false); }}>
@@ -161,7 +161,7 @@ export function Navbar() {
                      </Button>
                    </div>
 
-                   <div className="space-y-2 pt-4 border-t border-white/10 max-h-[60vh] overflow-y-auto">
+                   <div className="space-y-2 pt-4 border-t border-blue-100 max-h-[60vh] overflow-y-auto">
                      {[
                        {
                          label: "Banking & Remittance",
@@ -199,18 +199,18 @@ export function Navbar() {
                          ]
                        }
                      ].map((category) => (
-                       <div key={category.label} className="border border-white/10 rounded-lg overflow-hidden">
+                       <div key={category.label} className="border border-blue-100 rounded-lg overflow-hidden">
                          <button
                            onClick={() => setExpandedCategory(expandedCategory === category.label ? null : category.label)}
-                           className="w-full flex items-center justify-between px-4 py-3 bg-white/5 hover:bg-white/10 transition-colors"
+                           className="w-full flex items-center justify-between px-4 py-3 bg-blue-100/50 hover:bg-blue-100 transition-colors"
                          >
-                           <span className="text-sm font-bold text-white">{category.label}</span>
-                           <ChevronDown className={`h-4 w-4 text-blue-400 transition-transform ${expandedCategory === category.label ? 'rotate-180' : ''}`} />
+                           <span className="text-sm font-bold text-blue-900">{category.label}</span>
+                           <ChevronDown className={`h-4 w-4 text-blue-600 transition-transform ${expandedCategory === category.label ? 'rotate-180' : ''}`} />
                          </button>
                          {expandedCategory === category.label && (
-                           <div className="grid grid-cols-2 gap-2 p-3 bg-[#1a1a3e]">
+                           <div className="grid grid-cols-2 gap-2 p-3 bg-white">
                              {category.items.map((link) => (
-                               <a key={link.name} href={link.href} className="text-sm text-white/80 hover:text-blue-400 py-1" onClick={() => setIsOpen(false)}>
+                               <a key={link.name} href={link.href} className="text-sm text-blue-900 hover:text-primary py-1" onClick={() => setIsOpen(false)}>
                                  {link.name}
                                </a>
                              ))}
