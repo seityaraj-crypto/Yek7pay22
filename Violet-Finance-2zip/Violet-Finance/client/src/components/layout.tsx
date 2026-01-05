@@ -85,15 +85,11 @@ export function Navbar() {
       <div className="container mx-auto px-4 flex items-center justify-between relative">
         <button onClick={goHome} className="flex items-center group cursor-pointer">
           <div className="relative">
-             <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500/40 via-blue-500/40 to-purple-500/40 rounded-2xl blur-xl opacity-70 group-hover:opacity-100 transition-all duration-500" />
-             <div className="absolute -inset-1 bg-gradient-to-br from-slate-800/90 to-slate-900/80 rounded-xl border border-cyan-400/30" />
+             <div className="absolute -inset-2 bg-purple-500/40 rounded-xl blur-lg opacity-70 group-hover:opacity-100 transition-all duration-500" />
              <img 
                src={logoImg} 
                alt="Yek7pay" 
-               className="h-11 w-auto relative transition-all duration-500 group-hover:scale-110 group-hover:-rotate-2 drop-shadow-[0_6px_12px_rgba(0,0,0,0.5)] [filter:drop-shadow(0_0_8px_rgba(34,211,238,0.5))_drop-shadow(2px_2px_0px_rgba(124,58,237,0.6))]" 
-               style={{
-                 transform: 'perspective(500px) rotateY(-5deg) rotateX(2deg)',
-               }}
+               className="h-10 w-auto relative transition-all duration-300 group-hover:scale-105 [filter:drop-shadow(0_0_12px_rgba(168,85,247,0.6))_drop-shadow(0_0_20px_rgba(139,92,246,0.4))]" 
              />
           </div>
         </button>
