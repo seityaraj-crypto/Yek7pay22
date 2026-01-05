@@ -79,17 +79,17 @@ export function Navbar() {
   ];
 
   return (
-    <nav className="fixed w-full z-50 top-0 border-b border-white/10 bg-gradient-to-r from-[#1e293b] via-[#0f172a] to-[#1e1b4b] backdrop-blur-2xl h-16 flex items-center shadow-[0_4px_30px_rgba(0,0,0,0.3)]">
-      <div className="absolute inset-0 bg-gradient-to-r from-slate-700/20 via-transparent to-indigo-900/20 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-400/40 to-transparent" />
+    <nav className="fixed w-full z-50 top-0 border-b border-white/10 bg-gradient-to-r from-[#334155] via-[#1e293b] to-[#1e1b4b] backdrop-blur-2xl h-16 flex items-center shadow-[0_4px_30px_rgba(0,0,0,0.3)]">
+      <div className="absolute inset-0 bg-gradient-to-r from-slate-500/15 via-slate-700/10 to-indigo-900/15 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-slate-400/30 via-blue-400/50 to-purple-500/30" />
       <div className="container mx-auto px-4 flex items-center justify-between relative">
         <button onClick={goHome} className="flex items-center group cursor-pointer">
           <div className="relative">
-             <div className="absolute -inset-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-xl blur-lg opacity-0 group-hover:opacity-100 transition-all duration-500" />
+             <div className="absolute -inset-3 bg-gradient-to-r from-white/10 to-blue-400/10 rounded-2xl blur-xl opacity-100 group-hover:opacity-100 transition-all duration-500" />
              <img 
                src={logoImg} 
                alt="Yek7pay" 
-               className="h-10 w-auto relative transition-all duration-500 group-hover:scale-105 brightness-110 drop-shadow-[0_0_20px_rgba(56,189,248,0.4)]" 
+               className="h-10 w-auto relative transition-all duration-500 group-hover:scale-105 brightness-125 drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]" 
              />
           </div>
         </button>
