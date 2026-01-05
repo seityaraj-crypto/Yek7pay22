@@ -161,10 +161,11 @@ function ContactForm() {
           <select 
             value={formData.countryCode}
             onChange={(e) => setFormData({...formData, countryCode: e.target.value})}
-            className="px-3 py-3 bg-[#1a1a3e] border border-white/10 rounded-xl text-white focus:outline-none focus:border-blue-500 transition-colors min-w-[120px]"
+            className="px-3 py-3 bg-[#0d1b3e] border border-white/10 rounded-xl text-white focus:outline-none focus:border-blue-500 transition-colors min-w-[120px]"
+            style={{ backgroundColor: '#0d1b3e', color: 'white' }}
           >
             {countryCodes.map((c) => (
-              <option key={c.code} value={c.code} className="bg-[#1a1a3e] text-white">
+              <option key={c.code} value={c.code} style={{ backgroundColor: '#0d1b3e', color: 'white' }}>
                 {c.flag} {c.code}
               </option>
             ))}
@@ -192,18 +193,19 @@ function ContactForm() {
           value={formData.service}
           onChange={(e) => setFormData({...formData, service: e.target.value})}
           required
-          className="w-full px-4 py-3 bg-[#1a1a3e] border border-white/10 rounded-xl text-white focus:outline-none focus:border-blue-500 transition-colors"
+          className="w-full px-4 py-3 bg-[#0d1b3e] border border-white/10 rounded-xl text-white focus:outline-none focus:border-blue-500 transition-colors"
+          style={{ backgroundColor: '#0d1b3e', color: 'white' }}
         >
-          <option value="" className="bg-[#1a1a3e] text-white">Choose Service</option>
-          <option value="Advance DMT" className="bg-[#1a1a3e] text-white">Advance DMT</option>
-          <option value="Neo Bank" className="bg-[#1a1a3e] text-white">Neo Bank</option>
-          <option value="Indo-Nepal Remit" className="bg-[#1a1a3e] text-white">Indo-Nepal Remit</option>
-          <option value="AEPS Withdrawal" className="bg-[#1a1a3e] text-white">AEPS Withdrawal</option>
-          <option value="Bharat Connect (BBPS)" className="bg-[#1a1a3e] text-white">Bharat Connect (BBPS)</option>
-          <option value="mPOS Solutions" className="bg-[#1a1a3e] text-white">mPOS Solutions</option>
-          <option value="Travel Bookings" className="bg-[#1a1a3e] text-white">Travel Bookings</option>
-          <option value="GST & Compliance" className="bg-[#1a1a3e] text-white">GST & Compliance</option>
-          <option value="Other" className="bg-[#1a1a3e] text-white">Other</option>
+          <option value="" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>Choose Service</option>
+          <option value="Advance DMT" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>Advance DMT</option>
+          <option value="Neo Bank" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>Neo Bank</option>
+          <option value="Indo-Nepal Remit" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>Indo-Nepal Remit</option>
+          <option value="AEPS Withdrawal" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>AEPS Withdrawal</option>
+          <option value="Bharat Connect (BBPS)" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>Bharat Connect (BBPS)</option>
+          <option value="mPOS Solutions" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>mPOS Solutions</option>
+          <option value="Travel Bookings" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>Travel Bookings</option>
+          <option value="GST & Compliance" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>GST & Compliance</option>
+          <option value="Other" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>Other</option>
         </select>
       </div>
       <button 

@@ -208,41 +208,42 @@ export default function NewAccount() {
                     <div>
                       <label className="block text-sm font-bold text-white/60 mb-2">State *</label>
                       <select
-                        className="w-full px-4 py-4 rounded-xl bg-[#1a1a3e] border border-white/10 text-white focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all appearance-none"
+                        className="w-full px-4 py-4 rounded-xl bg-[#0d1b3e] border border-white/10 text-white focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all appearance-none"
+                        style={{ backgroundColor: '#0d1b3e', color: 'white' }}
                         required
                       >
-                        <option value="" className="bg-[#1a1a3e] text-white">Select State</option>
-                        <option value="Andhra Pradesh" className="bg-[#1a1a3e] text-white">Andhra Pradesh</option>
-                        <option value="Arunachal Pradesh" className="bg-[#1a1a3e] text-white">Arunachal Pradesh</option>
-                        <option value="Assam" className="bg-[#1a1a3e] text-white">Assam</option>
-                        <option value="Bihar" className="bg-[#1a1a3e] text-white">Bihar</option>
-                        <option value="Chhattisgarh" className="bg-[#1a1a3e] text-white">Chhattisgarh</option>
-                        <option value="Goa" className="bg-[#1a1a3e] text-white">Goa</option>
-                        <option value="Gujarat" className="bg-[#1a1a3e] text-white">Gujarat</option>
-                        <option value="Haryana" className="bg-[#1a1a3e] text-white">Haryana</option>
-                        <option value="Himachal Pradesh" className="bg-[#1a1a3e] text-white">Himachal Pradesh</option>
-                        <option value="Jharkhand" className="bg-[#1a1a3e] text-white">Jharkhand</option>
-                        <option value="Karnataka" className="bg-[#1a1a3e] text-white">Karnataka</option>
-                        <option value="Kerala" className="bg-[#1a1a3e] text-white">Kerala</option>
-                        <option value="Madhya Pradesh" className="bg-[#1a1a3e] text-white">Madhya Pradesh</option>
-                        <option value="Maharashtra" className="bg-[#1a1a3e] text-white">Maharashtra</option>
-                        <option value="Manipur" className="bg-[#1a1a3e] text-white">Manipur</option>
-                        <option value="Meghalaya" className="bg-[#1a1a3e] text-white">Meghalaya</option>
-                        <option value="Mizoram" className="bg-[#1a1a3e] text-white">Mizoram</option>
-                        <option value="Nagaland" className="bg-[#1a1a3e] text-white">Nagaland</option>
-                        <option value="Odisha" className="bg-[#1a1a3e] text-white">Odisha</option>
-                        <option value="Punjab" className="bg-[#1a1a3e] text-white">Punjab</option>
-                        <option value="Rajasthan" className="bg-[#1a1a3e] text-white">Rajasthan</option>
-                        <option value="Sikkim" className="bg-[#1a1a3e] text-white">Sikkim</option>
-                        <option value="Tamil Nadu" className="bg-[#1a1a3e] text-white">Tamil Nadu</option>
-                        <option value="Telangana" className="bg-[#1a1a3e] text-white">Telangana</option>
-                        <option value="Tripura" className="bg-[#1a1a3e] text-white">Tripura</option>
-                        <option value="Uttar Pradesh" className="bg-[#1a1a3e] text-white">Uttar Pradesh</option>
-                        <option value="Uttarakhand" className="bg-[#1a1a3e] text-white">Uttarakhand</option>
-                        <option value="West Bengal" className="bg-[#1a1a3e] text-white">West Bengal</option>
-                        <option value="Delhi" className="bg-[#1a1a3e] text-white">Delhi</option>
-                        <option value="Jammu & Kashmir" className="bg-[#1a1a3e] text-white">Jammu & Kashmir</option>
-                        <option value="Ladakh" className="bg-[#1a1a3e] text-white">Ladakh</option>
+                        <option value="" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>Select State</option>
+                        <option value="Andhra Pradesh" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>Andhra Pradesh</option>
+                        <option value="Arunachal Pradesh" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>Arunachal Pradesh</option>
+                        <option value="Assam" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>Assam</option>
+                        <option value="Bihar" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>Bihar</option>
+                        <option value="Chhattisgarh" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>Chhattisgarh</option>
+                        <option value="Goa" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>Goa</option>
+                        <option value="Gujarat" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>Gujarat</option>
+                        <option value="Haryana" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>Haryana</option>
+                        <option value="Himachal Pradesh" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>Himachal Pradesh</option>
+                        <option value="Jharkhand" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>Jharkhand</option>
+                        <option value="Karnataka" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>Karnataka</option>
+                        <option value="Kerala" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>Kerala</option>
+                        <option value="Madhya Pradesh" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>Madhya Pradesh</option>
+                        <option value="Maharashtra" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>Maharashtra</option>
+                        <option value="Manipur" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>Manipur</option>
+                        <option value="Meghalaya" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>Meghalaya</option>
+                        <option value="Mizoram" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>Mizoram</option>
+                        <option value="Nagaland" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>Nagaland</option>
+                        <option value="Odisha" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>Odisha</option>
+                        <option value="Punjab" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>Punjab</option>
+                        <option value="Rajasthan" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>Rajasthan</option>
+                        <option value="Sikkim" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>Sikkim</option>
+                        <option value="Tamil Nadu" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>Tamil Nadu</option>
+                        <option value="Telangana" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>Telangana</option>
+                        <option value="Tripura" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>Tripura</option>
+                        <option value="Uttar Pradesh" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>Uttar Pradesh</option>
+                        <option value="Uttarakhand" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>Uttarakhand</option>
+                        <option value="West Bengal" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>West Bengal</option>
+                        <option value="Delhi" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>Delhi</option>
+                        <option value="Jammu & Kashmir" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>Jammu & Kashmir</option>
+                        <option value="Ladakh" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>Ladakh</option>
                       </select>
                     </div>
                   </div>

@@ -572,11 +572,12 @@ export function AuthDialog({ isOpen, onOpenChange, defaultView = "menu" }: AuthD
                   <select
                     value={regState}
                     onChange={(e) => setRegState(e.target.value)}
-                    className="w-full h-11 px-3 rounded-xl bg-[#1a1a3e] border border-white/10 text-white focus:border-green-500/50 focus:outline-none transition-colors text-sm appearance-none"
+                    className="w-full h-11 px-3 rounded-xl bg-[#0d1b3e] border border-white/10 text-white focus:border-green-500/50 focus:outline-none transition-colors text-sm appearance-none"
+                    style={{ backgroundColor: '#0d1b3e', color: 'white' }}
                   >
-                    <option value="" className="bg-[#1a1a3e] text-white">Select</option>
+                    <option value="" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>Select</option>
                     {indianStates.map(state => (
-                      <option key={state} value={state} className="bg-[#1a1a3e] text-white">{state}</option>
+                      <option key={state} value={state} style={{ backgroundColor: '#0d1b3e', color: 'white' }}>{state}</option>
                     ))}
                   </select>
                 </div>
