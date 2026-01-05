@@ -81,12 +81,17 @@ export function Navbar() {
   return (
     <nav className="fixed w-full z-50 top-0 border-b border-white/5 bg-[#f5f5f7]/95 backdrop-blur-xl h-14 flex items-center shadow-sm">
       <div className="container mx-auto px-4 flex items-center justify-between">
-        <button onClick={goHome} className="flex items-center group cursor-pointer">
+        <button onClick={goHome} className="flex items-center group cursor-pointer" style={{ perspective: '500px' }}>
           <div className="relative">
              <img 
                src={logoImg} 
                alt="Yek7pay" 
-               className="h-10 w-auto transition-all duration-500 group-hover:scale-110 brightness-110 drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]" 
+               className="h-10 w-auto transition-all duration-500 group-hover:scale-110 brightness-110" 
+               style={{ 
+                 transform: 'rotateY(-8deg) rotateX(5deg)',
+                 filter: 'drop-shadow(3px 3px 2px rgba(0,0,0,0.3)) drop-shadow(-1px -1px 1px rgba(255,255,255,0.2))',
+                 transformStyle: 'preserve-3d'
+               }}
              />
           </div>
         </button>
@@ -237,11 +242,16 @@ export function Footer() {
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-16 mb-20">
           <div className="space-y-8 text-center md:text-left">
-            <div className="flex justify-center md:justify-start items-center gap-3">
+            <div className="flex justify-center md:justify-start items-center gap-3" style={{ perspective: '500px' }}>
               <img 
                 src={logoImg} 
                 alt="Yek7pay" 
-                className="h-16 w-auto brightness-110 drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]" 
+                className="h-16 w-auto brightness-110" 
+                style={{ 
+                  transform: 'rotateY(-8deg) rotateX(5deg)',
+                  filter: 'drop-shadow(4px 4px 3px rgba(0,0,0,0.4)) drop-shadow(-2px -2px 2px rgba(255,255,255,0.15))',
+                  transformStyle: 'preserve-3d'
+                }}
               />
             </div>
             <p className="text-white leading-relaxed text-sm max-w-xs mx-auto md:mx-0">
