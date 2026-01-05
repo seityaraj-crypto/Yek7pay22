@@ -79,9 +79,9 @@ export function Navbar() {
   ];
 
   return (
-    <nav className="fixed w-full z-50 top-0 border-b border-cyan-500/10 bg-gradient-to-r from-[#0a0f1a]/98 via-[#0d1525]/98 to-[#0a1628]/98 backdrop-blur-2xl h-16 flex items-center shadow-[0_4px_30px_rgba(0,0,0,0.4),0_0_40px_rgba(56,189,248,0.05)]">
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 via-transparent to-purple-600/5 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent" />
+    <nav className="fixed w-full z-50 top-0 border-b border-white/10 bg-gradient-to-r from-[#1e293b] via-[#0f172a] to-[#1e1b4b] backdrop-blur-2xl h-16 flex items-center shadow-[0_4px_30px_rgba(0,0,0,0.3)]">
+      <div className="absolute inset-0 bg-gradient-to-r from-slate-700/20 via-transparent to-indigo-900/20 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-400/40 to-transparent" />
       <div className="container mx-auto px-4 flex items-center justify-between relative">
         <button onClick={goHome} className="flex items-center group cursor-pointer">
           <div className="relative">
