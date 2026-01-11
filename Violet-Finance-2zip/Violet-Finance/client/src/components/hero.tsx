@@ -325,7 +325,9 @@ export function Hero() {
                       </div>
                       <div className="flex items-center justify-between text-[10px] md:text-xs">
                         <span className="text-white/40 font-medium">Amount</span>
-                        <span className="font-bold text-blue-400 blur-sm">{slide.amount}</span>
+                        <span className="font-bold text-blue-400">
+                          Rs <span className="blur-sm">{slide.amount.replace('Rs ', '')}</span>
+                        </span>
                       </div>
                       <div className="h-8 md:h-10 lg:h-12 w-full bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg md:rounded-xl flex items-center justify-center text-white text-[10px] md:text-xs font-bold gap-1 md:gap-2 shadow-lg shadow-blue-900/20 active:scale-95 transition-transform">
                         Confirm <Zap className="h-2.5 w-2.5 md:h-3 md:w-3" />
