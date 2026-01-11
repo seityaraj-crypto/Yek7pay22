@@ -36,8 +36,8 @@ const slides = [
   {
     id: 1,
     title: "Indo-Nepal Transfer",
-    amount: "₹1,00,000.00",
-    recipient: "Rajesh Sharma",
+    amount: "Rs 1,00,000.00",
+    recipient: "X Sharma",
     transferId: "YK7-8821",
     icon: "🇮🇳",
     targetIcon: "🇳🇵",
@@ -47,7 +47,7 @@ const slides = [
   {
     id: 2,
     title: "AEPS Withdrawal",
-    amount: "₹25,000.00",
+    amount: "Rs 25,000.00",
     recipient: "Priya Patel",
     transferId: "YK7-9942",
     icon: "💳",
@@ -58,7 +58,7 @@ const slides = [
   {
     id: 3,
     title: "DMT Transfer",
-    amount: "₹50,000.00",
+    amount: "Rs 50,000.00",
     recipient: "Amit Kumar",
     transferId: "YK7-3356",
     icon: "🏦",
@@ -69,7 +69,7 @@ const slides = [
   {
     id: 4,
     title: "mPOS Payment",
-    amount: "₹8,500.00",
+    amount: "Rs 8,500.00",
     recipient: "Quick Mart Store",
     transferId: "YK7-7721",
     icon: "📲",
@@ -319,11 +319,11 @@ export function Hero() {
                       transition={{ duration: 0.4 }}
                       className="space-y-3 relative z-10"
                     >
-                      <div className="flex items-center justify-between text-[10px] md:text-xs">
+                      <div className="flex items-center justify-between text-[10px] md:text-xs blur-sm">
                         <span className="text-white/40 font-medium">Recipient</span>
                         <span className="font-bold text-white truncate max-w-[100px] md:max-w-none">{slide.recipient}</span>
                       </div>
-                      <div className="flex items-center justify-between text-[10px] md:text-xs">
+                      <div className="flex items-center justify-between text-[10px] md:text-xs blur-sm">
                         <span className="text-white/40 font-medium">Amount</span>
                         <span className="font-bold text-blue-400">{slide.amount}</span>
                       </div>
