@@ -359,6 +359,9 @@ export function Footer() {
             <Link href="/terms" className="hover:text-blue-400 transition-all">Terms of Service</Link>
             <Link href="/privacy" className="hover:text-blue-400 transition-all">Privacy Policy</Link>
             <a href="/upgrade" className="hover:text-blue-400 transition-all">Premium Upgrade</a>
+            <p className="w-full text-center text-[10px] opacity-50 mt-4 max-w-4xl mx-auto px-4">
+              Disclaimer: Yek7Pay is a technology platform facilitating financial and travel services. We are not a bank, insurer, or airline. All services are fulfilled by licensed third-party partners. Users are advised to read all terms and conditions carefully before proceeding with any transaction.
+            </p>
           </div>
           <div className="mb-8">
             <h4 className="text-sm font-bold text-white mb-6 uppercase tracking-widest text-center">Our Trusted Partners</h4>
