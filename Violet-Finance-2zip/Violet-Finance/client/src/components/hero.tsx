@@ -9,7 +9,7 @@ const heroTextSlides = [
   {
     id: 1,
     highlight: "Neo Bank Unlimited",
-    text: "Daily money transfers with no limits. Send unlimited amounts every day with Yek7pay Neo Bank.",
+    text: "Unlimited vendor payments with no limits. Send unlimited amounts every day with Yek7pay Neo Bank.",
     icon: Banknote
   },
   {
