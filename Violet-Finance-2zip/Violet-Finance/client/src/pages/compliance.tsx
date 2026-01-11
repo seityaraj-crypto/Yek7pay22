@@ -7,8 +7,10 @@ import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Link } from "wouter";
 import { NetworkDots } from "@/components/network-dots";
+import { Invoice } from "@/components/invoice";
 
 const serviceCategories = [
+// ... (rest of categories remain same)
   {
     id: "income-tax",
     title: "Income Tax Filing (ITR)",
@@ -141,6 +143,8 @@ const complianceServices = serviceCategories.map(cat => ({
 
 export default function Compliance() {
   const [selectedService, setSelectedService] = useState<string | null>(null);
+  const [showInvoice, setShowInvoice] = useState(false);
+  const [invoiceData, setInvoiceData] = useState<any>(null);
   const [files, setFiles] = useState<File[]>([]);
   const [showTimePicker, setShowTimePicker] = useState(false);
   const [activeNumber, setActiveNumber] = useState<string | null>(null);
@@ -148,6 +152,31 @@ export default function Compliance() {
   const [appointmentContactOption, setAppointmentContactOption] = useState<'call' | 'whatsapp' | 'email' | null>(null);
   const [selectedTimeSlot, setSelectedTimeSlot] = useState<string | null>(null);
   const { toast } = useToast();
+
+  const handleServiceSelect = (service: any, category: any) => {
+    const priceStr = service.price.replace('₹', '').replace(',', '');
+    const price = parseFloat(priceStr);
+    
+    if (isNaN(price)) {
+      // Case to case services
+      const message = encodeURIComponent(`Hi, I'm interested in ${service.name} (${category.title}). Please provide a quote.`);
+      window.open(`https://wa.me/919230967187?text=${message}`, '_blank');
+      return;
+    }
+
+    const gst = price * 0.18;
+    const total = price + gst;
+
+    setInvoiceData({
+      title: `${service.name} - ${category.title}`,
+      amount: `₹ ${total.toLocaleString('en-IN')}`,
+      items: [
+        { name: "Service Fee", price: `₹ ${price.toLocaleString('en-IN')}` },
+        { name: "GST (18%)", price: `₹ ${gst.toLocaleString('en-IN')}` }
+      ]
+    });
+    setShowInvoice(true);
+  };
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -291,12 +320,9 @@ export default function Compliance() {
                             <Button
                               size="sm"
                               className="bg-gradient-to-r from-emerald-500 to-blue-500 hover:opacity-90 text-white rounded-full px-4 h-8 text-xs font-bold"
-                              onClick={() => {
-                                const message = encodeURIComponent(`Hi, I'm interested in ${service.name} (${category.title}) - ${service.price}. Please provide more details.`);
-                                window.open(`https://wa.me/919230967187?text=${message}`, '_blank');
-                              }}
+                              onClick={() => handleServiceSelect(service, category)}
                             >
-                              Enquire Now
+                              Pay Now
                             </Button>
                           </div>
                         </div>
@@ -332,6 +358,40 @@ export default function Compliance() {
           </div>
         </motion.div>
       </main>
+
+      <AnimatePresence>
+        {showInvoice && invoiceData && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-black/80 backdrop-blur-md"
+              onClick={() => setShowInvoice(false)}
+            />
+            <div className="relative z-[110] w-full max-w-2xl">
+              <button 
+                onClick={() => setShowInvoice(false)}
+                className="absolute -top-12 right-0 p-2 rounded-full hover:bg-white/10 transition-colors"
+              >
+                <X className="h-8 w-8 text-white" />
+              </button>
+              <Invoice 
+                title={invoiceData.title}
+                amount={invoiceData.amount}
+                invoiceNumber={`INV-${Math.floor(Math.random() * 90000) + 10000}`}
+                date={new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })}
+                items={invoiceData.items}
+                onClose={() => {
+                  const message = encodeURIComponent(`Hi, I've generated the invoice for ${invoiceData.title} (${invoiceData.amount}). Please guide me with the payment process.`);
+                  window.open(`https://wa.me/919230967187?text=${message}`, '_blank');
+                  setShowInvoice(false);
+                }}
+              />
+            </div>
+          </div>
+        )}
+      </AnimatePresence>
 
       {/* Time Selection Modal */}
       <AnimatePresence>

@@ -1,9 +1,13 @@
 import { Navbar, Footer } from "@/components/layout";
-import { motion } from "framer-motion";
-import { CheckCircle2, Zap, ShieldCheck } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { CheckCircle2, Zap, ShieldCheck, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import { Invoice } from "@/components/invoice";
 
 export default function Upgrade() {
+  const [showInvoice, setShowInvoice] = useState(false);
+
   return (
     <div className="min-h-screen bg-[#0a0a2e] text-white">
       <Navbar />
@@ -76,13 +80,12 @@ export default function Upgrade() {
                 <h2 className="text-4xl font-display font-black mb-6">Activate Premium Now</h2>
                 <div className="text-6xl font-black text-pink-500 mb-10">₹ 999 <span className="text-lg text-white/40 font-bold uppercase tracking-widest">Only</span></div>
                 
-                <a href="https://wa.me/919230967187?text=Hi%2C%20I%20want%20to%20activate%20Premium%20for%20%E2%82%B9999" target="_blank" rel="noopener noreferrer">
-                  <Button 
-                    className="bg-gradient-to-r from-blue-600 via-indigo-600 to-pink-600 hover:from-blue-500 hover:to-pink-500 text-white rounded-full px-16 h-20 text-xl font-black shadow-2xl transition-all hover:scale-105 active:scale-95 flex items-center gap-4 mx-auto"
-                  >
-                    Confirm Activation <Zap className="h-6 w-6 fill-current" />
-                  </Button>
-                </a>
+                <Button 
+                  className="bg-gradient-to-r from-blue-600 via-indigo-600 to-pink-600 hover:from-blue-500 hover:to-pink-500 text-white rounded-full px-16 h-20 text-xl font-black shadow-2xl transition-all hover:scale-105 active:scale-95 flex items-center gap-4 mx-auto"
+                  onClick={() => setShowInvoice(true)}
+                >
+                  Confirm Activation <Zap className="h-6 w-6 fill-current" />
+                </Button>
                 
                 <p className="mt-8 text-white/40 text-sm font-bold uppercase tracking-widest flex items-center justify-center gap-2">
                   <ShieldCheck className="h-4 w-4" /> Secure 256-bit Encrypted Payment
@@ -92,6 +95,43 @@ export default function Upgrade() {
           </div>
         </div>
       </main>
+
+      <AnimatePresence>
+        {showInvoice && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-black/80 backdrop-blur-md"
+              onClick={() => setShowInvoice(false)}
+            />
+            <div className="relative z-[110] w-full max-w-2xl">
+              <button 
+                onClick={() => setShowInvoice(false)}
+                className="absolute -top-12 right-0 p-2 rounded-full hover:bg-white/10 transition-colors"
+              >
+                <X className="h-8 w-8 text-white" />
+              </button>
+              <Invoice 
+                title="Premium Membership Activation"
+                amount="₹ 999.00"
+                invoiceNumber={`INV-${Math.floor(Math.random() * 90000) + 10000}`}
+                date={new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })}
+                items={[
+                  { name: "Premium Business License", price: "₹ 846.61" },
+                  { name: "GST (18%)", price: "₹ 152.39" }
+                ]}
+                onClose={() => {
+                  const message = encodeURIComponent(`Hi, I've generated the invoice for Premium Activation (₹999). Please guide me with the payment process.`);
+                  window.open(`https://wa.me/919230967187?text=${message}`, '_blank');
+                  setShowInvoice(false);
+                }}
+              />
+            </div>
+          </div>
+        )}
+      </AnimatePresence>
 
       <Footer />
     </div>
