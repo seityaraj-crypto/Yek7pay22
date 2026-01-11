@@ -129,7 +129,7 @@ export function Hero() {
               </div>
 
               <h1 className="text-5xl md:text-7xl font-display font-bold text-white leading-[1.1] mb-8 tracking-tighter">
-                Empowering <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-pink-500">India's Financial Future</span> <br />
+                Empowering <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-pink-500">India</span> <br />
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-blue-400 to-purple-500">Solution Provider</span>
               </h1>
               
