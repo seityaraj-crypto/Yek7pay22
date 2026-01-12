@@ -18,8 +18,8 @@ export function WelcomePopup() {
     },
     {
       title: "Unlimited Money",
-      highlight: "Transfers Daily",
-      description: "Neo Bank with zero limits. Send any amount, anytime.",
+      highlight: "Transfer Daily",
+      description: "Unlimited Vendor payments daily. Neo Bank With zero limits.",
       icon: TrendingUp,
       gradient: "from-purple-500 to-pink-600"
     },
