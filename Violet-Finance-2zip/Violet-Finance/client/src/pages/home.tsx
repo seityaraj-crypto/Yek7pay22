@@ -394,7 +394,7 @@ export default function Home() {
               <div className="flex flex-wrap gap-4">
                 <Button 
                   className="bg-gradient-to-r from-blue-600 via-indigo-600 to-pink-600 hover:from-blue-500 hover:to-pink-500 text-white rounded-full px-12 h-16 text-lg font-bold shadow-xl shadow-blue-900/40 transition-all hover:scale-105 active:scale-95 flex items-center gap-3 border border-white/10"
-                  onClick={() => window.location.href = "https://yek7pay.com"}
+                  onClick={() => window.location.href = "https://yek7pay.in"}
                 >
                   Go to Booking Portal <ArrowRight className="h-6 w-6" />
                 </Button>
