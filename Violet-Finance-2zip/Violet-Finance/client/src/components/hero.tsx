@@ -9,7 +9,7 @@ const heroTextSlides = [
   {
     id: 1,
     highlight: "Neo Bank Unlimited",
-    text: "Unlimited vendor payments with no limits. Experience seamless vendor payments with Yek7pay Neo Bank.",
+    text: "Unlimited Daily Vendor Payments. Designed for High-Volume Transactions.",
     icon: Banknote
   },
   {
