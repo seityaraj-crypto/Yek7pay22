@@ -436,7 +436,7 @@ export default function Home() {
               variant="featured"
               features={[
                 "Unlimited daily limits for merchants",
-                "Designed for high-volume enterprises",
+                "Designed for High-Volume Transactions",
                 "Real-time liquidity management",
                 "Customized dashboard for business"
               ]}
