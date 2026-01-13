@@ -25,7 +25,7 @@ export function WelcomePopup() {
     },
     {
       title: "Earn",
-      highlight: "₹1 Lakh+ Monthly",
+      highlight: "Unlimited Monthly",
       description: "Become a Yek7Pay partner and maximize your income",
       icon: Users,
       gradient: "from-pink-500 to-orange-500"

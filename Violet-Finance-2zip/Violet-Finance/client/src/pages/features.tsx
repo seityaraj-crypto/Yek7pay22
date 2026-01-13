@@ -174,7 +174,7 @@ export default function Features() {
   ];
 
   const whyChooseUs = [
-    { icon: TrendingUp, title: "Earn ₹1 Lakh+ Monthly", desc: "High commission rates on all services" },
+    { icon: TrendingUp, title: "Earn Unlimited Monthly", desc: "High commission rates on all services" },
     { icon: Users, title: "100,000+ Partners", desc: "Join India's largest fintech network" },
     { icon: Shield, title: "100% Secure", desc: "Bank-grade security & RBI compliant" },
     { icon: Zap, title: "Instant Settlement", desc: "Get your money in minutes, not days" },
