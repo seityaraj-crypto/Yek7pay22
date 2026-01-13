@@ -17,8 +17,8 @@ export function WelcomePopup() {
       gradient: "from-blue-500 to-purple-600"
     },
     {
-      title: "Unlimited Money",
-      highlight: "Transfer Daily",
+      title: "Unlimited daily",
+      highlight: "Vendor payments",
       description: "Unlimited Vendor payments daily. Neo Bank With zero limits.",
       icon: TrendingUp,
       gradient: "from-purple-500 to-pink-600"
