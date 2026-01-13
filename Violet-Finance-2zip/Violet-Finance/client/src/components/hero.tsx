@@ -130,7 +130,16 @@ export function Hero() {
 
               <h1 className="text-5xl md:text-7xl font-display font-bold text-white leading-[1.1] mb-8 tracking-tighter">
                 Powering <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-pink-500">India's</span> <br />
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-blue-400 to-purple-500">Fintech Ecosystem</span>
+                <span className="relative">
+                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-blue-400 to-purple-500">Fintech Ecosystem</span>
+                  <span className="absolute -bottom-2 left-0 flex items-center gap-1">
+                    <span className="w-2 h-2 rounded-full bg-blue-500"></span>
+                    <span className="w-8 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500"></span>
+                    <span className="w-2 h-2 rounded-full bg-purple-500"></span>
+                    <span className="w-12 h-0.5 bg-gradient-to-r from-purple-500 to-pink-500"></span>
+                    <span className="w-2 h-2 rounded-full bg-pink-500"></span>
+                  </span>
+                </span>
               </h1>
               
               <div className="mb-10 max-w-xl mx-auto lg:mx-0 min-h-[120px]">

@@ -165,7 +165,7 @@ function ContactForm() {
             style={{ backgroundColor: '#0d1b3e', color: 'white' }}
           >
             {countryCodes.map((c) => (
-              <option key={c.code} value={c.code} style={{ backgroundColor: '#0d1b3e', color: 'white' }}>
+              <option key={c.country} value={c.code} style={{ backgroundColor: '#0d1b3e', color: 'white' }}>
                 {c.flag} {c.code}
               </option>
             ))}
