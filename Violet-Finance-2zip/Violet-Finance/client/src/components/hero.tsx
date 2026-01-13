@@ -129,7 +129,7 @@ export function Hero() {
               </div>
 
               <h1 className="text-5xl md:text-7xl font-display font-bold text-white leading-[1.1] mb-8 tracking-tighter">
-                Powering <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-pink-500">India's</span> <br />
+                Powering <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-pink-500 inline-block pr-2">India's</span> <br />
                 <span className="relative">
                   <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-blue-400 to-purple-500">Fintech Ecosystem</span>
                   <span className="absolute -bottom-2 left-0 flex items-center gap-1">
