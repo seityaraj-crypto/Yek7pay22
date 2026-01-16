@@ -47,7 +47,7 @@ const serviceCategories = [
       { name: "GST Return Filing (GSTR-1 & GSTR 3B) - Transaction based", frequency: "Monthly", price: "₹1,499" },
       { name: "GST Annual Return (GSTR 9)", frequency: "Annual", price: "₹2,499" },
       { name: "GST Refund (Exporter)", frequency: "Quarterly", price: "₹2,999" },
-      { name: "GST Notice Reply", frequency: "Ad-hoc", price: "Case to case" },
+      { name: "GST Notice Reply", frequency: "Ad-hoc", price: "Case by case" },
       { name: "E-Way Bill Generation", frequency: "Ad-hoc", price: "₹499" },
     ]
   },
@@ -61,7 +61,7 @@ const serviceCategories = [
       { name: "Pvt. Ltd. / LLP Incorporation", frequency: "One-time", price: "₹9,999" },
       { name: "ROC Annual Filing (AOC-4, MGT-7)", frequency: "Annual", price: "₹9,999" },
       { name: "Director KYC (DIR-3)", frequency: "Annual", price: "₹499" },
-      { name: "Other MCA Related Work", frequency: "Ad-hoc", price: "Case to case" },
+      { name: "Other MCA Related Work", frequency: "Ad-hoc", price: "Case by case" },
     ]
   },
   {
@@ -158,7 +158,7 @@ export default function Compliance() {
     const price = parseFloat(priceStr);
     
     if (isNaN(price)) {
-      // Case to case services
+      // Case by case services
       const message = encodeURIComponent(`Hi, I'm interested in ${service.name} (${category.title}). Please provide a quote.`);
       window.open(`https://wa.me/919230967187?text=${message}`, '_blank');
       return;
