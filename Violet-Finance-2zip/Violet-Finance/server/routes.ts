@@ -4,6 +4,7 @@ import { storage } from "./storage";
 import { registerChatRoutes } from "./replit_integrations/chat";
 import { registerImageRoutes } from "./replit_integrations/image";
 import { registerRazorpayRoutes } from "./razorpay";
+import { registerInvoiceRoutes } from "./invoice";
 
 export async function registerRoutes(
   httpServer: Server,
@@ -14,6 +15,7 @@ export async function registerRoutes(
   registerChatRoutes(app);
   registerImageRoutes(app);
   registerRazorpayRoutes(app);
+  registerInvoiceRoutes(app);
 
   // Contact form endpoint - stores inquiries for info@yek7pay.com
   app.post("/api/contact", async (req, res) => {
