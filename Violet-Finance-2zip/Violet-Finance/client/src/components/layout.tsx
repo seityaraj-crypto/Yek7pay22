@@ -97,25 +97,6 @@ export function Navbar() {
             </div>
           </button>
           
-          <div className="hidden md:flex items-center gap-4 ml-4">
-            <div className="flex items-center gap-3 px-4 py-2 bg-gradient-to-br from-slate-50 to-blue-50/50 rounded-xl border border-slate-200/80 shadow-sm">
-              <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-emerald-500 to-blue-600 rounded-lg shadow-md">
-                <span className="relative flex h-2.5 w-2.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-white"></span>
-                </span>
-              </div>
-              <div className="flex flex-col">
-                <span className="text-[10px] font-black text-emerald-600 uppercase tracking-widest">24/7 Support</span>
-                <a href="mailto:info@yek7pay.com" className="text-[11px] font-semibold text-slate-600 hover:text-blue-600 transition-colors">
-                  info@yek7pay.com
-                </a>
-                <a href="tel:+919230967187" className="text-[11px] font-bold text-slate-800 hover:text-blue-600 transition-colors">
-                  +91 92309 67187
-                </a>
-              </div>
-            </div>
-          </div>
         </div>
 
         {/* Desktop Nav */}
@@ -156,6 +137,15 @@ export function Navbar() {
         </div>
 
         <div className="flex items-center gap-3 md:gap-4">
+          <div className="hidden md:flex flex-col items-end text-right">
+            <span className="text-[10px] font-black text-emerald-600 uppercase tracking-widest">24/7 Support</span>
+            <a href="mailto:info@yek7pay.com" className="text-[11px] font-semibold text-slate-600 hover:text-blue-600 transition-colors">
+              info@yek7pay.com
+            </a>
+            <a href="tel:+919230967187" className="text-[11px] font-bold text-slate-700 hover:text-blue-600 transition-colors">
+              +91 92309 67187
+            </a>
+          </div>
           <Button className="bg-gradient-to-r from-blue-950 via-blue-900 to-purple-800 hover:opacity-90 text-white border-0 shadow-[0_0_20px_rgba(59,130,246,0.3)] rounded-full px-4 md:px-6 h-9 md:h-10 text-xs md:text-sm font-bold transition-all hover:scale-105 active:scale-95" onClick={openMenu}>
             Open Account / Login
           </Button>
