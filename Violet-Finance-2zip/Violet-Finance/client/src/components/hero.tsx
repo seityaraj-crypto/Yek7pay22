@@ -125,7 +125,7 @@ export function Hero() {
             >
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-blue-400 text-sm font-bold mb-8 neo-glow">
                 <Coins className="h-4 w-4 text-secondary" />
-                Next Gen Neo Banking with Yek7pay
+                Next-Gen Financial Services
               </div>
 
               <h1 className="text-5xl md:text-7xl font-display font-bold text-white leading-[1.1] mb-8 tracking-tighter">
