@@ -10,7 +10,6 @@ import { NetworkDots } from "@/components/network-dots";
 import { Invoice } from "@/components/invoice";
 
 const serviceCategories = [
-// ... (rest of categories remain same)
   {
     id: "income-tax",
     title: "Income Tax Filing (ITR)",
@@ -18,10 +17,10 @@ const serviceCategories = [
     color: "text-blue-400",
     bgColor: "bg-blue-400/10",
     services: [
-      { name: "Salaried Individual", frequency: "Annual", price: "₹499" },
-      { name: "Business / Professionals", frequency: "Annual", price: "₹1,499" },
-      { name: "Capital Gain / Multiple Sources", frequency: "Annual", price: "₹1,999" },
-      { name: "Previous Year's ITR (Missed ITRs - up to 5 lakh)", frequency: "Annual", price: "₹2,499" },
+      { name: "Salaried Individual", frequency: "Annual", price: "₹499", productId: "itr-salary-pension" },
+      { name: "Business / Professionals", frequency: "Annual", price: "₹1,499", productId: "itr-business-professional" },
+      { name: "Capital Gain / Multiple Sources", frequency: "Annual", price: "₹1,999", productId: "itr-capital-gain" },
+      { name: "Previous Year's ITR (Missed ITRs - up to 5 lakh)", frequency: "Annual", price: "₹2,499", productId: "itr-previous-year" },
     ]
   },
   {
@@ -31,8 +30,8 @@ const serviceCategories = [
     color: "text-purple-400",
     bgColor: "bg-purple-400/10",
     services: [
-      { name: "TDS Return Filing", frequency: "Quarterly", price: "₹2,999" },
-      { name: "Advance Tax Computation", frequency: "Quarterly", price: "₹2,999" },
+      { name: "TDS Return Filing", frequency: "Quarterly", price: "₹2,999", productId: "tds-return" },
+      { name: "Advance Tax Computation", frequency: "Quarterly", price: "₹2,999", productId: "advance-tax" },
     ]
   },
   {
@@ -42,13 +41,13 @@ const serviceCategories = [
     color: "text-amber-400",
     bgColor: "bg-amber-400/10",
     services: [
-      { name: "GST Registration", frequency: "One-time", price: "₹2,999" },
-      { name: "GST Return Filing (GSTR-1 & GSTR 3B) - NIL Return", frequency: "Monthly", price: "₹499" },
-      { name: "GST Return Filing (GSTR-1 & GSTR 3B) - Transaction based", frequency: "Monthly", price: "₹1,499" },
-      { name: "GST Annual Return (GSTR 9)", frequency: "Annual", price: "₹2,499" },
-      { name: "GST Refund (Exporter)", frequency: "Quarterly", price: "₹2,999" },
-      { name: "GST Notice Reply", frequency: "Ad-hoc", price: "Case by case" },
-      { name: "E-Way Bill Generation", frequency: "Ad-hoc", price: "₹499" },
+      { name: "GST Registration", frequency: "One-time", price: "₹2,999", productId: "gst-registration" },
+      { name: "GST Return Filing (GSTR-1 & GSTR 3B) - NIL Return", frequency: "Monthly", price: "₹499", productId: "gst-return-nil" },
+      { name: "GST Return Filing (GSTR-1 & GSTR 3B) - Transaction based", frequency: "Monthly", price: "₹1,499", productId: "gst-return-transaction" },
+      { name: "GST Annual Return (GSTR 9)", frequency: "Annual", price: "₹2,499", productId: "gst-annual-return" },
+      { name: "GST Refund (Exporter)", frequency: "Quarterly", price: "₹2,999", productId: "gst-refund-exporter" },
+      { name: "GST Notice Reply", frequency: "Ad-hoc", price: "Case by case", productId: null },
+      { name: "E-Way Bill Generation", frequency: "Ad-hoc", price: "₹499", productId: "eway-bill" },
     ]
   },
   {
@@ -58,10 +57,10 @@ const serviceCategories = [
     color: "text-emerald-400",
     bgColor: "bg-emerald-400/10",
     services: [
-      { name: "Pvt. Ltd. / LLP Incorporation", frequency: "One-time", price: "₹9,999" },
-      { name: "ROC Annual Filing (AOC-4, MGT-7)", frequency: "Annual", price: "₹9,999" },
-      { name: "Director KYC (DIR-3)", frequency: "Annual", price: "₹499" },
-      { name: "Other MCA Related Work", frequency: "Ad-hoc", price: "Case by case" },
+      { name: "Pvt. Ltd. / LLP Incorporation", frequency: "One-time", price: "₹9,999", productId: "pvt-ltd-incorporation" },
+      { name: "ROC Annual Filing (AOC-4, MGT-7)", frequency: "Annual", price: "₹9,999", productId: "roc-filing" },
+      { name: "Director KYC (DIR-3)", frequency: "Annual", price: "₹499", productId: "director-kyc" },
+      { name: "Other MCA Related Work", frequency: "Ad-hoc", price: "Case by case", productId: null },
     ]
   },
   {
@@ -71,9 +70,9 @@ const serviceCategories = [
     color: "text-cyan-400",
     bgColor: "bg-cyan-400/10",
     services: [
-      { name: "Monthly Accounting & Bookkeeping", frequency: "Monthly", price: "₹4,999" },
-      { name: "Balance Sheet & P&L Preparation", frequency: "Annual", price: "₹4,999" },
-      { name: "Tax Audit (u/s 44AB)", frequency: "Annual", price: "₹14,999" },
+      { name: "Monthly Accounting & Bookkeeping", frequency: "Monthly", price: "₹4,999", productId: "monthly-accounting" },
+      { name: "Balance Sheet & P&L Preparation", frequency: "Annual", price: "₹4,999", productId: "balance-sheet" },
+      { name: "Tax Audit (u/s 44AB)", frequency: "Annual", price: "₹14,999", productId: "tax-audit" },
     ]
   },
   {
@@ -83,11 +82,11 @@ const serviceCategories = [
     color: "text-pink-400",
     bgColor: "bg-pink-400/10",
     services: [
-      { name: "CA Certificate / Net Worth Certificate", frequency: "Ad-hoc", price: "₹2,999" },
-      { name: "Shareholding Certificate by CA", frequency: "Ad-hoc", price: "₹2,999" },
-      { name: "Project Report for Bank Loan", frequency: "Ad-hoc", price: "₹2,999" },
-      { name: "Turnover Certificate", frequency: "Ad-hoc", price: "₹2,999" },
-      { name: "Projected Financials", frequency: "Ad-hoc", price: "₹2,999" },
+      { name: "CA Certificate / Net Worth Certificate", frequency: "Ad-hoc", price: "₹2,999", productId: "ca-certificate" },
+      { name: "Shareholding Certificate by CA", frequency: "Ad-hoc", price: "₹2,999", productId: "shareholding-certificate" },
+      { name: "Project Report for Bank Loan", frequency: "Ad-hoc", price: "₹2,999", productId: "project-report" },
+      { name: "Turnover Certificate", frequency: "Ad-hoc", price: "₹2,999", productId: "turnover-certificate" },
+      { name: "Projected Financials", frequency: "Ad-hoc", price: "₹2,999", productId: "projected-financials" },
     ]
   },
   {
@@ -97,9 +96,9 @@ const serviceCategories = [
     color: "text-indigo-400",
     bgColor: "bg-indigo-400/10",
     services: [
-      { name: "Digital Signature Certificate (DSC)", frequency: "One-time", price: "₹1,999" },
-      { name: "PAN / TAN Application", frequency: "One-time", price: "₹499" },
-      { name: "PAN / TAN Correction", frequency: "One-time", price: "₹499" },
+      { name: "Digital Signature Certificate (DSC)", frequency: "One-time", price: "₹1,999", productId: "dsc" },
+      { name: "PAN / TAN Application", frequency: "One-time", price: "₹499", productId: "pan-tan-application" },
+      { name: "PAN / TAN Correction", frequency: "One-time", price: "₹499", productId: "pan-tan-correction" },
     ]
   },
   {
@@ -109,25 +108,25 @@ const serviceCategories = [
     color: "text-orange-400",
     bgColor: "bg-orange-400/10",
     services: [
-      { name: "Shop Act / Gumasta License", frequency: "One-time", price: "₹2,499" },
-      { name: "FSSAI Registration (Food License)", frequency: "One-time", price: "₹2,499" },
-      { name: "Import Export Code (IEC)", frequency: "One-time", price: "₹999" },
-      { name: "UDYAM / MSME Registration", frequency: "One-time", price: "₹999" },
-      { name: "Trade License (Municipal)", frequency: "One-time", price: "₹2,499" },
-      { name: "Labour License (Contractor/Establishment)", frequency: "One-time", price: "₹2,999" },
-      { name: "Professional Tax Registration", frequency: "One-time", price: "₹1,999" },
-      { name: "ISO Certification", frequency: "One-time", price: "₹6,999" },
-      { name: "Trademark Registration", frequency: "One-time", price: "₹4,999" },
-      { name: "Copyright Registration", frequency: "One-time", price: "₹4,999" },
-      { name: "PF / ESIC Registration", frequency: "One-time", price: "₹2,499" },
-      { name: "Startup India / DPIIT Registration", frequency: "One-time", price: "₹4,999" },
-      { name: "GEM Portal Registration", frequency: "One-time", price: "₹1,499" },
-      { name: "Pollution Control NOC (SPCB)", frequency: "One-time", price: "₹5,999" },
-      { name: "Fire Safety NOC", frequency: "One-time", price: "₹3,999" },
-      { name: "Drug License", frequency: "One-time", price: "₹5,999" },
-      { name: "Liquor License", frequency: "One-time", price: "₹24,999" },
-      { name: "Trade Mark Objection / Reply Handling", frequency: "One-time", price: "₹2,499" },
-      { name: "Patent Registration", frequency: "One-time", price: "₹9,999" },
+      { name: "Shop Act / Gumasta License", frequency: "One-time", price: "₹2,499", productId: null },
+      { name: "FSSAI Registration (Food License)", frequency: "One-time", price: "₹2,499", productId: "fssai-registration" },
+      { name: "Import Export Code (IEC)", frequency: "One-time", price: "₹999", productId: "import-export-code" },
+      { name: "UDYAM / MSME Registration", frequency: "One-time", price: "₹999", productId: "udyam-registration" },
+      { name: "Trade License (Municipal)", frequency: "One-time", price: "₹2,499", productId: null },
+      { name: "Labour License (Contractor/Establishment)", frequency: "One-time", price: "₹2,999", productId: null },
+      { name: "Professional Tax Registration", frequency: "One-time", price: "₹1,999", productId: null },
+      { name: "ISO Certification", frequency: "One-time", price: "₹6,999", productId: null },
+      { name: "Trademark Registration", frequency: "One-time", price: "₹4,999", productId: null },
+      { name: "Copyright Registration", frequency: "One-time", price: "₹4,999", productId: null },
+      { name: "PF / ESIC Registration", frequency: "One-time", price: "₹2,499", productId: null },
+      { name: "Startup India / DPIIT Registration", frequency: "One-time", price: "₹4,999", productId: null },
+      { name: "GEM Portal Registration", frequency: "One-time", price: "₹1,499", productId: null },
+      { name: "Pollution Control NOC (SPCB)", frequency: "One-time", price: "₹5,999", productId: null },
+      { name: "Fire Safety NOC", frequency: "One-time", price: "₹3,999", productId: null },
+      { name: "Drug License", frequency: "One-time", price: "₹5,999", productId: null },
+      { name: "Liquor License", frequency: "One-time", price: "₹24,999", productId: null },
+      { name: "Trade Mark Objection / Reply Handling", frequency: "One-time", price: "₹2,499", productId: null },
+      { name: "Patent Registration", frequency: "One-time", price: "₹9,999", productId: null },
     ]
   }
 ];
@@ -154,22 +153,21 @@ export default function Compliance() {
   const { toast } = useToast();
 
   const handleServiceSelect = (service: any, category: any) => {
-    const priceStr = service.price.replace('₹', '').replace(',', '');
-    const price = parseFloat(priceStr);
-    
-    if (isNaN(price)) {
-      // Case by case services
+    if (!service.productId) {
       const message = encodeURIComponent(`Hi, I'm interested in ${service.name} (${category.title}). Please provide a quote.`);
       window.open(`https://wa.me/919230967187?text=${message}`, '_blank');
       return;
     }
 
+    const priceStr = service.price.replace('₹', '').replace(',', '');
+    const price = parseFloat(priceStr);
     const gst = price * 0.18;
     const total = price + gst;
 
     setInvoiceData({
       title: `${service.name} - ${category.title}`,
       amount: `₹ ${total.toLocaleString('en-IN')}`,
+      productId: service.productId,
       items: [
         { name: "Service Fee", price: `₹ ${price.toLocaleString('en-IN')}` },
         { name: "GST (18%)", price: `₹ ${gst.toLocaleString('en-IN')}` }
@@ -379,13 +377,13 @@ export default function Compliance() {
               <Invoice 
                 title={invoiceData.title}
                 amount={invoiceData.amount}
+                productId={invoiceData.productId}
                 invoiceNumber={`INV-${Math.floor(Math.random() * 90000) + 10000}`}
                 date={new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })}
                 items={invoiceData.items}
-                onClose={() => {
-                  const message = encodeURIComponent(`Hi, I've generated the invoice for ${invoiceData.title} (${invoiceData.amount}). Please guide me with the payment process.`);
-                  window.open(`https://wa.me/919230967187?text=${message}`, '_blank');
-                  setShowInvoice(false);
+                onClose={() => setShowInvoice(false)}
+                onPaymentSuccess={() => {
+                  console.log("Compliance service payment successful:", invoiceData.title);
                 }}
               />
             </div>

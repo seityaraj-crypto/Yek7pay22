@@ -116,16 +116,16 @@ export default function Upgrade() {
               <Invoice 
                 title="Premium Membership Activation"
                 amount="₹ 999.00"
+                productId="premium-activation"
                 invoiceNumber={`INV-${Math.floor(Math.random() * 90000) + 10000}`}
                 date={new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })}
                 items={[
                   { name: "Premium Business License", price: "₹ 846.61" },
                   { name: "GST (18%)", price: "₹ 152.39" }
                 ]}
-                onClose={() => {
-                  const message = encodeURIComponent(`Hi, I've generated the invoice for Premium Activation (₹999). Please guide me with the payment process.`);
-                  window.open(`https://wa.me/919230967187?text=${message}`, '_blank');
-                  setShowInvoice(false);
+                onClose={() => setShowInvoice(false)}
+                onPaymentSuccess={() => {
+                  console.log("Premium activation payment successful");
                 }}
               />
             </div>

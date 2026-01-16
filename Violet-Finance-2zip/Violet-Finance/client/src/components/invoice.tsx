@@ -1,17 +1,50 @@
 import { motion } from "framer-motion";
-import { ShieldCheck, Download, CheckCircle2, QrCode } from "lucide-react";
+import { ShieldCheck, Download, CheckCircle2, QrCode, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useRazorpay } from "@/hooks/use-razorpay";
+import { useToast } from "@/hooks/use-toast";
 
 interface InvoiceProps {
   title: string;
   amount: string;
+  productId: string;
   items: { name: string; price: string }[];
   invoiceNumber: string;
   date: string;
   onClose: () => void;
+  onPaymentSuccess?: () => void;
 }
 
-export function Invoice({ title, amount, items, invoiceNumber, date, onClose }: InvoiceProps) {
+export function Invoice({ title, amount, productId, items, invoiceNumber, date, onClose, onPaymentSuccess }: InvoiceProps) {
+  const { initiatePayment, isLoading } = useRazorpay();
+  const { toast } = useToast();
+
+  const handlePayment = () => {
+    initiatePayment({
+      productId,
+      name: "Yek7Pay Solutions",
+      description: title,
+      notes: {
+        invoiceNumber,
+      },
+      onSuccess: (response) => {
+        toast({
+          title: "Payment Successful!",
+          description: `Transaction ID: ${response.razorpay_payment_id}`,
+        });
+        onPaymentSuccess?.();
+        onClose();
+      },
+      onError: (error) => {
+        toast({
+          title: "Payment Failed",
+          description: error.message,
+          variant: "destructive",
+        });
+      },
+    });
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.9 }}
@@ -53,12 +86,12 @@ export function Invoice({ title, amount, items, invoiceNumber, date, onClose }: 
           <h4 className="text-xs font-bold uppercase tracking-widest text-white/40 mb-3">Payment Method</h4>
           <div className="flex items-center gap-2 text-sm">
             <ShieldCheck className="h-4 w-4 text-emerald-400" />
-            <span className="font-medium">Secure UPI / QR</span>
+            <span className="font-medium">Razorpay Secure Payment</span>
           </div>
         </div>
         <div className="flex justify-end items-center">
-          <div className="bg-white p-2 rounded-xl">
-            <QrCode className="h-16 w-16 text-black" />
+          <div className="bg-gradient-to-br from-blue-500/20 to-purple-500/20 p-3 rounded-xl border border-white/10">
+            <ShieldCheck className="h-12 w-12 text-emerald-400" />
           </div>
         </div>
       </div>
@@ -73,14 +106,22 @@ export function Invoice({ title, amount, items, invoiceNumber, date, onClose }: 
         </Button>
         <Button 
           className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white rounded-full h-12 text-sm font-bold shadow-lg"
-          onClick={onClose}
+          onClick={handlePayment}
+          disabled={isLoading}
         >
-          Proceed to Pay
+          {isLoading ? (
+            <>
+              <Loader2 className="h-4 w-4 animate-spin mr-2" />
+              Processing...
+            </>
+          ) : (
+            "Pay Now"
+          )}
         </Button>
       </div>
 
       <p className="text-center mt-6 text-[10px] text-white/30 uppercase tracking-[0.2em] font-bold">
-        Authorized Transaction • Yek7Pay Next Gen Neo Bank
+        Authorized Transaction • Yek7Pay Solutions
       </p>
     </motion.div>
   );
