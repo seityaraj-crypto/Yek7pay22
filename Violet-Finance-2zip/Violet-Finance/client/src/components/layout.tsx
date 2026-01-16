@@ -47,7 +47,7 @@ export function Navbar() {
       label: "Banking & Remittance",
       items: [
         { name: "Advance DMT", icon: Send, href: "/#banking" },
-        { name: "Yek7Pay Unlimited", icon: Landmark, href: "/#banking" },
+        { name: "Yek7Pay Unlimited", icon: Landmark, href: "/upgrade" },
         { name: "Indo-Nepal Remit", icon: Globe, href: "/#banking" },
         { name: "AEPS Withdrawal", icon: Fingerprint, href: "/#banking" },
         { name: "Micro ATM", icon: Smartphone, href: "/#banking" },
@@ -58,8 +58,8 @@ export function Navbar() {
       label: "Payments & Collection",
       items: [
         { name: "Bharat Connect (BBPS)", icon: Receipt, href: "/bbps" },
-        { name: "UPI QR Collection", icon: Zap, iconColor: "text-yellow-500", href: "/#services" },
-        { name: "mPOS Card Solutions", icon: TabletSmartphone, href: "/#services" },
+        { name: "UPI QR Collection", icon: Zap, iconColor: "text-yellow-500", href: "/#bharat-connect" },
+        { name: "mPOS Card Solutions", icon: TabletSmartphone, href: "/#bharat-connect" },
         { name: "Credit Card Bill Pay", icon: CreditCard, iconColor: "text-purple-400", href: "/bbps" },
         { name: "Utility Payments", icon: Zap, iconColor: "text-green-400", href: "/bbps" },
         { name: "Recharge & DTH", icon: Smartphone, iconColor: "text-blue-400", href: "/bbps" },
@@ -69,10 +69,10 @@ export function Navbar() {
       label: "Growth & Travel",
       items: [
         { name: "Business Loans", icon: Building2, href: "/#booking" },
-        { name: "Flight Bookings", icon: Plane, href: "/#booking" },
-        { name: "Train Bookings", icon: Train, href: "/#booking" },
-        { name: "Bus Bookings", icon: Train, iconColor: "text-orange-400", href: "/#booking" },
-        { name: "Hotel Bookings", icon: Building2, iconColor: "text-pink-400", href: "/#booking" },
+        { name: "Flight Bookings", icon: Plane, href: "/#travel-booking" },
+        { name: "Train Bookings", icon: Train, href: "/#travel-booking" },
+        { name: "Bus Bookings", icon: Train, iconColor: "text-orange-400", href: "/#travel-booking" },
+        { name: "Hotel Bookings", icon: Building2, iconColor: "text-pink-400", href: "/#travel-booking" },
         { name: "GST & Compliance", icon: ClipboardCheck, href: "/compliance" },
       ]
     }
@@ -194,7 +194,7 @@ export function Navbar() {
                          label: "Banking & Remittance",
                          items: [
                            { name: "Advance DMT", href: "/#banking" },
-                           { name: "Neo Bank", href: "/#banking" },
+                           { name: "Yek7Pay Unlimited", href: "/upgrade" },
                            { name: "Indo-Nepal Remit", href: "/#banking" },
                            { name: "AEPS", href: "/#banking" },
                            { name: "Micro ATM", href: "/#banking" },
@@ -205,8 +205,8 @@ export function Navbar() {
                          label: "Payments & Collection",
                          items: [
                            { name: "Bharat Connect", href: "/bbps" },
-                           { name: "UPI QR", href: "/#services" },
-                           { name: "mPOS Solutions", href: "/#services" },
+                           { name: "UPI QR", href: "/#bharat-connect" },
+                           { name: "mPOS Solutions", href: "/#bharat-connect" },
                            { name: "Credit Card Pay", href: "/bbps" },
                            { name: "Utility Bills", href: "/bbps" },
                            { name: "Recharge & DTH", href: "/bbps" },
@@ -216,10 +216,10 @@ export function Navbar() {
                          label: "Growth & Travel",
                          items: [
                            { name: "Business Loans", href: "/#booking" },
-                           { name: "Flight Booking", href: "/#booking" },
-                           { name: "Train Booking", href: "/#booking" },
-                           { name: "Bus Booking", href: "/#booking" },
-                           { name: "Hotel Booking", href: "/#booking" },
+                           { name: "Flight Booking", href: "/#travel-booking" },
+                           { name: "Train Booking", href: "/#travel-booking" },
+                           { name: "Bus Booking", href: "/#travel-booking" },
+                           { name: "Hotel Booking", href: "/#travel-booking" },
                            { name: "Insurance", href: "/insurance" },
                            { name: "GST & Compliance", href: "/compliance" },
                            { name: "Premium Upgrade", href: "/upgrade" },
