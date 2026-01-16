@@ -163,22 +163,22 @@ export function Navbar() {
                    <Menu className="h-6 w-6" />
                  </Button>
                </SheetTrigger>
-               <SheetContent className="bg-blue-50 border-l border-blue-100 w-[320px] text-blue-950">
-                 <div className="flex flex-col gap-8 mt-12">
-                   <div className="flex items-center justify-center mb-4">
-                     <img src={logoImg} alt="Yek7pay" className="h-10 w-auto" />
+               <SheetContent className="bg-blue-50 border-l border-blue-100 w-[320px] text-blue-950 overflow-y-auto">
+                 <div className="flex flex-col gap-4 mt-8 pb-8">
+                   <div className="flex items-center justify-center mb-2">
+                     <img src={logoImg} alt="Yek7pay" className="h-8 w-auto" />
                    </div>
                    
-                   <div className="grid grid-cols-1 gap-4">
-                     <Button variant="outline" className="w-full border-blue-200 text-blue-900 font-bold hover:bg-blue-100/50 h-12" onClick={() => { openLogin(); setIsOpen(false); }}>
+                   <div className="grid grid-cols-2 gap-2">
+                     <Button variant="outline" className="w-full border-blue-200 text-blue-900 font-bold hover:bg-blue-100/50 h-10 text-xs" onClick={() => { openLogin(); setIsOpen(false); }}>
                        Login
                      </Button>
-                     <Button className="w-full bg-gradient-to-r from-blue-950 via-blue-900 to-purple-800 border-0 hover:opacity-90 text-white rounded-full font-bold h-12 shadow-lg shadow-blue-500/10" onClick={() => { openMenu(); setIsOpen(false); }}>
+                     <Button className="w-full bg-gradient-to-r from-blue-950 via-blue-900 to-purple-800 border-0 hover:opacity-90 text-white rounded-full font-bold h-10 text-xs shadow-lg shadow-blue-500/10" onClick={() => { openMenu(); setIsOpen(false); }}>
                        Create Account
                      </Button>
                    </div>
 
-                   <div className="space-y-2 pt-4 border-t border-blue-100 max-h-[60vh] overflow-y-auto">
+                   <div className="space-y-2 pt-3 border-t border-blue-100">
                      {[
                        {
                          label: "Banking & Remittance",
