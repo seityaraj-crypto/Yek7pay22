@@ -17,11 +17,12 @@ export function Chatbot() {
   const [input, setInput] = useState("");
   const [conversationId, setConversationId] = useState<number | null>(null);
   const [streamingMessage, setStreamingMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const queryClient = useQueryClient();
 
   // Create or get conversation
-  const { data: conversation } = useQuery({
+  const { data: conversation, isLoading: conversationLoading } = useQuery({
     queryKey: ["/api/conversations/active"],
     queryFn: async () => {
       const res = await fetch("/api/conversations");
@@ -59,20 +60,41 @@ export function Chatbot() {
   }, [messages, streamingMessage]);
 
   const handleSend = async () => {
-    if (!input.trim() || !conversationId) return;
+    if (!input.trim() || isLoading) return;
+    
+    // Wait for conversation to be ready
+    let activeConversationId = conversationId;
+    if (!activeConversationId) {
+      try {
+        const res = await fetch("/api/conversations");
+        const conversations = await res.json();
+        if (conversations.length > 0) {
+          activeConversationId = conversations[0].id;
+        } else {
+          const newRes = await apiRequest("POST", "/api/conversations", { title: "Yek7pay AI Chat" });
+          const newConv = await newRes.json();
+          activeConversationId = newConv.id;
+        }
+        setConversationId(activeConversationId);
+      } catch (error) {
+        console.error("Failed to create conversation:", error);
+        return;
+      }
+    }
 
     const userContent = input;
     setInput("");
     setStreamingMessage("");
+    setIsLoading(true);
 
     // Optimistically update UI
-    queryClient.setQueryData([`/api/conversations/${conversationId}`], (old: Message[] = []) => [
+    queryClient.setQueryData([`/api/conversations/${activeConversationId}`], (old: Message[] = []) => [
       ...old,
       { role: "user", content: userContent }
     ]);
 
     try {
-      const response = await fetch(`/api/conversations/${conversationId}/messages`, {
+      const response = await fetch(`/api/conversations/${activeConversationId}/messages`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ content: userContent }),
@@ -109,9 +131,11 @@ export function Chatbot() {
       }
 
       setStreamingMessage("");
-      queryClient.invalidateQueries({ queryKey: [`/api/conversations/${conversationId}`] });
+      queryClient.invalidateQueries({ queryKey: [`/api/conversations/${activeConversationId}`] });
     } catch (error) {
       console.error("Chat error:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -242,7 +266,7 @@ export function Chatbot() {
             <div className="p-4 border-t border-white/10 bg-white/5 flex gap-2 shrink-0">
               <input
                 className="flex-1 bg-white/5 border border-white/10 rounded-full px-4 text-sm focus:outline-none focus:ring-1 focus:ring-primary h-10"
-                placeholder="Type a message..."
+                placeholder={conversationLoading ? "Loading..." : "Type a message..."}
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => {
@@ -251,14 +275,15 @@ export function Chatbot() {
                     handleSend();
                   }
                 }}
+                disabled={isLoading}
               />
               <Button 
                 size="icon" 
                 className="rounded-full h-10 w-10 bg-primary hover:bg-primary/90 flex-shrink-0" 
                 onClick={handleSend}
-                disabled={!input.trim()}
+                disabled={!input.trim() || isLoading}
               >
-                <Send className="h-4 w-4" />
+                {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
               </Button>
             </div>
           </CardContent>
