@@ -237,7 +237,7 @@ export function Navbar() {
 
 export function Footer() {
   return (
-    <footer className="bg-gradient-to-br from-[#0a0a2e] via-[#1a0a3a] to-[#2a0a4a] py-24 mt-20 relative overflow-hidden text-white">
+    <footer className="bg-gradient-to-br from-[#0a0a2e] via-[#1a0a3a] to-[#2a0a4a] pt-24 pb-8 mt-20 relative overflow-hidden text-white">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-blue-600/5 blur-[120px] pointer-events-none" />
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-16 mb-20">
