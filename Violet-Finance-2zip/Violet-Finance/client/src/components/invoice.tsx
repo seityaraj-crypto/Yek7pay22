@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { ShieldCheck, Download, CheckCircle2, Loader2, Mail, Phone, Send } from "lucide-react";
+import { ShieldCheck, Download, CheckCircle2, Loader2, Mail, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useRazorpay } from "@/hooks/use-razorpay";
@@ -28,7 +28,6 @@ export function Invoice({ title, amount, productId, items, invoiceNumber, date, 
   const [paymentComplete, setPaymentComplete] = useState(false);
   const [paymentDetails, setPaymentDetails] = useState<PaymentDetails | null>(null);
   const [customerEmail, setCustomerEmail] = useState("");
-  const [customerPhone, setCustomerPhone] = useState("");
   const [isSendingInvoice, setIsSendingInvoice] = useState(false);
   const [invoiceSent, setInvoiceSent] = useState(false);
 
@@ -63,10 +62,10 @@ export function Invoice({ title, amount, productId, items, invoiceNumber, date, 
   };
 
   const handleSendInvoice = async () => {
-    if (!customerEmail && !customerPhone) {
+    if (!customerEmail) {
       toast({
-        title: "Contact Required",
-        description: "Please enter your email or phone number to receive the invoice.",
+        title: "Email Required",
+        description: "Please enter your email address to receive the invoice.",
         variant: "destructive",
       });
       return;
@@ -85,23 +84,17 @@ export function Invoice({ title, amount, productId, items, invoiceNumber, date, 
           date,
           paymentId: paymentDetails?.paymentId,
           orderId: paymentDetails?.orderId,
-          customerEmail: customerEmail || undefined,
-          customerPhone: customerPhone || undefined,
+          customerEmail,
         }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        if (data.method === "whatsapp" && data.whatsappUrl) {
-          window.open(data.whatsappUrl, "_blank");
-        }
         setInvoiceSent(true);
         toast({
           title: "Invoice Sent!",
-          description: customerEmail 
-            ? `Invoice sent to ${customerEmail}` 
-            : `Invoice opened in WhatsApp`,
+          description: `Invoice sent to ${customerEmail}`,
         });
       } else {
         throw new Error(data.error || "Failed to send invoice");
@@ -174,7 +167,7 @@ export function Invoice({ title, amount, productId, items, invoiceNumber, date, 
           
           {!invoiceSent ? (
             <>
-              <div className="space-y-3 mb-4">
+              <div className="mb-4">
                 <div className="relative">
                   <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/40" />
                   <Input
@@ -185,21 +178,10 @@ export function Invoice({ title, amount, productId, items, invoiceNumber, date, 
                     className="pl-10 bg-white/5 border-white/10 text-white placeholder:text-white/30 rounded-xl h-12"
                   />
                 </div>
-                <div className="text-center text-white/30 text-xs">OR</div>
-                <div className="relative">
-                  <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/40" />
-                  <Input
-                    type="tel"
-                    placeholder="Enter WhatsApp number (with country code)"
-                    value={customerPhone}
-                    onChange={(e) => setCustomerPhone(e.target.value)}
-                    className="pl-10 bg-white/5 border-white/10 text-white placeholder:text-white/30 rounded-xl h-12"
-                  />
-                </div>
               </div>
               <Button
                 onClick={handleSendInvoice}
-                disabled={isSendingInvoice || (!customerEmail && !customerPhone)}
+                disabled={isSendingInvoice || !customerEmail}
                 className="w-full bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white rounded-xl h-12 font-bold"
               >
                 {isSendingInvoice ? (
@@ -210,7 +192,7 @@ export function Invoice({ title, amount, productId, items, invoiceNumber, date, 
                 ) : (
                   <>
                     <Send className="h-4 w-4 mr-2" />
-                    Send Invoice with Greetings
+                    Send Invoice to Email
                   </>
                 )}
               </Button>
@@ -219,7 +201,7 @@ export function Invoice({ title, amount, productId, items, invoiceNumber, date, 
             <div className="text-center py-4">
               <CheckCircle2 className="h-8 w-8 text-emerald-400 mx-auto mb-2" />
               <p className="text-emerald-400 font-bold">Invoice Sent Successfully!</p>
-              <p className="text-white/40 text-sm mt-1">Check your {customerEmail ? "email" : "WhatsApp"}</p>
+              <p className="text-white/40 text-sm mt-1">Check your email</p>
             </div>
           )}
         </div>
