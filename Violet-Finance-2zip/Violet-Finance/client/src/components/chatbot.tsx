@@ -119,14 +119,15 @@ export function Chatbot() {
     <>
       {!isOpen && !isMinimized && (
         <div className="fixed bottom-20 right-6 z-50">
-          <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 rounded-full blur-lg opacity-60 animate-pulse" />
-          <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 rounded-full opacity-30 animate-spin" style={{ animationDuration: '3s' }} />
+          <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 rounded-full blur-lg opacity-60 animate-pulse pointer-events-none" />
+          <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 rounded-full opacity-30 animate-spin pointer-events-none" style={{ animationDuration: '3s' }} />
           <Button
             onClick={() => setIsOpen(true)}
-            className="relative h-14 w-14 rounded-full shadow-2xl bg-gradient-to-br from-cyan-500 via-blue-600 to-purple-600 hover:scale-110 transition-all p-0 border-2 border-white/20 flex items-center justify-center overflow-hidden group"
+            onTouchEnd={(e) => { e.preventDefault(); setIsOpen(true); }}
+            className="relative h-14 w-14 rounded-full shadow-2xl bg-gradient-to-br from-cyan-500 via-blue-600 to-purple-600 hover:scale-110 transition-all p-0 border-2 border-white/20 flex items-center justify-center overflow-hidden group touch-manipulation"
           >
-            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-            <div className="relative flex items-center justify-center">
+            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+            <div className="relative flex items-center justify-center pointer-events-none">
               <Sparkles className="absolute h-3 w-3 text-yellow-300 -top-1 -right-1 animate-ping" style={{ animationDuration: '1.5s' }} />
               <Sparkles className="absolute h-2 w-2 text-cyan-300 -bottom-0.5 -left-1 animate-ping" style={{ animationDuration: '2s', animationDelay: '0.5s' }} />
               <Bot className="h-7 w-7 text-white drop-shadow-lg" />
