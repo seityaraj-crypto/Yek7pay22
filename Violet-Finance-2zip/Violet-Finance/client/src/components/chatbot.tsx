@@ -118,7 +118,7 @@ export function Chatbot() {
   return (
     <>
       {!isOpen && !isMinimized && (
-        <div className="fixed bottom-6 right-6 z-50">
+        <div className="fixed bottom-20 right-6 z-50">
           <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 rounded-full blur-lg opacity-60 animate-pulse" />
           <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 rounded-full opacity-30 animate-spin" style={{ animationDuration: '3s' }} />
           <Button
@@ -137,7 +137,7 @@ export function Chatbot() {
 
       {isMinimized && (
         <div 
-          className="fixed bottom-6 right-6 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full shadow-2xl z-50 flex items-center gap-3 px-4 py-3 cursor-pointer hover:scale-105 transition-all"
+          className="fixed bottom-20 right-6 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full shadow-2xl z-50 flex items-center gap-3 px-4 py-3 cursor-pointer hover:scale-105 transition-all"
           onClick={() => { setIsMinimized(false); setIsOpen(true); }}
         >
           <div className="h-2 w-2 bg-green-400 rounded-full animate-pulse" />
