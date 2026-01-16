@@ -168,6 +168,16 @@ export function Navbar() {
                    <div className="flex items-center justify-center mb-2">
                      <img src={logoImg} alt="Yek7pay" className="h-8 w-auto" />
                    </div>
+
+                   <div className="flex flex-col items-center text-center py-2 border-b border-blue-100">
+                     <span className="text-[10px] font-black text-emerald-600 uppercase tracking-widest">24/7 Support</span>
+                     <a href="mailto:info@yek7pay.com" className="text-xs font-semibold text-slate-600 hover:text-blue-600 transition-colors">
+                       info@yek7pay.com
+                     </a>
+                     <a href="tel:+919230967187" className="text-xs font-bold text-slate-700 hover:text-blue-600 transition-colors">
+                       +91 92309 67187
+                     </a>
+                   </div>
                    
                    <div className="grid grid-cols-2 gap-2">
                      <Button variant="outline" className="w-full border-blue-200 text-blue-900 font-bold hover:bg-blue-100/50 h-10 text-xs" onClick={() => { openLogin(); setIsOpen(false); }}>
