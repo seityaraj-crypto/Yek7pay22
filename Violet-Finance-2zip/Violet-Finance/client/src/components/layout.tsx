@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Menu, Shield, Bell, ChevronDown, Landmark, Send, Globe, Fingerprint, CreditCard, Banknote, Briefcase, Zap, Receipt, Plane, Train, Building2, ClipboardCheck, Smartphone, TabletSmartphone } from "lucide-react";
+import { Menu, Shield, Bell, ChevronDown, Landmark, Send, Globe, Fingerprint, CreditCard, Banknote, Briefcase, Zap, Receipt, Plane, Train, Building2, ClipboardCheck, Smartphone, TabletSmartphone, Mail, Phone } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { AuthDialog } from "@/components/auth-dialog";
 import {
@@ -81,20 +81,33 @@ export function Navbar() {
   return (
     <nav className="fixed w-full z-50 top-0 border-b border-white/5 bg-[#f5f5f7]/95 backdrop-blur-xl h-14 flex items-center shadow-sm">
       <div className="container mx-auto px-4 flex items-center justify-between">
-        <button onClick={goHome} className="flex items-center group cursor-pointer" style={{ perspective: '500px' }}>
-          <div className="relative">
-             <img 
-               src={logoImg} 
-               alt="Yek7pay" 
-               className="h-10 w-auto transition-all duration-500 group-hover:scale-110 brightness-110" 
-               style={{ 
-                 transform: 'rotateY(-5deg) rotateX(3deg)',
-                 filter: 'drop-shadow(2px 2px 1px rgba(0,0,0,0.2)) drop-shadow(-1px -1px 1px rgba(255,255,255,0.1))',
-                 transformStyle: 'preserve-3d'
-               }}
-             />
+        <div className="flex items-center gap-4">
+          <button onClick={goHome} className="flex items-center group cursor-pointer" style={{ perspective: '500px' }}>
+            <div className="relative">
+               <img 
+                 src={logoImg} 
+                 alt="Yek7pay" 
+                 className="h-10 w-auto transition-all duration-500 group-hover:scale-110 brightness-110" 
+                 style={{ 
+                   transform: 'rotateY(-5deg) rotateX(3deg)',
+                   filter: 'drop-shadow(2px 2px 1px rgba(0,0,0,0.2)) drop-shadow(-1px -1px 1px rgba(255,255,255,0.1))',
+                   transformStyle: 'preserve-3d'
+                 }}
+               />
+            </div>
+          </button>
+          
+          <div className="hidden md:flex items-center gap-4 ml-2 border-l border-slate-200 pl-4">
+            <a href="mailto:info@yek7pay.com" className="flex items-center gap-1.5 text-xs text-slate-600 hover:text-blue-600 transition-colors">
+              <Mail className="h-3.5 w-3.5" />
+              <span className="hidden lg:inline">info@yek7pay.com</span>
+            </a>
+            <a href="tel:+919230967187" className="flex items-center gap-1.5 text-xs text-slate-600 hover:text-blue-600 transition-colors">
+              <Phone className="h-3.5 w-3.5" />
+              <span>+91 92309 67187</span>
+            </a>
           </div>
-        </button>
+        </div>
 
         {/* Desktop Nav */}
         <div className="hidden lg:flex items-center gap-6">
