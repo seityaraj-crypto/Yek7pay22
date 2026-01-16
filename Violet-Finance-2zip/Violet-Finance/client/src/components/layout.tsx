@@ -97,23 +97,23 @@ export function Navbar() {
             </div>
           </button>
           
-          <div className="hidden md:flex items-center gap-3 ml-3">
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-emerald-500/10 to-blue-500/10 rounded-full border border-emerald-500/20">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-              </span>
-              <span className="text-[10px] font-bold text-emerald-600 uppercase tracking-wider">24/7 Support</span>
-            </div>
-            <div className="flex items-center gap-2 text-xs">
-              <a href="tel:+919230967187" className="flex items-center gap-1.5 px-2.5 py-1.5 bg-slate-100 hover:bg-blue-50 rounded-lg transition-colors group">
-                <Phone className="h-3.5 w-3.5 text-blue-500" />
-                <span className="font-semibold text-slate-700 group-hover:text-blue-600">+91 92309 67187</span>
-              </a>
-              <a href="mailto:info@yek7pay.com" className="hidden lg:flex items-center gap-1.5 px-2.5 py-1.5 bg-slate-100 hover:bg-blue-50 rounded-lg transition-colors group">
-                <Mail className="h-3.5 w-3.5 text-blue-500" />
-                <span className="font-semibold text-slate-700 group-hover:text-blue-600">info@yek7pay.com</span>
-              </a>
+          <div className="hidden md:flex items-center gap-4 ml-4">
+            <div className="flex items-center gap-3 px-4 py-2 bg-gradient-to-br from-slate-50 to-blue-50/50 rounded-xl border border-slate-200/80 shadow-sm">
+              <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-emerald-500 to-blue-600 rounded-lg shadow-md">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-white"></span>
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] font-black text-emerald-600 uppercase tracking-widest">24/7 Support</span>
+                <a href="mailto:info@yek7pay.com" className="text-[11px] font-semibold text-slate-600 hover:text-blue-600 transition-colors">
+                  info@yek7pay.com
+                </a>
+                <a href="tel:+919230967187" className="text-[11px] font-bold text-slate-800 hover:text-blue-600 transition-colors">
+                  +91 92309 67187
+                </a>
+              </div>
             </div>
           </div>
         </div>
