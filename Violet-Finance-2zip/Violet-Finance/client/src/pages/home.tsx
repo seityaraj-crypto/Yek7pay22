@@ -131,6 +131,10 @@ function ContactForm() {
       if (response.ok) {
         setSubmitStatus({ success: true, message: data.message });
         setFormData({ name: "", countryCode: "+91", phone: "", email: "", service: "" });
+        
+        if (data.whatsappUrl) {
+          window.open(data.whatsappUrl, "_blank");
+        }
       } else {
         setSubmitStatus({ success: false, message: data.error || "Something went wrong" });
       }
