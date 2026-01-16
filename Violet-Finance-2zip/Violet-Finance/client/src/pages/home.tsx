@@ -430,7 +430,7 @@ export default function Home() {
             />
             <ServiceCard 
               icon={Landmark}
-              title="Neo Bank Unlimited"
+              title="Yek7Pay Unlimited"
               description="Unlimited daily limits for merchants and high-volume users. Safe, secure, and instant."
               delay={0.2}
               variant="featured"

@@ -33,7 +33,7 @@ export default function Upgrade() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
               {[
-                { title: "Neo Bank Unlimited", desc: "Unlimited daily limits for high-volume money transfers." },
+                { title: "Yek7Pay Unlimited", desc: "Unlimited daily limits for high-volume money transfers." },
                 { title: "PPI Wallet", desc: "Digital wallet solutions for instant merchant payouts." },
                 { title: "Premium Loans", desc: "Priority processing for business and personal financing." },
                 { title: "Compliance Suite", desc: "Full access to GST filing, ITR, and audit services." },

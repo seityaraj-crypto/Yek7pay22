@@ -8,7 +8,7 @@ import { Link } from "wouter";
 const heroTextSlides = [
   {
     id: 1,
-    highlight: "Neo Bank Unlimited",
+    highlight: "Yek7Pay Unlimited",
     text: "Unlimited Daily Vendor Payments. Designed for High-Volume Transactions.",
     icon: Banknote
   },

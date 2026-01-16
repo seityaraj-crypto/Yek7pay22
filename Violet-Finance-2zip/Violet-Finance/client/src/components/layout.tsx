@@ -47,7 +47,7 @@ export function Navbar() {
       label: "Banking & Remittance",
       items: [
         { name: "Advance DMT", icon: Send, href: "/#banking" },
-        { name: "Neo Bank Unlimited", icon: Landmark, href: "/#banking" },
+        { name: "Yek7Pay Unlimited", icon: Landmark, href: "/#banking" },
         { name: "Indo-Nepal Remit", icon: Globe, href: "/#banking" },
         { name: "AEPS Withdrawal", icon: Fingerprint, href: "/#banking" },
         { name: "Micro ATM", icon: Smartphone, href: "/#banking" },
@@ -306,7 +306,7 @@ export function Footer() {
             <h4 className="font-display font-bold text-white mb-10 text-sm tracking-wider uppercase opacity-70">Banking & Remittance</h4>
             <ul className="space-y-3 text-sm text-white">
               <li><a href="/#banking" className="hover:text-blue-400 transition-all">Advance DMT</a></li>
-              <li><a href="/#banking" className="hover:text-blue-400 transition-all">Neo Bank Unlimited</a></li>
+              <li><a href="/#banking" className="hover:text-blue-400 transition-all">Yek7Pay Unlimited</a></li>
               <li><a href="/#banking" className="hover:text-blue-400 transition-all">Indo-Nepal Remit</a></li>
               <li><a href="/#banking" className="hover:text-blue-400 transition-all">AEPS Withdrawal</a></li>
               <li><a href="/#banking" className="hover:text-blue-400 transition-all">Micro ATM</a></li>

@@ -91,7 +91,7 @@ export default function Features() {
   const services = [
     {
       icon: Banknote,
-      title: "Neo Bank Unlimited",
+      title: "Yek7Pay Unlimited",
       tagline: "Zero Limits, Maximum Growth",
       description: "Send unlimited money daily with instant settlements. No daily caps, no restrictions - just seamless transactions for your growing business.",
       features: ["Unlimited Daily Transfers", "T+0 Instant Settlement", "Zero Hidden Charges", "Pan-India Coverage"],
