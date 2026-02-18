@@ -2,6 +2,7 @@ import { Navbar, Footer } from "@/components/layout";
 import { Hero } from "@/components/hero";
 import { ServiceCard } from "@/components/service-card";
 import { SectionHeader } from "@/components/section-header";
+import { AuthDialog } from "@/components/auth-dialog";
 import { WelcomePopup } from "@/components/welcome-popup";
 import { NetworkDots } from "@/components/network-dots";
 import { useState } from "react";
@@ -226,7 +227,7 @@ function ContactForm() {
 }
 
 export default function Home() {
-
+  const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [showTimePicker, setShowTimePicker] = useState(false);
   const [activeNumber, setActiveNumber] = useState<string | null>(null);
   const [activeVipCard, setActiveVipCard] = useState<number | null>(null);
@@ -322,10 +323,10 @@ export default function Home() {
          <div className="container mx-auto px-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
                {[
-                 { label: 'Sent Money', icon: Send, color: 'text-blue-500', action: () => window.open('https://wa.me/919230967187?text=Hi%2C%20I%20want%20to%20know%20about%20Send%20Money', '_blank') },
-                 { label: 'AEPS', icon: Fingerprint, color: 'text-blue-400', action: () => window.open('https://wa.me/919230967187?text=Hi%2C%20I%20want%20to%20know%20about%20AEPS', '_blank') },
-                 { label: 'Credit Card', icon: CreditCard, color: 'text-blue-500', action: () => window.open('https://wa.me/919230967187?text=Hi%2C%20I%20want%20to%20know%20about%20Credit%20Card', '_blank') },
-                 { label: 'Nepal Remit', icon: Globe, color: 'text-blue-600', action: () => window.open('https://wa.me/919230967187?text=Hi%2C%20I%20want%20to%20know%20about%20Nepal%20Remit', '_blank') }
+                 { label: 'Sent Money', icon: Send, color: 'text-blue-500', action: () => setIsAuthOpen(true) },
+                 { label: 'AEPS', icon: Fingerprint, color: 'text-blue-400', action: () => setIsAuthOpen(true) },
+                 { label: 'Credit Card', icon: CreditCard, color: 'text-blue-500', action: () => setIsAuthOpen(true) },
+                 { label: 'Nepal Remit', icon: Globe, color: 'text-blue-600', action: () => setIsAuthOpen(true) }
                ].map((action, i) => (
                   <Button key={i} variant="ghost" className="h-20 bg-white/5 backdrop-blur-md shadow-xl border border-white/5 hover:border-violet-500/30 hover:bg-violet-500/5 rounded-2xl flex flex-col gap-2 transition-all group" onClick={action.action}>
                      <div className={`p-2 rounded-xl bg-white/5 group-hover:scale-110 transition-transform ${action.color}`}>
@@ -774,11 +775,9 @@ export default function Home() {
                     </li>
                   ))}
                </ul>
-               <a href="https://wa.me/919230967187?text=Hi%2C%20I%20want%20to%20know%20about%20UPI%20QR%20Solutions" target="_blank" rel="noopener noreferrer" className="w-full">
-                 <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white h-14 rounded-2xl font-bold">
-                    Get Started <ArrowRight className="ml-2 h-5 w-5" />
-                 </Button>
-               </a>
+               <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white h-14 rounded-2xl font-bold" onClick={() => setIsAuthOpen(true)}>
+                  Get Started <ArrowRight className="ml-2 h-5 w-5" />
+               </Button>
             </div>
 
             <div className="bg-white/5 backdrop-blur-xl p-12 rounded-[3rem] shadow-2xl border border-white/10 flex flex-col items-center text-center group">
@@ -794,11 +793,9 @@ export default function Home() {
                     </li>
                   ))}
                </ul>
-               <a href="https://wa.me/919230967187?text=Hi%2C%20I%20want%20to%20know%20about%20mPOS%20Solutions" target="_blank" rel="noopener noreferrer" className="w-full">
-                 <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white h-14 rounded-2xl font-bold">
-                    Get Started <ArrowRight className="ml-2 h-5 w-5" />
-                 </Button>
-               </a>
+               <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white h-14 rounded-2xl font-bold" onClick={() => setIsAuthOpen(true)}>
+                  Get Started <ArrowRight className="ml-2 h-5 w-5" />
+               </Button>
             </div>
           </div>
         </div>
@@ -843,11 +840,9 @@ export default function Home() {
                 <p className="text-xl text-white/80 font-medium">Join thousands of satisfied merchants and start accepting payments today.</p>
               </div>
               <div className="flex-shrink-0 w-full md:w-auto text-center md:text-right">
-                <a href="https://wa.me/919230967187?text=Hi%2C%20I%20want%20to%20open%20a%20Yek7Pay%20account" target="_blank" rel="noopener noreferrer" className="w-full md:w-auto">
-                  <Button className="w-full md:w-auto bg-white text-purple-600 hover:bg-white/90 h-16 px-12 rounded-2xl font-black text-lg shadow-xl transition-all hover:scale-105 active:scale-95">
-                    Contact Us
-                  </Button>
-                </a>
+                <Button className="w-full md:w-auto bg-white text-purple-600 hover:bg-white/90 h-16 px-12 rounded-2xl font-black text-lg shadow-xl transition-all hover:scale-105 active:scale-95" onClick={() => setIsAuthOpen(true)}>
+                  Create Free Account
+                </Button>
               </div>
             </div>
           </div>
@@ -1326,6 +1321,7 @@ export default function Home() {
       </section>
 
       <Footer />
+      <AuthDialog isOpen={isAuthOpen} onOpenChange={setIsAuthOpen} />
 
       {/* Time Selection Modal */}
       <AnimatePresence>
