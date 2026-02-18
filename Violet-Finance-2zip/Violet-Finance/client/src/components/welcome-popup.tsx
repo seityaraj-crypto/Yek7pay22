@@ -19,7 +19,7 @@ export function WelcomePopup() {
     {
       title: "Seamless",
       highlight: "Vendor Payments",
-      description: "Effortless vendor payments with no daily limits. Built for scale.",
+      description: "Effortless vendor payments with no daily limit. Built for scale.",
       icon: TrendingUp,
       gradient: "from-purple-500 to-pink-600"
     },
