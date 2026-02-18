@@ -681,9 +681,10 @@ export default function Home() {
             >
               <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 bg-[length:200%_100%] animate-[shimmer_2s_ease-in-out_infinite]" />
               <span className="relative z-10 flex items-center gap-3 text-white">
-                <Clock className="w-5 h-5" />
+                <Clock className="w-5 h-5 animate-[tickSlow_6s_linear_infinite]" />
                 Make an Appointment
               </span>
+              <style>{`@keyframes tickSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
             </button>
           </div>
         </div>
@@ -1145,10 +1146,11 @@ export default function Home() {
                   <div className="text-center mb-6">
                     <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mx-auto mb-4 shadow-lg shadow-purple-500/30 relative overflow-hidden">
                       <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent animate-[shimmer_2s_infinite]" />
-                      <Clock className="w-8 h-8 text-white animate-[tick_1s_steps(12)_infinite] drop-shadow-lg" />
+                      <Clock className="w-8 h-8 text-white animate-[tick_4s_steps(12)_infinite] drop-shadow-lg" />
                     </div>
                     <style>{`
                       @keyframes tick { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+                      @keyframes tickSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
                       @keyframes shimmer { 0%,100% { opacity: 0; } 50% { opacity: 1; } }
                     `}</style>
                     <h3 className="text-2xl font-bold text-white">Select Time Slot</h3>
