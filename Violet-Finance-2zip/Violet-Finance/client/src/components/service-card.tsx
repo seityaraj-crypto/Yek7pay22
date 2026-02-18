@@ -26,7 +26,7 @@ export function ServiceCard({ icon: Icon, title, description, delay = 0, variant
 
   const handleClick = () => {
     if (externalUrl) {
-      window.location.href = externalUrl;
+      window.open(externalUrl, '_blank');
     } else if (onClick) {
       onClick();
     } else {
