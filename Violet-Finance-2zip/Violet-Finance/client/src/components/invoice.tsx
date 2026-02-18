@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { ShieldCheck, Download, CheckCircle2, Loader2, Mail, Send, X } from "lucide-react";
+import { ShieldCheck, Download, CheckCircle2, Loader2, Phone, MessageCircle, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useRazorpay } from "@/hooks/use-razorpay";
@@ -24,14 +24,43 @@ interface PaymentDetails {
   orderId: string;
 }
 
+function buildWhatsAppInvoiceMsg(data: { invoiceNumber: string; title: string; amount: string; items: { name: string; price: string; qty?: number }[]; paymentId?: string; customerPhone?: string }) {
+  const parseAmt = (a: string) => parseFloat(a.replace(/[^\d.]/g, "")) || 0;
+  const fmtINR = (n: number) => n.toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const totalAmount = parseAmt(data.amount);
+  const itemsList = data.items.map(item => {
+    const qty = item.qty || 1;
+    const price = parseAmt(item.price);
+    return `  ${item.name}: ₹${fmtINR(price)} x ${qty} = ₹${fmtINR(price * qty)}`;
+  }).join("\n");
+
+  return `*INVOICE - Yek7Pay*
+
+Invoice: #${data.invoiceNumber}
+Service: ${data.title}
+
+*Items:*
+${itemsList}
+
+*Total Paid: ₹${fmtINR(totalAmount)}*
+
+${data.paymentId ? `Transaction ID: ${data.paymentId}` : ""}
+
+Thank you for choosing Yek7Pay!
+
+For queries:
+WhatsApp: +91 92309 67187
+
+_Yek7Pay Solutions Private Limited_`;
+}
+
 export function Invoice({ title, amount, productId, items, invoiceNumber, date, onClose, onPaymentSuccess }: InvoiceProps) {
   const { initiatePayment, isLoading } = useRazorpay();
   const { toast } = useToast();
   const [paymentComplete, setPaymentComplete] = useState(false);
   const [paymentDetails, setPaymentDetails] = useState<PaymentDetails | null>(null);
-  const [customerEmail, setCustomerEmail] = useState("");
-  const [emailForInvoice, setEmailForInvoice] = useState("");
-  const [isSendingInvoice, setIsSendingInvoice] = useState(false);
+  const [customerPhone, setCustomerPhone] = useState("");
+  const [phoneForInvoice, setPhoneForInvoice] = useState("");
   const [invoiceSent, setInvoiceSent] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
   const invoiceRef = useRef<HTMLDivElement>(null);
@@ -40,27 +69,35 @@ export function Invoice({ title, amount, productId, items, invoiceNumber, date, 
     return parseFloat(amt.replace(/[^\d.]/g, "")) || 0;
   };
 
+  const openWhatsAppInvoice = (phone: string, paymentId?: string) => {
+    const msg = buildWhatsAppInvoiceMsg({ invoiceNumber, title, amount, items, paymentId, customerPhone: phone });
+    const cleanPhone = phone.replace(/\D/g, "");
+    const fullPhone = cleanPhone.startsWith("91") ? cleanPhone : `91${cleanPhone}`;
+    const waUrl = `https://api.whatsapp.com/send?phone=${fullPhone}&text=${encodeURIComponent(msg)}`;
+    window.open(waUrl, '_blank');
+  };
+
   const handlePayment = () => {
-    if (!customerEmail) {
+    if (!customerPhone) {
       toast({
-        title: "Email Required",
-        description: "Please enter your email address before proceeding to payment.",
+        title: "Phone Number Required",
+        description: "Please enter the customer's phone number before proceeding to payment.",
         variant: "destructive",
       });
       return;
     }
-    setEmailForInvoice(customerEmail);
+    setPhoneForInvoice(customerPhone);
 
     initiatePayment({
       productId,
       name: "Yek7Pay Solutions",
       description: title,
       prefill: {
-        email: customerEmail,
+        contact: customerPhone,
       },
       notes: {
         invoiceNumber,
-        customerEmail,
+        customerPhone,
       },
       onSuccess: async (response) => {
         setPaymentDetails({
@@ -74,42 +111,12 @@ export function Invoice({ title, amount, productId, items, invoiceNumber, date, 
         });
         onPaymentSuccess?.();
 
-        try {
-          const emailRes = await fetch("/api/invoice/send", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              invoiceNumber,
-              title,
-              amount,
-              items,
-              date,
-              paymentId: response.razorpay_payment_id,
-              orderId: response.razorpay_order_id,
-              customerEmail,
-            }),
-          });
-          if (emailRes.ok) {
-            setInvoiceSent(true);
-            toast({
-              title: "Invoice Sent!",
-              description: `Invoice auto-sent to ${customerEmail}`,
-            });
-          } else {
-            const errData = await emailRes.json().catch(() => ({}));
-            console.error("Auto-send invoice failed:", errData);
-            toast({
-              title: "Invoice Ready",
-              description: "Auto-email could not be sent. You can download or resend it below.",
-            });
-          }
-        } catch (err) {
-          console.error("Auto-send invoice failed:", err);
-          toast({
-            title: "Invoice Ready",
-            description: "Auto-email could not be sent. You can download or resend it manually.",
-          });
-        }
+        openWhatsAppInvoice(customerPhone, response.razorpay_payment_id);
+        setInvoiceSent(true);
+        toast({
+          title: "Invoice Sent via WhatsApp!",
+          description: `Invoice opened in WhatsApp for ${customerPhone}`,
+        });
       },
       onError: (error) => {
         toast({
@@ -121,54 +128,23 @@ export function Invoice({ title, amount, productId, items, invoiceNumber, date, 
     });
   };
 
-  const handleSendInvoice = async () => {
-    const emailToUse = emailForInvoice || customerEmail;
-    if (!emailToUse) {
+  const handleSendInvoice = () => {
+    const phoneToUse = phoneForInvoice || customerPhone;
+    if (!phoneToUse) {
       toast({
-        title: "Email Required",
-        description: "Please enter your email address to receive the invoice.",
+        title: "Phone Number Required",
+        description: "Please enter the phone number to send the invoice.",
         variant: "destructive",
       });
       return;
     }
 
-    setIsSendingInvoice(true);
-    try {
-      const response = await fetch("/api/invoice/send", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          invoiceNumber,
-          title,
-          amount,
-          items,
-          date,
-          paymentId: paymentDetails?.paymentId,
-          orderId: paymentDetails?.orderId,
-          customerEmail: emailToUse,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        setInvoiceSent(true);
-        toast({
-          title: "Invoice Sent!",
-          description: `Invoice sent to ${emailToUse}`,
-        });
-      } else {
-        throw new Error(data.error || "Failed to send invoice");
-      }
-    } catch (error) {
-      toast({
-        title: "Send Failed",
-        description: "Could not send invoice. Please download it instead.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSendingInvoice(false);
-    }
+    openWhatsAppInvoice(phoneToUse, paymentDetails?.paymentId);
+    setInvoiceSent(true);
+    toast({
+      title: "Invoice Sent via WhatsApp!",
+      description: `Invoice opened in WhatsApp for ${phoneToUse}`,
+    });
   };
 
   const handleDownloadInvoice = useCallback(async () => {
@@ -276,7 +252,7 @@ export function Invoice({ title, amount, productId, items, invoiceNumber, date, 
             </div>
             <div className="text-sm text-gray-700 text-right space-y-1">
               <p className="font-bold">Receiver:</p>
-              <p>{emailForInvoice || customerEmail || "Customer"}</p>
+              <p>{phoneForInvoice || customerPhone || "Customer"}</p>
               {paymentDetails && (
                 <p className="text-xs text-gray-500">Txn: {paymentDetails.paymentId}</p>
               )}
@@ -331,27 +307,26 @@ export function Invoice({ title, amount, productId, items, invoiceNumber, date, 
           {!invoiceSent ? (
             <div className="flex gap-2">
               <div className="relative flex-1">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
                 <Input
-                  type="email"
-                  placeholder="Enter email to resend invoice"
-                  value={emailForInvoice || customerEmail}
-                  onChange={(e) => setEmailForInvoice(e.target.value)}
+                  type="tel"
+                  placeholder="Enter phone to resend invoice via WhatsApp"
+                  value={phoneForInvoice || customerPhone}
+                  onChange={(e) => setPhoneForInvoice(e.target.value)}
                   className="pl-10 h-10 text-sm"
                 />
               </div>
               <Button
                 onClick={handleSendInvoice}
-                disabled={isSendingInvoice}
                 size="sm"
                 className="bg-green-600 hover:bg-green-700 text-white h-10 px-4"
               >
-                {isSendingInvoice ? <Loader2 className="h-4 w-4 animate-spin" /> : <><Send className="h-4 w-4 mr-1" /> Send</>}
+                <MessageCircle className="h-4 w-4 mr-1" /> Send
               </Button>
             </div>
           ) : (
             <div className="flex items-center gap-2 text-green-600 text-sm font-medium justify-center py-1">
-              <CheckCircle2 className="h-4 w-4" /> Invoice sent to {emailForInvoice || customerEmail}
+              <CheckCircle2 className="h-4 w-4" /> Invoice sent via WhatsApp to {phoneForInvoice || customerPhone}
             </div>
           )}
 
@@ -449,18 +424,18 @@ export function Invoice({ title, amount, productId, items, invoiceNumber, date, 
         </div>
 
         <div className="mb-4">
-          <label className="block text-sm font-semibold text-gray-700 mb-2">Your Email (for invoice delivery)</label>
+          <label className="block text-sm font-semibold text-gray-700 mb-2">WhatsApp Number (for invoice delivery)</label>
           <div className="relative">
-            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+            <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
             <Input
-              type="email"
-              placeholder="Enter your email address"
-              value={customerEmail}
-              onChange={(e) => setCustomerEmail(e.target.value)}
+              type="tel"
+              placeholder="Enter WhatsApp number (e.g. 9230967187)"
+              value={customerPhone}
+              onChange={(e) => setCustomerPhone(e.target.value)}
               className="pl-10 h-11 text-sm border-gray-300"
             />
           </div>
-          <p className="text-xs text-gray-400 mt-1">Invoice will be automatically sent to this email after payment</p>
+          <p className="text-xs text-gray-400 mt-1">Invoice will be automatically sent via WhatsApp after payment</p>
         </div>
 
         <Button
