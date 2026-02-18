@@ -227,35 +227,29 @@ export function WelcomePopup() {
                   </div>
 
                   <div className="space-y-3 mb-8">
-                    <a
-                      href="/new-account"
-                      className="flex items-center gap-4 p-4 rounded-2xl bg-gradient-to-r from-blue-600/20 to-purple-600/20 border border-blue-500/30 hover:border-blue-400/50 transition-all group cursor-pointer"
-                      onClick={handleClose}
-                    >
-                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                        <UserPlus className="w-6 h-6 text-white" />
-                      </div>
-                      <div className="flex-1">
-                        <p className="font-bold text-white group-hover:text-blue-300 transition-colors">Create Your Account</p>
-                        <p className="text-sm text-white/50">Start your free Yek7Pay account now</p>
-                      </div>
-                      <ArrowRight className="w-5 h-5 text-white/50 group-hover:text-white group-hover:translate-x-1 transition-all" />
-                    </a>
+                    <div className="grid grid-cols-2 gap-3">
+                      <a
+                        href="/new-account"
+                        className="flex flex-col items-center gap-2 p-4 rounded-2xl bg-gradient-to-br from-blue-600/20 to-purple-600/20 border border-blue-500/30 hover:border-blue-400/50 transition-all group cursor-pointer text-center"
+                        onClick={handleClose}
+                      >
+                        <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                          <UserPlus className="w-5 h-5 text-white" />
+                        </div>
+                        <p className="font-bold text-white text-sm group-hover:text-blue-300 transition-colors">Create Account</p>
+                      </a>
 
-                    <a
-                      href="/login"
-                      className="flex items-center gap-4 p-4 rounded-2xl bg-gradient-to-r from-green-600/20 to-teal-600/20 border border-green-500/30 hover:border-green-400/50 transition-all group cursor-pointer"
-                      onClick={handleClose}
-                    >
-                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-teal-600 flex items-center justify-center">
-                        <LogIn className="w-6 h-6 text-white" />
-                      </div>
-                      <div className="flex-1">
-                        <p className="font-bold text-white group-hover:text-green-300 transition-colors">Login</p>
-                        <p className="text-sm text-white/50">Login to Yek7Pay</p>
-                      </div>
-                      <ArrowRight className="w-5 h-5 text-white/50 group-hover:text-white group-hover:translate-x-1 transition-all" />
-                    </a>
+                      <a
+                        href="/login"
+                        className="flex flex-col items-center gap-2 p-4 rounded-2xl bg-gradient-to-br from-green-600/20 to-teal-600/20 border border-green-500/30 hover:border-green-400/50 transition-all group cursor-pointer text-center"
+                        onClick={handleClose}
+                      >
+                        <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-green-500 to-teal-600 flex items-center justify-center">
+                          <LogIn className="w-5 h-5 text-white" />
+                        </div>
+                        <p className="font-bold text-white text-sm group-hover:text-green-300 transition-colors">Login</p>
+                      </a>
+                    </div>
 
                     <a
                       href="/upgrade"
