@@ -181,9 +181,11 @@ export function Hero() {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start">
-                <Button size="lg" className="bg-primary hover:bg-primary/90 text-white h-14 px-10 rounded-full shadow-2xl neo-glow text-lg font-bold" onClick={() => setIsAuthOpen(true)}>
-                  Get Started <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
+                <a href="https://yek7pay.finstore.app/" target="_blank" rel="noopener noreferrer">
+                  <Button size="lg" className="bg-primary hover:bg-primary/90 text-white h-14 px-10 rounded-full shadow-2xl neo-glow text-lg font-bold">
+                    Get Started <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </a>
                 <Link href="/features">
                   <Button size="lg" variant="outline" className="h-14 px-10 rounded-full border-white/10 hover:bg-white/5 hover:text-white text-lg font-bold">
                     Explore Features

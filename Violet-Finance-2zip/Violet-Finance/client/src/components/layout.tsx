@@ -146,9 +146,11 @@ export function Navbar() {
               +91 92309 67187
             </a>
           </div>
-          <Button className="bg-gradient-to-r from-blue-950 via-blue-900 to-purple-800 hover:opacity-90 text-white border-0 shadow-[0_0_20px_rgba(59,130,246,0.3)] rounded-full px-4 md:px-6 h-9 md:h-10 text-xs md:text-sm font-bold transition-all hover:scale-105 active:scale-95" onClick={openMenu}>
-            Open Account / Login
-          </Button>
+          <a href="https://yek7pay.finstore.app/" target="_blank" rel="noopener noreferrer">
+            <Button className="bg-gradient-to-r from-blue-950 via-blue-900 to-purple-800 hover:opacity-90 text-white border-0 shadow-[0_0_20px_rgba(59,130,246,0.3)] rounded-full px-4 md:px-6 h-9 md:h-10 text-xs md:text-sm font-bold transition-all hover:scale-105 active:scale-95">
+              Open Account / Login
+            </Button>
+          </a>
 
           <div className="flex items-center gap-2">
              <Button variant="ghost" size="icon" className="text-blue-400 relative hover:text-primary hover:bg-blue-50 hidden sm:flex">
@@ -180,12 +182,16 @@ export function Navbar() {
                    </div>
                    
                    <div className="grid grid-cols-2 gap-2">
-                     <Button variant="outline" className="w-full border-blue-200 text-blue-900 font-bold hover:bg-blue-100/50 h-10 text-xs" onClick={() => { openLogin(); setIsOpen(false); }}>
-                       Login
-                     </Button>
-                     <Button className="w-full bg-gradient-to-r from-blue-950 via-blue-900 to-purple-800 border-0 hover:opacity-90 text-white rounded-full font-bold h-10 text-xs shadow-lg shadow-blue-500/10" onClick={() => { openMenu(); setIsOpen(false); }}>
-                       Create Account
-                     </Button>
+                     <a href="https://yek7pay.finstore.app/" target="_blank" rel="noopener noreferrer" className="w-full" onClick={() => setIsOpen(false)}>
+                       <Button variant="outline" className="w-full border-blue-200 text-blue-900 font-bold hover:bg-blue-100/50 h-10 text-xs">
+                         Login
+                       </Button>
+                     </a>
+                     <a href="https://yek7pay.finstore.app/" target="_blank" rel="noopener noreferrer" className="w-full" onClick={() => setIsOpen(false)}>
+                       <Button className="w-full bg-gradient-to-r from-blue-950 via-blue-900 to-purple-800 border-0 hover:opacity-90 text-white rounded-full font-bold h-10 text-xs shadow-lg shadow-blue-500/10">
+                         Create Account
+                       </Button>
+                     </a>
                    </div>
 
                    <div className="space-y-2 pt-3 border-t border-blue-100">

@@ -775,9 +775,11 @@ export default function Home() {
                     </li>
                   ))}
                </ul>
-               <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white h-14 rounded-2xl font-bold" onClick={() => setIsAuthOpen(true)}>
-                  Get Started <ArrowRight className="ml-2 h-5 w-5" />
-               </Button>
+               <a href="https://yek7pay.finstore.app/" target="_blank" rel="noopener noreferrer" className="w-full block">
+                  <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white h-14 rounded-2xl font-bold">
+                    Get Started <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+               </a>
             </div>
 
             <div className="bg-white/5 backdrop-blur-xl p-12 rounded-[3rem] shadow-2xl border border-white/10 flex flex-col items-center text-center group">
@@ -793,9 +795,11 @@ export default function Home() {
                     </li>
                   ))}
                </ul>
-               <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white h-14 rounded-2xl font-bold" onClick={() => setIsAuthOpen(true)}>
-                  Get Started <ArrowRight className="ml-2 h-5 w-5" />
-               </Button>
+               <a href="https://yek7pay.finstore.app/" target="_blank" rel="noopener noreferrer" className="w-full block">
+                  <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white h-14 rounded-2xl font-bold">
+                    Get Started <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+               </a>
             </div>
           </div>
         </div>
@@ -840,9 +844,11 @@ export default function Home() {
                 <p className="text-xl text-white/80 font-medium">Join thousands of satisfied merchants and start accepting payments today.</p>
               </div>
               <div className="flex-shrink-0 w-full md:w-auto text-center md:text-right">
-                <Button className="w-full md:w-auto bg-white text-purple-600 hover:bg-white/90 h-16 px-12 rounded-2xl font-black text-lg shadow-xl transition-all hover:scale-105 active:scale-95" onClick={() => setIsAuthOpen(true)}>
-                  Create Free Account
-                </Button>
+                <a href="https://yek7pay.finstore.app/" target="_blank" rel="noopener noreferrer">
+                  <Button className="w-full md:w-auto bg-white text-purple-600 hover:bg-white/90 h-16 px-12 rounded-2xl font-black text-lg shadow-xl transition-all hover:scale-105 active:scale-95">
+                    Create Free Account
+                  </Button>
+                </a>
               </div>
             </div>
           </div>
