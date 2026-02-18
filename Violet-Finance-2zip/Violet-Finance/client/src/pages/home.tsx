@@ -112,43 +112,28 @@ function ContactForm() {
     email: "",
     service: ""
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<{ success: boolean; message: string } | null>(null);
+  const [sent, setSent] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitStatus(null);
-
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData)
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        setSubmitStatus({ success: true, message: data.message });
-        setFormData({ name: "", countryCode: "+91", phone: "", email: "", service: "" });
-      } else {
-        setSubmitStatus({ success: false, message: data.error || "Something went wrong" });
-      }
-    } catch (error) {
-      setSubmitStatus({ success: false, message: "Failed to submit. Please try again." });
-    } finally {
-      setIsSubmitting(false);
-    }
+    const msg = `Hi, I have a question about *${formData.service || 'your services'}*.%0A%0A*Name:* ${encodeURIComponent(formData.name)}%0A*Phone:* ${encodeURIComponent(formData.countryCode + ' ' + formData.phone)}%0A*Email:* ${encodeURIComponent(formData.email)}%0A%0APlease assist me. Thank you!`;
+    window.open(`https://wa.me/919230967187?text=${msg}`, '_blank');
+    setSent(true);
   };
+
+  if (sent) {
+    return (
+      <div className="p-6 rounded-xl bg-green-500/20 text-green-400 border border-green-500/30 text-center">
+        <MessageCircle className="h-8 w-8 mx-auto mb-3" />
+        <p className="font-bold text-lg">WhatsApp opened!</p>
+        <p className="text-sm text-green-400/70 mt-1">Send the message to connect with our team.</p>
+        <button onClick={() => setSent(false)} className="mt-4 text-xs text-white/50 underline hover:text-white/70">Send another message</button>
+      </div>
+    );
+  }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      {submitStatus && (
-        <div className={`p-4 rounded-xl text-center ${submitStatus.success ? 'bg-green-500/20 text-green-400 border border-green-500/30' : 'bg-red-500/20 text-red-400 border border-red-500/30'}`}>
-          {submitStatus.message}
-        </div>
-      )}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <input 
           type="text" 
@@ -211,17 +196,10 @@ function ContactForm() {
       </div>
       <button 
         type="submit" 
-        disabled={isSubmitting}
-        className="w-full py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-bold rounded-xl transition-all hover:scale-[1.02] shadow-lg shadow-blue-500/20 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+        className="w-full py-4 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white font-bold rounded-xl transition-all hover:scale-[1.02] shadow-lg shadow-green-500/20 flex items-center justify-center gap-2"
       >
-        {isSubmitting ? (
-          <>
-            <Loader2 className="h-5 w-5 animate-spin" />
-            Sending...
-          </>
-        ) : (
-          "Send Message"
-        )}
+        <MessageCircle className="h-5 w-5" />
+        Send Message via WhatsApp
       </button>
     </form>
   );
