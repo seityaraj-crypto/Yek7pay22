@@ -9,7 +9,7 @@ const heroTextSlides = [
   {
     id: 1,
     highlight: "Yek7Pay Unlimited",
-    text: "Unlimited Daily Vendor Payments. Designed for High-Volume Transactions.",
+    text: "Seamless Vendor Payments With No Daily Limits. Built for High-Volume Businesses.",
     icon: Banknote
   },
   {

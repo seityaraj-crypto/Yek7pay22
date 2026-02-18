@@ -17,9 +17,9 @@ export function WelcomePopup() {
       gradient: "from-blue-500 to-purple-600"
     },
     {
-      title: "Unlimited daily",
-      highlight: "Vendor payments",
-      description: "Unlimited Vendor payments daily. Neo Bank With zero limits.",
+      title: "Seamless",
+      highlight: "Vendor Payments",
+      description: "Effortless vendor payments with no daily limits. Built for scale.",
       icon: TrendingUp,
       gradient: "from-purple-500 to-pink-600"
     },
