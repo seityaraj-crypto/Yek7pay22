@@ -6,8 +6,9 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { NetworkDots } from "@/components/network-dots";
 
+const BBPS_REDIRECT = "https://yek7pay.finstore.app/";
+
 const bbpsServices = [
-  { title: "MSPDCL", icon: Zap, desc: "Manipur Electricity - Direct bill payment for MSPDCL customers.", color: "text-yellow-500", bgColor: "bg-yellow-500/10", url: "https://billing.mspdcl.info" },
   { title: "Electricity", icon: Zap, desc: "Pay all state board electricity bills instantly.", color: "text-yellow-400", bgColor: "bg-yellow-400/10" },
   { title: "Water Bill", icon: Droplets, desc: "Seamless payment for municipal water connections.", color: "text-blue-400", bgColor: "bg-blue-400/10" },
   { title: "LPG Gas", icon: Flame, desc: "Book and pay for gas cylinders from your home.", color: "text-orange-400", bgColor: "bg-orange-400/10" },
@@ -62,11 +63,7 @@ export default function BharatConnect() {
               >
                 <Card 
                   className="h-full bg-white/5 border-white/10 hover:border-violet-500/50 transition-all backdrop-blur-xl group cursor-pointer"
-                  onClick={() => {
-                    if (service.url) {
-                      window.open(service.url, '_blank');
-                    }
-                  }}
+                  onClick={() => window.open(BBPS_REDIRECT, '_blank')}
                 >
                   <CardHeader>
                     <div className={`w-12 h-12 rounded-2xl ${service.bgColor} flex items-center justify-center ${service.color} mb-4 group-hover:scale-110 transition-transform shadow-lg border border-white/5`}>
@@ -79,10 +76,8 @@ export default function BharatConnect() {
                     <Button 
                       className="w-full bg-white/5 hover:bg-violet-500 text-white border-white/10 rounded-xl text-xs font-bold transition-all"
                       onClick={(e) => {
-                        if (service.url) {
-                          e.stopPropagation();
-                          window.open(service.url, '_blank');
-                        }
+                        e.stopPropagation();
+                        window.open(BBPS_REDIRECT, '_blank');
                       }}
                     >
                       Pay Now
