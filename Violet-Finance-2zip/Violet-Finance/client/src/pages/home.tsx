@@ -235,6 +235,7 @@ export default function Home() {
   const [vipContactOption, setVipContactOption] = useState<'call' | 'whatsapp' | 'email' | null>(null);
   const [showAppointmentContact, setShowAppointmentContact] = useState(false);
   const [appointmentContactOption, setAppointmentContactOption] = useState<'call' | 'whatsapp' | 'email' | null>(null);
+  const [showCallAgent, setShowCallAgent] = useState(false);
   const [selectedTimeSlot, setSelectedTimeSlot] = useState<string | null>(null);
 
   const timeSlots = [
@@ -833,27 +834,82 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Ready to Get Started Section */}
+      {/* Ready to Boost Your Business Section */}
       <section className="py-24 bg-transparent">
         <div className="container mx-auto px-4">
           <div className="bg-gradient-to-r from-purple-600/60 to-blue-600/60 backdrop-blur-2xl rounded-[2.5rem] p-12 text-white border border-white/10 shadow-2xl relative overflow-hidden group">
             <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />
             <div className="flex flex-col md:flex-row items-center justify-between gap-12 relative z-10">
               <div className="max-w-2xl text-center md:text-left">
-                <h2 className="text-4xl md:text-5xl font-black mb-6 leading-tight">Ready to Get Started?</h2>
+                <h2 className="text-4xl md:text-5xl font-black mb-6 leading-tight">Ready to Boost Your Business?</h2>
                 <p className="text-xl text-white/80 font-medium">Join thousands of satisfied merchants and start accepting payments today.</p>
               </div>
               <div className="flex-shrink-0 w-full md:w-auto text-center md:text-right">
-                <a href="https://yek7pay.finstore.app/" target="_blank" rel="noopener noreferrer">
-                  <Button className="w-full md:w-auto bg-white text-purple-600 hover:bg-white/90 h-16 px-12 rounded-2xl font-black text-lg shadow-xl transition-all hover:scale-105 active:scale-95">
-                    Create Free Account
-                  </Button>
-                </a>
+                <Button 
+                  className="w-full md:w-auto bg-white text-purple-600 hover:bg-white/90 h-16 px-12 rounded-2xl font-black text-lg shadow-xl transition-all hover:scale-105 active:scale-95"
+                  onClick={() => setShowCallAgent(true)}
+                >
+                  Create Your Account
+                </Button>
               </div>
             </div>
           </div>
         </div>
       </section>
+
+      {/* Call Agent Popup */}
+      <AnimatePresence>
+        {showCallAgent && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-black/80 backdrop-blur-md"
+              onClick={() => setShowCallAgent(false)}
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="relative z-[110] bg-[#1a1a3a] border border-white/10 rounded-[2rem] p-8 md:p-10 shadow-2xl max-w-md w-full text-white text-center"
+            >
+              <button 
+                onClick={() => setShowCallAgent(false)}
+                className="absolute top-4 right-4 p-2 rounded-full hover:bg-white/10 transition-colors"
+              >
+                <X className="h-5 w-5 text-white/60" />
+              </button>
+
+              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center mx-auto mb-6 shadow-xl shadow-green-500/20">
+                <Phone className="h-9 w-9 text-white" />
+              </div>
+
+              <h3 className="text-2xl md:text-3xl font-black mb-3">Call Yek7Pay Agent</h3>
+              <p className="text-white/60 mb-2 text-sm">Our registration expert will help you set up your account quickly and guide you through the entire process.</p>
+              <p className="text-white/40 text-xs mb-8">Available Mon-Sat, 9 AM - 7 PM IST</p>
+
+              <a href="tel:+919230967187" className="block mb-4">
+                <Button className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white h-16 rounded-2xl font-bold text-lg shadow-xl shadow-green-500/20 transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-3">
+                  <Phone className="h-5 w-5" />
+                  Call +91 92309 67187
+                </Button>
+              </a>
+
+              <a href="https://wa.me/919230967187?text=Hi%2C%20I%20want%20to%20create%20my%20Yek7Pay%20account.%20Please%20help%20me%20with%20registration." target="_blank" rel="noopener noreferrer" className="block mb-6">
+                <Button variant="outline" className="w-full border-white/10 hover:bg-white/5 text-white h-14 rounded-2xl font-bold text-base flex items-center justify-center gap-3">
+                  <MessageCircle className="h-5 w-5 text-green-400" />
+                  WhatsApp Us
+                </Button>
+              </a>
+
+              <p className="text-[10px] text-white/30 uppercase tracking-[0.15em] font-medium">
+                Pan India Service Available
+              </p>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
 
       {/* VIP Franchise & Distributor Section */}
       <section className="py-24 bg-transparent">
