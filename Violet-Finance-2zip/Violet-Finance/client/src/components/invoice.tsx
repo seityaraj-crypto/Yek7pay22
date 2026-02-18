@@ -1,16 +1,18 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { ShieldCheck, Download, CheckCircle2, Loader2, Mail, Send } from "lucide-react";
+import { ShieldCheck, Download, CheckCircle2, Loader2, Mail, Send, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useRazorpay } from "@/hooks/use-razorpay";
 import { useToast } from "@/hooks/use-toast";
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 interface InvoiceProps {
   title: string;
   amount: string;
   productId: string;
-  items: { name: string; price: string }[];
+  items: { name: string; price: string; qty?: number }[];
   invoiceNumber: string;
   date: string;
   onClose: () => void;
@@ -28,18 +30,39 @@ export function Invoice({ title, amount, productId, items, invoiceNumber, date, 
   const [paymentComplete, setPaymentComplete] = useState(false);
   const [paymentDetails, setPaymentDetails] = useState<PaymentDetails | null>(null);
   const [customerEmail, setCustomerEmail] = useState("");
+  const [emailForInvoice, setEmailForInvoice] = useState("");
   const [isSendingInvoice, setIsSendingInvoice] = useState(false);
   const [invoiceSent, setInvoiceSent] = useState(false);
+  const [isDownloading, setIsDownloading] = useState(false);
+  const invoiceRef = useRef<HTMLDivElement>(null);
+
+  const parseAmount = (amt: string): number => {
+    return parseFloat(amt.replace(/[^\d.]/g, "")) || 0;
+  };
 
   const handlePayment = () => {
+    if (!customerEmail) {
+      toast({
+        title: "Email Required",
+        description: "Please enter your email address before proceeding to payment.",
+        variant: "destructive",
+      });
+      return;
+    }
+    setEmailForInvoice(customerEmail);
+
     initiatePayment({
       productId,
       name: "Yek7Pay Solutions",
       description: title,
+      prefill: {
+        email: customerEmail,
+      },
       notes: {
         invoiceNumber,
+        customerEmail,
       },
-      onSuccess: (response) => {
+      onSuccess: async (response) => {
         setPaymentDetails({
           paymentId: response.razorpay_payment_id,
           orderId: response.razorpay_order_id,
@@ -50,6 +73,43 @@ export function Invoice({ title, amount, productId, items, invoiceNumber, date, 
           description: `Transaction ID: ${response.razorpay_payment_id}`,
         });
         onPaymentSuccess?.();
+
+        try {
+          const emailRes = await fetch("/api/invoice/send", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              invoiceNumber,
+              title,
+              amount,
+              items,
+              date,
+              paymentId: response.razorpay_payment_id,
+              orderId: response.razorpay_order_id,
+              customerEmail,
+            }),
+          });
+          if (emailRes.ok) {
+            setInvoiceSent(true);
+            toast({
+              title: "Invoice Sent!",
+              description: `Invoice auto-sent to ${customerEmail}`,
+            });
+          } else {
+            const errData = await emailRes.json().catch(() => ({}));
+            console.error("Auto-send invoice failed:", errData);
+            toast({
+              title: "Invoice Ready",
+              description: "Auto-email could not be sent. You can download or resend it below.",
+            });
+          }
+        } catch (err) {
+          console.error("Auto-send invoice failed:", err);
+          toast({
+            title: "Invoice Ready",
+            description: "Auto-email could not be sent. You can download or resend it manually.",
+          });
+        }
       },
       onError: (error) => {
         toast({
@@ -62,7 +122,8 @@ export function Invoice({ title, amount, productId, items, invoiceNumber, date, 
   };
 
   const handleSendInvoice = async () => {
-    if (!customerEmail) {
+    const emailToUse = emailForInvoice || customerEmail;
+    if (!emailToUse) {
       toast({
         title: "Email Required",
         description: "Please enter your email address to receive the invoice.",
@@ -84,7 +145,7 @@ export function Invoice({ title, amount, productId, items, invoiceNumber, date, 
           date,
           paymentId: paymentDetails?.paymentId,
           orderId: paymentDetails?.orderId,
-          customerEmail,
+          customerEmail: emailToUse,
         }),
       });
 
@@ -94,7 +155,7 @@ export function Invoice({ title, amount, productId, items, invoiceNumber, date, 
         setInvoiceSent(true);
         toast({
           title: "Invoice Sent!",
-          description: `Invoice sent to ${customerEmail}`,
+          description: `Invoice sent to ${emailToUse}`,
         });
       } else {
         throw new Error(data.error || "Failed to send invoice");
@@ -110,9 +171,79 @@ export function Invoice({ title, amount, productId, items, invoiceNumber, date, 
     }
   };
 
-  const handleDownloadInvoice = () => {
-    window.print();
-  };
+  const handleDownloadInvoice = useCallback(async () => {
+    if (!invoiceRef.current) return;
+    setIsDownloading(true);
+    try {
+      const canvas = await html2canvas(invoiceRef.current, {
+        scale: 2,
+        backgroundColor: "#ffffff",
+        useCORS: true,
+        logging: false,
+      });
+
+      const imgData = canvas.toDataURL("image/png");
+      const imgWidth = canvas.width;
+      const imgHeight = canvas.height;
+
+      const pdf = new jsPDF({
+        orientation: "portrait",
+        unit: "mm",
+        format: "a4",
+      });
+
+      const a4Width = 210;
+      const a4Height = 297;
+      const margin = 0;
+      const contentWidth = a4Width - margin * 2;
+      const scaledHeight = (imgHeight * contentWidth) / imgWidth;
+
+      if (scaledHeight <= a4Height) {
+        pdf.addImage(imgData, "PNG", margin, margin, contentWidth, scaledHeight);
+      } else {
+        let yOffset = 0;
+        let page = 0;
+        const sourceSliceHeight = (a4Height * imgWidth) / contentWidth;
+
+        while (yOffset < imgHeight) {
+          if (page > 0) pdf.addPage();
+
+          const sliceH = Math.min(sourceSliceHeight, imgHeight - yOffset);
+          const sliceCanvas = document.createElement("canvas");
+          sliceCanvas.width = imgWidth;
+          sliceCanvas.height = sliceH;
+          const ctx = sliceCanvas.getContext("2d");
+          if (ctx) {
+            ctx.drawImage(canvas, 0, yOffset, imgWidth, sliceH, 0, 0, imgWidth, sliceH);
+            const sliceData = sliceCanvas.toDataURL("image/png");
+            const slicePageH = (sliceH * contentWidth) / imgWidth;
+            pdf.addImage(sliceData, "PNG", margin, margin, contentWidth, slicePageH);
+          }
+
+          yOffset += sliceH;
+          page++;
+        }
+      }
+
+      pdf.save(`Yek7Pay_Invoice_${invoiceNumber}.pdf`);
+
+      toast({
+        title: "Invoice Downloaded!",
+        description: `Saved as Yek7Pay_Invoice_${invoiceNumber}.pdf`,
+      });
+    } catch (err) {
+      console.error("Download failed:", err);
+      toast({
+        title: "Download Failed",
+        description: "Could not generate invoice PDF. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsDownloading(false);
+    }
+  }, [invoiceNumber, toast]);
+
+  const totalAmount = parseAmount(amount);
 
   if (paymentComplete) {
     return (
@@ -120,111 +251,128 @@ export function Invoice({ title, amount, productId, items, invoiceNumber, date, 
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.9 }}
-        className="bg-[#1a1a3a] border border-white/10 rounded-[2rem] p-8 shadow-2xl max-w-2xl w-full relative overflow-hidden text-white"
+        className="bg-white rounded-2xl shadow-2xl max-w-[600px] w-full relative overflow-hidden"
       >
-        <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/20 blur-3xl -translate-y-1/2 translate-x-1/2" />
-        
-        <div className="text-center mb-8 relative z-10">
-          <motion.div 
-            initial={{ scale: 0 }} 
-            animate={{ scale: 1 }} 
-            transition={{ type: "spring", delay: 0.2 }}
-            className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-emerald-500 to-green-600 mb-4"
-          >
-            <CheckCircle2 className="h-10 w-10 text-white" />
-          </motion.div>
-          <h2 className="text-3xl font-display font-black mb-2">Payment Successful!</h2>
-          <p className="text-white/60">Thank you for your payment. Your invoice is ready.</p>
+        <div className="flex items-center justify-between px-6 py-3 bg-gray-50 border-b">
+          <span className="text-xs text-gray-500 font-medium">Invoice Preview</span>
+          <button onClick={onClose} className="text-gray-400 hover:text-gray-600">
+            <X className="h-4 w-4" />
+          </button>
         </div>
 
-        <div className="bg-white/5 rounded-2xl p-6 mb-6 border border-white/10">
-          <div className="flex justify-between items-start mb-4">
-            <div>
-              <p className="text-xs font-bold uppercase tracking-widest text-white/40 mb-1">Invoice</p>
-              <p className="text-lg font-bold">{invoiceNumber}</p>
+        <div ref={invoiceRef} className="bg-white p-8" style={{ fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" }}>
+          <div className="flex justify-end mb-1">
+            <p className="text-sm text-gray-700"><span className="font-semibold">Sender:</span> Yek7Pay Solutions Pvt. Ltd.</p>
+          </div>
+          <hr className="border-gray-300 mb-6" />
+
+          <h1 className="text-3xl font-bold text-gray-800 mb-6 tracking-wide">INVOICE</h1>
+
+          <div className="flex justify-between mb-8">
+            <div className="text-sm text-gray-700 space-y-1">
+              <p><span className="font-bold">Invoice:</span> #{invoiceNumber}</p>
+              <p><span className="font-bold">Date:</span> {date}</p>
+              <p><span className="font-bold">Payment Status:</span> <span className="text-green-600 font-semibold">PAID</span></p>
             </div>
-            <div className="text-right">
-              <p className="text-xs font-bold uppercase tracking-widest text-white/40 mb-1">Amount Paid</p>
-              <p className="text-2xl font-black text-emerald-400">{amount}</p>
+            <div className="text-sm text-gray-700 text-right space-y-1">
+              <p className="font-bold">Receiver:</p>
+              <p>{emailForInvoice || customerEmail || "Customer"}</p>
+              {paymentDetails && (
+                <p className="text-xs text-gray-500">Txn: {paymentDetails.paymentId}</p>
+              )}
             </div>
           </div>
-          <div className="pt-4 border-t border-white/10">
-            <p className="text-sm text-white/60 mb-1">Service</p>
-            <p className="font-bold">{title}</p>
+
+          <table className="w-full border-collapse mb-6">
+            <thead>
+              <tr className="bg-gray-100">
+                <th className="text-left py-3 px-4 text-sm font-bold text-gray-700 border border-gray-200">Item Description</th>
+                <th className="text-right py-3 px-4 text-sm font-bold text-gray-700 border border-gray-200">Price (₹)</th>
+                <th className="text-center py-3 px-4 text-sm font-bold text-gray-700 border border-gray-200">Quantity</th>
+                <th className="text-right py-3 px-4 text-sm font-bold text-gray-700 border border-gray-200">Subtotal (₹)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {items.map((item, idx) => {
+                const qty = item.qty || 1;
+                const price = parseAmount(item.price);
+                const subtotal = price * qty;
+                return (
+                  <tr key={idx} className="border-b border-gray-200">
+                    <td className="py-3 px-4 text-sm text-gray-700 border border-gray-200">{item.name}</td>
+                    <td className="py-3 px-4 text-sm text-gray-700 text-right border border-gray-200">{price.toLocaleString("en-IN", { minimumFractionDigits: 2 })}</td>
+                    <td className="py-3 px-4 text-sm text-gray-700 text-center border border-gray-200">{qty}</td>
+                    <td className="py-3 px-4 text-sm text-gray-700 text-right font-semibold border border-gray-200">{subtotal.toLocaleString("en-IN", { minimumFractionDigits: 2 })}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colSpan={3} className="py-3 px-4 text-sm font-bold text-gray-800 text-right border border-gray-200">Total (₹)</td>
+                <td className="py-3 px-4 text-base font-bold text-gray-900 text-right border border-gray-200">{totalAmount.toLocaleString("en-IN", { minimumFractionDigits: 2 })}</td>
+              </tr>
+            </tfoot>
+          </table>
+
+          <div className="mt-8 mb-4">
+            <p className="text-sm text-blue-700 font-semibold underline mb-2">Payment processed via Razorpay:</p>
+            <p className="text-sm text-gray-600">Company: Yek7Pay Solutions Private Limited</p>
+            <p className="text-sm text-gray-600">Email: info@yek7pay.com</p>
+            <p className="text-sm text-gray-600">WhatsApp: +91 92309 67187</p>
           </div>
-          {paymentDetails && (
-            <div className="pt-4 mt-4 border-t border-white/10 text-sm">
-              <p className="text-white/40">Transaction ID: {paymentDetails.paymentId}</p>
-            </div>
-          )}
+
+          <div className="mt-6 pt-4 border-t border-gray-200">
+            <p className="text-xs text-blue-700 italic">Note: This is a system-generated invoice. For queries, contact info@yek7pay.com</p>
+          </div>
         </div>
 
-        <div className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-2xl p-6 mb-6 border border-white/10">
-          <h3 className="text-sm font-bold uppercase tracking-widest text-white/60 mb-4 flex items-center gap-2">
-            <Send className="h-4 w-4" />
-            Receive Your Invoice
-          </h3>
-          
+        <div className="px-6 py-4 bg-gray-50 border-t space-y-3">
           {!invoiceSent ? (
-            <>
-              <div className="mb-4">
-                <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/40" />
-                  <Input
-                    type="email"
-                    placeholder="Enter your email"
-                    value={customerEmail}
-                    onChange={(e) => setCustomerEmail(e.target.value)}
-                    className="pl-10 bg-white/5 border-white/10 text-white placeholder:text-white/30 rounded-xl h-12"
-                  />
-                </div>
+            <div className="flex gap-2">
+              <div className="relative flex-1">
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                <Input
+                  type="email"
+                  placeholder="Enter email to resend invoice"
+                  value={emailForInvoice || customerEmail}
+                  onChange={(e) => setEmailForInvoice(e.target.value)}
+                  className="pl-10 h-10 text-sm"
+                />
               </div>
               <Button
                 onClick={handleSendInvoice}
-                disabled={isSendingInvoice || !customerEmail}
-                className="w-full bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white rounded-xl h-12 font-bold"
+                disabled={isSendingInvoice}
+                size="sm"
+                className="bg-green-600 hover:bg-green-700 text-white h-10 px-4"
               >
-                {isSendingInvoice ? (
-                  <>
-                    <Loader2 className="h-4 w-4 animate-spin mr-2" />
-                    Sending Invoice...
-                  </>
-                ) : (
-                  <>
-                    <Send className="h-4 w-4 mr-2" />
-                    Send Invoice to Email
-                  </>
-                )}
+                {isSendingInvoice ? <Loader2 className="h-4 w-4 animate-spin" /> : <><Send className="h-4 w-4 mr-1" /> Send</>}
               </Button>
-            </>
+            </div>
           ) : (
-            <div className="text-center py-4">
-              <CheckCircle2 className="h-8 w-8 text-emerald-400 mx-auto mb-2" />
-              <p className="text-emerald-400 font-bold">Invoice Sent Successfully!</p>
-              <p className="text-white/40 text-sm mt-1">Check your email</p>
+            <div className="flex items-center gap-2 text-green-600 text-sm font-medium justify-center py-1">
+              <CheckCircle2 className="h-4 w-4" /> Invoice sent to {emailForInvoice || customerEmail}
             </div>
           )}
-        </div>
 
-        <div className="flex gap-4">
-          <Button 
-            variant="outline" 
-            className="flex-1 rounded-full h-12 border-white/10 hover:bg-white/5 text-sm font-bold gap-2"
-            onClick={handleDownloadInvoice}
-          >
-            <Download className="h-4 w-4" /> Download Invoice
-          </Button>
-          <Button 
-            className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white rounded-full h-12 text-sm font-bold"
-            onClick={onClose}
-          >
-            Done
-          </Button>
+          <div className="flex gap-3">
+            <Button
+              variant="outline"
+              className="flex-1 h-10 text-sm font-bold gap-2"
+              onClick={handleDownloadInvoice}
+              disabled={isDownloading}
+            >
+              {isDownloading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Download className="h-4 w-4" />}
+              Download Invoice
+            </Button>
+            <Button
+              className="flex-1 bg-blue-600 hover:bg-blue-700 text-white h-10 text-sm font-bold"
+              onClick={onClose}
+            >
+              Done
+            </Button>
+          </div>
         </div>
-
-        <p className="text-center mt-6 text-[10px] text-white/30 uppercase tracking-[0.2em] font-bold">
-          With Warm Greetings from Yek7Pay • Thank You for Your Trust
-        </p>
       </motion.div>
     );
   }
@@ -234,70 +382,106 @@ export function Invoice({ title, amount, productId, items, invoiceNumber, date, 
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.9 }}
-      className="bg-[#1a1a3a] border border-white/10 rounded-[2rem] p-8 shadow-2xl max-w-2xl w-full relative overflow-hidden text-white"
+      className="bg-white rounded-2xl shadow-2xl max-w-[600px] w-full relative overflow-hidden"
     >
-      <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 blur-3xl -translate-y-1/2 translate-x-1/2" />
-      
-      <div className="flex justify-between items-start mb-8 relative z-10">
-        <div>
-          <h2 className="text-3xl font-display font-black mb-2">Invoice</h2>
-          <p className="text-white/40 font-bold uppercase tracking-widest text-xs">Yek7Pay Solutions Private Limited</p>
-        </div>
-        <div className="text-right">
-          <p className="text-sm font-bold">No: {invoiceNumber}</p>
-          <p className="text-sm text-white/40">{date}</p>
-        </div>
+      <div className="flex items-center justify-between px-6 py-3 bg-gray-50 border-b">
+        <span className="text-xs text-gray-500 font-medium">Payment Invoice</span>
+        <button onClick={onClose} className="text-gray-400 hover:text-gray-600">
+          <X className="h-4 w-4" />
+        </button>
       </div>
 
-      <div className="bg-white/5 rounded-2xl p-6 mb-8 border border-white/10">
-        <h3 className="text-lg font-bold mb-4 border-b border-white/10 pb-2">{title}</h3>
-        <div className="space-y-3">
-          {items.map((item, idx) => (
-            <div key={idx} className="flex justify-between text-sm">
-              <span className="text-white/60">{item.name}</span>
-              <span className="font-bold">{item.price}</span>
-            </div>
-          ))}
-          <div className="pt-4 mt-4 border-t border-white/10 flex justify-between items-center">
-            <span className="text-lg font-bold">Total Amount</span>
-            <span className="text-2xl font-black text-pink-500">{amount}</span>
+      <div className="p-8" style={{ fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" }}>
+        <div className="flex justify-end mb-1">
+          <p className="text-sm text-gray-700"><span className="font-semibold">From:</span> Yek7Pay Solutions Pvt. Ltd.</p>
+        </div>
+        <hr className="border-gray-300 mb-6" />
+
+        <h1 className="text-3xl font-bold text-gray-800 mb-6 tracking-wide">INVOICE</h1>
+
+        <div className="flex justify-between mb-8">
+          <div className="text-sm text-gray-700 space-y-1">
+            <p><span className="font-bold">Invoice:</span> #{invoiceNumber}</p>
+            <p><span className="font-bold">Date:</span> {date}</p>
+            <p><span className="font-bold">Payment Status:</span> <span className="text-amber-600 font-semibold">PENDING</span></p>
+          </div>
+          <div className="text-sm text-gray-700 text-right">
+            <p className="font-bold">Service:</p>
+            <p>{title}</p>
           </div>
         </div>
+
+        <table className="w-full border-collapse mb-6">
+          <thead>
+            <tr className="bg-gray-100">
+              <th className="text-left py-3 px-4 text-sm font-bold text-gray-700 border border-gray-200">Item Description</th>
+              <th className="text-right py-3 px-4 text-sm font-bold text-gray-700 border border-gray-200">Price (₹)</th>
+              <th className="text-center py-3 px-4 text-sm font-bold text-gray-700 border border-gray-200">Quantity</th>
+              <th className="text-right py-3 px-4 text-sm font-bold text-gray-700 border border-gray-200">Subtotal (₹)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {items.map((item, idx) => {
+              const qty = item.qty || 1;
+              const price = parseAmount(item.price);
+              const subtotal = price * qty;
+              return (
+                <tr key={idx} className="border-b border-gray-200">
+                  <td className="py-3 px-4 text-sm text-gray-700 border border-gray-200">{item.name}</td>
+                  <td className="py-3 px-4 text-sm text-gray-700 text-right border border-gray-200">{price.toLocaleString("en-IN", { minimumFractionDigits: 2 })}</td>
+                  <td className="py-3 px-4 text-sm text-gray-700 text-center border border-gray-200">{qty}</td>
+                  <td className="py-3 px-4 text-sm text-gray-700 text-right font-semibold border border-gray-200">{subtotal.toLocaleString("en-IN", { minimumFractionDigits: 2 })}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colSpan={3} className="py-3 px-4 text-sm font-bold text-gray-800 text-right border border-gray-200">Total (₹)</td>
+              <td className="py-3 px-4 text-base font-bold text-gray-900 text-right border border-gray-200">{totalAmount.toLocaleString("en-IN", { minimumFractionDigits: 2 })}</td>
+            </tr>
+          </tfoot>
+        </table>
+
+        <div className="flex items-center gap-2 text-sm text-gray-500 mb-6">
+          <ShieldCheck className="h-4 w-4 text-green-500" />
+          <span>Secured by Razorpay Payment Gateway</span>
+        </div>
+
+        <div className="mb-4">
+          <label className="block text-sm font-semibold text-gray-700 mb-2">Your Email (for invoice delivery)</label>
+          <div className="relative">
+            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+            <Input
+              type="email"
+              placeholder="Enter your email address"
+              value={customerEmail}
+              onChange={(e) => setCustomerEmail(e.target.value)}
+              className="pl-10 h-11 text-sm border-gray-300"
+            />
+          </div>
+          <p className="text-xs text-gray-400 mt-1">Invoice will be automatically sent to this email after payment</p>
+        </div>
+
+        <Button
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white h-12 text-base font-bold shadow-lg rounded-lg"
+          onClick={handlePayment}
+          disabled={isLoading}
+        >
+          {isLoading ? (
+            <>
+              <Loader2 className="h-5 w-5 animate-spin mr-2" />
+              Processing Payment...
+            </>
+          ) : (
+            `Pay ₹${totalAmount.toLocaleString("en-IN", { minimumFractionDigits: 2 })} Now`
+          )}
+        </Button>
+
+        <p className="text-center mt-4 text-[10px] text-gray-400 uppercase tracking-[0.15em] font-medium">
+          Yek7Pay Solutions Private Limited • Authorized Transaction
+        </p>
       </div>
-
-      <div className="grid grid-cols-2 gap-8 mb-8">
-        <div>
-          <h4 className="text-xs font-bold uppercase tracking-widest text-white/40 mb-3">Payment Method</h4>
-          <div className="flex items-center gap-2 text-sm">
-            <ShieldCheck className="h-4 w-4 text-emerald-400" />
-            <span className="font-medium">Razorpay Secure Payment</span>
-          </div>
-        </div>
-        <div className="flex justify-end items-center">
-          <div className="bg-gradient-to-br from-blue-500/20 to-purple-500/20 p-3 rounded-xl border border-white/10">
-            <ShieldCheck className="h-12 w-12 text-emerald-400" />
-          </div>
-        </div>
-      </div>
-
-      <Button 
-        className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white rounded-full h-14 text-base font-bold shadow-lg"
-        onClick={handlePayment}
-        disabled={isLoading}
-      >
-        {isLoading ? (
-          <>
-            <Loader2 className="h-5 w-5 animate-spin mr-2" />
-            Processing Payment...
-          </>
-        ) : (
-          `Pay ${amount} Now`
-        )}
-      </Button>
-
-      <p className="text-center mt-6 text-[10px] text-white/30 uppercase tracking-[0.2em] font-bold">
-        Authorized Transaction • Yek7Pay Solutions
-      </p>
     </motion.div>
   );
 }

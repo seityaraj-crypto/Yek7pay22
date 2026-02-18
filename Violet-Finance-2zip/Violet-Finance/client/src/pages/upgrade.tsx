@@ -106,13 +106,7 @@ export default function Upgrade() {
               className="absolute inset-0 bg-black/80 backdrop-blur-md"
               onClick={() => setShowInvoice(false)}
             />
-            <div className="relative z-[110] w-full max-w-2xl">
-              <button 
-                onClick={() => setShowInvoice(false)}
-                className="absolute -top-12 right-0 p-2 rounded-full hover:bg-white/10 transition-colors"
-              >
-                <X className="h-8 w-8 text-white" />
-              </button>
+            <div className="relative z-[110] w-full max-w-2xl max-h-[90vh] overflow-y-auto">
               <Invoice 
                 title="Premium Membership Activation"
                 amount="₹ 999.00"
