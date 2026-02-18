@@ -1,8 +1,9 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ShieldCheck, Zap, Globe, Coins, CheckCircle2, Send, Wallet, CreditCard, Smartphone, Banknote } from "lucide-react";
+import { ArrowRight, ShieldCheck, Zap, Globe, Coins, CheckCircle2, Send, Wallet, CreditCard, Smartphone, Banknote, Phone, X, MessageCircle } from "lucide-react";
 import { AuthDialog } from "@/components/auth-dialog";
 import { useState, useEffect } from "react";
+import ReactDOM from "react-dom";
 import { Link } from "wouter";
 
 const heroTextSlides = [
@@ -81,6 +82,7 @@ const slides = [
 
 export function Hero() {
   const [isAuthOpen, setIsAuthOpen] = useState(false);
+  const [showCallAgent, setShowCallAgent] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [currentTextSlide, setCurrentTextSlide] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -107,6 +109,7 @@ export function Hero() {
   const textSlide = heroTextSlides[currentTextSlide];
 
   return (
+    <>
     <div className="relative min-h-screen flex items-center overflow-hidden pt-16 bg-gradient-to-br from-[#0a1a3a] via-[#0d0d2b] to-[#1a0b3b]">
       {/* Dynamic Background Elements */}
       <div className="absolute inset-0 z-0">
@@ -181,11 +184,9 @@ export function Hero() {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start">
-                <a href="https://yek7pay.finstore.app/" target="_blank" rel="noopener noreferrer">
-                  <Button size="lg" className="bg-primary hover:bg-primary/90 text-white h-14 px-10 rounded-full shadow-2xl neo-glow text-lg font-bold">
-                    Get Started <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
-                </a>
+                <Button size="lg" className="bg-primary hover:bg-primary/90 text-white h-14 px-10 rounded-full shadow-2xl neo-glow text-lg font-bold cursor-pointer" onClick={() => setShowCallAgent(true)}>
+                  Get Started <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
                 <Link href="/features">
                   <Button size="lg" variant="outline" className="h-14 px-10 rounded-full border-white/10 hover:bg-white/5 hover:text-white text-lg font-bold">
                     Explore Features
@@ -356,5 +357,65 @@ export function Hero() {
       </div>
       <AuthDialog isOpen={isAuthOpen} onOpenChange={setIsAuthOpen} />
     </div>
+    {showCallAgent && ReactDOM.createPortal(
+      <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
+        <div 
+          className="absolute inset-0 bg-black/80 backdrop-blur-md"
+          onClick={() => setShowCallAgent(false)}
+        />
+        <div className="relative z-[10000] bg-[#1a1a3a] border border-white/10 rounded-[2rem] p-8 md:p-10 shadow-2xl max-w-md w-full text-white text-center">
+          <button 
+            onClick={() => setShowCallAgent(false)}
+            className="absolute top-4 right-4 p-2 rounded-full hover:bg-white/10 transition-colors"
+          >
+            <X className="h-5 w-5 text-white/60" />
+          </button>
+
+          <div className="w-20 h-20 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center mx-auto mb-6 shadow-xl shadow-green-500/20">
+            <Phone className="h-9 w-9 text-white" />
+          </div>
+
+          <h3 className="text-2xl md:text-3xl font-black mb-3">Call Yek7Pay Agent</h3>
+          <p className="text-white/60 mb-2 text-sm">Our registration expert will help you set up your account quickly and guide you through the entire process.</p>
+          <p className="text-white/40 text-xs mb-8">Available Mon-Sat, 9 AM - 7 PM IST</p>
+
+          <a href="tel:+919230967187" className="block mb-4">
+            <Button className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white h-16 rounded-2xl font-bold text-lg shadow-xl shadow-green-500/20 transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-3">
+              <Phone className="h-5 w-5" />
+              Call +91 92309 67187
+            </Button>
+          </a>
+
+          <a href="https://wa.me/919230967187?text=Hi%2C%20I%20want%20to%20create%20my%20Yek7Pay%20account.%20Please%20help%20me%20with%20registration." target="_blank" rel="noopener noreferrer" className="block mb-4">
+            <Button variant="outline" className="w-full border-white/10 hover:bg-white/5 text-white h-14 rounded-2xl font-bold text-base flex items-center justify-center gap-3">
+              <MessageCircle className="h-5 w-5 text-green-400" />
+              WhatsApp Us
+            </Button>
+          </a>
+
+          <div className="relative my-6">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-white/10"></div>
+            </div>
+            <div className="relative flex justify-center">
+              <span className="bg-[#1a1a3a] px-4 text-xs text-white/40 uppercase tracking-widest">or register online</span>
+            </div>
+          </div>
+
+          <a href="https://yek7pay.finstore.app/" target="_blank" rel="noopener noreferrer" className="block mb-6">
+            <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white h-14 rounded-2xl font-bold text-base shadow-lg transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-3">
+              <ArrowRight className="h-5 w-5" />
+              Continue to Registration
+            </Button>
+          </a>
+
+          <p className="text-[10px] text-white/30 uppercase tracking-[0.15em] font-medium">
+            Pan India Service Available
+          </p>
+        </div>
+      </div>,
+      document.body
+    )}
+    </>
   );
 }
