@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Menu, Shield, Bell, ChevronDown, Landmark, Send, Globe, Fingerprint, CreditCard, Banknote, Briefcase, Zap, Receipt, Plane, Train, Building2, ClipboardCheck, Smartphone, TabletSmartphone, Mail, Phone } from "lucide-react";
+import { Menu, Shield, Bell, ChevronDown, Landmark, Send, Globe, Fingerprint, CreditCard, Banknote, Briefcase, Zap, Receipt, Plane, Train, Building2, ClipboardCheck, Smartphone, TabletSmartphone, Mail, Phone, X, MessageCircle, ArrowRight } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { AuthDialog } from "@/components/auth-dialog";
 import {
@@ -19,6 +19,7 @@ export function Navbar() {
   const [isAuthOpen, setIsAuthOpen] = React.useState(false);
   const [authView, setAuthView] = React.useState<"menu" | "login">("menu");
   const [expandedCategory, setExpandedCategory] = React.useState<string | null>(null);
+  const [showCallAgent, setShowCallAgent] = React.useState(false);
   const [, setLocation] = useLocation();
 
   const scrollToTop = () => {
@@ -146,11 +147,12 @@ export function Navbar() {
               +91 92309 67187
             </a>
           </div>
-          <a href="https://yek7pay.finstore.app/" target="_blank" rel="noopener noreferrer">
-            <Button className="bg-gradient-to-r from-blue-950 via-blue-900 to-purple-800 hover:opacity-90 text-white border-0 shadow-[0_0_20px_rgba(59,130,246,0.3)] rounded-full px-4 md:px-6 h-9 md:h-10 text-xs md:text-sm font-bold transition-all hover:scale-105 active:scale-95">
-              Open Account / Login
-            </Button>
-          </a>
+          <Button 
+            className="bg-gradient-to-r from-blue-950 via-blue-900 to-purple-800 hover:opacity-90 text-white border-0 shadow-[0_0_20px_rgba(59,130,246,0.3)] rounded-full px-4 md:px-6 h-9 md:h-10 text-xs md:text-sm font-bold transition-all hover:scale-105 active:scale-95"
+            onClick={() => setShowCallAgent(true)}
+          >
+            Open Account / Login
+          </Button>
 
           <div className="flex items-center gap-2">
              <Button variant="ghost" size="icon" className="text-blue-400 relative hover:text-primary hover:bg-blue-50 hidden sm:flex">
@@ -182,16 +184,19 @@ export function Navbar() {
                    </div>
                    
                    <div className="grid grid-cols-2 gap-2">
-                     <a href="https://yek7pay.finstore.app/" target="_blank" rel="noopener noreferrer" className="w-full" onClick={() => setIsOpen(false)}>
-                       <Button variant="outline" className="w-full border-blue-200 text-blue-900 font-bold hover:bg-blue-100/50 h-10 text-xs">
-                         Login
-                       </Button>
-                     </a>
-                     <a href="https://yek7pay.finstore.app/" target="_blank" rel="noopener noreferrer" className="w-full" onClick={() => setIsOpen(false)}>
-                       <Button className="w-full bg-gradient-to-r from-blue-950 via-blue-900 to-purple-800 border-0 hover:opacity-90 text-white rounded-full font-bold h-10 text-xs shadow-lg shadow-blue-500/10">
-                         Create Account
-                       </Button>
-                     </a>
+                     <Button 
+                       variant="outline" 
+                       className="w-full border-blue-200 text-blue-900 font-bold hover:bg-blue-100/50 h-10 text-xs"
+                       onClick={() => { setIsOpen(false); setShowCallAgent(true); }}
+                     >
+                       Login
+                     </Button>
+                     <Button 
+                       className="w-full bg-gradient-to-r from-blue-950 via-blue-900 to-purple-800 border-0 hover:opacity-90 text-white rounded-full font-bold h-10 text-xs shadow-lg shadow-blue-500/10"
+                       onClick={() => { setIsOpen(false); setShowCallAgent(true); }}
+                     >
+                       Create Account
+                     </Button>
                    </div>
 
                    <div className="space-y-2 pt-3 border-t border-blue-100">
@@ -259,6 +264,66 @@ export function Navbar() {
         </div>
       </div>
       <AuthDialog isOpen={isAuthOpen} onOpenChange={setIsAuthOpen} defaultView={authView} />
+
+      {/* Call Agent Popup */}
+      {showCallAgent && (
+        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
+          <div 
+            className="absolute inset-0 bg-black/80 backdrop-blur-md"
+            onClick={() => setShowCallAgent(false)}
+          />
+          <div className="relative z-[210] bg-[#1a1a3a] border border-white/10 rounded-[2rem] p-8 md:p-10 shadow-2xl max-w-md w-full text-white text-center animate-in fade-in zoom-in-95 duration-200">
+            <button 
+              onClick={() => setShowCallAgent(false)}
+              className="absolute top-4 right-4 p-2 rounded-full hover:bg-white/10 transition-colors"
+            >
+              <X className="h-5 w-5 text-white/60" />
+            </button>
+
+            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center mx-auto mb-6 shadow-xl shadow-green-500/20">
+              <Phone className="h-9 w-9 text-white" />
+            </div>
+
+            <h3 className="text-2xl md:text-3xl font-black mb-3">Call Yek7Pay Agent</h3>
+            <p className="text-white/60 mb-2 text-sm">Our registration expert will help you set up your account quickly and guide you through the entire process.</p>
+            <p className="text-white/40 text-xs mb-8">Available Mon-Sat, 9 AM - 7 PM IST</p>
+
+            <a href="tel:+919230967187" className="block mb-4">
+              <Button className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white h-16 rounded-2xl font-bold text-lg shadow-xl shadow-green-500/20 transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-3">
+                <Phone className="h-5 w-5" />
+                Call +91 92309 67187
+              </Button>
+            </a>
+
+            <a href="https://wa.me/919230967187?text=Hi%2C%20I%20want%20to%20create%20my%20Yek7Pay%20account.%20Please%20help%20me%20with%20registration." target="_blank" rel="noopener noreferrer" className="block mb-4">
+              <Button variant="outline" className="w-full border-white/10 hover:bg-white/5 text-white h-14 rounded-2xl font-bold text-base flex items-center justify-center gap-3">
+                <MessageCircle className="h-5 w-5 text-green-400" />
+                WhatsApp Us
+              </Button>
+            </a>
+
+            <div className="relative my-6">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-white/10"></div>
+              </div>
+              <div className="relative flex justify-center">
+                <span className="bg-[#1a1a3a] px-4 text-xs text-white/40 uppercase tracking-widest">or register online</span>
+              </div>
+            </div>
+
+            <a href="https://yek7pay.finstore.app/" target="_blank" rel="noopener noreferrer" className="block mb-6">
+              <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white h-14 rounded-2xl font-bold text-base shadow-lg transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-3">
+                <ArrowRight className="h-5 w-5" />
+                Continue to Registration
+              </Button>
+            </a>
+
+            <p className="text-[10px] text-white/30 uppercase tracking-[0.15em] font-medium">
+              Pan India Service Available
+            </p>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }
