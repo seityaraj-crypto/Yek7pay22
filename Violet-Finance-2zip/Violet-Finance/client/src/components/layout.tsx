@@ -2,7 +2,7 @@ import * as React from "react";
 import ReactDOM from "react-dom";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Menu, Shield, ShieldCheck, Bell, ChevronDown, Landmark, Send, Globe, Fingerprint, CreditCard, Banknote, Briefcase, Zap, Receipt, Plane, Train, Building2, ClipboardCheck, Smartphone, TabletSmartphone, Mail, Phone, X, MessageCircle, ArrowRight } from "lucide-react";
+import { Menu, Shield, ShieldCheck, Bell, ChevronDown, Landmark, Send, Globe, Fingerprint, CreditCard, Banknote, Briefcase, Zap, Receipt, Plane, Train, Building2, ClipboardCheck, Smartphone, TabletSmartphone, Mail, Phone, X, MessageCircle, ArrowRight, Crown } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { AuthDialog } from "@/components/auth-dialog";
 import {
@@ -312,12 +312,19 @@ export function Navbar() {
             </div>
           </div>
 
-          <a href="https://yek7pay.finstore.app/" target="_blank" rel="noopener noreferrer" className="block mb-6">
+          <a href="https://yek7pay.finstore.app/" target="_blank" rel="noopener noreferrer" className="block mb-4">
             <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white h-14 rounded-2xl font-bold text-base shadow-lg transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-3">
               <ArrowRight className="h-5 w-5" />
               Continue to Registration
             </Button>
           </a>
+
+          <Link href="/premium" onClick={() => setShowCallAgent(false)} className="block mb-6">
+            <Button className="w-full bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-black h-14 rounded-2xl font-bold text-base shadow-xl shadow-amber-500/20 transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-3">
+              <Crown className="h-5 w-5" />
+              Upgrade Premium ₹999
+            </Button>
+          </Link>
 
           <p className="text-[10px] text-white/30 uppercase tracking-[0.15em] font-medium">
             Pan India Service Available
