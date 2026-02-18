@@ -251,44 +251,40 @@ export function AuthDialog({ isOpen, onOpenChange, defaultView = "menu" }: AuthD
             </DialogHeader>
 
             <div className="grid gap-4 mt-4">
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <Link href="/new-account">
-                  <Button 
-                    className="w-full h-16 bg-gradient-to-r from-blue-950 via-blue-900 to-purple-800 border-0 text-white rounded-2xl font-bold text-lg flex items-center justify-between px-6 group"
-                    onClick={() => onOpenChange(false)}
-                  >
-                    <div className="flex items-center gap-4">
-                      <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors">
+              <div className="grid grid-cols-2 gap-3">
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <Link href="/new-account">
+                    <Button 
+                      className="w-full h-16 bg-gradient-to-r from-blue-950 via-blue-900 to-purple-800 border-0 text-white rounded-2xl font-bold text-sm flex flex-col items-center justify-center gap-1 group"
+                      onClick={() => onOpenChange(false)}
+                    >
+                      <div className="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors">
                         <UserPlus className="h-5 w-5" />
                       </div>
-                      <span>Create Your Account</span>
-                    </div>
-                    <span className="text-white/40 group-hover:text-white transition-colors">→</span>
-                  </Button>
-                </Link>
-              </motion.div>
+                      <span>Create Account</span>
+                    </Button>
+                  </Link>
+                </motion.div>
 
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <Button 
-                  variant="outline"
-                  className="w-full h-16 bg-white/5 border-white/10 text-white rounded-2xl font-bold text-lg flex items-center justify-between px-6 group hover:bg-white/10 hover:border-blue-500/50"
-                  onClick={() => setView("login")}
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                 >
-                  <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center group-hover:bg-blue-500/20 transition-colors">
+                  <Button 
+                    variant="outline"
+                    className="w-full h-16 bg-white/5 border-white/10 text-white rounded-2xl font-bold text-sm flex flex-col items-center justify-center gap-1 group hover:bg-white/10 hover:border-blue-500/50"
+                    onClick={() => setView("login")}
+                  >
+                    <div className="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center group-hover:bg-blue-500/20 transition-colors">
                       <LogIn className="h-5 w-5" />
                     </div>
                     <span>Login</span>
-                  </div>
-                  <span className="text-white/40 group-hover:text-blue-400 transition-colors">→</span>
-                </Button>
-              </motion.div>
+                  </Button>
+                </motion.div>
+              </div>
 
               <motion.div
                 whileHover={{ scale: 1.02 }}
