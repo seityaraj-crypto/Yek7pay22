@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { ShieldCheck, Download, CheckCircle2, Loader2, Phone, MessageCircle, X } from "lucide-react";
+import { ShieldCheck, Download, CheckCircle2, Loader2, Phone, MessageCircle, X, User, MapPin, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useRazorpay } from "@/hooks/use-razorpay";
@@ -24,7 +24,13 @@ interface PaymentDetails {
   orderId: string;
 }
 
-function buildWhatsAppInvoiceMsg(data: { invoiceNumber: string; title: string; amount: string; items: { name: string; price: string; qty?: number }[]; paymentId?: string; customerPhone?: string }) {
+interface CustomerDetails {
+  name: string;
+  address: string;
+  phone: string;
+}
+
+function buildWhatsAppInvoiceMsg(data: { invoiceNumber: string; title: string; amount: string; items: { name: string; price: string; qty?: number }[]; paymentId?: string; customer?: CustomerDetails }) {
   const parseAmt = (a: string) => parseFloat(a.replace(/[^\d.]/g, "")) || 0;
   const fmtINR = (n: number) => n.toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const totalAmount = parseAmt(data.amount);
@@ -34,11 +40,18 @@ function buildWhatsAppInvoiceMsg(data: { invoiceNumber: string; title: string; a
     return `  ${item.name}: ₹${fmtINR(price)} x ${qty} = ₹${fmtINR(price * qty)}`;
   }).join("\n");
 
+  const customerInfo = data.customer ? `
+*Customer:*
+Name: ${data.customer.name}
+Phone: ${data.customer.phone}
+Address: ${data.customer.address}
+` : "";
+
   return `*INVOICE - Yek7Pay*
 
 Invoice: #${data.invoiceNumber}
 Service: ${data.title}
-
+${customerInfo}
 *Items:*
 ${itemsList}
 
@@ -57,9 +70,9 @@ _Yek7Pay Solutions Private Limited_`;
 export function Invoice({ title, amount, productId, items, invoiceNumber, date, onClose, onPaymentSuccess }: InvoiceProps) {
   const { initiatePayment, isLoading } = useRazorpay();
   const { toast } = useToast();
-  const [paymentComplete, setPaymentComplete] = useState(false);
+  const [step, setStep] = useState<'details' | 'invoice' | 'paid'>('details');
   const [paymentDetails, setPaymentDetails] = useState<PaymentDetails | null>(null);
-  const [customerPhone, setCustomerPhone] = useState("");
+  const [customer, setCustomer] = useState<CustomerDetails>({ name: "", address: "", phone: "" });
   const [phoneForInvoice, setPhoneForInvoice] = useState("");
   const [invoiceSent, setInvoiceSent] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
@@ -70,52 +83,61 @@ export function Invoice({ title, amount, productId, items, invoiceNumber, date, 
   };
 
   const openWhatsAppInvoice = (phone: string, paymentId?: string) => {
-    const msg = buildWhatsAppInvoiceMsg({ invoiceNumber, title, amount, items, paymentId, customerPhone: phone });
+    const msg = buildWhatsAppInvoiceMsg({ invoiceNumber, title, amount, items, paymentId, customer: customer });
     const cleanPhone = phone.replace(/\D/g, "");
     const fullPhone = cleanPhone.startsWith("91") ? cleanPhone : `91${cleanPhone}`;
     const waUrl = `https://api.whatsapp.com/send?phone=${fullPhone}&text=${encodeURIComponent(msg)}`;
     window.open(waUrl, '_blank');
   };
 
-  const handlePayment = () => {
-    if (!customerPhone) {
-      toast({
-        title: "Phone Number Required",
-        description: "Please enter the customer's phone number before proceeding to payment.",
-        variant: "destructive",
-      });
+  const handleDetailsSubmit = () => {
+    if (!customer.name.trim()) {
+      toast({ title: "Name Required", description: "Please enter the customer's name.", variant: "destructive" });
       return;
     }
-    setPhoneForInvoice(customerPhone);
+    if (!customer.phone.trim()) {
+      toast({ title: "Phone Required", description: "Please enter the customer's phone number.", variant: "destructive" });
+      return;
+    }
+    if (!customer.address.trim()) {
+      toast({ title: "Address Required", description: "Please enter the customer's address.", variant: "destructive" });
+      return;
+    }
+    setPhoneForInvoice(customer.phone);
+    setStep('invoice');
+  };
 
+  const handlePayment = () => {
     initiatePayment({
       productId,
       name: "Yek7Pay Solutions",
       description: title,
       prefill: {
-        contact: customerPhone,
+        contact: customer.phone,
+        name: customer.name,
       },
       notes: {
         invoiceNumber,
-        customerPhone,
+        customerPhone: customer.phone,
+        customerName: customer.name,
       },
       onSuccess: async (response) => {
         setPaymentDetails({
           paymentId: response.razorpay_payment_id,
           orderId: response.razorpay_order_id,
         });
-        setPaymentComplete(true);
+        setStep('paid');
         toast({
           title: "Payment Successful!",
           description: `Transaction ID: ${response.razorpay_payment_id}`,
         });
         onPaymentSuccess?.();
 
-        openWhatsAppInvoice(customerPhone, response.razorpay_payment_id);
+        openWhatsAppInvoice(customer.phone, response.razorpay_payment_id);
         setInvoiceSent(true);
         toast({
           title: "Invoice Sent via WhatsApp!",
-          description: `Invoice opened in WhatsApp for ${customerPhone}`,
+          description: `Invoice opened in WhatsApp for ${customer.phone}`,
         });
       },
       onError: (error) => {
@@ -129,7 +151,7 @@ export function Invoice({ title, amount, productId, items, invoiceNumber, date, 
   };
 
   const handleSendInvoice = () => {
-    const phoneToUse = phoneForInvoice || customerPhone;
+    const phoneToUse = phoneForInvoice || customer.phone;
     if (!phoneToUse) {
       toast({
         title: "Phone Number Required",
@@ -221,7 +243,100 @@ export function Invoice({ title, amount, productId, items, invoiceNumber, date, 
 
   const totalAmount = parseAmount(amount);
 
-  if (paymentComplete) {
+  if (step === 'details') {
+    return (
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.9 }}
+        className="bg-white rounded-2xl shadow-2xl max-w-[600px] w-full relative overflow-hidden"
+      >
+        <div className="flex items-center justify-between px-6 py-3 bg-gray-50 border-b">
+          <span className="text-xs text-gray-500 font-medium">Customer Details</span>
+          <button onClick={onClose} className="text-gray-400 hover:text-gray-600">
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+
+        <div className="p-8" style={{ fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" }}>
+          <h2 className="text-2xl font-bold text-gray-800 mb-2">Enter Customer Details</h2>
+          <p className="text-sm text-gray-500 mb-6">These details will appear on the invoice and WhatsApp receipt.</p>
+
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-1.5">Full Name</label>
+              <div className="relative">
+                <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                <Input
+                  type="text"
+                  placeholder="Enter customer's full name"
+                  value={customer.name}
+                  onChange={(e) => setCustomer({ ...customer, name: e.target.value })}
+                  className="pl-10 h-11 text-sm border-gray-300 text-gray-900 bg-white"
+                  style={{ color: '#111827' }}
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-1.5">Phone Number (WhatsApp)</label>
+              <div className="relative">
+                <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                <Input
+                  type="tel"
+                  placeholder="e.g. 9230967187"
+                  value={customer.phone}
+                  onChange={(e) => setCustomer({ ...customer, phone: e.target.value })}
+                  className="pl-10 h-11 text-sm border-gray-300 text-gray-900 bg-white"
+                  style={{ color: '#111827' }}
+                />
+              </div>
+              <p className="text-xs text-gray-400 mt-1">Invoice will be sent to this WhatsApp number</p>
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-1.5">Address</label>
+              <div className="relative">
+                <MapPin className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                <textarea
+                  placeholder="Enter customer's address"
+                  value={customer.address}
+                  onChange={(e) => setCustomer({ ...customer, address: e.target.value })}
+                  rows={2}
+                  className="w-full pl-10 pr-4 py-2.5 text-sm border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                  style={{ color: '#111827' }}
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-6 p-4 rounded-xl bg-blue-50 border border-blue-100">
+            <div className="flex justify-between items-center">
+              <div>
+                <p className="text-sm font-semibold text-gray-700">{title}</p>
+                <p className="text-xs text-gray-500 mt-0.5">Service Amount</p>
+              </div>
+              <p className="text-xl font-bold text-gray-900">₹{totalAmount.toLocaleString("en-IN", { minimumFractionDigits: 2 })}</p>
+            </div>
+          </div>
+
+          <Button
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white h-12 text-base font-bold shadow-lg rounded-lg mt-6 flex items-center justify-center gap-2"
+            onClick={handleDetailsSubmit}
+          >
+            Continue to Payment <ArrowRight className="h-5 w-5" />
+          </Button>
+
+          <div className="flex items-center gap-2 text-sm text-gray-400 mt-4 justify-center">
+            <ShieldCheck className="h-4 w-4 text-green-500" />
+            <span>Secured by Razorpay Payment Gateway</span>
+          </div>
+        </div>
+      </motion.div>
+    );
+  }
+
+  if (step === 'paid') {
     return (
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
@@ -252,7 +367,9 @@ export function Invoice({ title, amount, productId, items, invoiceNumber, date, 
             </div>
             <div className="text-sm text-gray-700 text-right space-y-1">
               <p className="font-bold">Receiver:</p>
-              <p>{phoneForInvoice || customerPhone || "Customer"}</p>
+              <p>{customer.name || "Customer"}</p>
+              <p className="text-xs text-gray-500">{customer.phone}</p>
+              {customer.address && <p className="text-xs text-gray-500">{customer.address}</p>}
               {paymentDetails && (
                 <p className="text-xs text-gray-500">Txn: {paymentDetails.paymentId}</p>
               )}
@@ -311,7 +428,7 @@ export function Invoice({ title, amount, productId, items, invoiceNumber, date, 
                 <Input
                   type="tel"
                   placeholder="Enter phone to resend invoice via WhatsApp"
-                  value={phoneForInvoice || customerPhone}
+                  value={phoneForInvoice || customer.phone}
                   onChange={(e) => setPhoneForInvoice(e.target.value)}
                   className="pl-10 h-10 text-sm text-gray-900 bg-white"
                   style={{ color: '#111827' }}
@@ -327,7 +444,7 @@ export function Invoice({ title, amount, productId, items, invoiceNumber, date, 
             </div>
           ) : (
             <div className="flex items-center gap-2 text-green-600 text-sm font-medium justify-center py-1">
-              <CheckCircle2 className="h-4 w-4" /> Invoice sent via WhatsApp to {phoneForInvoice || customerPhone}
+              <CheckCircle2 className="h-4 w-4" /> Invoice sent via WhatsApp to {phoneForInvoice || customer.phone}
             </div>
           )}
 
@@ -424,20 +541,11 @@ export function Invoice({ title, amount, productId, items, invoiceNumber, date, 
           <span>Secured by Razorpay Payment Gateway</span>
         </div>
 
-        <div className="mb-4">
-          <label className="block text-sm font-semibold text-gray-700 mb-2">WhatsApp Number (for invoice delivery)</label>
-          <div className="relative">
-            <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-            <Input
-              type="tel"
-              placeholder="Enter WhatsApp number (e.g. 9230967187)"
-              value={customerPhone}
-              onChange={(e) => setCustomerPhone(e.target.value)}
-              className="pl-10 h-11 text-sm border-gray-300 text-gray-900 bg-white"
-              style={{ color: '#111827' }}
-            />
-          </div>
-          <p className="text-xs text-gray-400 mt-1">Invoice will be automatically sent via WhatsApp after payment</p>
+        <div className="mb-4 p-4 rounded-xl bg-blue-50 border border-blue-100">
+          <p className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Customer</p>
+          <p className="text-sm font-semibold text-gray-800">{customer.name}</p>
+          <p className="text-xs text-gray-500">{customer.phone} &bull; {customer.address}</p>
+          <p className="text-xs text-gray-400 mt-1.5">Invoice will be sent via WhatsApp after payment</p>
         </div>
 
         <Button
