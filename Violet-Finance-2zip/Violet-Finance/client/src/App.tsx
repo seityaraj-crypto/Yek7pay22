@@ -13,8 +13,6 @@ import Compliance from "@/pages/compliance";
 import Insurance from "@/pages/insurance";
 import BharatConnect from "@/pages/bbps";
 import Upgrade from "@/pages/upgrade";
-import Login from "@/pages/login";
-import NewAccount from "@/pages/new-account";
 import Features from "@/pages/features";
 import { Chatbot } from "@/components/chatbot";
 
@@ -37,8 +35,6 @@ function Router() {
       <Route path="/insurance" component={Insurance} />
       <Route path="/bbps" component={BharatConnect} />
       <Route path="/upgrade" component={Upgrade} />
-      <Route path="/login" component={Login} />
-      <Route path="/new-account" component={NewAccount} />
       <Route path="/features" component={Features} />
       <Route component={NotFound} />
     </Switch>

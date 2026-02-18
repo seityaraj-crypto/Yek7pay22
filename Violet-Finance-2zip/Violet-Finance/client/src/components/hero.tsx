@@ -1,7 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ShieldCheck, Zap, Globe, Coins, CheckCircle2, Send, Wallet, CreditCard, Smartphone, Banknote } from "lucide-react";
-import { AuthDialog } from "@/components/auth-dialog";
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
 
@@ -80,7 +79,7 @@ const slides = [
 ];
 
 export function Hero() {
-  const [isAuthOpen, setIsAuthOpen] = useState(false);
+
   const [currentSlide, setCurrentSlide] = useState(0);
   const [currentTextSlide, setCurrentTextSlide] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -181,9 +180,11 @@ export function Hero() {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start">
-                <Button size="lg" className="bg-primary hover:bg-primary/90 text-white h-14 px-10 rounded-full shadow-2xl neo-glow text-lg font-bold" onClick={() => setIsAuthOpen(true)}>
-                  Get Started <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
+                <a href="https://wa.me/919230967187?text=Hi%2C%20I%20want%20to%20get%20started%20with%20Yek7Pay" target="_blank" rel="noopener noreferrer">
+                  <Button size="lg" className="bg-primary hover:bg-primary/90 text-white h-14 px-10 rounded-full shadow-2xl neo-glow text-lg font-bold">
+                    Get Started <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </a>
                 <Link href="/features">
                   <Button size="lg" variant="outline" className="h-14 px-10 rounded-full border-white/10 hover:bg-white/5 hover:text-white text-lg font-bold">
                     Explore Features
@@ -352,7 +353,6 @@ export function Hero() {
           </motion.div>
         </div>
       </div>
-      <AuthDialog isOpen={isAuthOpen} onOpenChange={setIsAuthOpen} />
     </div>
   );
 }

@@ -3,7 +3,6 @@ import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Menu, Shield, Bell, ChevronDown, Landmark, Send, Globe, Fingerprint, CreditCard, Banknote, Briefcase, Zap, Receipt, Plane, Train, Building2, ClipboardCheck, Smartphone, TabletSmartphone, Mail, Phone } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { AuthDialog } from "@/components/auth-dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,8 +15,6 @@ import logoImg from "@assets/Logo_Yek7pay_PNG_1767107682421.png";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = React.useState(false);
-  const [isAuthOpen, setIsAuthOpen] = React.useState(false);
-  const [authView, setAuthView] = React.useState<"menu" | "login">("menu");
   const [expandedCategory, setExpandedCategory] = React.useState<string | null>(null);
   const [, setLocation] = useLocation();
 
@@ -32,15 +29,6 @@ export function Navbar() {
     }, 100);
   };
 
-  const openLogin = () => {
-    setAuthView("login");
-    setIsAuthOpen(true);
-  };
-
-  const openMenu = () => {
-    setAuthView("menu");
-    setIsAuthOpen(true);
-  };
 
   const services = [
     {
@@ -146,9 +134,11 @@ export function Navbar() {
               +91 92309 67187
             </a>
           </div>
-          <Button className="bg-gradient-to-r from-blue-950 via-blue-900 to-purple-800 hover:opacity-90 text-white border-0 shadow-[0_0_20px_rgba(59,130,246,0.3)] rounded-full px-4 md:px-6 h-9 md:h-10 text-xs md:text-sm font-bold transition-all hover:scale-105 active:scale-95" onClick={openMenu}>
-            Open Account / Login
-          </Button>
+          <a href="https://wa.me/919230967187?text=Hi%2C%20I%20want%20to%20open%20a%20Yek7Pay%20account" target="_blank" rel="noopener noreferrer">
+            <Button className="bg-gradient-to-r from-blue-950 via-blue-900 to-purple-800 hover:opacity-90 text-white border-0 shadow-[0_0_20px_rgba(59,130,246,0.3)] rounded-full px-4 md:px-6 h-9 md:h-10 text-xs md:text-sm font-bold transition-all hover:scale-105 active:scale-95">
+              Open Account
+            </Button>
+          </a>
 
           <div className="flex items-center gap-2">
              <Button variant="ghost" size="icon" className="text-blue-400 relative hover:text-primary hover:bg-blue-50 hidden sm:flex">
@@ -179,14 +169,11 @@ export function Navbar() {
                      </a>
                    </div>
                    
-                   <div className="grid grid-cols-2 gap-2">
-                     <Button variant="outline" className="w-full border-blue-200 text-blue-900 font-bold hover:bg-blue-100/50 h-10 text-xs" onClick={() => { openLogin(); setIsOpen(false); }}>
-                       Login
+                   <a href="https://wa.me/919230967187?text=Hi%2C%20I%20want%20to%20open%20a%20Yek7Pay%20account" target="_blank" rel="noopener noreferrer" className="w-full" onClick={() => setIsOpen(false)}>
+                     <Button className="w-full bg-gradient-to-r from-blue-950 via-blue-900 to-purple-800 border-0 hover:opacity-90 text-white rounded-full font-bold h-10 text-xs shadow-lg shadow-blue-500/10">
+                       Open Account
                      </Button>
-                     <Button className="w-full bg-gradient-to-r from-blue-950 via-blue-900 to-purple-800 border-0 hover:opacity-90 text-white rounded-full font-bold h-10 text-xs shadow-lg shadow-blue-500/10" onClick={() => { openMenu(); setIsOpen(false); }}>
-                       Create Account
-                     </Button>
-                   </div>
+                   </a>
 
                    <div className="space-y-2 pt-3 border-t border-blue-100">
                      {[
@@ -252,7 +239,6 @@ export function Navbar() {
           </div>
         </div>
       </div>
-      <AuthDialog isOpen={isAuthOpen} onOpenChange={setIsAuthOpen} defaultView={authView} />
     </nav>
   );
 }
