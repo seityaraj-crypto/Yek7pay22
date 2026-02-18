@@ -17,6 +17,7 @@ export default function Features() {
   const [activeVipCard, setActiveVipCard] = useState<number | null>(null);
   const [showVipContact, setShowVipContact] = useState(false);
   const [vipContactOption, setVipContactOption] = useState<'call' | 'whatsapp' | 'email' | null>(null);
+  const [showCallAgent, setShowCallAgent] = useState(false);
 
   const vipBenefits = [
     { 
@@ -462,12 +463,13 @@ export default function Features() {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link href="/new-account">
-                  <Button className="h-16 px-10 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 hover:from-blue-500 hover:via-purple-500 hover:to-pink-500 text-white rounded-full text-lg font-bold shadow-2xl shadow-purple-500/30 transition-all hover:scale-105">
-                    Create Your Account
-                    <ArrowRight className="w-5 h-5 ml-2" />
-                  </Button>
-                </Link>
+                <Button 
+                  className="h-16 px-10 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 hover:from-blue-500 hover:via-purple-500 hover:to-pink-500 text-white rounded-full text-lg font-bold shadow-2xl shadow-purple-500/30 transition-all hover:scale-105"
+                  onClick={() => setShowCallAgent(true)}
+                >
+                  Create Your Account
+                  <ArrowRight className="w-5 h-5 ml-2" />
+                </Button>
                 <a href="https://wa.me/919230967187?text=Hi%2C%20I%20want%20to%20know%20more%20about%20Yek7Pay%20services" target="_blank" rel="noopener noreferrer">
                   <Button variant="outline" className="h-16 px-10 rounded-full border-white/20 hover:bg-white/10 text-lg font-bold">
                     Chat with Us
@@ -648,6 +650,76 @@ export default function Features() {
               )}
             </motion.div>
           </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Call Agent Popup */}
+      <AnimatePresence>
+        {showCallAgent && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-black/80 backdrop-blur-md"
+              onClick={() => setShowCallAgent(false)}
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="relative z-[110] bg-[#1a1a3a] border border-white/10 rounded-[2rem] p-8 md:p-10 shadow-2xl max-w-md w-full text-white text-center"
+            >
+              <button 
+                onClick={() => setShowCallAgent(false)}
+                className="absolute top-4 right-4 p-2 rounded-full hover:bg-white/10 transition-colors"
+              >
+                <X className="h-5 w-5 text-white/60" />
+              </button>
+
+              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center mx-auto mb-6 shadow-xl shadow-green-500/20">
+                <Phone className="h-9 w-9 text-white" />
+              </div>
+
+              <h3 className="text-2xl md:text-3xl font-black mb-3">Call Yek7Pay Agent</h3>
+              <p className="text-white/60 mb-2 text-sm">Our registration expert will help you set up your account quickly and guide you through the entire process.</p>
+              <p className="text-white/40 text-xs mb-8">Available Mon-Sat, 9 AM - 7 PM IST</p>
+
+              <a href="tel:+919230967187" className="block mb-4">
+                <Button className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white h-16 rounded-2xl font-bold text-lg shadow-xl shadow-green-500/20 transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-3">
+                  <Phone className="h-5 w-5" />
+                  Call +91 92309 67187
+                </Button>
+              </a>
+
+              <a href="https://wa.me/919230967187?text=Hi%2C%20I%20want%20to%20create%20my%20Yek7Pay%20account.%20Please%20help%20me%20with%20registration." target="_blank" rel="noopener noreferrer" className="block mb-4">
+                <Button variant="outline" className="w-full border-white/10 hover:bg-white/5 text-white h-14 rounded-2xl font-bold text-base flex items-center justify-center gap-3">
+                  <MessageCircle className="h-5 w-5 text-green-400" />
+                  WhatsApp Us
+                </Button>
+              </a>
+
+              <div className="relative my-6">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-white/10"></div>
+                </div>
+                <div className="relative flex justify-center">
+                  <span className="bg-[#1a1a3a] px-4 text-xs text-white/40 uppercase tracking-widest">or register online</span>
+                </div>
+              </div>
+
+              <a href="https://yek7pay.finstore.app/" target="_blank" rel="noopener noreferrer" className="block mb-6">
+                <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white h-14 rounded-2xl font-bold text-base shadow-lg transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-3">
+                  <ArrowRight className="h-5 w-5" />
+                  Continue to Registration
+                </Button>
+              </a>
+
+              <p className="text-[10px] text-white/30 uppercase tracking-[0.15em] font-medium">
+                Pan India Service Available
+              </p>
+            </motion.div>
+          </div>
         )}
       </AnimatePresence>
 
