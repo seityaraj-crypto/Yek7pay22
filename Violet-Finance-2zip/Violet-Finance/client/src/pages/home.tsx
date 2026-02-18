@@ -242,9 +242,7 @@ export default function Home() {
   const [serviceReqName, setServiceReqName] = useState("");
   const [serviceReqPhone, setServiceReqPhone] = useState("");
   const [serviceReqEmail, setServiceReqEmail] = useState("");
-  const [serviceReqLoading, setServiceReqLoading] = useState(false);
   const [serviceReqSent, setServiceReqSent] = useState(false);
-  const [serviceReqError, setServiceReqError] = useState("");
   const [selectedTimeSlot, setSelectedTimeSlot] = useState<string | null>(null);
 
   const timeSlots = [
@@ -1493,27 +1491,11 @@ export default function Home() {
                   <p className="text-white/50 text-sm">Fill in your details and our team will reach out to you.</p>
                 </div>
 
-                <form onSubmit={async (e) => {
+                <form onSubmit={(e) => {
                   e.preventDefault();
-                  setServiceReqLoading(true);
-                  setServiceReqError("");
-                  try {
-                    const res = await fetch("/api/service-request", {
-                      method: "POST",
-                      headers: { "Content-Type": "application/json" },
-                      body: JSON.stringify({ name: serviceReqName, phone: serviceReqPhone, email: serviceReqEmail, service: serviceRequestType }),
-                    });
-                    if (res.ok) {
-                      setServiceReqSent(true);
-                    } else {
-                      setServiceReqError("Something went wrong. Please try again.");
-                    }
-                  } catch (err) {
-                    console.error(err);
-                    setServiceReqError("Network error. Please check your connection and try again.");
-                  } finally {
-                    setServiceReqLoading(false);
-                  }
+                  const msg = `Hi, I'm interested in *${serviceRequestType}*.%0A%0A*Name:* ${encodeURIComponent(serviceReqName)}%0A*Phone:* ${encodeURIComponent(serviceReqPhone)}%0A*Email:* ${encodeURIComponent(serviceReqEmail)}%0A%0APlease share more details. Thank you!`;
+                  window.open(`https://wa.me/919230967187?text=${msg}`, '_blank');
+                  setServiceReqSent(true);
                 }} className="space-y-4">
                   <div>
                     <label className="block text-xs font-bold text-white/50 mb-2 uppercase tracking-wider">Full Name</label>
@@ -1527,13 +1509,8 @@ export default function Home() {
                     <label className="block text-xs font-bold text-white/50 mb-2 uppercase tracking-wider">Email Address</label>
                     <input type="email" required value={serviceReqEmail} onChange={(e) => setServiceReqEmail(e.target.value)} placeholder="your@email.com" className="w-full h-12 rounded-xl bg-white/5 border border-white/10 px-4 text-white placeholder:text-white/30 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all" />
                   </div>
-                  {serviceReqError && (
-                    <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm text-center">
-                      {serviceReqError}
-                    </div>
-                  )}
-                  <Button type="submit" disabled={serviceReqLoading} className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white h-14 rounded-2xl font-bold text-base shadow-xl transition-all hover:scale-[1.02] active:scale-95 mt-4 flex items-center justify-center gap-3">
-                    {serviceReqLoading ? <><Loader2 className="h-5 w-5 animate-spin" /> Sending...</> : <><Send className="h-5 w-5" /> Send Request</>}
+                  <Button type="submit" className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white h-14 rounded-2xl font-bold text-base shadow-xl transition-all hover:scale-[1.02] active:scale-95 mt-4 flex items-center justify-center gap-3">
+                    <MessageCircle className="h-5 w-5" /> Send Request via WhatsApp
                   </Button>
                 </form>
               </>
