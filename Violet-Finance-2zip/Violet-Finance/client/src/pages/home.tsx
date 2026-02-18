@@ -407,7 +407,6 @@ export default function Home() {
               description="Seamlessly transfer funds to any bank account in India instantly with Yek7pay's 24/7 DMT service."
               delay={0.1}
               variant="featured"
-              externalUrl="https://yek7pay.finstore.app/"
               features={[
                 "24/7_GRADIENT Instant DMT to any bank in India",
                 "Real-time settlements with zero delays",
@@ -434,7 +433,6 @@ export default function Home() {
               description="Secure cross-border corridor for instant money transfers between India and Nepal."
               delay={0.3}
               variant="featured"
-              externalUrl="https://yek7pay.finstore.app/"
               features={[
                 "Instant India-Nepal money corridor",
                 "Secure & compliant transactions",
@@ -447,7 +445,6 @@ export default function Home() {
               title="Cash Withdrawal"
               description="AEPS enabled biometric cash withdrawals and balance inquiries at any Yek7pay point."
               delay={0.4}
-              externalUrl="https://yek7pay.finstore.app/"
               features={[
                 "Biometric AEPS cash withdrawals",
                 "Balance inquiry at any Yek7pay point",
@@ -461,7 +458,6 @@ export default function Home() {
               description="Apply for high-limit credit cards with instant approval and exclusive lifestyle rewards."
               delay={0.5}
               variant="featured"
-              externalUrl="https://yek7pay.finstore.app/"
               features={[
                 "High-limit premium credit cards",
                 "Instant approval with credit scoring",
