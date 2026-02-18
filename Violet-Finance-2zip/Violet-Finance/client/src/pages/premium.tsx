@@ -50,7 +50,7 @@ const premiumServices = [
   },
   {
     icon: Building2,
-    title: "Compliance Suite",
+    title: "GST & Compliance",
     desc: "Complete access to GST filing, ITR returns, company incorporation, MSME registration, and audit services.",
     highlight: "Full Access"
   },
