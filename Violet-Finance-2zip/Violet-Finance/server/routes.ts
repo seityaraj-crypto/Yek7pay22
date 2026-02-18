@@ -163,8 +163,74 @@ _Sent via Yek7Pay Website Contact Form_`;
     }
   });
 
-  // use storage to perform CRUD operations on the storage interface
-  // e.g. storage.insertUser(user) or storage.getUserByUsername(username)
+  app.post("/api/service-request", async (req, res) => {
+    try {
+      const { name, phone, email, service } = req.body;
+      
+      if (!name || !phone || !email || !service) {
+        return res.status(400).json({ error: "All fields are required" });
+      }
+
+      const RESEND_API_KEY = process.env.RESEND_API_KEY;
+      let emailSent = false;
+
+      const emailHtml = `<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"></head>
+<body style="font-family: Arial, sans-serif; background: #f5f5f5; padding: 40px 0;">
+  <table width="600" align="center" cellpadding="0" cellspacing="0" style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+    <tr><td style="background: linear-gradient(135deg, #7c3aed, #3b82f6); padding: 30px; text-align: center;">
+      <h1 style="color: white; margin: 0; font-size: 24px;">New Service Request</h1>
+      <p style="color: rgba(255,255,255,0.8); margin: 8px 0 0;">Yek7Pay - ${service}</p>
+    </td></tr>
+    <tr><td style="padding: 30px;">
+      <table width="100%" cellpadding="8" cellspacing="0" style="border: 1px solid #e5e7eb; border-radius: 8px;">
+        <tr style="background: #f9fafb;"><td style="font-weight: bold; color: #374151; width: 120px;">Name</td><td style="color: #111827;">${name}</td></tr>
+        <tr><td style="font-weight: bold; color: #374151;">Phone</td><td style="color: #111827;">${phone}</td></tr>
+        <tr style="background: #f9fafb;"><td style="font-weight: bold; color: #374151;">Email</td><td style="color: #111827;">${email}</td></tr>
+        <tr><td style="font-weight: bold; color: #374151;">Service</td><td style="color: #111827;">${service}</td></tr>
+        <tr style="background: #f9fafb;"><td style="font-weight: bold; color: #374151;">Date</td><td style="color: #111827;">${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}</td></tr>
+      </table>
+      <p style="color: #6b7280; font-size: 13px; margin-top: 20px; text-align: center;">Please follow up with this lead at the earliest.</p>
+    </td></tr>
+  </table>
+</body>
+</html>`;
+
+      if (RESEND_API_KEY) {
+        try {
+          const recipients = ["info@yek7pay.com", "seityaraj@yek7pay.com"];
+          const emailResponse = await fetch("https://api.resend.com/emails", {
+            method: "POST",
+            headers: {
+              "Authorization": `Bearer ${RESEND_API_KEY}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              from: "Yek7Pay Website <noreply@yek7pay.com>",
+              to: recipients,
+              subject: `New ${service} Request from ${name}`,
+              html: emailHtml,
+            }),
+          });
+          emailSent = emailResponse.ok;
+        } catch (emailError) {
+          console.error("Service request email failed:", emailError);
+        }
+      }
+
+      console.log("New Service Request:", { name, phone, email, service, emailSent });
+
+      res.json({ 
+        success: true, 
+        message: "Your request has been submitted successfully! Our team will contact you soon.",
+        emailSent
+      });
+    } catch (error) {
+      console.error("Service request error:", error);
+      res.status(500).json({ error: "Failed to submit request" });
+    }
+  });
 
   return httpServer;
 }

@@ -6,6 +6,7 @@ import { AuthDialog } from "@/components/auth-dialog";
 import { WelcomePopup } from "@/components/welcome-popup";
 import { NetworkDots } from "@/components/network-dots";
 import { useState } from "react";
+import ReactDOM from "react-dom";
 import { Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
@@ -236,6 +237,14 @@ export default function Home() {
   const [showAppointmentContact, setShowAppointmentContact] = useState(false);
   const [appointmentContactOption, setAppointmentContactOption] = useState<'call' | 'whatsapp' | 'email' | null>(null);
   const [showCallAgent, setShowCallAgent] = useState(false);
+  const [showServiceRequest, setShowServiceRequest] = useState(false);
+  const [serviceRequestType, setServiceRequestType] = useState("");
+  const [serviceReqName, setServiceReqName] = useState("");
+  const [serviceReqPhone, setServiceReqPhone] = useState("");
+  const [serviceReqEmail, setServiceReqEmail] = useState("");
+  const [serviceReqLoading, setServiceReqLoading] = useState(false);
+  const [serviceReqSent, setServiceReqSent] = useState(false);
+  const [serviceReqError, setServiceReqError] = useState("");
   const [selectedTimeSlot, setSelectedTimeSlot] = useState<string | null>(null);
 
   const timeSlots = [
@@ -776,11 +785,9 @@ export default function Home() {
                     </li>
                   ))}
                </ul>
-               <a href="https://yek7pay.finstore.app/" target="_blank" rel="noopener noreferrer" className="w-full block">
-                  <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white h-14 rounded-2xl font-bold">
+               <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white h-14 rounded-2xl font-bold cursor-pointer" onClick={() => { setServiceRequestType("QR Payment Collection"); setServiceReqSent(false); setServiceReqName(""); setServiceReqPhone(""); setServiceReqEmail(""); setShowServiceRequest(true); }}>
                     Get Started <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
-               </a>
+               </Button>
             </div>
 
             <div className="bg-white/5 backdrop-blur-xl p-12 rounded-[3rem] shadow-2xl border border-white/10 flex flex-col items-center text-center group">
@@ -796,11 +803,9 @@ export default function Home() {
                     </li>
                   ))}
                </ul>
-               <a href="https://yek7pay.finstore.app/" target="_blank" rel="noopener noreferrer" className="w-full block">
-                  <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white h-14 rounded-2xl font-bold">
+               <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white h-14 rounded-2xl font-bold cursor-pointer" onClick={() => { setServiceRequestType("mPOS Solutions"); setServiceReqSent(false); setServiceReqName(""); setServiceReqPhone(""); setServiceReqEmail(""); setShowServiceRequest(true); }}>
                     Get Started <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
-               </a>
+               </Button>
             </div>
           </div>
         </div>
@@ -1458,6 +1463,85 @@ export default function Home() {
           </div>
         )}
       </AnimatePresence>
+
+      {showServiceRequest && ReactDOM.createPortal(
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/80 backdrop-blur-md" onClick={() => setShowServiceRequest(false)} />
+          <div className="relative z-[10000] bg-[#1a1a3a] border border-white/10 rounded-[2rem] p-8 md:p-10 shadow-2xl max-w-md w-full text-white">
+            <button onClick={() => setShowServiceRequest(false)} className="absolute top-4 right-4 p-2 rounded-full hover:bg-white/10 transition-colors">
+              <X className="h-5 w-5 text-white/60" />
+            </button>
+
+            {serviceReqSent ? (
+              <div className="text-center py-6">
+                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center mx-auto mb-6 shadow-xl shadow-green-500/20">
+                  <CheckCircle2 className="h-10 w-10 text-white" />
+                </div>
+                <h3 className="text-2xl font-black mb-3">Request Sent!</h3>
+                <p className="text-white/60 text-sm mb-6">Thank you for your interest in {serviceRequestType}. Our team will contact you shortly.</p>
+                <Button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white h-12 rounded-2xl font-bold px-8" onClick={() => setShowServiceRequest(false)}>
+                  Close
+                </Button>
+              </div>
+            ) : (
+              <>
+                <div className="text-center mb-8">
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-blue-600 flex items-center justify-center mx-auto mb-5 shadow-xl">
+                    {serviceRequestType === "QR Payment Collection" ? <QrCode className="h-8 w-8 text-white" /> : <TabletSmartphone className="h-8 w-8 text-white" />}
+                  </div>
+                  <h3 className="text-2xl font-black mb-2">{serviceRequestType}</h3>
+                  <p className="text-white/50 text-sm">Fill in your details and our team will reach out to you.</p>
+                </div>
+
+                <form onSubmit={async (e) => {
+                  e.preventDefault();
+                  setServiceReqLoading(true);
+                  setServiceReqError("");
+                  try {
+                    const res = await fetch("/api/service-request", {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify({ name: serviceReqName, phone: serviceReqPhone, email: serviceReqEmail, service: serviceRequestType }),
+                    });
+                    if (res.ok) {
+                      setServiceReqSent(true);
+                    } else {
+                      setServiceReqError("Something went wrong. Please try again.");
+                    }
+                  } catch (err) {
+                    console.error(err);
+                    setServiceReqError("Network error. Please check your connection and try again.");
+                  } finally {
+                    setServiceReqLoading(false);
+                  }
+                }} className="space-y-4">
+                  <div>
+                    <label className="block text-xs font-bold text-white/50 mb-2 uppercase tracking-wider">Full Name</label>
+                    <input type="text" required value={serviceReqName} onChange={(e) => setServiceReqName(e.target.value)} placeholder="Enter your full name" className="w-full h-12 rounded-xl bg-white/5 border border-white/10 px-4 text-white placeholder:text-white/30 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all" />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-white/50 mb-2 uppercase tracking-wider">Phone Number</label>
+                    <input type="tel" required value={serviceReqPhone} onChange={(e) => setServiceReqPhone(e.target.value)} placeholder="+91 XXXXX XXXXX" className="w-full h-12 rounded-xl bg-white/5 border border-white/10 px-4 text-white placeholder:text-white/30 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all" />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-white/50 mb-2 uppercase tracking-wider">Email Address</label>
+                    <input type="email" required value={serviceReqEmail} onChange={(e) => setServiceReqEmail(e.target.value)} placeholder="your@email.com" className="w-full h-12 rounded-xl bg-white/5 border border-white/10 px-4 text-white placeholder:text-white/30 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all" />
+                  </div>
+                  {serviceReqError && (
+                    <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm text-center">
+                      {serviceReqError}
+                    </div>
+                  )}
+                  <Button type="submit" disabled={serviceReqLoading} className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white h-14 rounded-2xl font-bold text-base shadow-xl transition-all hover:scale-[1.02] active:scale-95 mt-4 flex items-center justify-center gap-3">
+                    {serviceReqLoading ? <><Loader2 className="h-5 w-5 animate-spin" /> Sending...</> : <><Send className="h-5 w-5" /> Send Request</>}
+                  </Button>
+                </form>
+              </>
+            )}
+          </div>
+        </div>,
+        document.body
+      )}
     </div>
   );
 }
