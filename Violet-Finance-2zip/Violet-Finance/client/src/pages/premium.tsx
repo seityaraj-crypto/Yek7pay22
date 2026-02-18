@@ -14,15 +14,9 @@ import { Link } from "wouter";
 const premiumServices = [
   {
     icon: Send,
-    title: "Unlimited DMT",
+    title: "Yek7pay Unlimited",
     desc: "Unlimited daily money transfer limits with zero downtime. Process high-volume transactions instantly across all banks in India.",
     highlight: "No Daily Limits"
-  },
-  {
-    icon: Fingerprint,
-    title: "AEPS Services",
-    desc: "Aadhaar Enabled Payment System for cash withdrawals, balance inquiry, and mini statements at your shop or agency.",
-    highlight: "Biometric Banking"
   },
   {
     icon: CreditCard,
@@ -59,24 +53,6 @@ const premiumServices = [
     title: "Compliance Suite",
     desc: "Complete access to GST filing, ITR returns, company incorporation, MSME registration, and audit services.",
     highlight: "Full Access"
-  },
-  {
-    icon: Plane,
-    title: "Flight Booking",
-    desc: "Book domestic and international flights with exclusive commission on every ticket. Earn while you serve customers.",
-    highlight: "Earn Commission"
-  },
-  {
-    icon: Train,
-    title: "Train Booking",
-    desc: "IRCTC authorized train ticket booking with instant confirmation. Serve your customers and earn on every booking.",
-    highlight: "IRCTC Authorized"
-  },
-  {
-    icon: Smartphone,
-    title: "Micro ATM",
-    desc: "Turn your smartphone into an ATM. Allow customers to withdraw cash using their debit cards at your location.",
-    highlight: "Mobile ATM"
   },
   {
     icon: Briefcase,
