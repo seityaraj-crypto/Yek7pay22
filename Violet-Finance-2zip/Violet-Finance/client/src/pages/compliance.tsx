@@ -262,8 +262,8 @@ export default function Compliance() {
           </div>
 
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
-            <h2 className="text-2xl font-bold flex items-center gap-3 bg-gradient-to-r from-sky-300 via-indigo-300 to-teal-300 bg-clip-text text-transparent">
-              <CheckCircle2 className="text-sky-300 h-6 w-6" />
+            <h2 className="text-2xl font-bold flex items-center gap-3">
+              <CheckCircle2 className="text-emerald-400 h-6 w-6" />
               Explore All Compliance Services
             </h2>
             <button 

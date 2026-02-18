@@ -4,7 +4,7 @@ import {
   ArrowLeft, Banknote, CreditCard, Smartphone, QrCode, Wallet, Building2, 
   Globe, FileText, Shield, Plane, Train, TrendingUp, Users, Zap, 
   CheckCircle2, ArrowRight, Star, Award, Clock, HeadphonesIcon, X, Sparkles,
-  Crown, Phone, Mail, MessageCircle, LogIn
+  Crown, Phone, Mail, MessageCircle
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
@@ -464,16 +464,15 @@ export default function Features() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href="/new-account">
                   <Button className="h-16 px-10 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 hover:from-blue-500 hover:via-purple-500 hover:to-pink-500 text-white rounded-full text-lg font-bold shadow-2xl shadow-purple-500/30 transition-all hover:scale-105">
-                    Create Account
+                    Create Your Account
                     <ArrowRight className="w-5 h-5 ml-2" />
                   </Button>
                 </Link>
-                <Link href="/login">
+                <a href="https://wa.me/919230967187?text=Hi%2C%20I%20want%20to%20know%20more%20about%20Yek7Pay%20services" target="_blank" rel="noopener noreferrer">
                   <Button variant="outline" className="h-16 px-10 rounded-full border-white/20 hover:bg-white/10 text-lg font-bold">
-                    Login
-                    <LogIn className="w-5 h-5 ml-2" />
+                    Chat with Us
                   </Button>
-                </Link>
+                </a>
               </div>
 
               <div className="mt-10 flex items-center justify-center gap-8 text-sm text-white/50">

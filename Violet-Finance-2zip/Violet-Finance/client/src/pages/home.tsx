@@ -228,7 +228,6 @@ function ContactForm() {
 
 export default function Home() {
   const [isAuthOpen, setIsAuthOpen] = useState(false);
-  const [authView, setAuthView] = useState<"menu" | "login" | "register">("menu");
   const [showTimePicker, setShowTimePicker] = useState(false);
   const [activeNumber, setActiveNumber] = useState<string | null>(null);
   const [activeVipCard, setActiveVipCard] = useState<number | null>(null);
@@ -840,12 +839,9 @@ export default function Home() {
                 <h2 className="text-4xl md:text-5xl font-black mb-6 leading-tight">Ready to Get Started?</h2>
                 <p className="text-xl text-white/80 font-medium">Join thousands of satisfied merchants and start accepting payments today.</p>
               </div>
-              <div className="flex-shrink-0 w-full md:w-auto text-center md:text-right flex flex-col sm:flex-row gap-3">
-                <Button className="w-full sm:w-auto bg-white text-purple-600 hover:bg-white/90 h-16 px-10 rounded-2xl font-black text-lg shadow-xl transition-all hover:scale-105 active:scale-95" onClick={() => setIsAuthOpen(true)}>
-                  Create Account
-                </Button>
-                <Button variant="outline" className="w-full sm:w-auto border-white/30 text-white hover:bg-white/10 h-16 px-10 rounded-2xl font-black text-lg shadow-xl transition-all hover:scale-105 active:scale-95" onClick={() => { setAuthView("login"); setIsAuthOpen(true); }}>
-                  Login
+              <div className="flex-shrink-0 w-full md:w-auto text-center md:text-right">
+                <Button className="w-full md:w-auto bg-white text-purple-600 hover:bg-white/90 h-16 px-12 rounded-2xl font-black text-lg shadow-xl transition-all hover:scale-105 active:scale-95" onClick={() => setIsAuthOpen(true)}>
+                  Create Free Account
                 </Button>
               </div>
             </div>
@@ -1325,7 +1321,7 @@ export default function Home() {
       </section>
 
       <Footer />
-      <AuthDialog isOpen={isAuthOpen} onOpenChange={(open) => { setIsAuthOpen(open); if (!open) setAuthView("menu"); }} defaultView={authView} />
+      <AuthDialog isOpen={isAuthOpen} onOpenChange={setIsAuthOpen} />
 
       {/* Time Selection Modal */}
       <AnimatePresence>
