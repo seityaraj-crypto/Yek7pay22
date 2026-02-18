@@ -511,6 +511,7 @@ export default function Compliance() {
                       <span className="text-purple-200 font-bold">{selectedTimeSlot}</span>
                     </div>
                     <h3 className="text-xl font-bold text-white">How would you like to book?</h3>
+                    <p className="text-sm text-purple-200/60 mt-1">Pan India Service Available</p>
                   </div>
                   
                   <div className="space-y-3">
