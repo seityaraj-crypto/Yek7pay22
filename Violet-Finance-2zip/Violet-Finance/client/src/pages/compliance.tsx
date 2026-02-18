@@ -14,8 +14,8 @@ const serviceCategories = [
     id: "income-tax",
     title: "Income Tax Filing (ITR)",
     icon: FileText,
-    color: "text-blue-400",
-    bgColor: "bg-blue-400/10",
+    color: "text-sky-300",
+    bgColor: "bg-sky-500/15",
     services: [
       { name: "Salaried Individual", frequency: "Annual", price: "₹499", productId: "itr-salary-pension" },
       { name: "Business / Professionals", frequency: "Annual", price: "₹1,499", productId: "itr-business-professional" },
@@ -27,8 +27,8 @@ const serviceCategories = [
     id: "income-tax-other",
     title: "Income Tax - Other",
     icon: ClipboardCheck,
-    color: "text-purple-400",
-    bgColor: "bg-purple-400/10",
+    color: "text-indigo-300",
+    bgColor: "bg-indigo-500/15",
     services: [
       { name: "TDS Return Filing", frequency: "Quarterly", price: "₹2,999", productId: "tds-return" },
       { name: "Advance Tax Computation", frequency: "Quarterly", price: "₹2,999", productId: "advance-tax" },
@@ -38,8 +38,8 @@ const serviceCategories = [
     id: "gst-services",
     title: "GST Services",
     icon: Scale,
-    color: "text-amber-400",
-    bgColor: "bg-amber-400/10",
+    color: "text-teal-300",
+    bgColor: "bg-teal-500/15",
     services: [
       { name: "GST Registration", frequency: "One-time", price: "₹2,999", productId: "gst-registration" },
       { name: "GST Return Filing (GSTR-1 & GSTR 3B) - NIL Return", frequency: "Monthly", price: "₹499", productId: "gst-return-nil" },
