@@ -313,7 +313,8 @@ export function Invoice({ title, amount, productId, items, invoiceNumber, date, 
                   placeholder="Enter phone to resend invoice via WhatsApp"
                   value={phoneForInvoice || customerPhone}
                   onChange={(e) => setPhoneForInvoice(e.target.value)}
-                  className="pl-10 h-10 text-sm"
+                  className="pl-10 h-10 text-sm text-gray-900 bg-white"
+                  style={{ color: '#111827' }}
                 />
               </div>
               <Button
@@ -432,7 +433,8 @@ export function Invoice({ title, amount, productId, items, invoiceNumber, date, 
               placeholder="Enter WhatsApp number (e.g. 9230967187)"
               value={customerPhone}
               onChange={(e) => setCustomerPhone(e.target.value)}
-              className="pl-10 h-11 text-sm border-gray-300"
+              className="pl-10 h-11 text-sm border-gray-300 text-gray-900 bg-white"
+              style={{ color: '#111827' }}
             />
           </div>
           <p className="text-xs text-gray-400 mt-1">Invoice will be automatically sent via WhatsApp after payment</p>
