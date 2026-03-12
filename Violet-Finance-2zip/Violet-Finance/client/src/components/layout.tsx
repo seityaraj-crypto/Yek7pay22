@@ -273,108 +273,125 @@ export function Navbar() {
           className="absolute inset-0 bg-black/80 backdrop-blur-md"
           onClick={() => setShowCallAgent(false)}
         />
-        <div className="relative z-[10000] bg-[#0f0f2a] border border-white/10 rounded-2xl shadow-2xl max-w-md w-full text-white overflow-hidden">
+        <div className="relative z-[10000] bg-[#080820] border border-white/10 rounded-3xl shadow-2xl shadow-black/50 max-w-md w-full text-white overflow-hidden">
+
           {/* Header */}
-          <div className="relative bg-gradient-to-r from-blue-900/80 to-indigo-900/80 px-6 py-5 border-b border-white/10">
+          <div className="relative px-6 pt-6 pb-5 border-b border-white/8">
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-transparent to-indigo-600/10 pointer-events-none" />
             <button
               onClick={() => setShowCallAgent(false)}
-              className="absolute top-4 right-4 p-1.5 rounded-lg hover:bg-white/10 transition-colors"
+              className="absolute top-4 right-4 p-2 rounded-xl bg-white/5 hover:bg-white/10 transition-colors"
             >
-              <X className="h-4 w-4 text-white/50" />
+              <X className="h-4 w-4 text-white/40" />
             </button>
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-md">
+            <div className="flex items-center gap-3 relative">
+              <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-700 flex items-center justify-center shadow-lg shadow-blue-500/30">
                 <Phone className="h-5 w-5 text-white" />
               </div>
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-blue-300">Yek7Pay Support</p>
-                <h3 className="text-lg font-black leading-tight">Talk to an Agent</h3>
+                <p className="text-[10px] font-black uppercase tracking-[0.15em] text-blue-400 mb-0.5">Yek7Pay Support</p>
+                <h3 className="text-xl font-black leading-none">Talk to an Agent</h3>
               </div>
             </div>
           </div>
 
-          {/* Agent Card */}
-          <div className="mx-5 mt-5 p-4 rounded-xl bg-white/5 border border-white/10 flex items-center gap-4">
-            <div className="relative shrink-0">
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white font-black text-lg shadow-md shadow-blue-500/20">YK</div>
-              <span className="absolute -bottom-1 -right-1 flex h-4 w-4">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60" />
-                <span className="relative inline-flex rounded-full h-4 w-4 bg-emerald-500 border-2 border-[#0f0f2a]" />
-              </span>
+          <div className="px-5 py-5 space-y-4">
+
+            {/* Agent Card */}
+            <div className="p-4 rounded-2xl bg-white/4 border border-white/8 flex items-center gap-4">
+              <div className="relative shrink-0">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-700 flex items-center justify-center text-white font-black text-lg shadow-lg shadow-blue-500/25">YK</div>
+                <span className="absolute -bottom-1 -right-1 flex h-4 w-4">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-50" />
+                  <span className="relative inline-flex rounded-full h-4 w-4 bg-emerald-500 border-2 border-[#080820]" />
+                </span>
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-base font-black leading-tight">Yek7Pay Expert</p>
+                <p className="text-[11px] text-white/45 mt-0.5">Financial Onboarding Specialist</p>
+                <p className="text-[10px] font-bold text-emerald-400 mt-1.5 flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse inline-block" />
+                  Online · Available Now
+                </p>
+              </div>
             </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-base font-black leading-tight">Yek7Pay Expert</p>
-              <p className="text-xs text-white/50 leading-tight mt-0.5">Financial Onboarding Specialist</p>
-              <p className="text-[10px] font-semibold text-emerald-400 mt-1 uppercase tracking-wider">● Online · Available Now</p>
+
+            {/* Tagline */}
+            <p className="text-[11px] text-white/40 leading-relaxed px-0.5">
+              Our dedicated expert will personally guide you through seamless onboarding, assist with account setup, and ensure you start earning commissions from Day 1.
+            </p>
+
+            {/* Call & WhatsApp */}
+            <div className="flex gap-2.5">
+              <a href="tel:+919230967187" className="flex-1">
+                <div className="flex items-center gap-2.5 h-11 px-3.5 rounded-xl bg-white/5 border border-white/10 hover:bg-blue-500/15 hover:border-blue-400/30 transition-all cursor-pointer">
+                  <Phone className="h-4 w-4 text-blue-400 shrink-0" />
+                  <div>
+                    <p className="text-[9px] text-white/35 leading-none font-medium uppercase tracking-wider">Call Agent</p>
+                    <p className="text-[11px] font-black text-white leading-tight mt-0.5">+91 92309 67187</p>
+                  </div>
+                </div>
+              </a>
+              <a href="https://wa.me/919230967187?text=Hi%2C%20I%20want%20to%20create%20my%20Yek7Pay%20account.%20Please%20help%20me%20with%20registration." target="_blank" rel="noopener noreferrer" className="flex-1">
+                <div className="flex items-center gap-2.5 h-11 px-3.5 rounded-xl bg-[#25D366]/8 border border-[#25D366]/20 hover:bg-[#25D366]/18 hover:border-[#25D366]/45 transition-all cursor-pointer">
+                  <MessageCircle className="h-4 w-4 text-[#25D366] shrink-0" />
+                  <div>
+                    <p className="text-[9px] text-white/35 leading-none font-medium uppercase tracking-wider">WhatsApp</p>
+                    <p className="text-[11px] font-black text-white leading-tight mt-0.5">Chat Now</p>
+                  </div>
+                </div>
+              </a>
             </div>
-          </div>
 
-          {/* Expert Tagline */}
-          <p className="mx-5 mt-3 text-xs text-white/45 leading-relaxed">
-            Our dedicated Yek7Pay expert will personally guide you through seamless onboarding, assist with account setup, and ensure you start earning commissions from Day 1.
-          </p>
+            {/* Divider */}
+            <div className="flex items-center gap-3">
+              <div className="flex-1 h-px bg-white/8" />
+              <span className="text-[10px] text-white/25 uppercase tracking-widest font-semibold">or</span>
+              <div className="flex-1 h-px bg-white/8" />
+            </div>
 
-          {/* Contact Buttons — single row */}
-          <div className="px-5 mt-4 flex gap-3">
-            <a href="tel:+919230967187" className="flex-1">
-              <Button className="w-full bg-white/8 hover:bg-blue-500/20 border border-white/10 hover:border-blue-400/40 text-white h-11 rounded-xl font-bold text-sm shadow-sm transition-all hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2">
-                <Phone className="h-4 w-4 text-blue-400 shrink-0" />
-                +91 92309 67187
-              </Button>
-            </a>
-            <a href="https://wa.me/919230967187?text=Hi%2C%20I%20want%20to%20create%20my%20Yek7Pay%20account.%20Please%20help%20me%20with%20registration." target="_blank" rel="noopener noreferrer" className="flex-1">
-              <Button className="w-full bg-[#25D366]/15 hover:bg-[#25D366]/25 border border-[#25D366]/30 hover:border-[#25D366]/60 text-white h-11 rounded-xl font-bold text-sm shadow-sm transition-all hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2">
-                <MessageCircle className="h-4 w-4 text-[#25D366] shrink-0" />
-                WhatsApp Us
-              </Button>
-            </a>
-          </div>
-
-          {/* Divider */}
-          <div className="flex items-center gap-3 px-5 my-4">
-            <div className="flex-1 h-px bg-white/10" />
-            <span className="text-[10px] text-white/30 uppercase tracking-widest font-medium">or</span>
-            <div className="flex-1 h-px bg-white/10" />
-          </div>
-
-          {/* Action Buttons */}
-          <div className="px-5 pb-5 space-y-2.5">
-            <a href="https://yek7pay.finstore.app/" target="_blank" rel="noopener noreferrer" className="block">
-              <Button className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white h-12 rounded-xl font-black text-sm shadow-lg shadow-blue-500/25 transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2">
-                <ArrowRight className="h-4 w-4 shrink-0" />
-                Register Online / Login
-              </Button>
+            {/* Register / Login — Featured Card */}
+            <a href="https://yek7pay.finstore.app/" target="_blank" rel="noopener noreferrer" className="block group">
+              <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 p-4 shadow-xl shadow-blue-600/30 transition-all hover:scale-[1.02] hover:shadow-blue-500/40 active:scale-[0.98] cursor-pointer">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-8 translate-x-8 pointer-events-none" />
+                <div className="absolute bottom-0 left-0 w-20 h-20 bg-white/5 rounded-full translate-y-6 -translate-x-6 pointer-events-none" />
+                <div className="relative flex items-center justify-between">
+                  <div>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-blue-200/80 mb-1">New to Yek7Pay?</p>
+                    <p className="text-base font-black text-white leading-tight">Register Online / Login</p>
+                    <p className="text-[11px] text-blue-100/70 mt-1">Access your Yek7Pay dashboard instantly</p>
+                  </div>
+                  <div className="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center shrink-0 ml-3 group-hover:bg-white/25 transition-colors">
+                    <ArrowRight className="h-5 w-5 text-white" />
+                  </div>
+                </div>
+              </div>
             </a>
 
-            {/* Upgrade Premium — expanded card */}
-            <Link href="/premium" onClick={() => setShowCallAgent(false)} className="block">
-              <div className="w-full rounded-xl bg-gradient-to-r from-amber-600/20 via-yellow-600/15 to-amber-600/20 border border-amber-500/30 hover:border-amber-400/60 transition-all hover:scale-[1.01] active:scale-[0.99] cursor-pointer p-3.5">
+            {/* Upgrade Premium */}
+            <Link href="/premium" onClick={() => setShowCallAgent(false)} className="block group">
+              <div className="relative rounded-2xl bg-gradient-to-r from-amber-600/15 via-yellow-600/10 to-amber-600/15 border border-amber-500/25 hover:border-amber-400/50 transition-all hover:scale-[1.01] active:scale-[0.99] cursor-pointer p-3.5">
                 <div className="flex items-center justify-between mb-2.5">
                   <div className="flex items-center gap-2">
                     <Crown className="h-4 w-4 text-amber-400" />
                     <span className="text-sm font-black text-amber-400">Upgrade Premium — ₹999</span>
                   </div>
-                  <ArrowRight className="h-4 w-4 text-amber-400/60" />
+                  <ArrowRight className="h-3.5 w-3.5 text-amber-400/50 group-hover:text-amber-400 transition-colors" />
                 </div>
-                <div className="flex gap-2">
-                  <span className="inline-flex items-center gap-1 text-[10px] font-bold text-amber-300 bg-amber-500/10 border border-amber-500/20 rounded-full px-2.5 py-0.5">
-                    🏆 Highest Commission
-                  </span>
-                  <span className="inline-flex items-center gap-1 text-[10px] font-bold text-amber-300 bg-amber-500/10 border border-amber-500/20 rounded-full px-2.5 py-0.5">
-                    ✦ Full Access
-                  </span>
-                  <span className="inline-flex items-center gap-1 text-[10px] font-bold text-amber-300 bg-amber-500/10 border border-amber-500/20 rounded-full px-2.5 py-0.5">
-                    ⚡ Instant
-                  </span>
+                <div className="flex flex-wrap gap-1.5">
+                  <span className="inline-flex items-center text-[10px] font-bold text-amber-300 bg-amber-500/10 border border-amber-500/20 rounded-full px-2.5 py-0.5">🏆 Highest Commission</span>
+                  <span className="inline-flex items-center text-[10px] font-bold text-amber-300 bg-amber-500/10 border border-amber-500/20 rounded-full px-2.5 py-0.5">✦ Full Access</span>
+                  <span className="inline-flex items-center text-[10px] font-bold text-amber-300 bg-amber-500/10 border border-amber-500/20 rounded-full px-2.5 py-0.5">⚡ Instant</span>
                 </div>
               </div>
             </Link>
+
           </div>
 
           {/* Footer */}
-          <div className="border-t border-white/10 px-5 py-3 flex items-center justify-between">
-            <p className="text-[10px] text-white/30 font-medium">Mon–Sat · 9 AM – 7 PM IST</p>
-            <p className="text-[10px] text-white/30 font-medium">Pan India</p>
+          <div className="border-t border-white/8 px-5 py-3 flex items-center justify-between bg-white/2">
+            <p className="text-[10px] text-white/25 font-medium">Mon–Sat · 9 AM – 7 PM IST</p>
+            <p className="text-[10px] text-white/25 font-medium">Pan India Service</p>
           </div>
         </div>
       </div>,
