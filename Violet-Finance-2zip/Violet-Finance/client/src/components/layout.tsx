@@ -327,7 +327,7 @@ export function Navbar() {
                 <div className="flex items-center gap-2.5 h-11 px-3.5 rounded-xl bg-white/5 border border-white/10 hover:bg-blue-500/15 hover:border-blue-400/30 transition-all cursor-pointer">
                   <Phone className="h-4 w-4 text-blue-400 shrink-0" />
                   <div>
-                    <p className="text-[9px] text-white/35 leading-none font-medium uppercase tracking-wider">Direct Line</p>
+                    <p className="text-[9px] text-white/35 leading-none font-medium uppercase tracking-wider">Call Agent</p>
                     <p className="text-[11px] font-black text-white leading-tight mt-0.5">+91 92309 67187</p>
                   </div>
                 </div>
