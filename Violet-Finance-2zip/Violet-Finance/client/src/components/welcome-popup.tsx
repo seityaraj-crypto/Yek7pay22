@@ -267,10 +267,10 @@ export function WelcomePopup() {
                     href="https://yek7pay.finstore.app/"
                     target="_blank" rel="noopener noreferrer"
                     onClick={handleClose}
-                    className="flex items-center gap-3 w-full h-11 px-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all group mb-3"
+                    className="flex items-center justify-center gap-2 w-full h-12 px-4 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-black text-sm shadow-lg shadow-blue-500/25 transition-all hover:scale-[1.02] active:scale-[0.98] mb-3"
                   >
-                    <span className="text-sm font-bold text-white group-hover:text-blue-300 transition-colors flex-1">Register Online / Login</span>
-                    <ArrowRight className="w-4 h-4 text-white/40 group-hover:text-white group-hover:translate-x-1 transition-all" />
+                    <ArrowRight className="w-4 h-4 shrink-0" />
+                    <span>Register Online / Login</span>
                   </a>
 
                   {/* Upgrade Premium */}

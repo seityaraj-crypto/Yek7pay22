@@ -340,8 +340,8 @@ export function Navbar() {
           {/* Action Buttons */}
           <div className="px-5 pb-5 space-y-2.5">
             <a href="https://yek7pay.finstore.app/" target="_blank" rel="noopener noreferrer" className="block">
-              <Button className="w-full bg-white/8 hover:bg-white/15 border border-white/10 text-white h-11 rounded-xl font-bold text-sm transition-all flex items-center justify-center gap-2">
-                <ArrowRight className="h-4 w-4" />
+              <Button className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white h-12 rounded-xl font-black text-sm shadow-lg shadow-blue-500/25 transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2">
+                <ArrowRight className="h-4 w-4 shrink-0" />
                 Register Online / Login
               </Button>
             </a>
