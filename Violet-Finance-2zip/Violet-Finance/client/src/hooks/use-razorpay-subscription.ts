@@ -1,7 +1,8 @@
 import { useState, useCallback } from "react";
 
 interface SubscriptionOptions {
-  planKey: string;
+  planKey?: string;
+  planId?: string;
   name: string;
   description: string;
   prefill?: {
@@ -60,6 +61,7 @@ export function useRazorpaySubscription() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           planKey: options.planKey,
+          planId: options.planId,
           customerName: options.prefill?.name || "",
           customerEmail: options.prefill?.email || "",
           customerPhone: options.prefill?.contact || "",

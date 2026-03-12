@@ -1,65 +1,28 @@
 import { Navbar, Footer } from "@/components/layout";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
-  Crown, CheckCircle2, Zap, ShieldCheck, Send, Globe, Fingerprint, 
-  CreditCard, Banknote, Smartphone, Building2, Plane, Train, 
+  Crown, Zap, ShieldCheck, Send, Globe,
+  CreditCard, Banknote, Building2,
   QrCode, Wallet, Briefcase, HeadphonesIcon, TrendingUp, Star,
-  ArrowRight, Phone, MessageCircle
+  Phone, MessageCircle, User, Mail, X, Loader2, BadgeCheck
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { useState } from "react";
-import { Invoice } from "@/components/invoice";
-import { Link } from "wouter";
+import { useRazorpaySubscription } from "@/hooks/use-razorpay-subscription";
+import { useToast } from "@/hooks/use-toast";
+
+const PREMIUM_PLAN_ID = "plan_SQLtRpumAcjWcJ";
 
 const premiumServices = [
-  {
-    icon: Send,
-    title: "Yek7pay Unlimited",
-    desc: "Unlimited daily money transfer limits with zero downtime. Process high-volume transactions instantly across all banks in India.",
-    highlight: "No Daily Limits"
-  },
-  {
-    icon: CreditCard,
-    title: "mPOS Solutions",
-    desc: "Accept debit and credit card payments anywhere with a portable card machine. Ideal for shops, delivery, and field agents.",
-    highlight: "Card Acceptance"
-  },
-  {
-    icon: QrCode,
-    title: "UPI QR Payments",
-    desc: "Accept UPI payments with branded QR codes and instant soundbox alerts. No missed payments ever again.",
-    highlight: "Instant Alerts"
-  },
-  {
-    icon: Wallet,
-    title: "PPI Wallet",
-    desc: "Digital prepaid wallet for instant merchant payouts, bill payments, and recharges. Works even without a bank account.",
-    highlight: "Digital Wallet"
-  },
-  {
-    icon: Globe,
-    title: "Indo-Nepal Remittance",
-    desc: "Send money to Nepal instantly with the best exchange rates. Fully RBI compliant cross-border transfer service.",
-    highlight: "Cross-Border"
-  },
-  {
-    icon: Banknote,
-    title: "Business Loans",
-    desc: "Priority processing for business and personal financing. Quick disbursals with minimal documentation required.",
-    highlight: "Fast Approval"
-  },
-  {
-    icon: Building2,
-    title: "GST & Compliance",
-    desc: "Complete access to GST filing, ITR returns, company incorporation, MSME registration, and audit services.",
-    highlight: "Full Access"
-  },
-  {
-    icon: Briefcase,
-    title: "Insurance Services",
-    desc: "Offer life, health, motor, and travel insurance policies. Earn premium commissions on every policy sold.",
-    highlight: "High Commission"
-  }
+  { icon: Send, title: "Yek7pay Unlimited", desc: "Unlimited daily money transfer limits with zero downtime. Process high-volume transactions instantly across all banks in India.", highlight: "No Daily Limits" },
+  { icon: CreditCard, title: "mPOS Solutions", desc: "Accept debit and credit card payments anywhere with a portable card machine. Ideal for shops, delivery, and field agents.", highlight: "Card Acceptance" },
+  { icon: QrCode, title: "UPI QR Payments", desc: "Accept UPI payments with branded QR codes and instant soundbox alerts. No missed payments ever again.", highlight: "Instant Alerts" },
+  { icon: Wallet, title: "PPI Wallet", desc: "Digital prepaid wallet for instant merchant payouts, bill payments, and recharges. Works even without a bank account.", highlight: "Digital Wallet" },
+  { icon: Globe, title: "Indo-Nepal Remittance", desc: "Send money to Nepal instantly with the best exchange rates. Fully RBI compliant cross-border transfer service.", highlight: "Cross-Border" },
+  { icon: Banknote, title: "Business Loans", desc: "Priority processing for business and personal financing. Quick disbursals with minimal documentation required.", highlight: "Fast Approval" },
+  { icon: Building2, title: "GST & Compliance", desc: "Complete access to GST filing, ITR returns, company incorporation, MSME registration, and audit services.", highlight: "Full Access" },
+  { icon: Briefcase, title: "Insurance Services", desc: "Offer life, health, motor, and travel insurance policies. Earn premium commissions on every policy sold.", highlight: "High Commission" }
 ];
 
 const whyPremium = [
@@ -69,8 +32,52 @@ const whyPremium = [
   { icon: ShieldCheck, title: "Secure & Compliant", desc: "RBI compliant platform with 256-bit encryption and full data security." }
 ];
 
+interface CustomerForm {
+  name: string;
+  email: string;
+  phone: string;
+}
+
 export default function Premium() {
-  const [showInvoice, setShowInvoice] = useState(false);
+  const [showForm, setShowForm] = useState(false);
+  const [activated, setActivated] = useState<{ paymentId: string } | null>(null);
+  const [form, setForm] = useState<CustomerForm>({ name: "", email: "", phone: "" });
+  const { initiateSubscription, isLoading } = useRazorpaySubscription();
+  const { toast } = useToast();
+
+  const handleActivate = () => {
+    if (!form.name.trim()) {
+      toast({ title: "Name required", description: "Please enter your full name.", variant: "destructive" });
+      return;
+    }
+    if (!form.phone.trim()) {
+      toast({ title: "Phone required", description: "Please enter your phone number.", variant: "destructive" });
+      return;
+    }
+
+    initiateSubscription({
+      planId: PREMIUM_PLAN_ID,
+      name: "Yek7Pay Solutions",
+      description: "Premium Membership — ₹999 Activation",
+      prefill: {
+        name: form.name,
+        email: form.email,
+        contact: form.phone,
+      },
+      onSuccess: (response) => {
+        setActivated({ paymentId: response.razorpay_payment_id });
+        setShowForm(false);
+        toast({ title: "Premium Activated!", description: "Your premium membership is now active." });
+
+        const msg = `*Yek7Pay Premium Activated* 🎉\n\nName: ${form.name}\nPhone: ${form.phone}\nPlan: Premium Membership ₹999\nTransaction ID: ${response.razorpay_payment_id}\n\nThank you for activating Yek7Pay Premium!\n\n_Yek7Pay Solutions Private Limited_`;
+        const waUrl = `https://api.whatsapp.com/send?phone=91${form.phone.replace(/\D/g, "")}&text=${encodeURIComponent(msg)}`;
+        window.open(waUrl, "_blank");
+      },
+      onError: (err) => {
+        toast({ title: "Payment Failed", description: err.message, variant: "destructive" });
+      },
+    });
+  };
 
   return (
     <div className="min-h-screen bg-[#0a0a2e] text-white">
@@ -94,6 +101,20 @@ export default function Premium() {
               Start earning from Day 1 with India's most powerful fintech toolkit.
             </p>
           </motion.div>
+
+          {activated && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="max-w-lg mx-auto mb-16 p-8 rounded-3xl bg-gradient-to-br from-green-500/10 to-emerald-500/10 border border-green-500/20 text-center"
+            >
+              <BadgeCheck className="h-16 w-16 text-green-400 mx-auto mb-4" />
+              <h2 className="text-2xl font-black mb-2">Premium Activated!</h2>
+              <p className="text-white/60 mb-1">Your Yek7Pay Premium membership is now active.</p>
+              <p className="text-xs text-white/40">Transaction ID: {activated.paymentId}</p>
+              <p className="text-xs text-green-400 mt-3 font-medium">Confirmation sent to your WhatsApp</p>
+            </motion.div>
+          )}
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
             {premiumServices.map((service, i) => (
@@ -163,13 +184,13 @@ export default function Premium() {
               
               <Button 
                 className="bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-500 hover:from-amber-400 hover:to-amber-400 text-black rounded-full px-16 h-20 text-xl font-black shadow-2xl shadow-amber-500/30 transition-all hover:scale-105 active:scale-95 flex items-center gap-4 mx-auto"
-                onClick={() => setShowInvoice(true)}
+                onClick={() => setShowForm(true)}
               >
                 <Crown className="h-6 w-6" /> Activate Premium <Zap className="h-6 w-6 fill-current" />
               </Button>
               
               <p className="mt-8 text-white/40 text-sm font-bold uppercase tracking-widest flex items-center justify-center gap-2">
-                <ShieldCheck className="h-4 w-4" /> Secure 256-bit Encrypted Payment
+                <ShieldCheck className="h-4 w-4" /> Secure 256-bit Encrypted Payment via Razorpay
               </p>
             </div>
           </motion.div>
@@ -198,32 +219,106 @@ export default function Premium() {
       </main>
 
       <AnimatePresence>
-        {showInvoice && (
+        {showForm && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               className="absolute inset-0 bg-black/80 backdrop-blur-md"
-              onClick={() => setShowInvoice(false)}
+              onClick={() => setShowForm(false)}
             />
-            <div className="relative z-[110] w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-              <Invoice 
-                title="Premium Membership Activation"
-                amount="₹ 999.00"
-                productId="premium-activation"
-                invoiceNumber={`INV-${Math.floor(Math.random() * 90000) + 10000}`}
-                date={new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })}
-                items={[
-                  { name: "Premium Business License", price: "₹ 846.61" },
-                  { name: "GST (18%)", price: "₹ 152.39" }
-                ]}
-                onClose={() => setShowInvoice(false)}
-                onPaymentSuccess={() => {
-                  console.log("Premium activation payment successful");
-                }}
-              />
-            </div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="relative z-[110] bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden"
+            >
+              <div className="flex items-center justify-between px-6 py-3 bg-gray-50 border-b">
+                <div className="flex items-center gap-2">
+                  <Crown className="h-4 w-4 text-amber-500" />
+                  <span className="text-sm font-bold text-gray-700">Premium Membership — ₹999</span>
+                </div>
+                <button onClick={() => setShowForm(false)} className="text-gray-400 hover:text-gray-600">
+                  <X className="h-4 w-4" />
+                </button>
+              </div>
+
+              <div className="p-8">
+                <p className="text-sm text-gray-500 mb-6">Enter your details to proceed to payment. Confirmation will be sent via WhatsApp.</p>
+
+                <div className="space-y-4 mb-6">
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-1.5">Full Name *</label>
+                    <div className="relative">
+                      <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                      <Input
+                        type="text"
+                        placeholder="Your full name"
+                        value={form.name}
+                        onChange={(e) => setForm({ ...form, name: e.target.value })}
+                        className="pl-10 h-11 text-sm border-gray-300 text-gray-900 bg-white"
+                        style={{ color: "#111827" }}
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-1.5">Email (optional)</label>
+                    <div className="relative">
+                      <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                      <Input
+                        type="email"
+                        placeholder="your@email.com"
+                        value={form.email}
+                        onChange={(e) => setForm({ ...form, email: e.target.value })}
+                        className="pl-10 h-11 text-sm border-gray-300 text-gray-900 bg-white"
+                        style={{ color: "#111827" }}
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-1.5">Phone (WhatsApp) *</label>
+                    <div className="relative">
+                      <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                      <Input
+                        type="tel"
+                        placeholder="10-digit mobile number"
+                        value={form.phone}
+                        onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                        className="pl-10 h-11 text-sm border-gray-300 text-gray-900 bg-white"
+                        style={{ color: "#111827" }}
+                      />
+                    </div>
+                    <p className="text-xs text-gray-400 mt-1">Confirmation receipt will be sent to this number</p>
+                  </div>
+                </div>
+
+                <div className="mb-6 p-4 rounded-xl bg-amber-50 border border-amber-100 flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-bold text-gray-800">Premium Membership</p>
+                    <p className="text-xs text-gray-500 mt-0.5">All services · Highest commissions</p>
+                  </div>
+                  <p className="text-2xl font-black text-amber-600">₹999</p>
+                </div>
+
+                <Button
+                  onClick={handleActivate}
+                  disabled={isLoading}
+                  className="w-full h-12 text-sm font-black rounded-xl bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-black shadow-lg flex items-center justify-center gap-2"
+                >
+                  {isLoading ? (
+                    <><Loader2 className="h-4 w-4 animate-spin" /> Processing...</>
+                  ) : (
+                    <><Crown className="h-4 w-4" /> Pay ₹999 & Activate</>
+                  )}
+                </Button>
+
+                <div className="flex items-center gap-2 text-xs text-gray-400 mt-4 justify-center">
+                  <ShieldCheck className="h-3.5 w-3.5 text-green-500" />
+                  Secured by Razorpay Payment Gateway
+                </div>
+              </div>
+            </motion.div>
           </div>
         )}
       </AnimatePresence>

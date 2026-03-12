@@ -175,41 +175,46 @@ export function registerRazorpayRoutes(app: Express) {
         return res.status(500).json({ error: "Razorpay not configured" });
       }
 
-      const { planKey, customerName, customerEmail, customerPhone } = req.body;
+      const { planKey, planId, customerName, customerEmail, customerPhone } = req.body;
 
-      if (!planKey || !SUBSCRIPTION_PLANS[planKey]) {
-        return res.status(400).json({ error: "Valid plan key required" });
+      let resolvedPlanId: string;
+      let planLabel = planKey || "premium";
+
+      if (planId) {
+        resolvedPlanId = planId;
+      } else if (planKey && SUBSCRIPTION_PLANS[planKey]) {
+        const plan = SUBSCRIPTION_PLANS[planKey];
+        const razorpayPlan = await (razorpay as any).plans.create({
+          period: plan.period,
+          interval: plan.interval,
+          item: {
+            name: plan.name,
+            amount: plan.amount,
+            currency: "INR",
+            description: plan.description,
+          },
+          notes: { planKey },
+        });
+        resolvedPlanId = razorpayPlan.id;
+      } else {
+        return res.status(400).json({ error: "Valid planId or planKey required" });
       }
 
-      const plan = SUBSCRIPTION_PLANS[planKey];
-
-      const razorpayPlan = await (razorpay as any).plans.create({
-        period: plan.period,
-        interval: plan.interval,
-        item: {
-          name: plan.name,
-          amount: plan.amount,
-          currency: "INR",
-          description: plan.description,
-        },
-        notes: { planKey },
-      });
-
       const subscription = await (razorpay as any).subscriptions.create({
-        plan_id: razorpayPlan.id,
-        total_count: plan.period === "yearly" ? 1 : 12,
+        plan_id: resolvedPlanId,
+        total_count: 12,
         quantity: 1,
         customer_notify: 1,
         notes: {
-          planKey,
+          planLabel,
           customerName: customerName || "",
           customerEmail: customerEmail || "",
           customerPhone: customerPhone || "",
         },
       });
 
-      console.log("Subscription created:", { subscriptionId: subscription.id, planKey });
-      res.json({ subscription, plan: razorpayPlan, planDetails: plan });
+      console.log("Subscription created:", { subscriptionId: subscription.id, planId: resolvedPlanId });
+      res.json({ subscription, planId: resolvedPlanId });
     } catch (error: any) {
       console.error("Subscription creation error:", error);
       res.status(500).json({ error: error.message || "Failed to create subscription" });
