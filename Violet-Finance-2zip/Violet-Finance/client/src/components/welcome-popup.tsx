@@ -218,7 +218,7 @@ export function WelcomePopup() {
                   </button>
 
                   {/* Agent Card */}
-                  <div className="flex items-center gap-4 mb-6 p-4 rounded-2xl bg-white/5 border border-white/10">
+                  <div className="flex items-center gap-4 mb-3 p-4 rounded-2xl bg-white/5 border border-white/10">
                     <div className="relative shrink-0">
                       <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/30">
                         <span className="text-white font-black text-xl">YK</span>
@@ -229,31 +229,30 @@ export function WelcomePopup() {
                       </span>
                     </div>
                     <div>
-                      <p className="font-black text-white text-base leading-tight">Yek7Pay Agent</p>
-                      <p className="text-white/50 text-xs mt-0.5">Financial Expert · Available Now</p>
-                      <p className="text-[10px] font-semibold text-green-400 mt-1 uppercase tracking-wider">● Online</p>
+                      <p className="font-black text-white text-base leading-tight">Yek7Pay Expert</p>
+                      <p className="text-white/50 text-xs mt-0.5">Financial Onboarding Specialist</p>
+                      <p className="text-[10px] font-semibold text-green-400 mt-1 uppercase tracking-wider">● Online · Available Now</p>
                     </div>
                   </div>
 
-                  {/* Call & WhatsApp */}
-                  <div className="grid grid-cols-2 gap-3 mb-4">
+                  {/* Tagline */}
+                  <p className="text-white/45 text-[11px] leading-relaxed mb-4 px-0.5">
+                    Our dedicated Yek7Pay expert will personally guide you through seamless onboarding, assist with account setup, and ensure you start earning commissions from Day 1.
+                  </p>
+
+                  {/* Call & WhatsApp — single row */}
+                  <div className="flex gap-2.5 mb-4">
                     <a href="tel:+919230967187" onClick={handleClose}
-                      className="flex items-center justify-center gap-2 h-12 rounded-xl bg-white/5 border border-white/10 hover:bg-blue-500/20 hover:border-blue-400/40 transition-all group">
-                      <Phone className="w-4 h-4 text-blue-400 group-hover:text-blue-300" />
-                      <div className="text-left">
-                        <p className="text-[10px] text-white/40 leading-none">Call Agent</p>
-                        <p className="text-xs font-bold text-white leading-tight">+91 92309 67187</p>
-                      </div>
+                      className="flex-1 flex items-center justify-center gap-2 h-11 rounded-xl bg-white/5 border border-white/10 hover:bg-blue-500/20 hover:border-blue-400/40 transition-all group">
+                      <Phone className="w-3.5 h-3.5 text-blue-400 shrink-0" />
+                      <span className="text-xs font-bold text-white truncate">+91 92309 67187</span>
                     </a>
                     <a
                       href="https://wa.me/919230967187?text=Hello%2C%20I%20want%20to%20know%20more%20about%20Yek7Pay%20services"
                       target="_blank" rel="noopener noreferrer" onClick={handleClose}
-                      className="flex items-center justify-center gap-2 h-12 rounded-xl bg-[#25D366]/10 border border-[#25D366]/25 hover:bg-[#25D366]/20 hover:border-[#25D366]/50 transition-all group">
-                      <MessageCircle className="w-4 h-4 text-[#25D366]" />
-                      <div className="text-left">
-                        <p className="text-[10px] text-white/40 leading-none">WhatsApp</p>
-                        <p className="text-xs font-bold text-white leading-tight">Chat Now</p>
-                      </div>
+                      className="flex-1 flex items-center justify-center gap-2 h-11 rounded-xl bg-[#25D366]/10 border border-[#25D366]/25 hover:bg-[#25D366]/20 hover:border-[#25D366]/50 transition-all group">
+                      <MessageCircle className="w-3.5 h-3.5 text-[#25D366] shrink-0" />
+                      <span className="text-xs font-bold text-white">WhatsApp Us</span>
                     </a>
                   </div>
 
