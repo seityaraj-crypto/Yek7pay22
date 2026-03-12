@@ -2,7 +2,7 @@ import * as React from "react";
 import ReactDOM from "react-dom";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Menu, Shield, ShieldCheck, Bell, ChevronDown, Landmark, Send, Globe, Fingerprint, CreditCard, Banknote, Briefcase, Zap, Receipt, Plane, Train, Building2, ClipboardCheck, Smartphone, TabletSmartphone, Mail, Phone, X, MessageCircle, ArrowRight, Crown } from "lucide-react";
+import { Menu, Shield, ShieldCheck, Bell, ChevronDown, Landmark, Send, Globe, Fingerprint, CreditCard, Banknote, Briefcase, Zap, Receipt, Plane, Train, Building2, ClipboardCheck, Smartphone, TabletSmartphone, Mail, Phone, X, MessageCircle, ArrowRight, Crown, LogIn, Users } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { AuthDialog } from "@/components/auth-dialog";
 import {
@@ -286,11 +286,11 @@ export function Navbar() {
             </button>
             <div className="flex items-center gap-3 relative">
               <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-700 flex items-center justify-center shadow-lg shadow-blue-500/30">
-                <Phone className="h-5 w-5 text-white" />
+                <LogIn className="h-5 w-5 text-white" />
               </div>
               <div>
-                <p className="text-[10px] font-black uppercase tracking-[0.15em] text-blue-400 mb-0.5">Yek7Pay Support</p>
-                <h3 className="text-xl font-black leading-none">Talk to an Agent</h3>
+                <p className="text-[10px] font-black uppercase tracking-[0.15em] text-blue-400 mb-0.5">Yek7Pay Platform</p>
+                <h3 className="text-xl font-black leading-none">Partner Access & Support</h3>
               </div>
             </div>
           </div>
