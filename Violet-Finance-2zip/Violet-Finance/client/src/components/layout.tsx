@@ -136,6 +136,7 @@ export function Navbar() {
           </DropdownMenu>
 
           <a href="/bbps" className="text-sm font-bold text-slate-700 hover:text-blue-600 transition-all uppercase tracking-widest px-4 h-9 flex items-center rounded-lg hover:bg-slate-200/50">Bharat Connect</a>
+          <Link href="/subscription" className="text-sm font-bold text-amber-600 hover:text-amber-700 transition-all uppercase tracking-widest px-4 h-9 flex items-center rounded-lg hover:bg-amber-50/50 gap-1">Plans</Link>
           <Link href="/about" className="text-sm font-bold text-slate-700 hover:text-blue-600 transition-all uppercase tracking-widest px-4 h-9 flex items-center rounded-lg hover:bg-slate-200/50">About Us</Link>
         </div>
 

@@ -47,6 +47,51 @@ const AUTHORIZED_PRODUCTS: Record<string, { price: number; name: string }> = {
   "import-export-code": { price: 2358.82, name: "Import Export Code (IEC)" },
 };
 
+const SUBSCRIPTION_PLANS: Record<string, { amount: number; name: string; period: string; interval: number; description: string }> = {
+  "basic-monthly": {
+    amount: 99900,
+    name: "Basic Plan",
+    period: "monthly",
+    interval: 1,
+    description: "Core DMT, AEPS, UPI QR — perfect for getting started"
+  },
+  "professional-monthly": {
+    amount: 199900,
+    name: "Professional Plan",
+    period: "monthly",
+    interval: 1,
+    description: "All services + priority support + higher limits"
+  },
+  "enterprise-monthly": {
+    amount: 499900,
+    name: "Enterprise Plan",
+    period: "monthly",
+    interval: 1,
+    description: "Unlimited everything + dedicated manager + white-label"
+  },
+  "basic-yearly": {
+    amount: 999900,
+    name: "Basic Plan (Annual)",
+    period: "yearly",
+    interval: 1,
+    description: "Core DMT, AEPS, UPI QR — save 2 months"
+  },
+  "professional-yearly": {
+    amount: 1999900,
+    name: "Professional Plan (Annual)",
+    period: "yearly",
+    interval: 1,
+    description: "All services + priority support — save 2 months"
+  },
+  "enterprise-yearly": {
+    amount: 4999900,
+    name: "Enterprise Plan (Annual)",
+    period: "yearly",
+    interval: 1,
+    description: "Unlimited everything + dedicated manager — save 2 months"
+  },
+};
+
 export function registerRazorpayRoutes(app: Express) {
   app.get("/api/razorpay/key", (req, res) => {
     if (!RAZORPAY_KEY_ID) {
@@ -117,6 +162,89 @@ export function registerRazorpayRoutes(app: Express) {
     } catch (error: any) {
       console.error("Payment verification error:", error);
       res.status(500).json({ error: error.message || "Payment verification failed" });
+    }
+  });
+
+  app.get("/api/razorpay/subscription-plans", (req, res) => {
+    res.json(SUBSCRIPTION_PLANS);
+  });
+
+  app.post("/api/razorpay/create-subscription", async (req, res) => {
+    try {
+      if (!razorpay) {
+        return res.status(500).json({ error: "Razorpay not configured" });
+      }
+
+      const { planKey, customerName, customerEmail, customerPhone } = req.body;
+
+      if (!planKey || !SUBSCRIPTION_PLANS[planKey]) {
+        return res.status(400).json({ error: "Valid plan key required" });
+      }
+
+      const plan = SUBSCRIPTION_PLANS[planKey];
+
+      const razorpayPlan = await (razorpay as any).plans.create({
+        period: plan.period,
+        interval: plan.interval,
+        item: {
+          name: plan.name,
+          amount: plan.amount,
+          currency: "INR",
+          description: plan.description,
+        },
+        notes: { planKey },
+      });
+
+      const subscription = await (razorpay as any).subscriptions.create({
+        plan_id: razorpayPlan.id,
+        total_count: plan.period === "yearly" ? 1 : 12,
+        quantity: 1,
+        customer_notify: 1,
+        notes: {
+          planKey,
+          customerName: customerName || "",
+          customerEmail: customerEmail || "",
+          customerPhone: customerPhone || "",
+        },
+      });
+
+      console.log("Subscription created:", { subscriptionId: subscription.id, planKey });
+      res.json({ subscription, plan: razorpayPlan, planDetails: plan });
+    } catch (error: any) {
+      console.error("Subscription creation error:", error);
+      res.status(500).json({ error: error.message || "Failed to create subscription" });
+    }
+  });
+
+  app.post("/api/razorpay/verify-subscription", async (req, res) => {
+    try {
+      if (!RAZORPAY_KEY_SECRET) {
+        return res.status(500).json({ error: "Razorpay not configured" });
+      }
+
+      const { razorpay_payment_id, razorpay_subscription_id, razorpay_signature } = req.body;
+
+      if (!razorpay_payment_id || !razorpay_subscription_id || !razorpay_signature) {
+        return res.status(400).json({ error: "Missing subscription verification data" });
+      }
+
+      const body = razorpay_payment_id + "|" + razorpay_subscription_id;
+      const expectedSignature = crypto
+        .createHmac("sha256", RAZORPAY_KEY_SECRET)
+        .update(body)
+        .digest("hex");
+
+      const isAuthentic = expectedSignature === razorpay_signature;
+
+      if (isAuthentic) {
+        console.log("Subscription verified:", { razorpay_subscription_id, razorpay_payment_id });
+        res.json({ success: true, message: "Subscription activated successfully" });
+      } else {
+        res.status(400).json({ success: false, error: "Subscription verification failed" });
+      }
+    } catch (error: any) {
+      console.error("Subscription verification error:", error);
+      res.status(500).json({ error: error.message || "Subscription verification failed" });
     }
   });
 }
