@@ -681,7 +681,7 @@ export default function Features() {
                 <Phone className="h-9 w-9 text-white" />
               </div>
 
-              <h3 className="text-2xl md:text-3xl font-black mb-3">Call Yek7Pay Agent</h3>
+              <h3 className="text-2xl md:text-3xl font-black mb-3">Partner Access & Support</h3>
               <p className="text-white/60 mb-2 text-sm">Our registration expert will help you set up your account quickly and guide you through the entire process.</p>
               <p className="text-white/40 text-xs mb-8">Available Mon-Sat, 9 AM - 7 PM IST</p>
 
