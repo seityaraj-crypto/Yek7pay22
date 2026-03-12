@@ -334,7 +334,7 @@ export function Navbar() {
             <a href="https://yek7pay.finstore.app/" target="_blank" rel="noopener noreferrer" className="block">
               <Button className="w-full bg-white/8 hover:bg-white/15 border border-white/10 text-white h-10 rounded-xl font-bold text-sm transition-all flex items-center justify-center gap-2">
                 <ArrowRight className="h-3.5 w-3.5" />
-                Register Online
+                Register Online / Login
               </Button>
             </a>
             <Link href="/premium" onClick={() => setShowCallAgent(false)} className="block">
