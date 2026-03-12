@@ -358,7 +358,7 @@ export function Navbar() {
                 <div className="relative flex items-center justify-between">
                   <div>
                     <p className="text-[10px] font-black uppercase tracking-widest text-blue-200/80 mb-1">New to Yek7Pay?</p>
-                    <p className="text-base font-black text-white leading-tight">Open Account / Login to Yek7Pay</p>
+                    <p className="text-base font-black text-white leading-tight">Register Online / Login</p>
                     <p className="text-[11px] text-blue-100/70 mt-1">Access your Yek7Pay dashboard instantly</p>
                   </div>
                   <div className="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center shrink-0 ml-3 group-hover:bg-white/25 transition-colors">

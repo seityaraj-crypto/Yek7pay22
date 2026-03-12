@@ -270,7 +270,7 @@ export function WelcomePopup() {
                     className="flex items-center justify-center gap-2 w-full h-12 px-4 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-black text-sm shadow-lg shadow-blue-500/25 transition-all hover:scale-[1.02] active:scale-[0.98] mb-3"
                   >
                     <ArrowRight className="w-4 h-4 shrink-0" />
-                    <span>Open Account / Login to Yek7Pay</span>
+                    <span>Register Online / Login</span>
                   </a>
 
                   {/* Upgrade Premium */}
