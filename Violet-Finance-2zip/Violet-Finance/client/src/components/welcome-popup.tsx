@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Rocket, TrendingUp, Users, Zap, ArrowRight, Sparkles, UserPlus, LogIn, Crown, Phone, MessageCircle, Mail } from "lucide-react";
+import { X, Rocket, TrendingUp, Users, Zap, ArrowRight, Sparkles, Crown, Phone, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
 
 export function WelcomePopup() {
   const [isVisible, setIsVisible] = useState(false);
@@ -203,11 +204,11 @@ export function WelcomePopup() {
                 </motion.div>
               ) : (
                 <motion.div
-                  key="getstarted"
+                  key="agent"
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: 20 }}
-                  className="relative p-8 pt-12"
+                  className="relative p-7 pt-12"
                 >
                   <button
                     onClick={handleBack}
@@ -216,99 +217,76 @@ export function WelcomePopup() {
                     <ArrowRight className="w-5 h-5 text-white/70 group-hover:text-white rotate-180" />
                   </button>
 
-                  <div className="text-center mb-8">
-                    <h2 className="text-2xl md:text-3xl font-display font-black text-white mb-2">
-                      Get Started with{" "}
-                      <span className="bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
-                        Yek7Pay
+                  {/* Agent Card */}
+                  <div className="flex items-center gap-4 mb-6 p-4 rounded-2xl bg-white/5 border border-white/10">
+                    <div className="relative shrink-0">
+                      <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/30">
+                        <span className="text-white font-black text-xl">YK</span>
+                      </div>
+                      <span className="absolute -bottom-1 -right-1 flex h-4 w-4">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-4 w-4 bg-green-500 border-2 border-[#0d0d2b]"></span>
                       </span>
-                    </h2>
-                    <p className="text-white/60 text-sm">Choose how you'd like to proceed</p>
-                  </div>
-
-                  <div className="space-y-3 mb-8">
-                    <a
-                      href="/new-account"
-                      className="flex items-center gap-4 p-4 rounded-2xl bg-gradient-to-r from-blue-600/20 to-purple-600/20 border border-blue-500/30 hover:border-blue-400/50 transition-all group cursor-pointer"
-                      onClick={handleClose}
-                    >
-                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                        <UserPlus className="w-6 h-6 text-white" />
-                      </div>
-                      <div className="flex-1">
-                        <p className="font-bold text-white group-hover:text-blue-300 transition-colors">Create Your Account</p>
-                        <p className="text-sm text-white/50">Start your free Yek7Pay account now</p>
-                      </div>
-                      <ArrowRight className="w-5 h-5 text-white/50 group-hover:text-white group-hover:translate-x-1 transition-all" />
-                    </a>
-
-                    <a
-                      href="/login"
-                      className="flex items-center gap-4 p-4 rounded-2xl bg-gradient-to-r from-green-600/20 to-teal-600/20 border border-green-500/30 hover:border-green-400/50 transition-all group cursor-pointer"
-                      onClick={handleClose}
-                    >
-                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-teal-600 flex items-center justify-center">
-                        <LogIn className="w-6 h-6 text-white" />
-                      </div>
-                      <div className="flex-1">
-                        <p className="font-bold text-white group-hover:text-green-300 transition-colors">Login</p>
-                        <p className="text-sm text-white/50">Login to Yek7Pay</p>
-                      </div>
-                      <ArrowRight className="w-5 h-5 text-white/50 group-hover:text-white group-hover:translate-x-1 transition-all" />
-                    </a>
-
-                    <a
-                      href="/upgrade"
-                      className="flex items-center gap-4 p-4 rounded-2xl bg-gradient-to-r from-yellow-600/20 to-orange-600/20 border border-yellow-500/30 hover:border-yellow-400/50 transition-all group cursor-pointer"
-                      onClick={handleClose}
-                    >
-                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-yellow-500 to-orange-600 flex items-center justify-center">
-                        <Crown className="w-6 h-6 text-white" />
-                      </div>
-                      <div className="flex-1">
-                        <p className="font-bold text-white group-hover:text-yellow-300 transition-colors">Upgrade Premium</p>
-                        <p className="text-sm text-white/50">Unlock exclusive features & benefits</p>
-                      </div>
-                      <ArrowRight className="w-5 h-5 text-white/50 group-hover:text-white group-hover:translate-x-1 transition-all" />
-                    </a>
-                  </div>
-
-                  <div className="border-t border-white/10 pt-6">
-                    <p className="text-center text-white/50 text-sm mb-4">Need help? Contact us</p>
-                    <div className="flex justify-center gap-4">
-                      <a
-                        href="tel:+919230967187"
-                        className="flex flex-col items-center gap-2 p-3 rounded-xl bg-white/5 hover:bg-green-500/20 border border-white/10 hover:border-green-500/30 transition-all group"
-                      >
-                        <div className="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center group-hover:bg-green-500/30 transition-colors">
-                          <Phone className="w-5 h-5 text-green-400" />
-                        </div>
-                        <span className="text-xs text-white/60 group-hover:text-white transition-colors">Call</span>
-                      </a>
-
-                      <a
-                        href="https://wa.me/919230967187?text=Hello%2C%20I%20want%20to%20know%20more%20about%20Yek7Pay%20services"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex flex-col items-center gap-2 p-3 rounded-xl bg-white/5 hover:bg-green-500/20 border border-white/10 hover:border-green-500/30 transition-all group"
-                      >
-                        <div className="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center group-hover:bg-green-500/30 transition-colors">
-                          <MessageCircle className="w-5 h-5 text-green-400" />
-                        </div>
-                        <span className="text-xs text-white/60 group-hover:text-white transition-colors">WhatsApp</span>
-                      </a>
-
-                      <a
-                        href="mailto:info@yek7pay.com"
-                        className="flex flex-col items-center gap-2 p-3 rounded-xl bg-white/5 hover:bg-blue-500/20 border border-white/10 hover:border-blue-500/30 transition-all group"
-                      >
-                        <div className="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center group-hover:bg-blue-500/30 transition-colors">
-                          <Mail className="w-5 h-5 text-blue-400" />
-                        </div>
-                        <span className="text-xs text-white/60 group-hover:text-white transition-colors">Email</span>
-                      </a>
+                    </div>
+                    <div>
+                      <p className="font-black text-white text-base leading-tight">Yek7Pay Agent</p>
+                      <p className="text-white/50 text-xs mt-0.5">Financial Expert · Available Now</p>
+                      <p className="text-[10px] font-semibold text-green-400 mt-1 uppercase tracking-wider">● Online</p>
                     </div>
                   </div>
+
+                  {/* Call & WhatsApp */}
+                  <div className="grid grid-cols-2 gap-3 mb-4">
+                    <a href="tel:+919230967187" onClick={handleClose}
+                      className="flex items-center justify-center gap-2 h-12 rounded-xl bg-white/5 border border-white/10 hover:bg-blue-500/20 hover:border-blue-400/40 transition-all group">
+                      <Phone className="w-4 h-4 text-blue-400 group-hover:text-blue-300" />
+                      <div className="text-left">
+                        <p className="text-[10px] text-white/40 leading-none">Call Agent</p>
+                        <p className="text-xs font-bold text-white leading-tight">+91 92309 67187</p>
+                      </div>
+                    </a>
+                    <a
+                      href="https://wa.me/919230967187?text=Hello%2C%20I%20want%20to%20know%20more%20about%20Yek7Pay%20services"
+                      target="_blank" rel="noopener noreferrer" onClick={handleClose}
+                      className="flex items-center justify-center gap-2 h-12 rounded-xl bg-[#25D366]/10 border border-[#25D366]/25 hover:bg-[#25D366]/20 hover:border-[#25D366]/50 transition-all group">
+                      <MessageCircle className="w-4 h-4 text-[#25D366]" />
+                      <div className="text-left">
+                        <p className="text-[10px] text-white/40 leading-none">WhatsApp</p>
+                        <p className="text-xs font-bold text-white leading-tight">Chat Now</p>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div className="relative flex items-center gap-3 mb-4">
+                    <div className="flex-1 h-px bg-white/10" />
+                    <span className="text-[10px] uppercase tracking-widest text-white/30 font-semibold">or</span>
+                    <div className="flex-1 h-px bg-white/10" />
+                  </div>
+
+                  {/* Register / Login */}
+                  <a
+                    href="https://yek7pay.finstore.app/"
+                    target="_blank" rel="noopener noreferrer"
+                    onClick={handleClose}
+                    className="flex items-center gap-3 w-full h-11 px-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all group mb-3"
+                  >
+                    <span className="text-sm font-bold text-white group-hover:text-blue-300 transition-colors flex-1">Register Online / Login</span>
+                    <ArrowRight className="w-4 h-4 text-white/40 group-hover:text-white group-hover:translate-x-1 transition-all" />
+                  </a>
+
+                  {/* Upgrade Premium */}
+                  <Link href="/premium" onClick={handleClose}>
+                    <button className="flex items-center gap-3 w-full h-11 px-4 rounded-xl bg-amber-500/10 border border-amber-500/20 hover:bg-amber-500/20 hover:border-amber-400/40 transition-all group">
+                      <Crown className="w-4 h-4 text-amber-400" />
+                      <span className="text-sm font-bold text-amber-400 group-hover:text-amber-300 transition-colors flex-1 text-left">Upgrade Premium — ₹999</span>
+                      <ArrowRight className="w-4 h-4 text-amber-400/50 group-hover:text-amber-300 group-hover:translate-x-1 transition-all" />
+                    </button>
+                  </Link>
+
+                  {/* Availability */}
+                  <p className="text-center text-[10px] text-white/25 mt-4 font-medium uppercase tracking-wider">
+                    Mon – Sat · 9 AM – 7 PM IST
+                  </p>
                 </motion.div>
               )}
             </AnimatePresence>
