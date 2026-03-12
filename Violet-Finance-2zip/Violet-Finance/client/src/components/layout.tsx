@@ -273,32 +273,32 @@ export function Navbar() {
           className="absolute inset-0 bg-black/80 backdrop-blur-md"
           onClick={() => setShowCallAgent(false)}
         />
-        <div className="relative z-[10000] bg-[#1a1a3a] border border-white/10 rounded-[2rem] p-8 md:p-10 shadow-2xl max-w-md w-full text-white text-center">
+        <div className="relative z-[10000] bg-[#1a1a3a] border border-white/10 rounded-[2rem] p-6 md:p-8 shadow-2xl max-w-md w-full text-white text-center">
           <button 
             onClick={() => setShowCallAgent(false)}
-            className="absolute top-4 right-4 p-2 rounded-full hover:bg-white/10 transition-colors"
+            className="absolute top-3 right-3 p-1.5 rounded-full hover:bg-white/10 transition-colors"
           >
-            <X className="h-5 w-5 text-white/60" />
+            <X className="h-4 w-4 text-white/60" />
           </button>
 
-          <div className="w-20 h-20 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center mx-auto mb-6 shadow-xl shadow-green-500/20">
-            <Phone className="h-9 w-9 text-white" />
+          <div className="w-14 h-14 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center mx-auto mb-4 shadow-lg shadow-green-500/20">
+            <Phone className="h-6 w-6 text-white" />
           </div>
 
-          <h3 className="text-2xl md:text-3xl font-black mb-3">Call Yek7Pay Agent</h3>
-          <p className="text-white/60 mb-2 text-sm">Our registration expert will help you set up your account quickly and guide you through the entire process.</p>
-          <p className="text-white/40 text-xs mb-8">Available Mon-Sat, 9 AM - 7 PM IST</p>
+          <h3 className="text-xl font-black mb-2">Call Yek7Pay Agent</h3>
+          <p className="text-white/60 mb-1 text-xs">Our expert will help you set up your account and guide you through registration.</p>
+          <p className="text-white/40 text-[10px] mb-5">Available Mon-Sat, 9 AM - 7 PM IST</p>
 
-          <a href="tel:+919230967187" className="block mb-4">
-            <Button className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white h-16 rounded-2xl font-bold text-lg shadow-xl shadow-green-500/20 transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-3">
-              <Phone className="h-5 w-5" />
+          <a href="tel:+919230967187" className="block mb-2.5">
+            <Button className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white h-11 rounded-xl font-bold text-sm shadow-lg shadow-green-500/20 transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2">
+              <Phone className="h-4 w-4" />
               Call +91 92309 67187
             </Button>
           </a>
 
           <a href="https://wa.me/919230967187?text=Hi%2C%20I%20want%20to%20create%20my%20Yek7Pay%20account.%20Please%20help%20me%20with%20registration." target="_blank" rel="noopener noreferrer" className="block mb-4">
-            <Button variant="outline" className="w-full border-white/10 hover:bg-white/5 text-white h-14 rounded-2xl font-bold text-base flex items-center justify-center gap-3">
-              <MessageCircle className="h-5 w-5 text-green-400" />
+            <Button variant="outline" className="w-full border-white/10 hover:bg-white/5 text-white h-11 rounded-xl font-bold text-sm flex items-center justify-center gap-2">
+              <MessageCircle className="h-4 w-4 text-green-400" />
               WhatsApp Us
             </Button>
           </a>
