@@ -273,62 +273,83 @@ export function Navbar() {
           className="absolute inset-0 bg-black/80 backdrop-blur-md"
           onClick={() => setShowCallAgent(false)}
         />
-        <div className="relative z-[10000] bg-[#1a1a3a] border border-white/10 rounded-[2rem] p-6 md:p-8 shadow-2xl max-w-md w-full text-white text-center">
-          <button 
-            onClick={() => setShowCallAgent(false)}
-            className="absolute top-3 right-3 p-1.5 rounded-full hover:bg-white/10 transition-colors"
-          >
-            <X className="h-4 w-4 text-white/60" />
-          </button>
-
-          <div className="w-14 h-14 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center mx-auto mb-4 shadow-lg shadow-green-500/20">
-            <Phone className="h-6 w-6 text-white" />
-          </div>
-
-          <h3 className="text-xl font-black mb-2">Call Yek7Pay Agent</h3>
-          <p className="text-white/60 mb-1 text-xs">Our expert will help you set up your account and guide you through registration.</p>
-          <p className="text-white/40 text-[10px] mb-5">Available Mon-Sat, 9 AM - 7 PM IST</p>
-
-          <a href="tel:+919230967187" className="block mb-2.5">
-            <Button className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white h-11 rounded-xl font-bold text-sm shadow-lg shadow-green-500/20 transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2">
-              <Phone className="h-4 w-4" />
-              Call +91 92309 67187
-            </Button>
-          </a>
-
-          <a href="https://wa.me/919230967187?text=Hi%2C%20I%20want%20to%20create%20my%20Yek7Pay%20account.%20Please%20help%20me%20with%20registration." target="_blank" rel="noopener noreferrer" className="block mb-4">
-            <Button variant="outline" className="w-full border-white/10 hover:bg-white/5 text-white h-11 rounded-xl font-bold text-sm flex items-center justify-center gap-2">
-              <MessageCircle className="h-4 w-4 text-green-400" />
-              WhatsApp Us
-            </Button>
-          </a>
-
-          <div className="relative my-6">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-white/10"></div>
-            </div>
-            <div className="relative flex justify-center">
-              <span className="bg-[#1a1a3a] px-4 text-xs text-white/40 uppercase tracking-widest">or register online</span>
+        <div className="relative z-[10000] bg-[#0f0f2a] border border-white/10 rounded-2xl shadow-2xl max-w-sm w-full text-white overflow-hidden">
+          {/* Header */}
+          <div className="relative bg-gradient-to-r from-blue-900/80 to-indigo-900/80 px-5 py-4 border-b border-white/10">
+            <button
+              onClick={() => setShowCallAgent(false)}
+              className="absolute top-3 right-3 p-1 rounded-lg hover:bg-white/10 transition-colors"
+            >
+              <X className="h-4 w-4 text-white/50" />
+            </button>
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-md">
+                <Phone className="h-4 w-4 text-white" />
+              </div>
+              <div>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-blue-300">Yek7Pay Support</p>
+                <h3 className="text-base font-black leading-tight">Talk to an Agent</h3>
+              </div>
             </div>
           </div>
 
-          <a href="https://yek7pay.finstore.app/" target="_blank" rel="noopener noreferrer" className="block mb-4">
-            <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white h-14 rounded-2xl font-bold text-base shadow-lg transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-3">
-              <ArrowRight className="h-5 w-5" />
-              Continue to Registration
-            </Button>
-          </a>
+          {/* Agent Card */}
+          <div className="mx-4 mt-4 p-3 rounded-xl bg-white/5 border border-white/10 flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-400 to-teal-600 flex items-center justify-center text-white font-black text-sm shrink-0">YK</div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-bold leading-tight">Yek7Pay Expert</p>
+              <p className="text-[11px] text-white/50 leading-tight">Registration & Onboarding</p>
+            </div>
+            <span className="flex items-center gap-1 text-[10px] font-bold text-emerald-400 shrink-0">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse inline-block" />
+              Online
+            </span>
+          </div>
 
-          <Link href="/premium" onClick={() => setShowCallAgent(false)} className="block mb-6">
-            <Button className="w-full bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-black h-14 rounded-2xl font-bold text-base shadow-xl shadow-amber-500/20 transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-3">
-              <Crown className="h-5 w-5" />
-              Upgrade Premium ₹999
-            </Button>
-          </Link>
+          {/* Contact Buttons */}
+          <div className="px-4 mt-3 space-y-2">
+            <a href="tel:+919230967187" className="block">
+              <Button className="w-full bg-emerald-600 hover:bg-emerald-500 text-white h-10 rounded-xl font-bold text-sm shadow-md transition-all hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2">
+                <Phone className="h-3.5 w-3.5" />
+                +91 92309 67187
+              </Button>
+            </a>
+            <a href="https://wa.me/919230967187?text=Hi%2C%20I%20want%20to%20create%20my%20Yek7Pay%20account.%20Please%20help%20me%20with%20registration." target="_blank" rel="noopener noreferrer" className="block">
+              <Button className="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white h-10 rounded-xl font-bold text-sm shadow-md transition-all hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2">
+                <MessageCircle className="h-3.5 w-3.5" />
+                WhatsApp
+              </Button>
+            </a>
+          </div>
 
-          <p className="text-[10px] text-white/30 uppercase tracking-[0.15em] font-medium">
-            Pan India Service Available
-          </p>
+          {/* Divider */}
+          <div className="flex items-center gap-3 px-4 my-4">
+            <div className="flex-1 h-px bg-white/10" />
+            <span className="text-[10px] text-white/30 uppercase tracking-widest font-medium">or</span>
+            <div className="flex-1 h-px bg-white/10" />
+          </div>
+
+          {/* Action Buttons */}
+          <div className="px-4 pb-4 space-y-2">
+            <a href="https://yek7pay.finstore.app/" target="_blank" rel="noopener noreferrer" className="block">
+              <Button className="w-full bg-white/8 hover:bg-white/15 border border-white/10 text-white h-10 rounded-xl font-bold text-sm transition-all flex items-center justify-center gap-2">
+                <ArrowRight className="h-3.5 w-3.5" />
+                Register Online
+              </Button>
+            </a>
+            <Link href="/premium" onClick={() => setShowCallAgent(false)} className="block">
+              <Button className="w-full bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-black h-10 rounded-xl font-black text-sm shadow-md shadow-amber-500/20 transition-all hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2">
+                <Crown className="h-3.5 w-3.5" />
+                Upgrade Premium — ₹999
+              </Button>
+            </Link>
+          </div>
+
+          {/* Footer */}
+          <div className="border-t border-white/10 px-4 py-2.5 flex items-center justify-between">
+            <p className="text-[10px] text-white/30 font-medium">Mon–Sat · 9 AM – 7 PM IST</p>
+            <p className="text-[10px] text-white/30 font-medium">Pan India</p>
+          </div>
         </div>
       </div>,
       document.body
