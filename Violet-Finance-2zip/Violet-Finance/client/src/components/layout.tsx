@@ -294,30 +294,38 @@ export function Navbar() {
           </div>
 
           {/* Agent Card */}
-          <div className="mx-4 mt-4 p-3 rounded-xl bg-white/5 border border-white/10 flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-400 to-teal-600 flex items-center justify-center text-white font-black text-sm shrink-0">YK</div>
-            <div className="flex-1 min-w-0">
-              <p className="text-sm font-bold leading-tight">Yek7Pay Expert</p>
-              <p className="text-[11px] text-white/50 leading-tight">Registration & Onboarding</p>
+          <div className="mx-4 mt-4 p-3.5 rounded-xl bg-white/5 border border-white/10 flex items-center gap-3">
+            <div className="relative shrink-0">
+              <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white font-black text-sm shadow-md shadow-blue-500/20">YK</div>
+              <span className="absolute -bottom-0.5 -right-0.5 flex h-3.5 w-3.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60" />
+                <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500 border-2 border-[#0f0f2a]" />
+              </span>
             </div>
-            <span className="flex items-center gap-1 text-[10px] font-bold text-emerald-400 shrink-0">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse inline-block" />
-              Online
-            </span>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-black leading-tight">Yek7Pay Expert</p>
+              <p className="text-[10px] text-white/50 leading-tight mt-0.5">Financial Onboarding Specialist</p>
+            </div>
+            <span className="text-[9px] font-bold text-emerald-400 uppercase tracking-wider shrink-0">● Online</span>
           </div>
 
-          {/* Contact Buttons */}
-          <div className="px-4 mt-3 space-y-2">
-            <a href="tel:+919230967187" className="block">
-              <Button className="w-full bg-emerald-600 hover:bg-emerald-500 text-white h-10 rounded-xl font-bold text-sm shadow-md transition-all hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2">
-                <Phone className="h-3.5 w-3.5" />
+          {/* Expert Tagline */}
+          <p className="mx-4 mt-2.5 text-[11px] text-white/40 leading-relaxed">
+            Our dedicated Yek7Pay expert will personally guide you through seamless onboarding, assist with account setup, and ensure you start earning commissions from Day 1.
+          </p>
+
+          {/* Contact Buttons — single row */}
+          <div className="px-4 mt-3 flex gap-2.5">
+            <a href="tel:+919230967187" className="flex-1">
+              <Button className="w-full bg-white/8 hover:bg-blue-500/20 border border-white/10 hover:border-blue-400/40 text-white h-10 rounded-xl font-bold text-xs shadow-sm transition-all hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-1.5">
+                <Phone className="h-3.5 w-3.5 text-blue-400 shrink-0" />
                 +91 92309 67187
               </Button>
             </a>
-            <a href="https://wa.me/919230967187?text=Hi%2C%20I%20want%20to%20create%20my%20Yek7Pay%20account.%20Please%20help%20me%20with%20registration." target="_blank" rel="noopener noreferrer" className="block">
-              <Button className="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white h-10 rounded-xl font-bold text-sm shadow-md transition-all hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2">
-                <MessageCircle className="h-3.5 w-3.5" />
-                WhatsApp
+            <a href="https://wa.me/919230967187?text=Hi%2C%20I%20want%20to%20create%20my%20Yek7Pay%20account.%20Please%20help%20me%20with%20registration." target="_blank" rel="noopener noreferrer" className="flex-1">
+              <Button className="w-full bg-[#25D366]/15 hover:bg-[#25D366]/25 border border-[#25D366]/30 hover:border-[#25D366]/60 text-white h-10 rounded-xl font-bold text-xs shadow-sm transition-all hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-1.5">
+                <MessageCircle className="h-3.5 w-3.5 text-[#25D366] shrink-0" />
+                WhatsApp Us
               </Button>
             </a>
           </div>
