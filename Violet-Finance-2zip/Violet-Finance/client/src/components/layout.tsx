@@ -569,9 +569,6 @@ export function Footer() {
           <p className="text-[11px] text-white tracking-[0.2em] font-medium uppercase text-center">
              © 2025 Yek7pay. All rights reserved. | Powering <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-pink-500 font-black">India's</span> Financial Future
           </p>
-          <p className="text-[10px] text-white/60 text-center mt-5 max-w-4xl mx-auto leading-relaxed normal-case tracking-normal">
-            Disclaimer: Yek7Pay is a technology platform facilitating financial and travel services. We are not a bank, insurer, or airline. All services are fulfilled by licensed third-party partners. Users are advised to read all terms and conditions carefully before proceeding with any transaction.
-          </p>
         </div>
       </div>
     </footer>
