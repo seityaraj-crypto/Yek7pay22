@@ -202,7 +202,7 @@ export function registerRazorpayRoutes(app: Express) {
 
       const subscription = await (razorpay as any).subscriptions.create({
         plan_id: resolvedPlanId,
-        total_count: 12,
+        total_count: 5,
         quantity: 1,
         customer_notify: 1,
         notes: {

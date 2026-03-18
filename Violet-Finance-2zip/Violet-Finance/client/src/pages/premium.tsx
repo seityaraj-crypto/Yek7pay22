@@ -60,13 +60,13 @@ export default function Premium() {
     initiateSubscription({
       planId: PREMIUM_PLAN_ID,
       name: "Yek7Pay Solutions",
-      description: "Premium Membership — ₹999 Activation",
+      description: "Premium Membership — ₹999/year · Auto-renews annually",
       prefill: { name: form.name, email: form.email, contact: form.phone },
       onSuccess: (response) => {
         setActivated({ paymentId: response.razorpay_payment_id });
         setShowForm(false);
         toast({ title: "Premium Activated!", description: "Your premium membership is now active." });
-        const msg = `*Yek7Pay Premium Activated* 🎉\n\nName: ${form.name}\nPhone: ${form.phone}\nPlan: Premium Membership ₹999\nTransaction ID: ${response.razorpay_payment_id}\n\nThank you for activating Yek7Pay Premium!\n\n_Yek7Pay Solutions Private Limited_`;
+        const msg = `*Yek7Pay Premium Activated* 🎉\n\nName: ${form.name}\nPhone: ${form.phone}\nPlan: Premium Membership ₹999/year (Auto-renews annually)\nTransaction ID: ${response.razorpay_payment_id}\n\nThank you for activating Yek7Pay Premium! Your plan will auto-renew every year via Razorpay.\n\n_Yek7Pay Solutions Private Limited_`;
         const waUrl = `https://api.whatsapp.com/send?phone=91${form.phone.replace(/\D/g, "")}&text=${encodeURIComponent(msg)}`;
         window.open(waUrl, "_blank");
       },
@@ -124,7 +124,7 @@ export default function Premium() {
                       <Crown className="h-5 w-5 text-black" />
                     </div>
                     <div>
-                      <p className="text-[10px] font-black uppercase tracking-widest text-amber-400/70 mb-0.5">One-time Activation</p>
+                      <p className="text-[10px] font-black uppercase tracking-widest text-amber-400/70 mb-0.5">Recurring Yearly Plan</p>
                       <p className="text-lg font-black leading-tight">Activate Premium Now</p>
                     </div>
                   </div>
@@ -141,8 +141,8 @@ export default function Premium() {
                   {/* Right – price + button */}
                   <div className="flex items-center gap-5 shrink-0">
                     <div className="text-right hidden sm:block">
-                      <p className="text-2xl font-black text-amber-400 leading-none">₹999</p>
-                      <p className="text-[10px] text-white/40 font-medium uppercase tracking-wider mt-0.5">One-time fee</p>
+                      <p className="text-2xl font-black text-amber-400 leading-none">₹999<span className="text-sm font-semibold text-amber-400/70">/yr</span></p>
+                      <p className="text-[10px] text-white/40 font-medium uppercase tracking-wider mt-0.5">Auto-renews yearly</p>
                     </div>
                     <Button
                       onClick={() => setShowForm(true)}
@@ -156,7 +156,7 @@ export default function Premium() {
                 {/* Security note */}
                 <div className="border-t border-white/5 px-8 py-2 flex items-center gap-2">
                   <ShieldCheck className="h-3 w-3 text-green-400" />
-                  <span className="text-[10px] text-white/30 font-medium">Secured by Razorpay · 256-bit encrypted · Instant activation</span>
+                  <span className="text-[10px] text-white/30 font-medium">Secured by Razorpay · UPI Autopay · Card · Netbanking · Cancel anytime</span>
                 </div>
               </div>
             )}
