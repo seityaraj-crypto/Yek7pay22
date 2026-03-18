@@ -1,13 +1,12 @@
 import { Navbar, Footer } from "@/components/layout";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   Crown, Zap, ShieldCheck, Send, Globe,
   CreditCard, Banknote, Building2,
   QrCode, Wallet, Briefcase, HeadphonesIcon, TrendingUp, Star,
-  Phone, MessageCircle, User, Mail, X, Loader2, BadgeCheck, Check
+  Phone, MessageCircle, Loader2, BadgeCheck, Check
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { useRazorpaySubscription } from "@/hooks/use-razorpay-subscription";
 import { useToast } from "@/hooks/use-toast";
@@ -34,40 +33,23 @@ const whyPremium = [
 
 const keyBenefits = ["All 8 Services Included", "Highest Commission Rates", "24/7 VIP Support", "Instant Activation"];
 
-interface CustomerForm {
-  name: string;
-  email: string;
-  phone: string;
-}
 
 export default function Premium() {
-  const [showForm, setShowForm] = useState(false);
   const [activated, setActivated] = useState<{ paymentId: string } | null>(null);
-  const [form, setForm] = useState<CustomerForm>({ name: "", email: "", phone: "" });
   const { initiateSubscription, isLoading } = useRazorpaySubscription();
   const { toast } = useToast();
 
   const handleActivate = () => {
-    if (!form.name.trim()) {
-      toast({ title: "Name required", description: "Please enter your full name.", variant: "destructive" });
-      return;
-    }
-    if (!form.phone.trim()) {
-      toast({ title: "Phone required", description: "Please enter your phone number.", variant: "destructive" });
-      return;
-    }
-
     initiateSubscription({
       planId: PREMIUM_PLAN_ID,
       name: "Yek7Pay Solutions",
       description: "Premium Membership — ₹999/year · Auto-renews annually",
-      prefill: { name: form.name, email: form.email, contact: form.phone },
+      prefill: {},
       onSuccess: (response) => {
         setActivated({ paymentId: response.razorpay_payment_id });
-        setShowForm(false);
         toast({ title: "Premium Activated!", description: "Your premium membership is now active." });
-        const msg = `*Yek7Pay Premium Activated* 🎉\n\nName: ${form.name}\nPhone: ${form.phone}\nPlan: Premium Membership ₹999/year (Auto-renews annually)\nTransaction ID: ${response.razorpay_payment_id}\n\nThank you for activating Yek7Pay Premium! Your plan will auto-renew every year via Razorpay.\n\n_Yek7Pay Solutions Private Limited_`;
-        const waUrl = `https://api.whatsapp.com/send?phone=91${form.phone.replace(/\D/g, "")}&text=${encodeURIComponent(msg)}`;
+        const msg = `*Yek7Pay Premium Activated* 🎉\n\nPlan: Premium Membership ₹999/year (Auto-renews annually)\nTransaction ID: ${response.razorpay_payment_id}\n\nThank you for activating Yek7Pay Premium! Your plan will auto-renew every year via Razorpay.\n\n_Yek7Pay Solutions Private Limited_`;
+        const waUrl = `https://wa.me/919230967187?text=${encodeURIComponent(msg)}`;
         window.open(waUrl, "_blank");
       },
       onError: (err) => {
@@ -145,10 +127,13 @@ export default function Premium() {
                       <p className="text-[10px] text-white/40 font-medium uppercase tracking-wider mt-0.5">Auto-renews yearly</p>
                     </div>
                     <Button
-                      onClick={() => setShowForm(true)}
-                      className="bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-black font-black text-sm h-10 px-6 rounded-xl shadow-lg shadow-amber-500/20 transition-all hover:scale-105 active:scale-95 flex items-center gap-2 whitespace-nowrap"
+                      onClick={handleActivate}
+                      disabled={isLoading}
+                      className="bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-black font-black text-sm h-10 px-6 rounded-xl shadow-lg shadow-amber-500/20 transition-all hover:scale-105 active:scale-95 flex items-center gap-2 whitespace-nowrap disabled:opacity-60 disabled:cursor-not-allowed"
                     >
-                      <Zap className="h-4 w-4 fill-current" /> Activate — ₹999
+                      {isLoading
+                        ? <><Loader2 className="h-4 w-4 animate-spin" /> Processing...</>
+                        : <><Zap className="h-4 w-4 fill-current" /> Activate — ₹999</>}
                     </Button>
                   </div>
                 </div>
@@ -240,90 +225,6 @@ export default function Premium() {
         </div>
       </main>
 
-      {/* Activation Form Modal */}
-      <AnimatePresence>
-        {showForm && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-black/80 backdrop-blur-md"
-              onClick={() => setShowForm(false)}
-            />
-            <motion.div
-              initial={{ opacity: 0, scale: 0.92, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.92, y: 20 }}
-              className="relative z-[110] bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden"
-            >
-              <div className="flex items-center justify-between px-6 py-3 bg-gray-50 border-b">
-                <div className="flex items-center gap-2">
-                  <Crown className="h-4 w-4 text-amber-500" />
-                  <span className="text-sm font-bold text-gray-700">Premium Membership — ₹999</span>
-                </div>
-                <button onClick={() => setShowForm(false)} className="text-gray-400 hover:text-gray-600">
-                  <X className="h-4 w-4" />
-                </button>
-              </div>
-
-              <div className="p-7">
-                <p className="text-sm text-gray-500 mb-5">Enter your details to proceed. Confirmation will be sent via WhatsApp.</p>
-
-                <div className="space-y-4 mb-5">
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-700 mb-1.5 uppercase tracking-wider">Full Name *</label>
-                    <div className="relative">
-                      <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-                      <Input type="text" placeholder="Your full name" value={form.name}
-                        onChange={(e) => setForm({ ...form, name: e.target.value })}
-                        className="pl-10 h-10 text-sm border-gray-200 text-gray-900 bg-white" style={{ color: "#111827" }} />
-                    </div>
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-700 mb-1.5 uppercase tracking-wider">Email (optional)</label>
-                    <div className="relative">
-                      <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-                      <Input type="email" placeholder="your@email.com" value={form.email}
-                        onChange={(e) => setForm({ ...form, email: e.target.value })}
-                        className="pl-10 h-10 text-sm border-gray-200 text-gray-900 bg-white" style={{ color: "#111827" }} />
-                    </div>
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-700 mb-1.5 uppercase tracking-wider">WhatsApp Number *</label>
-                    <div className="relative">
-                      <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-                      <Input type="tel" placeholder="10-digit mobile number" value={form.phone}
-                        onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                        className="pl-10 h-10 text-sm border-gray-200 text-gray-900 bg-white" style={{ color: "#111827" }} />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mb-5 p-3.5 rounded-xl bg-amber-50 border border-amber-100 flex items-center justify-between">
-                  <div>
-                    <p className="text-sm font-bold text-gray-800">Premium Membership</p>
-                    <p className="text-xs text-gray-500 mt-0.5">All 8 services · Highest commissions · Instant access</p>
-                  </div>
-                  <p className="text-2xl font-black text-amber-600">₹999</p>
-                </div>
-
-                <Button onClick={handleActivate} disabled={isLoading}
-                  className="w-full h-11 text-sm font-black rounded-xl bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-black shadow-md flex items-center justify-center gap-2">
-                  {isLoading
-                    ? <><Loader2 className="h-4 w-4 animate-spin" /> Processing...</>
-                    : <><Crown className="h-4 w-4" /> Pay ₹999 &amp; Activate</>}
-                </Button>
-
-                <div className="flex items-center gap-2 text-xs text-gray-400 mt-3 justify-center">
-                  <ShieldCheck className="h-3.5 w-3.5 text-green-500" />
-                  Secured by Razorpay Payment Gateway
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
 
       <Footer />
     </div>
