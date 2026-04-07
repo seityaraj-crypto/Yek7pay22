@@ -73,23 +73,56 @@ export function useRazorpaySubscription() {
         throw new Error(errorData.error || "Failed to create subscription");
       }
 
-      const { subscription } = await subResponse.json();
+      const responseData = await subResponse.json();
+      const { subscription, fallbackOrder, mode } = responseData;
 
-      const razorpayOptions = {
+      const isOrderMode = mode === "order" && fallbackOrder;
+
+      const razorpayOptions: any = {
         key,
-        subscription_id: subscription.id,
         name: options.name,
-        description: options.description,
+        description: isOrderMode
+          ? options.description + " (Annual)"
+          : options.description,
         prefill: options.prefill || {},
         theme: { color: "#f59e0b" },
-        handler: async (response: SubscriptionResponse) => {
+        modal: { ondismiss: () => setIsLoading(false) },
+      };
+
+      if (isOrderMode) {
+        razorpayOptions.order_id = fallbackOrder.id;
+        razorpayOptions.amount = fallbackOrder.amount;
+        razorpayOptions.currency = fallbackOrder.currency;
+        razorpayOptions.handler = async (response: any) => {
+          try {
+            const verifyResponse = await fetch("/api/razorpay/verify-payment", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(response),
+            });
+            if (verifyResponse.ok) {
+              options.onSuccess?.({
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_subscription_id: fallbackOrder.id,
+                razorpay_signature: response.razorpay_signature,
+              });
+            } else {
+              const errorData = await verifyResponse.json();
+              throw new Error(errorData.error || "Payment verification failed");
+            }
+          } catch (err: any) {
+            options.onError?.(err);
+          }
+        };
+      } else {
+        razorpayOptions.subscription_id = subscription.id;
+        razorpayOptions.handler = async (response: SubscriptionResponse) => {
           try {
             const verifyResponse = await fetch("/api/razorpay/verify-subscription", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify(response),
             });
-
             if (verifyResponse.ok) {
               options.onSuccess?.(response);
             } else {
@@ -99,11 +132,8 @@ export function useRazorpaySubscription() {
           } catch (err: any) {
             options.onError?.(err);
           }
-        },
-        modal: {
-          ondismiss: () => setIsLoading(false),
-        },
-      };
+        };
+      }
 
       const rzp = new window.Razorpay(razorpayOptions);
       rzp.on("payment.failed", (response: any) => {

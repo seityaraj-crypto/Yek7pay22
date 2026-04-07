@@ -200,24 +200,44 @@ export function registerRazorpayRoutes(app: Express) {
         return res.status(400).json({ error: "Valid planId or planKey required" });
       }
 
-      const subscription = await (razorpay as any).subscriptions.create({
-        plan_id: resolvedPlanId,
-        total_count: 5,
-        quantity: 1,
-        customer_notify: 1,
-        notes: {
-          planLabel,
-          customerName: customerName || "",
-          customerEmail: customerEmail || "",
-          customerPhone: customerPhone || "",
-        },
-      });
+      try {
+        const subscription = await (razorpay as any).subscriptions.create({
+          plan_id: resolvedPlanId,
+          total_count: 5,
+          quantity: 1,
+          customer_notify: 1,
+          notes: {
+            planLabel,
+            customerName: customerName || "",
+            customerEmail: customerEmail || "",
+            customerPhone: customerPhone || "",
+          },
+        });
+        console.log("Subscription created:", { subscriptionId: subscription.id, planId: resolvedPlanId });
+        return res.json({ subscription, planId: resolvedPlanId, mode: "subscription" });
+      } catch (subError: any) {
+        const rzpMsg = subError?.error?.description || subError?.message || "Subscription API error";
+        console.warn("Subscription API failed, falling back to order:", rzpMsg);
 
-      console.log("Subscription created:", { subscriptionId: subscription.id, planId: resolvedPlanId });
-      res.json({ subscription, planId: resolvedPlanId });
+        const fallbackOrder = await razorpay.orders.create({
+          amount: 99900,
+          currency: "INR",
+          receipt: `rcpt_premium_${Date.now()}`,
+          notes: {
+            planLabel,
+            type: "premium-yearly-activation",
+            customerName: customerName || "",
+            customerEmail: customerEmail || "",
+            customerPhone: customerPhone || "",
+          },
+        });
+        console.log("Fallback order created:", fallbackOrder.id);
+        return res.json({ fallbackOrder, planId: resolvedPlanId, mode: "order" });
+      }
     } catch (error: any) {
+      const errMsg = error?.error?.description || error?.message || "Failed to create subscription";
       console.error("Subscription creation error:", error);
-      res.status(500).json({ error: error.message || "Failed to create subscription" });
+      res.status(500).json({ error: errMsg });
     }
   });
 
