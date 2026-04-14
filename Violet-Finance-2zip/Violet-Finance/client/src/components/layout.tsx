@@ -509,7 +509,7 @@ export function Footer() {
           <div className="flex flex-col items-center mb-8">
             <h4 className="text-sm font-bold text-white mb-4 uppercase tracking-widest">Download Our App</h4>
             <a 
-              href="https://play.google.com/store/apps/details?id=com.yek7pay" 
+              href="https://play.google.com/store/apps/details?id=app.finstore.yek7pay" 
               target="_blank" 
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-400 text-white px-6 py-3 rounded-xl font-bold transition-all hover:scale-105 shadow-lg shadow-green-500/20"
