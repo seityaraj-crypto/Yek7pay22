@@ -205,6 +205,16 @@ export default function Compliance() {
     setShowInvoice(true);
   };
 
+  const handleCustomInquiry = () => {
+    if (!customPayment) return;
+
+    const amountText = customAmount.trim() ? `\nQuoted / payable amount: ₹${Number(customAmount).toLocaleString('en-IN')}` : "";
+    const message = encodeURIComponent(`Hi, I need help with ${customPayment.service.name} (${customPayment.category.title}).${amountText}\nSuggested range: ${customPayment.service.price}\nPlease guide me.`);
+    window.open(`https://wa.me/919230967187?text=${message}`, '_blank');
+    setCustomPayment(null);
+    setCustomAmount("");
+  };
+
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const newFiles = Array.from(e.target.files);
@@ -440,12 +450,22 @@ export default function Compliance() {
                 />
               </div>
 
-              <Button
-                onClick={handleCustomPayment}
-                className="h-12 w-full rounded-xl bg-gradient-to-r from-emerald-500 to-blue-500 font-black text-white hover:opacity-90"
-              >
-                Continue to Payment
-              </Button>
+              <div className="space-y-3">
+                <Button
+                  onClick={handleCustomPayment}
+                  className="h-12 w-full rounded-xl bg-gradient-to-r from-emerald-500 to-blue-500 font-black text-white hover:opacity-90"
+                >
+                  Continue to Payment
+                </Button>
+                <Button
+                  onClick={handleCustomInquiry}
+                  variant="outline"
+                  className="h-12 w-full rounded-xl border-[#25D366]/30 bg-[#25D366]/10 font-black text-white hover:bg-[#25D366]/20"
+                >
+                  <MessageCircle className="mr-2 h-4 w-4 text-[#25D366]" />
+                  Get Inquiry on WhatsApp
+                </Button>
+              </div>
             </motion.div>
           </div>
         )}
