@@ -3,7 +3,6 @@ import { Hero } from "@/components/hero";
 import { ServiceCard } from "@/components/service-card";
 import { SectionHeader } from "@/components/section-header";
 import { AuthDialog } from "@/components/auth-dialog";
-import { WelcomePopup } from "@/components/welcome-popup";
 import { NetworkDots } from "@/components/network-dots";
 import { useState } from "react";
 import ReactDOM from "react-dom";
@@ -299,7 +298,6 @@ export default function Home() {
       <div className="absolute top-0 right-0 w-1/2 h-screen z-0 opacity-30" style={{ maskImage: 'linear-gradient(to left, black 50%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to left, black 50%, transparent 100%)' }}>
         <NetworkDots />
       </div>
-      <WelcomePopup />
       <Navbar />
       
       <Hero />
