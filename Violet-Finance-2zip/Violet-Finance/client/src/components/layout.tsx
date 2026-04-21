@@ -563,6 +563,12 @@ export function Footer() {
                 </div>
                 <span className="text-xs text-white/70 font-medium">Digital Payments</span>
               </div>
+              <div className="flex flex-col items-center gap-2 px-6 py-3 bg-white/5 rounded-xl border border-white/10">
+                <div className="w-14 h-14 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-lg flex items-center justify-center">
+                  <span className="text-white font-black text-sm">DK</span>
+                </div>
+                <span className="text-xs text-white/70 font-medium">Digi Khata</span>
+              </div>
             </div>
           </div>
 
