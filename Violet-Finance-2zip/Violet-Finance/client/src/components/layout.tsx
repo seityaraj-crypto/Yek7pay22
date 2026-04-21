@@ -559,9 +559,9 @@ export function Footer() {
               </div>
               <div className="flex flex-col items-center gap-2 px-6 py-3 bg-white/5 rounded-xl border border-white/10">
                 <div className="w-14 h-14 bg-gradient-to-br from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-black text-xl">N</span>
+                  <span className="text-white font-black text-xl">D</span>
                 </div>
-                <span className="text-xs text-white/70 font-medium">Neo Bank</span>
+                <span className="text-xs text-white/70 font-medium">Digital Payments</span>
               </div>
             </div>
           </div>

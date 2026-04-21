@@ -183,7 +183,7 @@ function ContactForm() {
         >
           <option value="" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>Choose Service</option>
           <option value="Advance DMT" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>Advance DMT</option>
-          <option value="Neo Bank" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>Neo Bank</option>
+          <option value="Digital Financial Services" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>Digital Financial Services</option>
           <option value="Indo-Nepal Remit" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>Indo-Nepal Remit</option>
           <option value="AEPS Withdrawal" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>AEPS Withdrawal</option>
           <option value="Bharat Connect (BBPS)" style={{ backgroundColor: '#0d1b3e', color: 'white' }}>Bharat Connect (BBPS)</option>

@@ -2,7 +2,7 @@
 
 ## Overview
 
-Violet-Finance is a fintech platform called Yek7Pay that provides neo-banking and digital payment services for agents, retailers, and merchants in India. The application offers money transfers (DMT), Indo-Nepal remittance, AEPS withdrawals, Micro ATM services, payment acceptance solutions (mPOS, UPI QR), PPI wallets, business loans, and travel booking services (flights, trains). The platform is designed to simplify financial operations and maximize profitability for its users.
+Violet-Finance is a fintech platform called Yek7Pay that provides digital payment and financial services for agents, retailers, and merchants in India. The application offers money transfers (DMT), Indo-Nepal remittance, AEPS withdrawals, Micro ATM services, payment acceptance solutions (mPOS, UPI QR), PPI wallets, business loans, and travel booking services (flights, trains). The platform is designed to simplify financial operations and maximize profitability for its users.
 
 ## User Preferences
 

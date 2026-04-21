@@ -36,10 +36,10 @@ export default function About() {
               <h2 className="text-3xl font-bold mb-6">Who We Are</h2>
               <div className="space-y-6 text-lg text-white/60 leading-relaxed font-medium">
                 <p>
-                  Yek7Pay empowers Agents, Retailers, and Merchants with a complete suite of neo-banking, payment acceptance, and financial growth tools, designed to simplify operations and maximize profitability.
+                  Yek7Pay empowers Agents, Retailers, and Merchants with a complete suite of digital financial services, payment acceptance, and financial growth tools, designed to simplify operations and maximize profitability.
                 </p>
                 <p>
-                  Our platform enables seamless Domestic Money Transfer (DMT) and Indo–Nepal Cross-Border Remittance, supported by AEPS, Micro ATM, and secure neo-banking services that bring reliable digital finance to every corner of India.
+                  Our platform enables seamless Domestic Money Transfer (DMT) and Indo–Nepal Cross-Border Remittance, supported by AEPS, Micro ATM, and secure digital payment services that bring reliable digital finance to every corner of India.
                 </p>
                 <p>
                   For modern merchants, Yek7Pay delivers advanced payment acceptance solutions, including: mPOS (Card Acceptance) for debit & credit cards, UPI Payment Collection via Static QR & Soundbox, and Instant UPI alerts for faster customer checkout.
@@ -94,7 +94,7 @@ export default function About() {
               { icon: ShieldCheck, title: "Secure", desc: "Military-grade encryption for every transaction." },
               { icon: Zap, title: "Instant", desc: "Real-time settlements and instant notifications." },
               { icon: Globe, title: "Global", desc: "Seamless cross-border Indo-Nepal remittances." },
-              { icon: Landmark, title: "Neo-Banking", desc: "Complete suite of digital financial tools." }
+              { icon: Landmark, title: "Digital Payments", desc: "Complete suite of digital financial tools." }
             ].map((item, i) => (
               <div key={i} className="text-center p-8 rounded-3xl bg-white/5 border border-white/10">
                 <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center mx-auto mb-6 text-blue-400">
