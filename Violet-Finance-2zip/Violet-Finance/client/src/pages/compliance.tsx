@@ -57,7 +57,7 @@ const serviceCategories = [
     color: "text-emerald-400",
     bgColor: "bg-emerald-400/10",
     services: [
-      { name: "Pvt. Ltd. / LLP Incorporation", frequency: "One-time", price: "₹9,999", productId: "pvt-ltd-incorporation" },
+      { name: "Pvt. Ltd. / LLP Incorporation", frequency: "One-time", price: "₹9,999 – ₹1.5 Lakhs", productId: null },
       { name: "ROC Annual Filing (AOC-4, MGT-7)", frequency: "Annual", price: "₹9,999", productId: "roc-filing" },
       { name: "Director KYC (DIR-3)", frequency: "Annual", price: "₹499", productId: "director-kyc" },
       { name: "Other MCA Related Work", frequency: "Ad-hoc", price: "Case by case", productId: null },
@@ -321,7 +321,7 @@ export default function Compliance() {
                               className="bg-gradient-to-r from-emerald-500 to-blue-500 hover:opacity-90 text-white rounded-full px-4 h-8 text-xs font-bold"
                               onClick={() => handleServiceSelect(service, category)}
                             >
-                              Pay Now
+                              {service.productId ? "Pay Now" : "Get Quote"}
                             </Button>
                           </div>
                         </div>

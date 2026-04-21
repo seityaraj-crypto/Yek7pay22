@@ -28,7 +28,7 @@ const AUTHORIZED_PRODUCTS: Record<string, { price: number; name: string }> = {
   "itr-previous-year": { price: 2948.82, name: "Previous Year's ITR" },
   "tds-return": { price: 3538.82, name: "TDS Return Filing" },
   "advance-tax": { price: 3538.82, name: "Advance Tax Computation" },
-  "pvt-ltd-incorporation": { price: 11798.82, name: "Pvt. Ltd. / LLP Incorporation" },
+  "pvt-ltd-incorporation": { price: 9999, name: "Pvt. Ltd. / LLP Incorporation" },
   "roc-filing": { price: 11798.82, name: "ROC Annual Filing" },
   "director-kyc": { price: 589.82, name: "Director KYC (DIR-3)" },
   "monthly-accounting": { price: 5898.82, name: "Monthly Accounting & Bookkeeping" },
