@@ -150,12 +150,14 @@ export default function Compliance() {
   const [showAppointmentContact, setShowAppointmentContact] = useState(false);
   const [appointmentContactOption, setAppointmentContactOption] = useState<'call' | 'whatsapp' | 'email' | null>(null);
   const [selectedTimeSlot, setSelectedTimeSlot] = useState<string | null>(null);
+  const [customPayment, setCustomPayment] = useState<{ service: any; category: any } | null>(null);
+  const [customAmount, setCustomAmount] = useState("");
   const { toast } = useToast();
 
   const handleServiceSelect = (service: any, category: any) => {
     if (!service.productId) {
-      const message = encodeURIComponent(`Hi, I'm interested in ${service.name} (${category.title}). Please provide a quote.`);
-      window.open(`https://wa.me/919230967187?text=${message}`, '_blank');
+      setCustomPayment({ service, category });
+      setCustomAmount("");
       return;
     }
 
@@ -173,6 +175,33 @@ export default function Compliance() {
         { name: "GST (18%)", price: `₹ ${gst.toLocaleString('en-IN')}` }
       ]
     });
+    setShowInvoice(true);
+  };
+
+  const handleCustomPayment = () => {
+    if (!customPayment) return;
+
+    const amount = Number(customAmount);
+    if (!Number.isFinite(amount) || amount < 1) {
+      toast({
+        title: "Valid amount required",
+        description: "Please enter the amount the customer needs to pay.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setInvoiceData({
+      title: `${customPayment.service.name} - ${customPayment.category.title}`,
+      amount: `₹ ${amount.toLocaleString('en-IN')}`,
+      productId: undefined,
+      customAmount: amount,
+      items: [
+        { name: "Custom quoted payment", price: `₹ ${amount.toLocaleString('en-IN')}` }
+      ]
+    });
+    setCustomPayment(null);
+    setCustomAmount("");
     setShowInvoice(true);
   };
 
@@ -359,6 +388,68 @@ export default function Compliance() {
       </main>
 
       <AnimatePresence>
+        {customPayment && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-black/80 backdrop-blur-md"
+              onClick={() => setCustomPayment(null)}
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.92, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.92, y: 20 }}
+              className="relative z-[110] w-full max-w-md rounded-3xl border border-emerald-500/20 bg-[#10102f] p-6 shadow-2xl"
+            >
+              <button
+                onClick={() => setCustomPayment(null)}
+                className="absolute right-4 top-4 rounded-full bg-white/10 p-2 text-white/50 hover:bg-white/20 hover:text-white"
+              >
+                <X className="h-4 w-4" />
+              </button>
+
+              <div className="mb-5 flex items-center gap-3">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500/15 text-emerald-400">
+                  <IndianRupee className="h-6 w-6" />
+                </div>
+                <div>
+                  <p className="text-xs font-black uppercase tracking-widest text-emerald-300/70">Dynamic Payment</p>
+                  <h3 className="text-xl font-black text-white">Pay Custom Amount</h3>
+                </div>
+              </div>
+
+              <div className="mb-5 rounded-2xl border border-white/10 bg-white/5 p-4">
+                <p className="text-sm font-bold text-white">{customPayment.service.name}</p>
+                <p className="mt-1 text-xs text-white/45">{customPayment.category.title}</p>
+                <p className="mt-2 text-xs font-semibold text-emerald-300">Suggested range: {customPayment.service.price}</p>
+              </div>
+
+              <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-white/60">Enter Amount</label>
+              <div className="relative mb-5">
+                <IndianRupee className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" />
+                <input
+                  type="number"
+                  min="1"
+                  placeholder="Enter payable amount"
+                  value={customAmount}
+                  onChange={(e) => setCustomAmount(e.target.value)}
+                  className="h-12 w-full rounded-xl border border-white/10 bg-white pl-10 pr-4 text-sm font-bold text-gray-900 outline-none focus:border-emerald-400"
+                  style={{ color: "#111827" }}
+                />
+              </div>
+
+              <Button
+                onClick={handleCustomPayment}
+                className="h-12 w-full rounded-xl bg-gradient-to-r from-emerald-500 to-blue-500 font-black text-white hover:opacity-90"
+              >
+                Continue to Payment
+              </Button>
+            </motion.div>
+          </div>
+        )}
+
         {showInvoice && invoiceData && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
             <motion.div 
@@ -373,6 +464,7 @@ export default function Compliance() {
                 title={invoiceData.title}
                 amount={invoiceData.amount}
                 productId={invoiceData.productId}
+                customAmount={invoiceData.customAmount}
                 invoiceNumber={`INV-${Math.floor(Math.random() * 90000) + 10000}`}
                 date={new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })}
                 items={invoiceData.items}

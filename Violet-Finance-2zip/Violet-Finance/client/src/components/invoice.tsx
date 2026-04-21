@@ -11,7 +11,8 @@ import jsPDF from "jspdf";
 interface InvoiceProps {
   title: string;
   amount: string;
-  productId: string;
+  productId?: string;
+  customAmount?: number;
   items: { name: string; price: string; qty?: number }[];
   invoiceNumber: string;
   date: string;
@@ -67,7 +68,7 @@ WhatsApp: +91 92309 67187
 _Yek7Pay Solutions Private Limited_`;
 }
 
-export function Invoice({ title, amount, productId, items, invoiceNumber, date, onClose, onPaymentSuccess }: InvoiceProps) {
+export function Invoice({ title, amount, productId, customAmount, items, invoiceNumber, date, onClose, onPaymentSuccess }: InvoiceProps) {
   const { initiatePayment, isLoading } = useRazorpay();
   const { toast } = useToast();
   const [step, setStep] = useState<'details' | 'invoice' | 'paid'>('details');
@@ -110,6 +111,7 @@ export function Invoice({ title, amount, productId, items, invoiceNumber, date, 
   const handlePayment = () => {
     initiatePayment({
       productId,
+      amount: customAmount,
       name: "Yek7Pay Solutions",
       description: title,
       prefill: {

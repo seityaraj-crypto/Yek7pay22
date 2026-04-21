@@ -1,7 +1,8 @@
 import { useState, useCallback } from "react";
 
 interface RazorpayOptions {
-  productId: string;
+  productId?: string;
+  amount?: number;
   currency?: string;
   name: string;
   description: string;
@@ -59,13 +60,18 @@ export function useRazorpay() {
       const keyResponse = await fetch("/api/razorpay/key");
       const { key } = await keyResponse.json();
 
-      const orderResponse = await fetch("/api/razorpay/create-order", {
+      const isCustomAmount = typeof options.amount === "number" && options.amount > 0;
+      const orderResponse = await fetch(isCustomAmount ? "/api/razorpay/create-custom-order" : "/api/razorpay/create-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           productId: options.productId,
+          amount: options.amount,
           currency: options.currency || "INR",
-          notes: options.notes || {},
+          notes: {
+            ...(options.notes || {}),
+            productName: options.description,
+          },
         }),
       });
 

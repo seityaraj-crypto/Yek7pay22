@@ -130,6 +130,38 @@ export function registerRazorpayRoutes(app: Express) {
     }
   });
 
+  app.post("/api/razorpay/create-custom-order", async (req, res) => {
+    try {
+      if (!razorpay) {
+        return res.status(500).json({ error: "Razorpay not configured" });
+      }
+
+      const { amount, currency = "INR", notes } = req.body;
+      const numericAmount = Number(amount);
+
+      if (!Number.isFinite(numericAmount) || numericAmount < 1 || numericAmount > 500000) {
+        return res.status(400).json({ error: "Enter a valid amount between ₹1 and ₹5,00,000" });
+      }
+
+      const order = await razorpay.orders.create({
+        amount: Math.round(numericAmount * 100),
+        currency,
+        receipt: `custom_${Date.now()}`,
+        notes: {
+          ...notes,
+          productId: "custom-compliance-payment",
+          productName: notes?.productName || "Custom Compliance Payment",
+        },
+      });
+
+      res.json(order);
+    } catch (error: any) {
+      const errMsg = error?.error?.description || error?.message || "Failed to create custom order";
+      console.error("Razorpay custom order creation error:", error);
+      res.status(500).json({ error: errMsg });
+    }
+  });
+
   app.post("/api/razorpay/verify-payment", async (req, res) => {
     try {
       if (!RAZORPAY_KEY_SECRET) {

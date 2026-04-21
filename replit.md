@@ -25,6 +25,7 @@ Preferred communication style: Simple, everyday language.
 - **API Pattern**: RESTful endpoints prefixed with `/api`
 - **Session Management**: Express sessions with connect-pg-simple for PostgreSQL storage
 - **Build**: esbuild for production bundling with selective dependency bundling for optimized cold starts
+- **Payments**: Razorpay supports fixed product orders, yearly premium subscriptions with order fallback, and custom quote-based compliance payments where customers can enter any payable amount.
 
 ### Data Layer
 - **ORM**: Drizzle ORM with PostgreSQL dialect
