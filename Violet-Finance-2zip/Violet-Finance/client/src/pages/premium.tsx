@@ -4,11 +4,12 @@ import {
   Crown, Zap, ShieldCheck, Send, Globe,
   CreditCard, Banknote, Building2,
   QrCode, Wallet, Briefcase, HeadphonesIcon, TrendingUp, Star,
-  Phone, MessageCircle, Loader2, BadgeCheck, Check
+  Phone, MessageCircle, Loader2, BadgeCheck, Check, Sparkles
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useRazorpaySubscription } from "@/hooks/use-razorpay-subscription";
+import { useRazorpay } from "@/hooks/use-razorpay";
 import { useToast } from "@/hooks/use-toast";
 
 const PREMIUM_PLAN_ID = "plan_SQLtRpumAcjWcJ";
@@ -31,31 +32,123 @@ const whyPremium = [
   { icon: ShieldCheck, title: "Secure & Compliant", desc: "RBI compliant platform with 256-bit encryption and full data security." }
 ];
 
-const keyBenefits = ["All 8 Services Included", "Highest Commission Rates", "24/7 VIP Support", "Instant Activation"];
+const plans = [
+  {
+    id: "starter",
+    badge: "Starter",
+    badgeColor: "text-blue-400 bg-blue-500/10 border-blue-500/20",
+    accentColor: "from-blue-500 to-cyan-400",
+    buttonColor: "from-blue-500 to-cyan-400 hover:from-blue-400 hover:to-cyan-300 shadow-blue-500/20",
+    borderColor: "border-blue-500/20",
+    price: "₹999",
+    period: "/yr",
+    label: "Shops & Very Small Business",
+    description: "Perfect for kirana stores, small retailers, and individual shop owners who need simple GST compliance.",
+    features: [
+      "1 Year GST Filing (Normal Scheme)",
+      "GST Registration Support",
+      "Quarterly Return Filing (GSTR-1 & 3B)",
+      "All Yek7Pay Financial Services",
+      "Priority Customer Support",
+    ],
+    highlight: false,
+    mode: "subscription",
+  },
+  {
+    id: "msme",
+    badge: "Most Popular",
+    badgeColor: "text-amber-400 bg-amber-500/10 border-amber-500/20",
+    accentColor: "from-amber-500 to-yellow-400",
+    buttonColor: "from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 shadow-amber-500/20",
+    borderColor: "border-amber-500/30",
+    price: "₹5,000",
+    period: "/yr",
+    label: "MSME & Transaction Business",
+    description: "Ideal for MSMEs, traders, and businesses with regular transactions needing full GST compliance.",
+    features: [
+      "1 Year GST Filing (MSME Scheme)",
+      "MSME Registration & Udyam Certificate",
+      "Monthly Return Filing (GSTR-1, 3B, 2A Reconciliation)",
+      "E-Invoice & E-Way Bill Support",
+      "All Yek7Pay Financial Services",
+      "Dedicated Account Manager",
+    ],
+    highlight: true,
+    mode: "order",
+    amount: 5000,
+  },
+  {
+    id: "corporate",
+    badge: "Corporate",
+    badgeColor: "text-purple-400 bg-purple-500/10 border-purple-500/20",
+    accentColor: "from-purple-500 to-pink-500",
+    buttonColor: "from-purple-500 to-pink-500 hover:from-purple-400 hover:to-pink-400 shadow-purple-500/20",
+    borderColor: "border-purple-500/20",
+    price: "₹15,000",
+    period: "/yr",
+    label: "Corporate & Large Business",
+    description: "Comprehensive GST & compliance package for corporates, Pvt. Ltd. companies, and high-volume businesses.",
+    features: [
+      "1 Year GST Filing (Corporate Scheme)",
+      "Full Annual Compliance Package",
+      "Monthly GSTR-1, 3B, 9 & 9C Filing",
+      "TDS/TCS Compliance",
+      "Director & Payroll Compliance",
+      "All Yek7Pay Financial Services",
+      "VIP 24/7 Dedicated Support",
+    ],
+    highlight: false,
+    mode: "order",
+    amount: 15000,
+  },
+];
 
+type ActivatedMap = Record<string, string>;
 
 export default function Premium() {
-  const [activated, setActivated] = useState<{ paymentId: string } | null>(null);
-  const { initiateSubscription, isLoading } = useRazorpaySubscription();
+  const [activated, setActivated] = useState<ActivatedMap>({});
+  const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
+
+  const { initiateSubscription } = useRazorpaySubscription();
+  const { initiatePayment } = useRazorpay();
   const { toast } = useToast();
 
-  const handleActivate = () => {
-    initiateSubscription({
-      planId: PREMIUM_PLAN_ID,
-      name: "Yek7Pay Solutions",
-      description: "Premium Membership — ₹999/year · Auto-renews annually",
-      prefill: {},
-      onSuccess: (response) => {
-        setActivated({ paymentId: response.razorpay_payment_id });
-        toast({ title: "Premium Activated!", description: "Your premium membership is now active." });
-        const msg = `*Yek7Pay Premium Activated* 🎉\n\nPlan: Premium Membership ₹999/year (Auto-renews annually)\nTransaction ID: ${response.razorpay_payment_id}\n\nThank you for activating Yek7Pay Premium! Your plan will auto-renew every year via Razorpay.\n\n_Yek7Pay Solutions Private Limited_`;
-        const waUrl = `https://wa.me/919230967187?text=${encodeURIComponent(msg)}`;
-        window.open(waUrl, "_blank");
-      },
-      onError: (err) => {
-        toast({ title: "Payment Failed", description: err.message, variant: "destructive" });
-      },
-    });
+  const handleActivate = (plan: typeof plans[0]) => {
+    setLoadingPlan(plan.id);
+
+    const onSuccess = (response: any) => {
+      const txnId = response.razorpay_payment_id || response.razorpay_subscription_id || "";
+      setActivated((prev) => ({ ...prev, [plan.id]: txnId }));
+      setLoadingPlan(null);
+      toast({ title: `${plan.badge} Plan Activated!`, description: "Your plan is now active." });
+      const msg = `*Yek7Pay ${plan.badge} Plan Activated* 🎉\n\nPlan: ${plan.label} — ${plan.price}/year\nTransaction ID: ${txnId}\n\nThank you for choosing Yek7Pay! Your GST filing plan is now active for 1 year.\n\n_Yek7Pay Solutions Private Limited_`;
+      window.open(`https://wa.me/919230967187?text=${encodeURIComponent(msg)}`, "_blank");
+    };
+
+    const onError = (err: Error) => {
+      setLoadingPlan(null);
+      toast({ title: "Payment Failed", description: err.message, variant: "destructive" });
+    };
+
+    if (plan.mode === "subscription") {
+      initiateSubscription({
+        planId: PREMIUM_PLAN_ID,
+        name: "Yek7Pay Solutions",
+        description: `${plan.label} — ₹999/year`,
+        prefill: {},
+        onSuccess,
+        onError,
+      });
+    } else {
+      initiatePayment({
+        amount: plan.amount,
+        name: "Yek7Pay Solutions",
+        description: `${plan.label} — ${plan.price}/year`,
+        prefill: {},
+        onSuccess,
+        onError,
+      });
+    }
   };
 
   return (
@@ -69,82 +162,106 @@ export default function Premium() {
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-center mb-8"
+            className="text-center mb-4"
           >
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-black mb-4 uppercase tracking-widest">
               <Crown className="h-3.5 w-3.5" /> Premium Services
             </div>
-            <h1 className="text-4xl md:text-6xl font-display font-black leading-tight">
-              All-in-One <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-400">Premium</span> Platform
+            <h1 className="text-4xl md:text-6xl font-display font-black leading-tight mb-3">
+              Choose Your <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-400">Premium</span> Plan
             </h1>
+            <p className="text-white/40 text-base max-w-xl mx-auto">
+              All plans include 1 year of GST filing support + full access to Yek7Pay's financial services platform.
+            </p>
           </motion.div>
 
-          {/* ── Activate Premium Banner (TOP) ── */}
+          {/* Pricing Cards */}
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="mb-14"
+            className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20 mt-12"
           >
-            {activated ? (
-              <div className="w-full rounded-2xl border border-green-500/20 bg-gradient-to-r from-green-500/10 to-emerald-500/5 px-6 py-5 flex flex-col sm:flex-row items-center gap-4">
-                <BadgeCheck className="h-8 w-8 text-green-400 shrink-0" />
-                <div className="flex-1 text-center sm:text-left">
-                  <p className="text-base font-black text-green-400">Premium Activated!</p>
-                  <p className="text-xs text-white/50 mt-0.5">Txn ID: {activated.paymentId} · Confirmation sent to WhatsApp</p>
-                </div>
-              </div>
-            ) : (
-              <div className="w-full rounded-2xl border border-amber-500/25 bg-gradient-to-r from-[#1a1200] via-[#1a1500] to-[#0f0f2a] relative overflow-hidden">
-                {/* amber left accent */}
-                <div className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-amber-400 to-yellow-500 rounded-l-2xl" />
+            {plans.map((plan, i) => {
+              const isActivated = !!activated[plan.id];
+              const isLoading = loadingPlan === plan.id;
 
-                <div className="flex flex-col lg:flex-row items-center gap-6 px-6 py-5 pl-8">
-                  {/* Left – icon + title */}
-                  <div className="flex items-center gap-4 shrink-0">
-                    <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-amber-500 to-yellow-500 flex items-center justify-center shadow-lg shadow-amber-500/20">
-                      <Crown className="h-5 w-5 text-black" />
-                    </div>
-                    <div>
-                      <p className="text-[10px] font-black uppercase tracking-widest text-amber-400/70 mb-0.5">Recurring Yearly Plan</p>
-                      <p className="text-lg font-black leading-tight">Activate Premium Now</p>
-                    </div>
-                  </div>
+              return (
+                <motion.div
+                  key={plan.id}
+                  initial={{ opacity: 0, y: 24 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 + i * 0.08 }}
+                  className={`relative rounded-2xl border ${plan.borderColor} ${plan.highlight ? "bg-gradient-to-b from-amber-500/8 to-[#0a0a2e]" : "bg-white/5"} flex flex-col overflow-hidden`}
+                >
+                  {/* Top accent bar */}
+                  <div className={`h-1 w-full bg-gradient-to-r ${plan.accentColor}`} />
 
-                  {/* Center – benefit pills */}
-                  <div className="flex flex-wrap gap-2 justify-center lg:justify-start flex-1">
-                    {keyBenefits.map((b, i) => (
-                      <span key={i} className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-white/70 bg-white/5 border border-white/10 rounded-full px-3 py-1">
-                        <Check className="h-3 w-3 text-amber-400" /> {b}
+                  {plan.highlight && (
+                    <div className="absolute top-4 right-4">
+                      <Sparkles className="h-4 w-4 text-amber-400 opacity-60" />
+                    </div>
+                  )}
+
+                  <div className="p-6 flex flex-col flex-1">
+                    {/* Badge */}
+                    <span className={`inline-flex items-center gap-1.5 text-[11px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full border mb-4 w-fit ${plan.badgeColor}`}>
+                      {plan.badge}
+                    </span>
+
+                    {/* Price */}
+                    <div className="mb-1">
+                      <span className={`text-4xl font-black bg-clip-text text-transparent bg-gradient-to-r ${plan.accentColor}`}>
+                        {plan.price}
                       </span>
-                    ))}
-                  </div>
-
-                  {/* Right – price + button */}
-                  <div className="flex items-center gap-5 shrink-0">
-                    <div className="text-right hidden sm:block">
-                      <p className="text-2xl font-black text-amber-400 leading-none">₹999<span className="text-sm font-semibold text-amber-400/70">/yr</span></p>
-                      <p className="text-[10px] text-white/40 font-medium uppercase tracking-wider mt-0.5">Auto-renews yearly</p>
+                      <span className="text-white/40 text-sm font-medium">{plan.period}</span>
                     </div>
-                    <Button
-                      onClick={handleActivate}
-                      disabled={isLoading}
-                      className="bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-black font-black text-sm h-10 px-6 rounded-xl shadow-lg shadow-amber-500/20 transition-all hover:scale-105 active:scale-95 flex items-center gap-2 whitespace-nowrap disabled:opacity-60 disabled:cursor-not-allowed"
-                    >
-                      {isLoading
-                        ? <><Loader2 className="h-4 w-4 animate-spin" /> Processing...</>
-                        : <><Zap className="h-4 w-4 fill-current" /> Activate — ₹999</>}
-                    </Button>
-                  </div>
-                </div>
+                    <p className="text-xs text-white/40 font-medium mb-1">1 Year Plan</p>
+                    <h3 className="text-base font-bold text-white mb-2">{plan.label}</h3>
+                    <p className="text-xs text-white/40 leading-relaxed mb-5">{plan.description}</p>
 
-                {/* Security note */}
-                <div className="border-t border-white/5 px-8 py-2 flex items-center gap-2">
-                  <ShieldCheck className="h-3 w-3 text-green-400" />
-                  <span className="text-[10px] text-white/30 font-medium">Secured by Razorpay · UPI Autopay · Card · Netbanking · Cancel anytime</span>
-                </div>
-              </div>
-            )}
+                    {/* Features */}
+                    <ul className="space-y-2.5 mb-6 flex-1">
+                      {plan.features.map((f, j) => (
+                        <li key={j} className="flex items-start gap-2 text-xs text-white/70">
+                          <Check className={`h-3.5 w-3.5 mt-0.5 shrink-0 bg-clip-text`} style={{ color: plan.highlight ? "#f59e0b" : undefined }} />
+                          {f}
+                        </li>
+                      ))}
+                    </ul>
+
+                    {/* CTA */}
+                    {isActivated ? (
+                      <div className="flex items-center gap-2 bg-green-500/10 border border-green-500/20 rounded-xl px-4 py-3">
+                        <BadgeCheck className="h-4 w-4 text-green-400 shrink-0" />
+                        <div>
+                          <p className="text-xs font-bold text-green-400">Plan Activated!</p>
+                          <p className="text-[10px] text-white/30 truncate">Txn: {activated[plan.id]}</p>
+                        </div>
+                      </div>
+                    ) : (
+                      <Button
+                        onClick={() => handleActivate(plan)}
+                        disabled={!!loadingPlan}
+                        className={`w-full bg-gradient-to-r ${plan.buttonColor} text-black font-black text-sm h-11 rounded-xl shadow-lg transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100`}
+                      >
+                        {isLoading
+                          ? <><Loader2 className="h-4 w-4 animate-spin" /> Processing...</>
+                          : <><Zap className="h-4 w-4 fill-current" /> Activate — {plan.price}</>}
+                      </Button>
+                    )}
+                  </div>
+
+                  {/* Security note */}
+                  <div className="border-t border-white/5 px-6 py-2 flex items-center gap-2">
+                    <ShieldCheck className="h-3 w-3 text-green-400 shrink-0" />
+                    <span className="text-[10px] text-white/25 font-medium">
+                      {plan.mode === "subscription" ? "Auto-renews yearly · Cancel anytime" : "One-time payment · Secured by Razorpay"}
+                    </span>
+                  </div>
+                </motion.div>
+              );
+            })}
           </motion.div>
 
           {/* Service Cards */}
@@ -207,14 +324,14 @@ export default function Premium() {
             transition={{ delay: 0.5 }}
             className="max-w-xl mx-auto text-center"
           >
-            <p className="text-white/40 text-sm mb-4">Need help? Talk to our expert.</p>
+            <p className="text-white/40 text-sm mb-4">Need help choosing a plan? Talk to our expert.</p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <a href="tel:+919230967187">
                 <Button variant="outline" className="border-white/10 hover:bg-white/5 text-white h-11 rounded-xl font-bold px-5 text-sm flex items-center gap-2">
                   <Phone className="h-4 w-4" /> Call +91 92309 67187
                 </Button>
               </a>
-              <a href="https://wa.me/919230967187?text=Hi%2C%20I%20want%20to%20know%20more%20about%20Yek7Pay%20Premium%20services." target="_blank" rel="noopener noreferrer">
+              <a href="https://wa.me/919230967187?text=Hi%2C%20I%20want%20to%20know%20more%20about%20Yek7Pay%20Premium%20plans." target="_blank" rel="noopener noreferrer">
                 <Button variant="outline" className="border-white/10 hover:bg-white/5 text-white h-11 rounded-xl font-bold px-5 text-sm flex items-center gap-2">
                   <MessageCircle className="h-4 w-4 text-green-400" /> WhatsApp Us
                 </Button>
@@ -224,7 +341,6 @@ export default function Premium() {
 
         </div>
       </main>
-
 
       <Footer />
     </div>
