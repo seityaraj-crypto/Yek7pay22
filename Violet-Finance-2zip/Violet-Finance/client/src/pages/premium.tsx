@@ -74,8 +74,8 @@ const plans = [
       "Dedicated Account Manager",
     ],
     highlight: true,
-    planId: undefined,
-    planKey: "msme-yearly",
+    planId: "plan_ShiQmryBxhBXKG",
+    planKey: undefined,
   },
   {
     id: "corporate",
