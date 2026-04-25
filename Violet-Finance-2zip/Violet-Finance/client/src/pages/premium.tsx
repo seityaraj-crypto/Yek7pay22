@@ -4,12 +4,11 @@ import {
   Crown, Zap, ShieldCheck, Send, Globe,
   CreditCard, Banknote, Building2,
   QrCode, Wallet, Briefcase, HeadphonesIcon, TrendingUp, Star,
-  Phone, MessageCircle, Loader2, BadgeCheck, Check, Sparkles
+  Phone, MessageCircle, Loader2, BadgeCheck, Check, Sparkles, RefreshCw
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useRazorpaySubscription } from "@/hooks/use-razorpay-subscription";
-import { useRazorpay } from "@/hooks/use-razorpay";
 import { useToast } from "@/hooks/use-toast";
 
 const PREMIUM_PLAN_ID = "plan_SQLtRpumAcjWcJ";
@@ -52,7 +51,8 @@ const plans = [
       "Priority Customer Support",
     ],
     highlight: false,
-    mode: "subscription",
+    planId: PREMIUM_PLAN_ID,
+    planKey: undefined,
   },
   {
     id: "msme",
@@ -74,8 +74,8 @@ const plans = [
       "Dedicated Account Manager",
     ],
     highlight: true,
-    mode: "order",
-    amount: 5000,
+    planId: undefined,
+    planKey: "msme-yearly",
   },
   {
     id: "corporate",
@@ -98,8 +98,8 @@ const plans = [
       "VIP 24/7 Dedicated Support",
     ],
     highlight: false,
-    mode: "order",
-    amount: 15000,
+    planId: undefined,
+    planKey: "corporate-yearly",
   },
 ];
 
@@ -110,7 +110,6 @@ export default function Premium() {
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
 
   const { initiateSubscription } = useRazorpaySubscription();
-  const { initiatePayment } = useRazorpay();
   const { toast } = useToast();
 
   const handleActivate = (plan: typeof plans[0]) => {
@@ -120,8 +119,8 @@ export default function Premium() {
       const txnId = response.razorpay_payment_id || response.razorpay_subscription_id || "";
       setActivated((prev) => ({ ...prev, [plan.id]: txnId }));
       setLoadingPlan(null);
-      toast({ title: `${plan.badge} Plan Activated!`, description: "Your plan is now active." });
-      const msg = `*Yek7Pay ${plan.badge} Plan Activated* 🎉\n\nPlan: ${plan.label} — ${plan.price}/year\nTransaction ID: ${txnId}\n\nThank you for choosing Yek7Pay! Your GST filing plan is now active for 1 year.\n\n_Yek7Pay Solutions Private Limited_`;
+      toast({ title: `${plan.badge} Plan Activated!`, description: "Your plan is now active and auto-renews yearly." });
+      const msg = `*Yek7Pay ${plan.badge} Plan Activated* 🎉\n\nPlan: ${plan.label} — ${plan.price}/year (Auto-renews annually)\nTransaction ID: ${txnId}\n\nThank you for choosing Yek7Pay! Your GST filing plan is now active for 1 year.\n\n_Yek7Pay Solutions Private Limited_`;
       window.open(`https://wa.me/919230967187?text=${encodeURIComponent(msg)}`, "_blank");
     };
 
@@ -130,25 +129,15 @@ export default function Premium() {
       toast({ title: "Payment Failed", description: err.message, variant: "destructive" });
     };
 
-    if (plan.mode === "subscription") {
-      initiateSubscription({
-        planId: PREMIUM_PLAN_ID,
-        name: "Yek7Pay Solutions",
-        description: `${plan.label} — ₹999/year`,
-        prefill: {},
-        onSuccess,
-        onError,
-      });
-    } else {
-      initiatePayment({
-        amount: plan.amount,
-        name: "Yek7Pay Solutions",
-        description: `${plan.label} — ${plan.price}/year`,
-        prefill: {},
-        onSuccess,
-        onError,
-      });
-    }
+    initiateSubscription({
+      planId: plan.planId,
+      planKey: plan.planKey,
+      name: "Yek7Pay Solutions",
+      description: `${plan.label} — ${plan.price}/year`,
+      prefill: {},
+      onSuccess,
+      onError,
+    });
   };
 
   return (
@@ -254,10 +243,8 @@ export default function Premium() {
 
                   {/* Security note */}
                   <div className="border-t border-white/5 px-6 py-2 flex items-center gap-2">
-                    <ShieldCheck className="h-3 w-3 text-green-400 shrink-0" />
-                    <span className="text-[10px] text-white/25 font-medium">
-                      {plan.mode === "subscription" ? "Auto-renews yearly · Cancel anytime" : "One-time payment · Secured by Razorpay"}
-                    </span>
+                    <RefreshCw className="h-3 w-3 text-green-400 shrink-0" />
+                    <span className="text-[10px] text-white/25 font-medium">Auto-renews yearly · Cancel anytime · Secured by Razorpay</span>
                   </div>
                 </motion.div>
               );

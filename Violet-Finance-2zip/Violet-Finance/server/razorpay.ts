@@ -90,6 +90,20 @@ const SUBSCRIPTION_PLANS: Record<string, { amount: number; name: string; period:
     interval: 1,
     description: "Unlimited everything + dedicated manager — save 2 months"
   },
+  "msme-yearly": {
+    amount: 500000,
+    name: "MSME Plan (Annual)",
+    period: "yearly",
+    interval: 1,
+    description: "GST filing for MSME & transaction businesses — 1 year"
+  },
+  "corporate-yearly": {
+    amount: 1500000,
+    name: "Corporate Plan (Annual)",
+    period: "yearly",
+    interval: 1,
+    description: "Full GST & compliance package for corporates — 1 year"
+  },
 };
 
 export function registerRazorpayRoutes(app: Express) {
@@ -251,8 +265,11 @@ export function registerRazorpayRoutes(app: Express) {
         const rzpMsg = subError?.error?.description || subError?.message || "Subscription API error";
         console.warn("Subscription API failed, falling back to order:", rzpMsg);
 
+        const fallbackAmount = planKey && SUBSCRIPTION_PLANS[planKey]
+          ? SUBSCRIPTION_PLANS[planKey].amount
+          : 99900;
         const fallbackOrder = await razorpay.orders.create({
-          amount: 99900,
+          amount: fallbackAmount,
           currency: "INR",
           receipt: `rcpt_premium_${Date.now()}`,
           notes: {
