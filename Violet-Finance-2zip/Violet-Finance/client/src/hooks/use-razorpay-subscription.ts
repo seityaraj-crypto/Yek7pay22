@@ -87,6 +87,13 @@ export function useRazorpaySubscription() {
         prefill: options.prefill || {},
         theme: { color: "#f59e0b" },
         modal: { ondismiss: () => setIsLoading(false) },
+        method: {
+          card: true,
+          upi: true,
+          netbanking: true,
+          wallet: true,
+          emandate: true,
+        },
       };
 
       if (isOrderMode) {

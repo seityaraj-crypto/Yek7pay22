@@ -94,6 +94,12 @@ export function useRazorpay() {
         theme: {
           color: "#6366f1",
         },
+        method: {
+          card: true,
+          upi: true,
+          netbanking: true,
+          wallet: true,
+        },
         handler: async (response: RazorpayResponse) => {
           try {
             const verifyResponse = await fetch("/api/razorpay/verify-payment", {
