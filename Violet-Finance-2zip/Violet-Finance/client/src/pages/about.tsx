@@ -1,6 +1,7 @@
 import { Navbar, Footer } from "@/components/layout";
 import { motion } from "framer-motion";
-import { Building2, Target, Eye, ShieldCheck, Zap, Globe, Landmark, CreditCard, QrCode, Smartphone, Briefcase, Plane, ClipboardCheck } from "lucide-react";
+import { Building2, Target, Eye, ShieldCheck, Zap, Globe, Landmark, CreditCard, QrCode, Smartphone, Briefcase, Plane, ClipboardCheck, Lock } from "lucide-react";
+import { Link } from "wouter";
 import { NetworkDots } from "@/components/network-dots";
 
 export default function About() {
@@ -104,6 +105,14 @@ export default function About() {
                 <p className="text-white/40">{item.desc}</p>
               </div>
             ))}
+          </div>
+
+          {/* Admin link */}
+          <div className="flex justify-center mt-16">
+            <Link href="/admin" className="inline-flex items-center gap-1.5 text-white/20 hover:text-white/50 transition-colors text-xs">
+              <Lock className="h-3 w-3" />
+              Yek7Pay
+            </Link>
           </div>
         </motion.div>
       </main>
