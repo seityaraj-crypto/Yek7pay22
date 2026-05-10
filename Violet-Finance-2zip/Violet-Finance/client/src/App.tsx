@@ -18,6 +18,7 @@ import NewAccount from "@/pages/new-account";
 import Features from "@/pages/features";
 import Premium from "@/pages/premium";
 import Subscription from "@/pages/subscription";
+import AddFunds from "@/pages/add-funds";
 import { Chatbot } from "@/components/chatbot";
 
 function ScrollToTop() {
@@ -44,6 +45,7 @@ function Router() {
       <Route path="/features" component={Features} />
       <Route path="/premium" component={Premium} />
       <Route path="/subscription" component={Subscription} />
+      <Route path="/add-funds" component={AddFunds} />
       <Route component={NotFound} />
     </Switch>
   );

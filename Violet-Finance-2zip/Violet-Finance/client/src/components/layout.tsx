@@ -137,6 +137,7 @@ export function Navbar() {
 
           <a href="/bbps" className="text-sm font-bold text-slate-700 hover:text-blue-600 transition-all uppercase tracking-widest px-4 h-9 flex items-center rounded-lg hover:bg-slate-200/50">Bharat Connect</a>
           <Link href="/about" className="text-sm font-bold text-slate-700 hover:text-blue-600 transition-all uppercase tracking-widest px-4 h-9 flex items-center rounded-lg hover:bg-slate-200/50">About Us</Link>
+          <Link href="/add-funds" className="text-sm font-black text-white uppercase tracking-widest px-4 h-9 flex items-center rounded-lg bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 shadow-md shadow-emerald-500/20 transition-all hover:scale-105">Add Funds</Link>
         </div>
 
         <div className="flex items-center gap-3 md:gap-4">
