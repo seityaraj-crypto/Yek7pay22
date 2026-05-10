@@ -8,7 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 export default function AdminLogin() {
   const [, navigate] = useLocation();
   const { toast } = useToast();
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPass, setShowPass] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -20,7 +20,7 @@ export default function AdminLogin() {
       const res = await fetch("/api/admin/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email: username, password }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Login failed");
@@ -52,15 +52,23 @@ export default function AdminLogin() {
           <p className="text-sm text-gray-500 mt-1">Administration Portal</p>
         </div>
 
-        <form onSubmit={handleLogin} className="bg-gray-900 rounded-2xl border border-gray-800 p-6 space-y-4">
+        <form onSubmit={handleLogin} autoComplete="off" className="bg-gray-900 rounded-2xl border border-gray-800 p-6 space-y-4">
+          {/* Honeypot to defeat browser autofill */}
+          <input type="text" name="fakeuser" style={{ display: "none" }} tabIndex={-1} readOnly />
+          <input type="password" name="fakepass" style={{ display: "none" }} tabIndex={-1} readOnly />
+
           <div>
-            <label className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1.5 block">Email Address</label>
+            <label className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1.5 block">Username</label>
             <Input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="you@yek7pay.com"
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Enter your username"
               required
+              autoComplete="off"
+              autoCorrect="off"
+              autoCapitalize="off"
+              spellCheck={false}
               className="bg-gray-800 border-gray-700 text-white placeholder:text-gray-600 h-11 rounded-xl focus:border-violet-500 focus:ring-0"
             />
           </div>
@@ -71,8 +79,9 @@ export default function AdminLogin() {
                 type={showPass ? "text" : "password"}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
+                placeholder="Enter your password"
                 required
+                autoComplete="new-password"
                 className="bg-gray-800 border-gray-700 text-white placeholder:text-gray-600 h-11 rounded-xl focus:border-violet-500 focus:ring-0 pr-11"
               />
               <button type="button" onClick={() => setShowPass(!showPass)} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300">

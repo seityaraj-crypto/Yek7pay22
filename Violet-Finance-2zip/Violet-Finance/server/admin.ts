@@ -8,6 +8,16 @@ import { eq, desc, ne, and } from "drizzle-orm";
 const JWT_SECRET = process.env.ADMIN_JWT_SECRET || "yek7pay-admin-secret-fallback";
 const TEMP_PASSWORD = "Khoirom@yek7pay";
 
+function validateStrongPassword(password: string): string[] {
+  const errors: string[] = [];
+  if (password.length < 12)       errors.push("Password must be at least 12 characters long.");
+  if (!/[A-Z]/.test(password))    errors.push("Password must contain at least one uppercase letter.");
+  if (!/[a-z]/.test(password))    errors.push("Password must contain at least one lowercase letter.");
+  if (!/[0-9]/.test(password))    errors.push("Password must contain at least one number.");
+  if (!/[^A-Za-z0-9]/.test(password)) errors.push("Password must contain at least one special character.");
+  return errors;
+}
+
 // ── JWT helpers ──────────────────────────────────────────────────────────────
 function signToken(payload: { id: number; email: string; role: string }) {
   return jwt.sign(payload, JWT_SECRET, { expiresIn: "8h" });
@@ -116,6 +126,9 @@ export function registerAdminRoutes(app: Express) {
       const [user] = await db.select().from(adminUsers).where(eq(adminUsers.id, id));
       const valid = await bcrypt.compare(currentPassword, user.passwordHash);
       if (!valid) return res.status(401).json({ error: "Current password is incorrect" });
+
+      const passwordErrors = validateStrongPassword(newPassword);
+      if (passwordErrors.length > 0) return res.status(400).json({ error: passwordErrors[0] });
 
       const hash = await bcrypt.hash(newPassword, 12);
       await db.update(adminUsers).set({ passwordHash: hash, mustResetPassword: false }).where(eq(adminUsers.id, id));
