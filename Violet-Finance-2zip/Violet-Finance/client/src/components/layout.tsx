@@ -2,7 +2,7 @@ import * as React from "react";
 import ReactDOM from "react-dom";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Menu, Shield, ShieldCheck, Bell, ChevronDown, Landmark, Send, Globe, Fingerprint, CreditCard, Banknote, Briefcase, Zap, Receipt, Plane, Train, Building2, ClipboardCheck, Smartphone, TabletSmartphone, Mail, Phone, X, MessageCircle, ArrowRight, Crown, LogIn, Users } from "lucide-react";
+import { Menu, Shield, ShieldCheck, Bell, ChevronDown, Landmark, Send, Globe, Fingerprint, CreditCard, Banknote, Briefcase, Zap, Receipt, Plane, Train, Building2, ClipboardCheck, Smartphone, TabletSmartphone, Mail, Phone, X, MessageCircle, ArrowRight, Crown, LogIn, Users, Wallet } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { AuthDialog } from "@/components/auth-dialog";
 import {
@@ -201,6 +201,15 @@ export function Navbar() {
                        Create Account
                      </Button>
                    </div>
+
+                   <Link
+                     href="/add-funds"
+                     onClick={() => setIsOpen(false)}
+                     className="flex items-center justify-center gap-2 w-full h-11 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-white font-black text-sm uppercase tracking-widest shadow-md shadow-emerald-500/20 transition-all active:scale-95"
+                   >
+                     <Wallet className="h-4 w-4" />
+                     Add Funds
+                   </Link>
 
                    <div className="space-y-2 pt-3 border-t border-blue-100">
                      {[
