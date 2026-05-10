@@ -5,6 +5,7 @@ import { registerChatRoutes } from "./replit_integrations/chat";
 import { registerImageRoutes } from "./replit_integrations/image";
 import { registerRazorpayRoutes } from "./razorpay";
 import { registerInvoiceRoutes } from "./invoice";
+import { registerAdminRoutes, seedAdminUsers } from "./admin";
 
 export async function registerRoutes(
   httpServer: Server,
@@ -16,6 +17,8 @@ export async function registerRoutes(
   registerImageRoutes(app);
   registerRazorpayRoutes(app);
   registerInvoiceRoutes(app);
+  registerAdminRoutes(app);
+  await seedAdminUsers();
 
   // Contact form endpoint - sends inquiries to info@yek7pay.com via email and WhatsApp
   app.post("/api/contact", async (req, res) => {

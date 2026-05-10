@@ -19,6 +19,10 @@ import Features from "@/pages/features";
 import Premium from "@/pages/premium";
 import Subscription from "@/pages/subscription";
 import AddFunds from "@/pages/add-funds";
+import AdminLogin from "@/pages/admin/login";
+import AdminChangePassword from "@/pages/admin/change-password";
+import AdminDashboard from "@/pages/admin/dashboard";
+import AdminUsers from "@/pages/admin/users";
 import { Chatbot } from "@/components/chatbot";
 
 function ScrollToTop() {
@@ -46,6 +50,11 @@ function Router() {
       <Route path="/premium" component={Premium} />
       <Route path="/subscription" component={Subscription} />
       <Route path="/add-funds" component={AddFunds} />
+      <Route path="/admin" component={AdminLogin} />
+      <Route path="/admin/login" component={AdminLogin} />
+      <Route path="/admin/change-password" component={AdminChangePassword} />
+      <Route path="/admin/dashboard" component={AdminDashboard} />
+      <Route path="/admin/users" component={AdminUsers} />
       <Route component={NotFound} />
     </Switch>
   );

@@ -39,3 +39,8 @@ externalPort = 80
 deploymentTarget = "autoscale"
 run = ["npm", "run", "start"]
 build = ["npm", "run", "build"]
+
+[userenv]
+
+[userenv.shared]
+ADMIN_JWT_SECRET = "e9827d7b1415fcf04f412e2010ea6f35595fce963f44bbf73a12029dc15cfb96b78bc78d4576ae412e7abb6e0c32845c"
